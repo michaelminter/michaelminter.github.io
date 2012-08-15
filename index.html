@@ -88,6 +88,8 @@
 
 <time datetime="2012-08-15T12:52:00-05:00" pubdate data-updated="true">Aug 15<span>th</span>, 2012</time>
         
+         | <a href="/blog/html-not-rendering-in-gmail/#disqus_thread">Comments</a>
+        
       </p>
     
   </header>
@@ -95,28 +97,44 @@
 
   <div class="entry-content"><p>I’ve been handling many of my company’s email campaigns for some time now and I can honestly say that it’s been pretty fun from a technical stand-point. There’s a lot that goes into email marketing (not including the marketing/sales implications). It has it’s own conventions, ideologies, and I believe to the utmost that there’s a larger future than presumed in store for the sometimes misunderstood technology. (I’m patiently waiting for a mobile device header-type.)</p>
 
-<p>Recently I’ve been using my new skills while working on my own applications using SendGrid as an alternative SMTP and email analytic tool. And I’ve only really come across one major programmable error. If you use a desktop client instead of a browser for viewing emails, as I do oftentimes, then this issue might not be so apparent (till now).</p>
+<p>Recently I’ve been using my new skills while working on my own applications using <a href="http://sendgrid.com/" title="SendGrid">SendGrid</a> as an alternative SMTP and email analytics tool. And I’ve only really come across one major programmable error. If you use a desktop client instead of a browser for viewing emails, as I do oftentimes, then this issue might not be so apparent (till now).</p>
 
 <p>I recently was witness to how Gmail handles email headers in regards to HTML v. text-only. Gmail’s SaaS actually only reads the latter MIME-type and throws away the rest. So if you have a text version being made available, and you want your emails to be seen strictly as HTML, you must render the HTML version in your code LAST. Here is a Ruby on Rails example:</p>
 
-<pre><code>class Notifier &lt; ActionMailer::Base
-  include SendGrid
-  default :from =&gt; Rails.configuration.sendgrid.reply_to
-  sendgrid_enable :opentrack, :clicktrack, :ganalytics
-  sendgrid_category :testing
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Notifier</span> <span class="o">&lt;</span> <span class="no">ActionMailer</span><span class="o">::</span><span class="no">Base</span>
+</span><span class='line'>  <span class="kp">include</span> <span class="no">SendGrid</span>
+</span><span class='line'>  <span class="n">default</span> <span class="ss">:from</span> <span class="o">=&gt;</span> <span class="no">Rails</span><span class="o">.</span><span class="n">configuration</span><span class="o">.</span><span class="n">sendgrid</span><span class="o">.</span><span class="n">reply_to</span>
+</span><span class='line'>  <span class="n">sendgrid_enable</span> <span class="ss">:opentrack</span><span class="p">,</span> <span class="ss">:clicktrack</span><span class="p">,</span> <span class="ss">:ganalytics</span>
+</span><span class='line'>  <span class="n">sendgrid_category</span> <span class="ss">:testing</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">user_updated</span><span class="p">(</span><span class="n">user</span><span class="p">)</span>
+</span><span class='line'>    <span class="vi">@user</span> <span class="o">=</span> <span class="n">user</span>
+</span><span class='line'>    <span class="n">mail</span><span class="p">(</span> <span class="ss">:to</span> <span class="o">=&gt;</span> <span class="vi">@user</span><span class="o">.</span><span class="n">email</span><span class="p">,</span>
+</span><span class='line'>          <span class="ss">:subject</span> <span class="o">=&gt;</span> <span class="s2">&quot;Your information has been updated.&quot;</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="nb">format</span><span class="o">|</span>
+</span><span class='line'>      <span class="nb">format</span><span class="o">.</span><span class="n">text</span> <span class="p">{</span> <span class="s2">&quot;</span><span class="si">#{</span><span class="n">user</span><span class="o">.</span><span class="n">first_name</span><span class="si">}</span><span class="s2">,</span><span class="se">\n\n</span><span class="s2">This is an auto-response to inform you that your information has changed.&quot;</span> <span class="p">}</span>
+</span><span class='line'>      <span class="nb">format</span><span class="o">.</span><span class="n">html</span> <span class="p">{</span> <span class="n">render</span> <span class="ss">:layout</span> <span class="o">=&gt;</span> <span class="s1">&#39;autoresponse&#39;</span> <span class="p">}</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
 
-  def user_updated(user)
-    @user = user
-    mail( :to =&gt; @user.email, 
-          :subject =&gt; "Your information has been updated.") do |format|
-      format.text { "#{user.first_name},\n\nThis is an auto-response to inform you that your information has changed." }
-      format.html { render :layout =&gt; 'autoresponse' }
-    end
-  end
-end
-</code></pre>
 
-<p>Super “thanks” go out to the SendGrid crew for their constantly superior customer service skills and for helping me out on my way to becoming an email marketing specialist.</p>
+<p>Super “thanks” go out to the <a href="http://sendgrid.com/" title="SendGrid">SendGrid</a> crew for their constantly superior customer service skills and for helping me out on my way to becoming an email marketing specialist.</p>
 </div>
   
   
@@ -133,6 +151,9 @@ end
 <aside class="sidebar">
   
     <section>
+  <h1>About Me</h1>
+  <p>Software Developer in Austin, TX</p>
+</section><section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
     
@@ -143,55 +164,36 @@ end
   </ul>
 </section>
 
-<section>
-  <h1>GitHub Repos</h1>
-  <ul id="gh_repos">
-    <li class="loading">Status updating&#8230;</li>
-  </ul>
-  
-  <a href="https://github.com/michaelminter">@michaelminter</a> on GitHub
-  
-  <script type="text/javascript">
-    $.domReady(function(){
-        if (!window.jXHR){
-            var jxhr = document.createElement('script');
-            jxhr.type = 'text/javascript';
-            jxhr.src = '/javascripts/libs/jXHR.js';
-            var s = document.getElementsByTagName('script')[0];
-            s.parentNode.insertBefore(jxhr, s);
+
+
+
+
+
+<section id="coderwall_container">
+  <h1>Coderwall Badges</h1>
+  <p>
+    <script type="text/javascript">
+      function display_coderwall(args) {
+        var badges = args["data"]["badges"];
+        var wall = '';
+        for ( var i = 0; i < badges.length; i++ ) {
+          var alt_txt   = badges[i]["name"];
+          var title_txt = badges[i]["name"] + ' - ' + badges[i]["description"];
+          wall += '<a href="http://coderwall.com/michaelminter/"><img src="'
+            + badges[i]["badge"]
+            + '" width="48" height="48" alt="' + alt_txt
+            + '" title="' + title_txt
+            + '"/></a>';
         }
-
-        github.showRepos({
-            user: 'michaelminter',
-            count: 0,
-            skip_forks: true,
-            target: '#gh_repos'
-        });
-    });
-  </script>
-  <script src="/javascripts/github.js" type="text/javascript"> </script>
-</section>
-
-
-<section>
-  <h1>Latest Tweets</h1>
-  <ul id="tweets">
-    <li class="loading">Status updating&#8230;</li>
-  </ul>
-  <script type="text/javascript">
-    $.domReady(function(){
-      getTwitterFeed("Mothore", 4, false);
-    });
-  </script>
-  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+        document.write(wall);
+      }
+    </script>
+    <script src="http://coderwall.com/michaelminter.json?callback=display_coderwall"></script>
+  </p>
   
-    <a href="http://twitter.com/Mothore" class="twitter-follow-button" data-show-count="false">Follow @Mothore</a>
+  <p><a href="http://coderwall.com/michaelminter"><img src="http://api.coderwall.com/michaelminter/endorsecount.png" /></a></p>
   
 </section>
-
-
-
-
 
   
 </aside>
@@ -206,16 +208,20 @@ end
 </footer>
   
 
+<script type="text/javascript">
+      var disqus_shortname = 'michaelminter';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
 
 
-<div id="fb-root"></div>
-<script>(function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) {return;}
-  js = d.createElement(s); js.id = id;
-  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));</script>
 
 
 
