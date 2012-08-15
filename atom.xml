@@ -4,7 +4,7 @@
   <title><![CDATA[Michael Minter]]></title>
   <link href="http://moorberry.net/atom.xml" rel="self"/>
   <link href="http://moorberry.net/"/>
-  <updated>2012-08-15T14:36:38-05:00</updated>
+  <updated>2012-08-15T15:45:19-05:00</updated>
   <id>http://moorberry.net/</id>
   <author>
     <name><![CDATA[Michael Minter]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[HTML Not Rendering in Gmail]]></title>
     <link href="http://moorberry.net/blog/html-not-rendering-in-gmail/"/>
-    <updated>2012-08-15T12:52:00-05:00</updated>
+    <updated>2011-12-10T12:52:00-06:00</updated>
     <id>http://moorberry.net/blog/html-not-rendering-in-gmail</id>
     <content type="html"><![CDATA[<p>I’ve been handling many of my company’s email campaigns for some time now and I can honestly say that it’s been pretty fun from a technical stand-point. There’s a lot that goes into email marketing (not including the marketing/sales implications). It has it’s own conventions, ideologies, and I believe to the utmost that there’s a larger future than presumed in store for the sometimes misunderstood technology. (I’m patiently waiting for a mobile device header-type.)</p>
 
@@ -58,6 +58,123 @@
 
 
 <p>Super “thanks” go out to the <a href="http://sendgrid.com/" title="SendGrid">SendGrid</a> crew for their constantly superior customer service skills and for helping me out on my way to becoming an email marketing specialist.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Export CSV]]></title>
+    <link href="http://moorberry.net/blog/export-csv-with-mongoid-and-fastercsv/"/>
+    <updated>2011-11-14T15:15:00-06:00</updated>
+    <id>http://moorberry.net/blog/export-csv-with-mongoid-and-fastercsv</id>
+    <content type="html"><![CDATA[<p>In my research I found a hundred and more different ways to manage the task of exporting data into a CSV file. Whenever I’m learning something new, on a new system or with a new language, I like to build the process myself from scratch. And being a minimalist programmer it just seems fitting. Enjoy</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">def</span> <span class="nf">export_inverts</span>
+</span><span class='line'>  <span class="nb">require</span> <span class="s1">&#39;fastercsv&#39;</span>
+</span><span class='line'>  <span class="n">inverts</span>  <span class="o">=</span> <span class="no">Invert</span><span class="o">.</span><span class="n">all</span>
+</span><span class='line'>  <span class="n">filename</span> <span class="o">=</span> <span class="n">params</span><span class="o">[</span><span class="ss">:action</span><span class="o">]</span> <span class="o">+</span> <span class="s2">&quot;.csv&quot;</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="c1">#this is required if you want this to work with IE</span>
+</span><span class='line'>  <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">env</span><span class="o">[</span><span class="s1">&#39;HTTP_USER_AGENT&#39;</span><span class="o">]</span> <span class="o">=~</span> <span class="sr">/msie/i</span>
+</span><span class='line'>    <span class="n">headers</span><span class="o">[</span><span class="s1">&#39;Pragma&#39;</span><span class="o">]</span> <span class="o">=</span> <span class="s1">&#39;public&#39;</span>
+</span><span class='line'>    <span class="n">headers</span><span class="o">[</span><span class="s2">&quot;Content-type&quot;</span><span class="o">]</span> <span class="o">=</span> <span class="s2">&quot;text/plain&quot;</span>
+</span><span class='line'>    <span class="n">headers</span><span class="o">[</span><span class="s1">&#39;Cache-Control&#39;</span><span class="o">]</span> <span class="o">=</span> <span class="s1">&#39;no-cache, must-revalidate, post-check=0, pre-check=0&#39;</span>
+</span><span class='line'>    <span class="n">headers</span><span class="o">[</span><span class="s1">&#39;Content-Disposition&#39;</span><span class="o">]</span> <span class="o">=</span> <span class="s2">&quot;attachment; filename=</span><span class="se">\&quot;</span><span class="si">#{</span><span class="n">filename</span><span class="si">}</span><span class="se">\&quot;</span><span class="s2">&quot;</span>
+</span><span class='line'>    <span class="n">headers</span><span class="o">[</span><span class="s1">&#39;Expires&#39;</span><span class="o">]</span> <span class="o">=</span> <span class="s2">&quot;0&quot;</span>
+</span><span class='line'>  <span class="k">else</span>
+</span><span class='line'>    <span class="n">headers</span><span class="o">[</span><span class="s2">&quot;Content-Type&quot;</span><span class="o">]</span> <span class="o">||=</span> <span class="s1">&#39;text/csv&#39;</span>
+</span><span class='line'>    <span class="n">headers</span><span class="o">[</span><span class="s2">&quot;Content-Disposition&quot;</span><span class="o">]</span> <span class="o">=</span> <span class="s2">&quot;attachment; filename=</span><span class="se">\&quot;</span><span class="si">#{</span><span class="n">filename</span><span class="si">}</span><span class="se">\&quot;</span><span class="s2">&quot;</span>
+</span><span class='line'>    <span class="n">headers</span><span class="o">[</span><span class="s2">&quot;Content-Transfer-Encoding&quot;</span><span class="o">]</span> <span class="o">=</span> <span class="s2">&quot;binary&quot;</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">csv_string</span> <span class="o">=</span> <span class="no">FasterCSV</span><span class="o">.</span><span class="n">generate</span> <span class="k">do</span> <span class="o">|</span><span class="n">csv</span><span class="o">|</span>
+</span><span class='line'>    <span class="n">csv</span> <span class="o">&lt;&lt;</span> <span class="o">[</span><span class="s2">&quot;Genus&quot;</span><span class="p">,</span><span class="s2">&quot;Species&quot;</span><span class="p">,</span><span class="s2">&quot;Common Name&quot;</span><span class="p">,</span><span class="s2">&quot;Pet Name&quot;</span><span class="p">,</span><span class="s2">&quot;Gender&quot;</span><span class="o">]</span>
+</span><span class='line'>    <span class="n">inverts</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">i</span><span class="o">|</span>
+</span><span class='line'>      <span class="n">csv</span> <span class="o">&lt;&lt;</span> <span class="o">[</span><span class="n">i</span><span class="o">.</span><span class="n">scientific_name</span><span class="p">,</span><span class="n">i</span><span class="o">.</span><span class="n">scientific_name</span><span class="p">,</span><span class="n">i</span><span class="o">.</span><span class="n">common_name</span><span class="p">,</span><span class="n">i</span><span class="o">.</span><span class="n">pet_name</span><span class="p">,</span><span class="n">i</span><span class="o">.</span><span class="n">gender</span><span class="o">]</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>  <span class="n">render</span> <span class="ss">:text</span> <span class="o">=&gt;</span> <span class="n">csv_string</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>NOTE: <em>Developers using Ruby 1.8 &lt;= must install gem:fastercsv</em></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Simple Flickr Gallery Implementation]]></title>
+    <link href="http://moorberry.net/blog/simple-flickr-gallery-implementation/"/>
+    <updated>2010-03-24T15:23:00-05:00</updated>
+    <id>http://moorberry.net/blog/simple-flickr-gallery-implementation</id>
+    <content type="html"><![CDATA[<p>In my search for finding a simple solution to any problem, I usually cross many and many blogs and articles, discussing my queried topic. But with so much detail that the solution becomes a problem in itself. So I often times end up resolved to research on my own. In this case, I share how to build the most simple method of displaying a Flickr gallery, with PHP.
+Assembling Your Variables</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="vg">$api</span>      <span class="o">=</span> <span class="s1">&#39;your-32-byte-api-key-courtesy-Flickr&#39;</span><span class="p">;</span>
+</span><span class='line'><span class="vg">$user_id</span>  <span class="o">=</span> <span class="s1">&#39;33822702%40N08&#39;</span><span class="p">;</span>
+</span><span class='line'><span class="vg">$per_page</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="vg">$xml</span> <span class="o">=</span> <span class="s1">&#39;http://api.flickr.com/services/rest/?method=flickr.people.getPublicPhotos&amp;api_key=&#39;</span><span class="o">.</span><span class="vg">$api</span><span class="o">.</span><span class="s1">&#39;&amp;user_id=&#39;</span><span class="o">.</span><span class="vg">$user_id</span><span class="o">.</span><span class="s1">&#39;&amp;per_page=&#39;</span><span class="o">.</span><span class="vg">$per_page</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="vg">$flickr</span> <span class="o">=</span> <span class="n">simplexml_load_file</span><span class="p">(</span><span class="vg">$xml</span><span class="p">);</span>
+</span><span class='line'><span class="n">foreach</span><span class="p">(</span><span class="vg">$flickr</span><span class="o">-&gt;</span><span class="n">photos</span><span class="o">-&gt;</span><span class="n">photo</span> <span class="n">as</span> <span class="vg">$p</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="n">echo</span> <span class="s1">&#39;&lt;a href=&quot;http://www.flickr.com/photos/&#39;</span><span class="o">.</span><span class="vg">$p</span><span class="o">[</span><span class="s1">&#39;owner&#39;</span><span class="o">].</span><span class="s1">&#39;/&#39;</span><span class="o">.</span><span class="vg">$p</span><span class="o">[</span><span class="s1">&#39;id&#39;</span><span class="o">].</span><span class="s1">&#39;&quot;&gt;&#39;</span><span class="p">;</span>
+</span><span class='line'>    <span class="n">echo</span> <span class="s1">&#39;&lt;img src=&quot;http://farm&#39;</span><span class="o">.</span><span class="vg">$p</span><span class="o">[</span><span class="s1">&#39;farm&#39;</span><span class="o">].</span><span class="s1">&#39;.static.flickr.com/&#39;</span><span class="o">.</span><span class="vg">$p</span><span class="o">[</span><span class="s1">&#39;server&#39;</span><span class="o">].</span><span class="s1">&#39;/&#39;</span><span class="o">.</span><span class="vg">$p</span><span class="o">[</span><span class="s1">&#39;id&#39;</span><span class="o">].</span><span class="s1">&#39;_&#39;</span><span class="o">.</span><span class="vg">$p</span><span class="o">[</span><span class="s1">&#39;secret&#39;</span><span class="o">].</span><span class="s1">&#39;_s.jpg&quot;&gt;&#39;</span><span class="p">;</span>
+</span><span class='line'>    <span class="n">echo</span> <span class="s1">&#39;&lt;/a&gt;&#39;</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The $api key allows your server and Flickr to “shake hands” sort of speak. You can get your Flickr API key here.</p>
+
+<p>Your $user_id is a static variable that Flickr uses to identify you. This value can be found in the URL of your “photostream”. I’ve left mine for reference (flickr.com).</p>
+
+<p>$per_page refers to how many photos will be retrieved from your photostream. Though this limiter is optional, the default count is, “all”. Which means if you have 1,000 plus photos, it could be a very bad thing, for you or your viewer’s load time.</p>
+
+<p>$xml stores the link, that gets called on to retrieve a list of your photos, as XML. This will also be a part of the script you modify to extend the features of your application based on what’s available in the Flickr API.</p>
+
+<p>$flickr uses a PHP function called, simplexml_load_file(), which interprets an XML file into an object. In this case, $flickr, becomes an array, and we use foreach() to extract the values we need, to display the gallery.</p>
+
+<h2>Summary</h2>
+
+<p>This method is just what I needed. Something small, easily accessible, and scalable. As you experiment with this script, you’ll afford the opportunity to use many tools, which Flickr offers. You can view a full list here if or when you’re ready.</p>
 ]]></content>
   </entry>
   

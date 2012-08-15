@@ -3,3 +3,5 @@ html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abb
 a.github_link { background:transparent url(/images/github.png) no-repeat 0 0;padding-left:19px; }
 
 #coderwall_container img { background:none;border:none;box-shadow:none;-webkit-box-shadow:none; }
+
+#google_adspace { padding-left:70px; }

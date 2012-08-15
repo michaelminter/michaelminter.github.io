@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: MongoDB | Michael Minter]]></title>
+  <link href="http://moorberry.net/blog/categories/mongodb/atom.xml" rel="self"/>
+  <link href="http://moorberry.net/"/>
+  <updated>2012-08-15T15:45:19-05:00</updated>
+  <id>http://moorberry.net/</id>
+  <author>
+    <name><![CDATA[Michael Minter]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Export CSV]]></title>
+    <link href="http://moorberry.net/blog/export-csv-with-mongoid-and-fastercsv/"/>
+    <updated>2011-11-14T15:15:00-06:00</updated>
+    <id>http://moorberry.net/blog/export-csv-with-mongoid-and-fastercsv</id>
+    <content type="html"><![CDATA[<p>In my research I found a hundred and more different ways to manage the task of exporting data into a CSV file. Whenever I’m learning something new, on a new system or with a new language, I like to build the process myself from scratch. And being a minimalist programmer it just seems fitting. Enjoy</p>
+
+<p>``` ruby
+def export_inverts
+  require 'fastercsv'
+  inverts  = Invert.all
+  filename = params[:action] + ".csv"</p>
+
+<p>  #this is required if you want this to work with IE
+  if request.env['HTTP_USER_AGENT'] =~ /msie/i</p>
+
+<pre><code>headers['Pragma'] = 'public'
+headers["Content-type"] = "text/plain"
+headers['Cache-Control'] = 'no-cache, must-revalidate, post-check=0, pre-check=0'
+headers['Content-Disposition'] = "attachment; filename=\"#{filename}\""
+headers['Expires'] = "0"
+</code></pre>
+
+<p>  else</p>
+
+<pre><code>headers["Content-Type"] ||= 'text/csv'
+headers["Content-Disposition"] = "attachment; filename=\"#{filename}\""
+headers["Content-Transfer-Encoding"] = "binary"
+</code></pre>
+
+<p>  end</p>
+
+<p>  csv_string = FasterCSV.generate do |csv|</p>
+
+<pre><code>csv &lt;&lt; ["Genus","Species","Common Name","Pet Name","Gender"]
+inverts.each do |i|
+  csv &lt;&lt; [i.scientific_name,i.scientific_name,i.common_name,i.pet_name,i.gender]
+end
+</code></pre>
+
+<p>  end
+  render :text => csv_string
+end
+```</p>
+
+<p>NOTE: <em>Developers using Ruby 1.8 &lt;= must install gem:fastercsv</em></p>
+]]></content>
+  </entry>
+  
+</feed>

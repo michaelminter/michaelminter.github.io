@@ -1,0 +1,322 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Export CSV - Michael Minter</title>
+  <meta name="author" content="Michael Minter">
+
+  
+  <meta name="description" content="In my research I found a hundred and more different ways to manage the task of exporting data into a CSV file. Whenever I’m learning something new, &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://moorberry.net/blog/export-csv-with-mongoid-and-fastercsv/">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Michael Minter" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Michael Minter</a></h1>
+  
+    <h2>A blog for web engineers.</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:moorberry.net" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Export CSV</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-11-14T15:15:00-06:00" pubdate data-updated="true">Nov 14<span>th</span>, 2011</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>In my research I found a hundred and more different ways to manage the task of exporting data into a CSV file. Whenever I’m learning something new, on a new system or with a new language, I like to build the process myself from scratch. And being a minimalist programmer it just seems fitting. Enjoy</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">def</span> <span class="nf">export_inverts</span>
+</span><span class='line'>  <span class="nb">require</span> <span class="s1">&#39;fastercsv&#39;</span>
+</span><span class='line'>  <span class="n">inverts</span>  <span class="o">=</span> <span class="no">Invert</span><span class="o">.</span><span class="n">all</span>
+</span><span class='line'>  <span class="n">filename</span> <span class="o">=</span> <span class="n">params</span><span class="o">[</span><span class="ss">:action</span><span class="o">]</span> <span class="o">+</span> <span class="s2">&quot;.csv&quot;</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="c1">#this is required if you want this to work with IE</span>
+</span><span class='line'>  <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">env</span><span class="o">[</span><span class="s1">&#39;HTTP_USER_AGENT&#39;</span><span class="o">]</span> <span class="o">=~</span> <span class="sr">/msie/i</span>
+</span><span class='line'>    <span class="n">headers</span><span class="o">[</span><span class="s1">&#39;Pragma&#39;</span><span class="o">]</span> <span class="o">=</span> <span class="s1">&#39;public&#39;</span>
+</span><span class='line'>    <span class="n">headers</span><span class="o">[</span><span class="s2">&quot;Content-type&quot;</span><span class="o">]</span> <span class="o">=</span> <span class="s2">&quot;text/plain&quot;</span>
+</span><span class='line'>    <span class="n">headers</span><span class="o">[</span><span class="s1">&#39;Cache-Control&#39;</span><span class="o">]</span> <span class="o">=</span> <span class="s1">&#39;no-cache, must-revalidate, post-check=0, pre-check=0&#39;</span>
+</span><span class='line'>    <span class="n">headers</span><span class="o">[</span><span class="s1">&#39;Content-Disposition&#39;</span><span class="o">]</span> <span class="o">=</span> <span class="s2">&quot;attachment; filename=</span><span class="se">\&quot;</span><span class="si">#{</span><span class="n">filename</span><span class="si">}</span><span class="se">\&quot;</span><span class="s2">&quot;</span>
+</span><span class='line'>    <span class="n">headers</span><span class="o">[</span><span class="s1">&#39;Expires&#39;</span><span class="o">]</span> <span class="o">=</span> <span class="s2">&quot;0&quot;</span>
+</span><span class='line'>  <span class="k">else</span>
+</span><span class='line'>    <span class="n">headers</span><span class="o">[</span><span class="s2">&quot;Content-Type&quot;</span><span class="o">]</span> <span class="o">||=</span> <span class="s1">&#39;text/csv&#39;</span>
+</span><span class='line'>    <span class="n">headers</span><span class="o">[</span><span class="s2">&quot;Content-Disposition&quot;</span><span class="o">]</span> <span class="o">=</span> <span class="s2">&quot;attachment; filename=</span><span class="se">\&quot;</span><span class="si">#{</span><span class="n">filename</span><span class="si">}</span><span class="se">\&quot;</span><span class="s2">&quot;</span>
+</span><span class='line'>    <span class="n">headers</span><span class="o">[</span><span class="s2">&quot;Content-Transfer-Encoding&quot;</span><span class="o">]</span> <span class="o">=</span> <span class="s2">&quot;binary&quot;</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">csv_string</span> <span class="o">=</span> <span class="no">FasterCSV</span><span class="o">.</span><span class="n">generate</span> <span class="k">do</span> <span class="o">|</span><span class="n">csv</span><span class="o">|</span>
+</span><span class='line'>    <span class="n">csv</span> <span class="o">&lt;&lt;</span> <span class="o">[</span><span class="s2">&quot;Genus&quot;</span><span class="p">,</span><span class="s2">&quot;Species&quot;</span><span class="p">,</span><span class="s2">&quot;Common Name&quot;</span><span class="p">,</span><span class="s2">&quot;Pet Name&quot;</span><span class="p">,</span><span class="s2">&quot;Gender&quot;</span><span class="o">]</span>
+</span><span class='line'>    <span class="n">inverts</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">i</span><span class="o">|</span>
+</span><span class='line'>      <span class="n">csv</span> <span class="o">&lt;&lt;</span> <span class="o">[</span><span class="n">i</span><span class="o">.</span><span class="n">scientific_name</span><span class="p">,</span><span class="n">i</span><span class="o">.</span><span class="n">scientific_name</span><span class="p">,</span><span class="n">i</span><span class="o">.</span><span class="n">common_name</span><span class="p">,</span><span class="n">i</span><span class="o">.</span><span class="n">pet_name</span><span class="p">,</span><span class="n">i</span><span class="o">.</span><span class="n">gender</span><span class="o">]</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>  <span class="n">render</span> <span class="ss">:text</span> <span class="o">=&gt;</span> <span class="n">csv_string</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>NOTE: <em>Developers using Ruby 1.8 &lt;= must install gem:fastercsv</em></p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn"><a href="http://github.com/michaelminter" target="_blank" class="github_link">Michael Minter</a></span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-11-14T15:15:00-06:00" pubdate data-updated="true">Nov 14<span>th</span>, 2011</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/mongodb/'>MongoDB</a>, <a class='category' href='/blog/categories/ruby/'>Ruby</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/simple-flickr-gallery-implementation/" title="Previous Post: Simple Flickr Gallery Implementation">&laquo; Simple Flickr Gallery Implementation</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/html-not-rendering-in-gmail/" title="Next Post: HTML Not Rendering in Gmail">HTML Not Rendering in Gmail &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>About Me</h1>
+  <p>Software Developer in Austin, TX</p>
+</section><section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/html-not-rendering-in-gmail/">HTML Not Rendering in Gmail</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/export-csv-with-mongoid-and-fastercsv/">Export CSV</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/simple-flickr-gallery-implementation/">Simple Flickr Gallery Implementation</a>
+      </li>
+    
+  </ul>
+</section>
+<section>
+  <h1>Recent Comments</h1>
+  <div id="dsq-recentcomments" class="dsq-widget"><script type="text/javascript" src="http://disqus.com/forums/michaelminter/recent_comments_widget.js"></script></div>
+</section>
+
+
+
+
+
+<section id="coderwall_container">
+  <h1>Coderwall Badges</h1>
+  <p>
+    <script type="text/javascript">
+      function display_coderwall(args) {
+        var badges = args["data"]["badges"];
+        var wall = '';
+        for ( var i = 0; i < badges.length; i++ ) {
+          var alt_txt   = badges[i]["name"];
+          var title_txt = badges[i]["name"] + ' - ' + badges[i]["description"];
+          wall += '<a href="http://coderwall.com/michaelminter/"><img src="'
+            + badges[i]["badge"]
+            + '" width="48" height="48" alt="' + alt_txt
+            + '" title="' + title_txt
+            + '"/></a>';
+        }
+        document.write(wall);
+      }
+    </script>
+    <script src="http://coderwall.com/michaelminter.json?callback=display_coderwall"></script>
+  </p>
+  
+  <p><a href="http://coderwall.com/michaelminter"><img src="http://api.coderwall.com/michaelminter/endorsecount.png" /></a></p>
+  
+</section>
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2012 - Michael Minter -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'michaelminter';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://moorberry.net/blog/export-csv-with-mongoid-and-fastercsv/';
+        var disqus_url = 'http://moorberry.net/blog/export-csv-with-mongoid-and-fastercsv/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>
