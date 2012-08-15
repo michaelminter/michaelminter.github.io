@@ -4,7 +4,7 @@
   <title><![CDATA[Michael Minter]]></title>
   <link href="http://moorberry.net/atom.xml" rel="self"/>
   <link href="http://moorberry.net/"/>
-  <updated>2012-08-15T15:47:01-05:00</updated>
+  <updated>2012-08-15T16:25:04-05:00</updated>
   <id>http://moorberry.net/</id>
   <author>
     <name><![CDATA[Michael Minter]]></name>
@@ -132,8 +132,9 @@
     <link href="http://moorberry.net/blog/simple-flickr-gallery-implementation/"/>
     <updated>2010-03-24T15:23:00-05:00</updated>
     <id>http://moorberry.net/blog/simple-flickr-gallery-implementation</id>
-    <content type="html"><![CDATA[<p>In my search for finding a simple solution to any problem, I usually cross many and many blogs and articles, discussing my queried topic. But with so much detail that the solution becomes a problem in itself. So I often times end up resolved to research on my own. In this case, I share how to build the most simple method of displaying a Flickr gallery, with PHP.
-Assembling Your Variables</p>
+    <content type="html"><![CDATA[<p>In my search for finding a simple solution to any problem, I usually cross many and many blogs and articles, discussing whatever topic. But with so much detail that the solution becomes a problem in itself. So I often times end up resolved to research on my own. In this case, I share the simplest programming method for displaying a <a href="http://flickr.com" title="Flickr">Flickr</a> gallery, with PHP.</p>
+
+<h2>Assembling Your Variables</h2>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -147,34 +148,36 @@ Assembling Your Variables</p>
 <span class='line-number'>10</span>
 <span class='line-number'>11</span>
 <span class='line-number'>12</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="vg">$api</span>      <span class="o">=</span> <span class="s1">&#39;your-32-byte-api-key-courtesy-Flickr&#39;</span><span class="p">;</span>
-</span><span class='line'><span class="vg">$user_id</span>  <span class="o">=</span> <span class="s1">&#39;33822702%40N08&#39;</span><span class="p">;</span>
-</span><span class='line'><span class="vg">$per_page</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="nv">$api_key</span>  <span class="o">=</span> <span class="s">&#39;cr79h3t7g387ghc3fh7338ch87c3ch734&#39;</span><span class="p">;</span>
+</span><span class='line'><span class="nv">$user_id</span>  <span class="o">=</span> <span class="s">&#39;33822702%40N08&#39;</span><span class="p">;</span>
+</span><span class='line'><span class="nv">$per_page</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
 </span><span class='line'>
-</span><span class='line'><span class="vg">$xml</span> <span class="o">=</span> <span class="s1">&#39;http://api.flickr.com/services/rest/?method=flickr.people.getPublicPhotos&amp;api_key=&#39;</span><span class="o">.</span><span class="vg">$api</span><span class="o">.</span><span class="s1">&#39;&amp;user_id=&#39;</span><span class="o">.</span><span class="vg">$user_id</span><span class="o">.</span><span class="s1">&#39;&amp;per_page=&#39;</span><span class="o">.</span><span class="vg">$per_page</span><span class="p">;</span>
+</span><span class='line'><span class="nv">$xml</span>      <span class="o">=</span> <span class="s">&#39;http://api.flickr.com/services/rest/?method=flickr.people.getPublicPhotos&amp;api_key=&#39;</span><span class="o">.</span><span class="nv">$api_key</span><span class="o">.</span><span class="s">&#39;&amp;user_id=&#39;</span><span class="o">.</span><span class="nv">$user_id</span><span class="o">.</span><span class="s">&#39;&amp;per_page=&#39;</span><span class="o">.</span><span class="nv">$per_page</span><span class="p">;</span>
 </span><span class='line'>
-</span><span class='line'><span class="vg">$flickr</span> <span class="o">=</span> <span class="n">simplexml_load_file</span><span class="p">(</span><span class="vg">$xml</span><span class="p">);</span>
-</span><span class='line'><span class="n">foreach</span><span class="p">(</span><span class="vg">$flickr</span><span class="o">-&gt;</span><span class="n">photos</span><span class="o">-&gt;</span><span class="n">photo</span> <span class="n">as</span> <span class="vg">$p</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>    <span class="n">echo</span> <span class="s1">&#39;&lt;a href=&quot;http://www.flickr.com/photos/&#39;</span><span class="o">.</span><span class="vg">$p</span><span class="o">[</span><span class="s1">&#39;owner&#39;</span><span class="o">].</span><span class="s1">&#39;/&#39;</span><span class="o">.</span><span class="vg">$p</span><span class="o">[</span><span class="s1">&#39;id&#39;</span><span class="o">].</span><span class="s1">&#39;&quot;&gt;&#39;</span><span class="p">;</span>
-</span><span class='line'>    <span class="n">echo</span> <span class="s1">&#39;&lt;img src=&quot;http://farm&#39;</span><span class="o">.</span><span class="vg">$p</span><span class="o">[</span><span class="s1">&#39;farm&#39;</span><span class="o">].</span><span class="s1">&#39;.static.flickr.com/&#39;</span><span class="o">.</span><span class="vg">$p</span><span class="o">[</span><span class="s1">&#39;server&#39;</span><span class="o">].</span><span class="s1">&#39;/&#39;</span><span class="o">.</span><span class="vg">$p</span><span class="o">[</span><span class="s1">&#39;id&#39;</span><span class="o">].</span><span class="s1">&#39;_&#39;</span><span class="o">.</span><span class="vg">$p</span><span class="o">[</span><span class="s1">&#39;secret&#39;</span><span class="o">].</span><span class="s1">&#39;_s.jpg&quot;&gt;&#39;</span><span class="p">;</span>
-</span><span class='line'>    <span class="n">echo</span> <span class="s1">&#39;&lt;/a&gt;&#39;</span><span class="p">;</span>
+</span><span class='line'><span class="nv">$flickr</span>   <span class="o">=</span> <span class="n">simplexml_load_file</span><span class="p">(</span><span class="nv">$xml</span><span class="p">);</span>
+</span><span class='line'><span class="k">foreach</span><span class="p">(</span><span class="nv">$flickr</span><span class="o">-&gt;</span><span class="n">photos</span><span class="o">-&gt;</span><span class="n">photo</span> <span class="n">as</span> <span class="nv">$p</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="n">echo</span> <span class="s">&#39;&lt;a href=&quot;http://www.flickr.com/photos/&#39;</span><span class="o">.</span><span class="nv">$p</span><span class="p">[</span><span class="s">&#39;owner&#39;</span><span class="p">]</span><span class="o">.</span><span class="s">&#39;/&#39;</span><span class="o">.</span><span class="nv">$p</span><span class="p">[</span><span class="s">&#39;id&#39;</span><span class="p">]</span><span class="o">.</span><span class="s">&#39;&quot;&gt;&#39;</span><span class="p">;</span>
+</span><span class='line'>    <span class="n">echo</span> <span class="s">&#39;&lt;img src=&quot;http://farm&#39;</span><span class="o">.</span><span class="nv">$p</span><span class="p">[</span><span class="s">&#39;farm&#39;</span><span class="p">]</span><span class="o">.</span><span class="s">&#39;.static.flickr.com/&#39;</span><span class="o">.</span><span class="nv">$p</span><span class="p">[</span><span class="s">&#39;server&#39;</span><span class="p">]</span><span class="o">.</span><span class="s">&#39;/&#39;</span><span class="o">.</span><span class="nv">$p</span><span class="p">[</span><span class="s">&#39;id&#39;</span><span class="p">]</span><span class="o">.</span><span class="s">&#39;_&#39;</span><span class="o">.</span><span class="nv">$p</span><span class="p">[</span><span class="s">&#39;secret&#39;</span><span class="p">]</span><span class="o">.</span><span class="s">&#39;_s.jpg&quot;&gt;&#39;</span><span class="p">;</span>
+</span><span class='line'>    <span class="n">echo</span> <span class="s">&#39;&lt;/a&gt;&#39;</span><span class="p">;</span>
 </span><span class='line'><span class="p">}</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>The $api key allows your server and Flickr to “shake hands” sort of speak. You can get your Flickr API key here.</p>
+<p><strong>$api_key</strong> is part of an authentication device that allows your server and Flickr to “shake hands” sort of speak. <a href="http://www.flickr.com/services/api/keys/" title="Flickr API Key">You can get your Flickr API key here</a>.</p>
 
-<p>Your $user_id is a static variable that Flickr uses to identify you. This value can be found in the URL of your “photostream”. I’ve left mine for reference (flickr.com).</p>
+<p><strong>$user_id</strong> is how Flickr identifies you. This value can be found in the URL of your Flickr “photostream”. <a href="http://www.flickr.com/photos/33822702@N08/" title="Michael Minter's Flickr">Here&#8217;s mine for reference</a>.</p>
 
-<p>$per_page refers to how many photos will be retrieved from your photostream. Though this limiter is optional, the default count is, “all”. Which means if you have 1,000 plus photos, it could be a very bad thing, for you or your viewer’s load time.</p>
+<p><strong>$per_page</strong> refers to how many photos will be retrieved from your photostream. Though this limiter is optional, the default count is, “all”. Which means if you have 1,000 plus photos, it could be a very bad thing, for your viewer’s browser load time.</p>
 
-<p>$xml stores the link, that gets called on to retrieve a list of your photos, as XML. This will also be a part of the script you modify to extend the features of your application based on what’s available in the Flickr API.</p>
+<p><strong>$xml</strong> is a link to the webfile that renders a list of your available photos based on previously noted variables. This line can be modified later to include even more search parameters. (see: below)</p>
 
-<p>$flickr uses a PHP function called, simplexml_load_file(), which interprets an XML file into an object. In this case, $flickr, becomes an array, and we use foreach() to extract the values we need, to display the gallery.</p>
+<p><strong>$flickr</strong> uses a PHP function called, <a href="http://php.net/manual/en/function.simplexml-load-file.php" title="simplexml_load_file function">simplexml_load_file()</a>, which parses an XML file into an object.</p>
+
+<p>In today&#8217;s lesson, <strong>$flickr</strong> becomes an array and we use <a href="http://us2.php.net/manual/en/control-structures.foreach.php" title="foreach function">foreach()</a> to extract the values we need, to display the gallery.</p>
 
 <h2>Summary</h2>
 
-<p>This method is just what I needed. Something small, easily accessible, and scalable. As you experiment with this script, you’ll afford the opportunity to use many tools, which Flickr offers. You can view a full list here if or when you’re ready.</p>
+<p>This method is just what I needed. Something small, easily accessible, and scalable. As you experiment with this script, you’ll be afforded the opportunity to use many different features of the API, which Flickr offers. <a href="http://www.flickr.com/services/api/" title="Flickr API Index">Click here to view a full list.</a></p>
 ]]></content>
   </entry>
   
