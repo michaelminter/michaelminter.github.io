@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>HTML Not Rendering in Gmail - Michael Minter</title>
+  <title>Server vs Client - Michael Minter</title>
   <meta name="author" content="Michael Minter">
 
   
-  <meta name="description" content="I’ve been handling many of my company’s email campaigns for some time now and I can honestly say that it’s been pretty fun from a technical stand- &hellip;">
+  <meta name="description" content="I can only presume that it’s because of the passionate advent of JQuery, that there has been an increasing rise of using Javascript, in precedence of &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://moorberry.net/blog/html-not-rendering-in-gmail">
+  <link rel="canonical" href="http://moorberry.net/blog/server-vs-client">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/bootstrap/bootstrap.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/stylesheets/bootstrap/responsive.css" media="screen, projection" rel="stylesheet" type="text/css">
@@ -98,7 +98,7 @@
   
   <header class="page-header">
     
-      <h1 class="entry-title">HTML Not Rendering in Gmail</h1>
+      <h1 class="entry-title">Server vs Client</h1>
     
     
       <p class="meta">
@@ -114,7 +114,7 @@
   
 
 
-<time datetime="2011-12-10T12:52:00-06:00" pubdate data-updated="true">Dec 10<span>th</span>, 2011</time>
+<time datetime="2012-08-20T21:11:00-05:00" pubdate data-updated="true">Aug 20<span>th</span>, 2012</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -123,11 +123,13 @@
   </header>
 
 
-<div class="entry-content"><p>I’ve been handling many of my company’s email campaigns for some time now and I can honestly say that it’s been pretty fun from a technical stand-point. There’s a lot that goes into email marketing (not including the marketing/sales implications). It has it’s own conventions, ideologies, and I believe to the utmost that there’s a larger future than presumed in store for the sometimes misunderstood technology. (I’m patiently waiting for a mobile device header-type.)</p>
+<div class="entry-content"><p>I can only presume that it’s because of the passionate advent of JQuery, that there has been an increasing rise of using Javascript, in precedence of PHP. This circumstance is arguably the sole cause to how and why designers are simply not learning a better way. I’m here to enlighten you.</p>
 
-<p>Recently I’ve been using my new skills while working on my own applications using <a href="http://sendgrid.com/" title="SendGrid">SendGrid</a> as an alternative SMTP and email analytics tool. And I’ve only really come across one major programmable error. If you use a desktop client instead of a browser for viewing emails, as I do oftentimes, then this issue might not be so apparent (till now).</p>
+<p>In opening, I’d like to express, that I hold no animosity for Javascript. Actually I quite often fancy a touch of its elegant lure and almost regularly indulge my viewers with its properties to control aesthetics at a dynamic fashion. But it has its place. If PHP can serve the same purpose, than its obvious strengths, should not be taken for granted.</p>
 
-<p>I recently was witness to how Gmail handles email headers in regards to HTML v. text-only. Gmail’s SaaS actually only reads the latter MIME-type and throws away the rest. So if you have a text version being made available, and you want your emails to be seen strictly as HTML, you must render the HTML version in your code LAST. Here is a Ruby on Rails example:</p>
+<p>One prominent example of this that I seem to notice more often in use than others, is the  application of color alternating rows with HTML tables, or also favorably known as the “zebra” effect. Which I’ll be using for my reference material.</p>
+
+<h2>PHP</h2>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -136,33 +138,70 @@
 <span class='line-number'>5</span>
 <span class='line-number'>6</span>
 <span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Notifier</span> <span class="o">&lt;</span> <span class="no">ActionMailer</span><span class="o">::</span><span class="no">Base</span>
-</span><span class='line'>  <span class="kp">include</span> <span class="no">SendGrid</span>
-</span><span class='line'>  <span class="n">default</span> <span class="ss">:from</span> <span class="o">=&gt;</span> <span class="no">Rails</span><span class="o">.</span><span class="n">configuration</span><span class="o">.</span><span class="n">sendgrid</span><span class="o">.</span><span class="n">reply_to</span>
-</span><span class='line'>  <span class="n">sendgrid_enable</span> <span class="ss">:opentrack</span><span class="p">,</span> <span class="ss">:clicktrack</span><span class="p">,</span> <span class="ss">:ganalytics</span>
-</span><span class='line'>  <span class="n">sendgrid_category</span> <span class="ss">:testing</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="k">def</span> <span class="nf">user_updated</span><span class="p">(</span><span class="n">user</span><span class="p">)</span>
-</span><span class='line'>    <span class="vi">@user</span> <span class="o">=</span> <span class="n">user</span>
-</span><span class='line'>    <span class="n">mail</span><span class="p">(</span> <span class="ss">:to</span> <span class="o">=&gt;</span> <span class="vi">@user</span><span class="o">.</span><span class="n">email</span><span class="p">,</span>
-</span><span class='line'>          <span class="ss">:subject</span> <span class="o">=&gt;</span> <span class="s2">&quot;Your information has been updated.&quot;</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="nb">format</span><span class="o">|</span>
-</span><span class='line'>      <span class="nb">format</span><span class="o">.</span><span class="n">text</span> <span class="p">{</span> <span class="s2">&quot;</span><span class="si">#{</span><span class="n">user</span><span class="o">.</span><span class="n">first_name</span><span class="si">}</span><span class="s2">,</span><span class="se">\n\n</span><span class="s2">This is an auto-response to inform you that your information has changed.&quot;</span> <span class="p">}</span>
-</span><span class='line'>      <span class="nb">format</span><span class="o">.</span><span class="n">html</span> <span class="p">{</span> <span class="n">render</span> <span class="ss">:layout</span> <span class="o">=&gt;</span> <span class="s1">&#39;autoresponse&#39;</span> <span class="p">}</span>
-</span><span class='line'>    <span class="k">end</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'><span class="k">end</span>
+</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="k">for</span> <span class="p">(</span><span class="nv">$i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="nv">$i</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">;</span><span class="nv">$i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">if</span> <span class="p">((</span><span class="nv">$i</span> <span class="nv">%</span> <span class="nv">2</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>        <span class="n">echo</span> <span class="s">&#39;&lt;tr class=&quot;zebra&quot;&gt;&#39;</span><span class="p">;</span>
+</span><span class='line'>    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span><span class='line'>        <span class="n">echo</span> <span class="s">&#39;&lt;tr&gt;&#39;</span><span class="p">;</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>Super “thanks” go out to the <a href="http://sendgrid.com/" title="SendGrid">SendGrid</a> crew for their constantly superior customer service skills and for helping me out on my way to becoming an email marketing specialist.</p>
+<p>The for() loop, does the accumulating work. It exponentially raises the default value ($i) by one, each iteration, so that the modulus operator (%) can equate the remainder of $i divided by two. So every instance of an even number represented by $i would evaluate to zero.</p>
+
+<h2>Ruby on Rails</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">&lt;</span><span class="sx">% @items.each </span><span class="k">do</span> <span class="o">|</span><span class="n">item</span><span class="o">|</span> <span class="sx">%&gt;</span>
+</span><span class='line'><span class="sx">  &lt;tr class=&quot;&lt;%= cycle(&quot;even&quot;, &quot;odd&quot;) %&gt;</span><span class="s2">&quot;&gt;</span>
+</span><span class='line'><span class="s2">    &lt;!-- use item --&gt;</span>
+</span><span class='line'><span class="s2">  &lt;/tr&gt;</span>
+</span><span class='line'><span class="s2">&lt;% end %&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>JQuery</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="nv">$</span><span class="err">(</span><span class="nv">document</span><span class="p">)</span><span class="o">.</span><span class="n">ready</span><span class="p">(</span><span class="n">function</span><span class="p">(){</span>
+</span><span class='line'>    <span class="vg">$(</span><span class="s">&quot;tr:even&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">css</span><span class="p">(</span><span class="s">&quot;background-color&quot;</span><span class="p">,</span> <span class="s">&quot;#EFEFEF&quot;</span><span class="p">);</span>
+</span><span class='line'>    <span class="vg">$(</span><span class="s">&quot;tr:odd&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">css</span><span class="p">(</span><span class="s">&quot;background-color&quot;</span><span class="p">,</span> <span class="s">&quot;#FFFFFF&quot;</span><span class="p">);</span>
+</span><span class='line'><span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The JQuery even and odd filters are used as index selectors. This method can be used on any page element with just a little bit of reverse engineering.</p>
+
+<h2>Discovering the Front-End</h2>
+
+<p>If you were to analyze the speed of using only Javascript, you would find that it is 16% slower, compared to PHP [1]. Though that number might seem relatively low in scale, because it is, consider all of the other factors when developing for the web.</p>
+
+<p>80% of the average user’s response time is spent on the front-end [2]. This time, is composed of downloading all of the elements necessary to make up the page (Images, libraries, scripts, stylesheets and more). Reducing the number of elements, in turn, reduces the number of HTTP requests required to render the page.</p>
+
+<p>With PHP everything is rendered before any HTTP requests are sent by the server.</p>
+
+<p>http://chart.apis.google.com/chart?cht=p&amp;chd=t:13,87&amp;chs=300x180&amp;chco=32cd32&amp;chdl=13.05%|86.95%&amp;chtt=GOOGLE&amp;chts=32cd32,12</p>
+
+<p>http://chart.apis.google.com/chart?cht=p&amp;chd=t:20,80&amp;chs=300x180&amp;chco=006699&amp;chdl=20.09%|79.91%&amp;chtt=PHP+ROCKSTAR&amp;chts=006699,12</p>
+
+<p>Graphically interpreted above are the details associated with load times. This analysis completes the HTTP request cycle from initialization. The darker portion, of each representation, shows the percentage of work involved by the server. As consistency shows, a lot of web design and development, relies mostly on what’s being delivered to the browser.</p>
+
+<h2>Summary</h2>
+
+<p>It’s certain that a professional web server is going to best the average home network set-up, in performance, any day. It’s your responsibility to take advantage of that, by running some server-side code, to save your guests the frustration of dealing with an idle load time.</p>
+
+<h3>References</h3>
+
+<p>[1] http://www.timestretch.com/FractalBenchmark.html
+[2] http://developer.yahoo.net/blog/archives/2007/03/high_performanc.html</p>
 </div>
 
 
@@ -185,14 +224,8 @@
   
 
 
-<time datetime="2011-12-10T12:52:00-06:00" pubdate data-updated="true">Dec 10<span>th</span>, 2011</time>
+<time datetime="2012-08-20T21:11:00-05:00" pubdate data-updated="true">Aug 20<span>th</span>, 2012</time>
       
-
-<span class="categories">
-  
-    <a class='category' href='/blog/categories/api/'>API</a>, <a class='category' href='/blog/categories/ruby/'>Ruby</a>
-  
-</span>
 
 
     </p>
@@ -214,14 +247,10 @@
     <ul class="pager">
       
       <li class="previous"><a class="basic-alignment left"
-        href="/blog/export-csv/" title="Previous Post:
-        Export CSV">&laquo; Export CSV</a></li>
+        href="/blog/html-not-rendering-in-gmail/" title="Previous Post:
+        HTML Not Rendering in Gmail">&laquo; HTML Not Rendering in Gmail</a></li>
       
       <li><a href="/blog/archives">Blog Archives</a></li>
-      
-      <li class="next"><a class="basic-alignment right" href="/blog/server-vs-client/"
-        title="Next Post: Server vs Client">Server vs Client
-        &raquo;</a></li>
       
     </ul>
   </footer>
@@ -322,8 +351,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://moorberry.net/blog/html-not-rendering-in-gmail/';
-        var disqus_url = 'http://moorberry.net/blog/html-not-rendering-in-gmail/';
+        var disqus_identifier = 'http://moorberry.net/blog/server-vs-client/';
+        var disqus_url = 'http://moorberry.net/blog/server-vs-client/';
         var disqus_script = 'embed.js';
       
     (function () {

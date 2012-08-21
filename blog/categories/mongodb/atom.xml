@@ -4,7 +4,7 @@
   <title><![CDATA[Category: MongoDB | Michael Minter]]></title>
   <link href="http://moorberry.net/blog/categories/mongodb/atom.xml" rel="self"/>
   <link href="http://moorberry.net/"/>
-  <updated>2012-08-20T20:56:12-05:00</updated>
+  <updated>2012-08-21T10:20:23-05:00</updated>
   <id>http://moorberry.net/</id>
   <author>
     <name><![CDATA[Michael Minter]]></name>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Export CSV]]></title>
-    <link href="http://moorberry.net/blog/export-csv-with-mongoid-and-fastercsv/"/>
+    <link href="http://moorberry.net/blog/export-csv/"/>
     <updated>2011-11-14T15:15:00-06:00</updated>
-    <id>http://moorberry.net/blog/export-csv-with-mongoid-and-fastercsv</id>
+    <id>http://moorberry.net/blog/export-csv</id>
     <content type="html"><![CDATA[<p>In my research I found a hundred and more different ways to manage the task of exporting data into a CSV file. Whenever I’m learning something new, on a new system or with a new language, I like to build the process myself from scratch. And being a minimalist programmer it just seems fitting. Enjoy</p>
 
 <p>``` ruby

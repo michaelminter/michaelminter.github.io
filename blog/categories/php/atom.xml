@@ -4,7 +4,7 @@
   <title><![CDATA[Category: PHP | Michael Minter]]></title>
   <link href="http://moorberry.net/blog/categories/php/atom.xml" rel="self"/>
   <link href="http://moorberry.net/"/>
-  <updated>2012-08-20T20:56:12-05:00</updated>
+  <updated>2012-08-21T10:20:23-05:00</updated>
   <id>http://moorberry.net/</id>
   <author>
     <name><![CDATA[Michael Minter]]></name>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Bare Bones Paypal Express Checkout NVP API]]></title>
-    <link href="http://moorberry.net/blog/bare-bones-paypal-express-checkout-nvp-api/"/>
+    <link href="http://moorberry.net/blog/paypal-express-checkout-nvp-api/"/>
     <updated>2010-04-03T20:19:00-05:00</updated>
-    <id>http://moorberry.net/blog/bare-bones-paypal-express-checkout-nvp-api</id>
+    <id>http://moorberry.net/blog/paypal-express-checkout-nvp-api</id>
     <content type="html"><![CDATA[<p>I'm not sure why <a href="http://paypal.com">Paypal</a> has written documentation, regarding its own Express Checkout name-value-pair API, with such a lack of enthusiasm. The classes used with the Paypal API are extremely easy to use. All of this is likely contributing to the confusion about using Express Checkout. But I’m here now, to save your application, and hopefully your sanity.</p>
 
 <p>I’m going to explain why the API objects work and what happens when they’re called. There’s a few different ways that you could go about setting up the product and/or service details. So I’ll keep this post relative to the main focus points and let you handle the before and after parts on an individual basis.</p>
@@ -164,9 +164,9 @@ Array
   
   <entry>
     <title type="html"><![CDATA[Simple Flickr Gallery Implementation]]></title>
-    <link href="http://moorberry.net/blog/simple-flickr-gallery-implementation/"/>
+    <link href="http://moorberry.net/blog/simple-flickr-gallery/"/>
     <updated>2010-03-24T15:23:00-05:00</updated>
-    <id>http://moorberry.net/blog/simple-flickr-gallery-implementation</id>
+    <id>http://moorberry.net/blog/simple-flickr-gallery</id>
     <content type="html"><![CDATA[<p>In my search for finding a simple solution to any problem, I usually cross many and many blogs and articles, discussing whatever topic. But with so much detail that the solution becomes a problem in itself. So I often times end up resolved to research on my own. In this case, I share the simplest programming method for displaying a <a href="http://flickr.com" title="Flickr">Flickr</a> gallery, with PHP.</p>
 
 <h2>Assembling Your Variables</h2>
