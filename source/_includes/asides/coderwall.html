@@ -1,7 +1,7 @@
 {% if site.coderwall_user %}
-<section id="coderwall_container">
-  <h1>Coderwall Badges</h1>
-  <p>
+<section class="well" id="coderwall">
+  <ul class="nav"><li class="nav-header">Coderwall Badges</li></ul>
+  <div id="coderwall_container">
     <script type="text/javascript">
       function display_coderwall(args) {
         var badges = args["data"]["badges"];
@@ -19,9 +19,12 @@
       }
     </script>
     <script src="http://coderwall.com/{{site.coderwall_user}}.json?callback=display_coderwall"></script>
-  </p>
-  {% if site.coderwall_show_endorse_link %}
-  <p><a href="http://coderwall.com/{{site.coderwall_user}}"><img src="http://api.coderwall.com/{{site.coderwall_user}}/endorsecount.png" /></a></p>
-  {% endif %}
+    
+    <br /><br />
+    
+    {% if site.coderwall_show_endorse_link %}
+    <p><a href="http://coderwall.com/{{site.coderwall_user}}"><img src="http://api.coderwall.com/{{site.coderwall_user}}/endorsecount.png" /></a></p>
+    {% endif %}
+  </div>
 </section>
 {% endif %}

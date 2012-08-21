@@ -1,7 +1,6 @@
 ---
 layout: post
 title: "HTML Not Rendering in Gmail"
-author: '<a href="http://github.com/michaelminter" target="_blank" class="github_link">Michael Minter</a>'
 date: 2011-12-10 12:52
 comments: true
 categories: [Ruby, API]
