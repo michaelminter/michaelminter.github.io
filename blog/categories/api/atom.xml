@@ -4,7 +4,7 @@
   <title><![CDATA[Category: API | Michael Minter]]></title>
   <link href="http://moorberry.net/blog/categories/api/atom.xml" rel="self"/>
   <link href="http://moorberry.net/"/>
-  <updated>2012-08-20T19:15:21-05:00</updated>
+  <updated>2012-08-20T20:56:12-05:00</updated>
   <id>http://moorberry.net/</id>
   <author>
     <name><![CDATA[Michael Minter]]></name>
@@ -46,6 +46,155 @@ end
 ```</p>
 
 <p>Super “thanks” go out to the <a href="http://sendgrid.com/" title="SendGrid">SendGrid</a> crew for their constantly superior customer service skills and for helping me out on my way to becoming an email marketing specialist.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Bare Bones Paypal Express Checkout NVP API]]></title>
+    <link href="http://moorberry.net/blog/bare-bones-paypal-express-checkout-nvp-api/"/>
+    <updated>2010-04-03T20:19:00-05:00</updated>
+    <id>http://moorberry.net/blog/bare-bones-paypal-express-checkout-nvp-api</id>
+    <content type="html"><![CDATA[<p>I'm not sure why <a href="http://paypal.com">Paypal</a> has written documentation, regarding its own Express Checkout name-value-pair API, with such a lack of enthusiasm. The classes used with the Paypal API are extremely easy to use. All of this is likely contributing to the confusion about using Express Checkout. But I’m here now, to save your application, and hopefully your sanity.</p>
+
+<p>I’m going to explain why the API objects work and what happens when they’re called. There’s a few different ways that you could go about setting up the product and/or service details. So I’ll keep this post relative to the main focus points and let you handle the before and after parts on an individual basis.</p>
+
+<h2>Referring payment authentication</h2>
+
+<p><code>perl
+$paypal = new SetExpressCheckout($totalPrice);
+</code></p>
+
+<p>We start out by calling the <strong>SetExpressCheckOut()</strong> class. This class caller instantiates the method you’ll use to set up the parameters required for redirecting the customer <em>to</em> Paypal <em>and back</em>. A variable of the total price has to be set to complete the initiation of this class.</p>
+
+<p>``` perl
+$paypal = new SetExpressCheckout($totalPrice);</p>
+
+<p>$paypal->setNVP("RETURNURL", "http://yourURL.com/confirm.php");
+$paypal->setNVP("HDRIMG", "http://yourURL.com/image.jpg");
+$paypal->setNVP("EMAIL", "$userEmail"); // customer's email
+$paypal->setNVP("AMT", $totalPrice);
+$paypal->setNVP("SHIPPINGAMT", "32");
+$paypal->setNVP("CUSTOM", "Anything you want to put");
+$paypal->setNVP("INVNUM", $uniqueID); // personal invoice number</p>
+
+<p>$paypal->getResponse();
+```</p>
+
+<p>Before you submit for a transfer to Paypal, know that there are optional values you can send with the setNVP() function, to customize the payment process. All values that can be found, by default, in the etc/NVP/SetExpressCheckout.ini file. I’ve included a list of common practice examples and how to use them in this template.</p>
+
+<p>getResponse() sends the user’s browser to Paypal for authentication of credit information. Specifically to a URL that you’ll have to variably set between test mode (sandbox) and live, in the file named etc/NVP/PayPalNVP.ini.</p>
+
+<h2>Completing the Sale</h2>
+
+<p><code>perl
+$paypal  = new GetExpressCheckoutDetails;
+$details = $paypal-&gt;getResponse();
+</code></p>
+
+<p><strong>GetExpressCheckoutDetails()</strong> is a class that is most responsible for presenting the custom specifications that you originally sent with SetExpressCheckOut() and SetNVP().</p>
+
+<p><strong>getResponse()</strong> will gather all of the available options as an array, labelled $details.</p>
+
+<p><code>perl
+$payment  = new DoExpressCheckoutPayment($totalPrice);
+$response = $payment-&gt;getResponse();
+</code></p>
+
+<p><strong>DoExpressCheckoutPayment()</strong> will instinctively initiate a communication with Paypal to notify the service that you are ready for the payment to be transferred to your account. The only necessary requisite, of calling this class and it calling to action, is to include the total price in its variable containment field.</p>
+
+<p><strong>getResponse()</strong> will gather the resulting responses by DoExpressCheckoutPayment() and include them in an array, labelled $response.</p>
+
+<p>It could be said that you could apply another (final) verification for your customer to submit before the transaction is completed by DoExpressCheckoutPayment(). But not technically necessary.</p>
+
+<p>``` perl
+if ($response['PAYMENTSTATUS'] == 'Completed') {</p>
+
+<pre><code># process information
+</code></pre>
+
+<p>}
+```</p>
+
+<p>One of the returned values in $response will be the PAYMENTSTATUS key. This is a string result that confirms whether or not the money has made been payed to your account. It will definitely be useful when you set up your system to print an invoice on complete, or some insightfully-formatted summary on failure.</p>
+
+<h2>Displaying results from getResponse</h2>
+
+<p>``` perl
+echo '<pre>';
+print_r($details);
+echo '<pre>';
+print_r($response);</p>
+
+<h1>The above code should print out something similar to the following:</h1>
+
+<p>Array
+(</p>
+
+<pre><code>[TOKEN] =&gt; EC%2d8DS53628GJ4630109
+[TIMESTAMP] =&gt; 2010%2d03%2d31T08%3a25%3a40Z
+[CORRELATIONID] =&gt; ce3e460d38d2f
+[ACK] =&gt; Success
+[VERSION] =&gt; 51%2e0
+[BUILD] =&gt; 1247606
+[EMAIL] =&gt; test_acct_36654645742_per%40domain%2ecom
+[PAYERID] =&gt; W96GXTA5P9BRN
+[PAYERSTATUS] =&gt; verified
+[FIRSTNAME] =&gt; Test
+[LASTNAME] =&gt; User
+[COUNTRYCODE] =&gt; US
+[SHIPTONAME] =&gt; Test%20User
+[SHIPTOSTREET] =&gt; 1%20Main%20St
+[SHIPTOCITY] =&gt; San%20Jose
+[SHIPTOSTATE] =&gt; CA
+[SHIPTOZIP] =&gt; 95131
+[SHIPTOCOUNTRYCODE] =&gt; US
+[SHIPTOCOUNTRYNAME] =&gt; United%20States
+[ADDRESSSTATUS] =&gt; Confirmed
+[CUSTOM] =&gt; Anything you want to put
+[INVNUM] =&gt; IYUUFEOAS0ME3MTI
+</code></pre>
+
+<p>)
+Array
+(</p>
+
+<pre><code>[TOKEN] =&gt; EC%2d8DS53628GJ4630109
+[TIMESTAMP] =&gt; 2010%2d03%2d31T08%3a25%3a43Z
+[CORRELATIONID] =&gt; b1989df39a0ca
+[ACK] =&gt; Success
+[VERSION] =&gt; 51%2e0
+[BUILD] =&gt; 1247606
+[TRANSACTIONID] =&gt; 1PR0061154034542X
+[TRANSACTIONTYPE] =&gt; expresscheckout
+[PAYMENTTYPE] =&gt; instant
+[ORDERTIME] =&gt; 2010%2d03%2d31T08%3a25%3a42Z
+[AMT] =&gt; 152%2e00
+[FEEAMT] =&gt; 4%2e71
+[TAXAMT] =&gt; 0%2e00
+[CURRENCYCODE] =&gt; USD
+[PAYMENTSTATUS] =&gt; Completed
+[PENDINGREASON] =&gt; None
+[REASONCODE] =&gt; None
+</code></pre>
+
+<p>)
+```</p>
+
+<h2>Testing</h2>
+
+<p>If you don’t have a <a href="https://developer.paypal.com/">Paypal developer account</a>, than you should certainly sign up for one to use Paypal’s Sandbox, which makes a mock version of Paypal available for testing. Comes complete with personal and business accounts, each with their own credentials, and unlimited funds.</p>
+
+<h2>Summary</h2>
+
+<p>Follow the preceding order and you could easily narrow this code down to a a single file, with enough if() constructs, or span it out to many.</p>
+
+<p>You might be left wondering why it seems less daunting than you have expected. That would be because you’re right. These few objects are all that’s needed to handle a shopping cart system on your website.</p>
+
+<p>Maybe Paypal will use this post to refer new users trying to understand how this system works. But I doubt it.</p>
+
+<h3>Note</h3>
+
+<p>Don't forget to adjust your database schema for <em>address2</em> in <strong>$details</strong> when available.</p>
 ]]></content>
   </entry>
   

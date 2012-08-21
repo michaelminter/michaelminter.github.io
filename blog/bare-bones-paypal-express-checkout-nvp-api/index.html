@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Michael Minter</title>
+  <title>Bare Bones Paypal Express Checkout NVP API - Michael Minter</title>
   <meta name="author" content="Michael Minter">
 
   
-  <meta name="description" content="I’ve been handling many of my company’s email campaigns for some time now and I can honestly say that it’s been pretty fun from a technical stand- &hellip;">
+  <meta name="description" content="I&#8217;m not sure why Paypal has written documentation, regarding its own Express Checkout name-value-pair API, with such a lack of enthusiasm. The &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://moorberry.net">
+  <link rel="canonical" href="http://moorberry.net/blog/bare-bones-paypal-express-checkout-nvp-api">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/bootstrap/bootstrap.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/stylesheets/bootstrap/responsive.css" media="screen, projection" rel="stylesheet" type="text/css">
@@ -92,187 +92,13 @@
 </nav>
   <div class="container">
     <div class="row-fluid">
-      <div class="span9">
-  
-  
-  
-    <article>
       
+<article class="hentry span9" role="article">
+
+  
   <header class="page-header">
     
-      <h1 class="entry-title"><a href="/blog/html-not-rendering-in-gmail/">HTML Not Rendering in Gmail</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-12-10T12:52:00-06:00" pubdate data-updated="true">Dec 10<span>th</span>, 2011</time>
-        
-         | <a href="/blog/html-not-rendering-in-gmail/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>I’ve been handling many of my company’s email campaigns for some time now and I can honestly say that it’s been pretty fun from a technical stand-point. There’s a lot that goes into email marketing (not including the marketing/sales implications). It has it’s own conventions, ideologies, and I believe to the utmost that there’s a larger future than presumed in store for the sometimes misunderstood technology. (I’m patiently waiting for a mobile device header-type.)</p>
-
-<p>Recently I’ve been using my new skills while working on my own applications using <a href="http://sendgrid.com/" title="SendGrid">SendGrid</a> as an alternative SMTP and email analytics tool. And I’ve only really come across one major programmable error. If you use a desktop client instead of a browser for viewing emails, as I do oftentimes, then this issue might not be so apparent (till now).</p>
-
-<p>I recently was witness to how Gmail handles email headers in regards to HTML v. text-only. Gmail’s SaaS actually only reads the latter MIME-type and throws away the rest. So if you have a text version being made available, and you want your emails to be seen strictly as HTML, you must render the HTML version in your code LAST. Here is a Ruby on Rails example:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Notifier</span> <span class="o">&lt;</span> <span class="no">ActionMailer</span><span class="o">::</span><span class="no">Base</span>
-</span><span class='line'>  <span class="kp">include</span> <span class="no">SendGrid</span>
-</span><span class='line'>  <span class="n">default</span> <span class="ss">:from</span> <span class="o">=&gt;</span> <span class="no">Rails</span><span class="o">.</span><span class="n">configuration</span><span class="o">.</span><span class="n">sendgrid</span><span class="o">.</span><span class="n">reply_to</span>
-</span><span class='line'>  <span class="n">sendgrid_enable</span> <span class="ss">:opentrack</span><span class="p">,</span> <span class="ss">:clicktrack</span><span class="p">,</span> <span class="ss">:ganalytics</span>
-</span><span class='line'>  <span class="n">sendgrid_category</span> <span class="ss">:testing</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="k">def</span> <span class="nf">user_updated</span><span class="p">(</span><span class="n">user</span><span class="p">)</span>
-</span><span class='line'>    <span class="vi">@user</span> <span class="o">=</span> <span class="n">user</span>
-</span><span class='line'>    <span class="n">mail</span><span class="p">(</span> <span class="ss">:to</span> <span class="o">=&gt;</span> <span class="vi">@user</span><span class="o">.</span><span class="n">email</span><span class="p">,</span>
-</span><span class='line'>          <span class="ss">:subject</span> <span class="o">=&gt;</span> <span class="s2">&quot;Your information has been updated.&quot;</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="nb">format</span><span class="o">|</span>
-</span><span class='line'>      <span class="nb">format</span><span class="o">.</span><span class="n">text</span> <span class="p">{</span> <span class="s2">&quot;</span><span class="si">#{</span><span class="n">user</span><span class="o">.</span><span class="n">first_name</span><span class="si">}</span><span class="s2">,</span><span class="se">\n\n</span><span class="s2">This is an auto-response to inform you that your information has changed.&quot;</span> <span class="p">}</span>
-</span><span class='line'>      <span class="nb">format</span><span class="o">.</span><span class="n">html</span> <span class="p">{</span> <span class="n">render</span> <span class="ss">:layout</span> <span class="o">=&gt;</span> <span class="s1">&#39;autoresponse&#39;</span> <span class="p">}</span>
-</span><span class='line'>    <span class="k">end</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Super “thanks” go out to the <a href="http://sendgrid.com/" title="SendGrid">SendGrid</a> crew for their constantly superior customer service skills and for helping me out on my way to becoming an email marketing specialist.</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header class="page-header">
-    
-      <h1 class="entry-title"><a href="/blog/export-csv-with-mongoid-and-fastercsv/">Export CSV</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-11-14T15:15:00-06:00" pubdate data-updated="true">Nov 14<span>th</span>, 2011</time>
-        
-         | <a href="/blog/export-csv-with-mongoid-and-fastercsv/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>In my research I found a hundred and more different ways to manage the task of exporting data into a CSV file. Whenever I’m learning something new, on a new system or with a new language, I like to build the process myself from scratch. And being a minimalist programmer it just seems fitting. Enjoy</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">def</span> <span class="nf">export_inverts</span>
-</span><span class='line'>  <span class="nb">require</span> <span class="s1">&#39;fastercsv&#39;</span>
-</span><span class='line'>  <span class="n">inverts</span>  <span class="o">=</span> <span class="no">Invert</span><span class="o">.</span><span class="n">all</span>
-</span><span class='line'>  <span class="n">filename</span> <span class="o">=</span> <span class="n">params</span><span class="o">[</span><span class="ss">:action</span><span class="o">]</span> <span class="o">+</span> <span class="s2">&quot;.csv&quot;</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="c1">#this is required if you want this to work with IE</span>
-</span><span class='line'>  <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">env</span><span class="o">[</span><span class="s1">&#39;HTTP_USER_AGENT&#39;</span><span class="o">]</span> <span class="o">=~</span> <span class="sr">/msie/i</span>
-</span><span class='line'>    <span class="n">headers</span><span class="o">[</span><span class="s1">&#39;Pragma&#39;</span><span class="o">]</span> <span class="o">=</span> <span class="s1">&#39;public&#39;</span>
-</span><span class='line'>    <span class="n">headers</span><span class="o">[</span><span class="s2">&quot;Content-type&quot;</span><span class="o">]</span> <span class="o">=</span> <span class="s2">&quot;text/plain&quot;</span>
-</span><span class='line'>    <span class="n">headers</span><span class="o">[</span><span class="s1">&#39;Cache-Control&#39;</span><span class="o">]</span> <span class="o">=</span> <span class="s1">&#39;no-cache, must-revalidate, post-check=0, pre-check=0&#39;</span>
-</span><span class='line'>    <span class="n">headers</span><span class="o">[</span><span class="s1">&#39;Content-Disposition&#39;</span><span class="o">]</span> <span class="o">=</span> <span class="s2">&quot;attachment; filename=</span><span class="se">\&quot;</span><span class="si">#{</span><span class="n">filename</span><span class="si">}</span><span class="se">\&quot;</span><span class="s2">&quot;</span>
-</span><span class='line'>    <span class="n">headers</span><span class="o">[</span><span class="s1">&#39;Expires&#39;</span><span class="o">]</span> <span class="o">=</span> <span class="s2">&quot;0&quot;</span>
-</span><span class='line'>  <span class="k">else</span>
-</span><span class='line'>    <span class="n">headers</span><span class="o">[</span><span class="s2">&quot;Content-Type&quot;</span><span class="o">]</span> <span class="o">||=</span> <span class="s1">&#39;text/csv&#39;</span>
-</span><span class='line'>    <span class="n">headers</span><span class="o">[</span><span class="s2">&quot;Content-Disposition&quot;</span><span class="o">]</span> <span class="o">=</span> <span class="s2">&quot;attachment; filename=</span><span class="se">\&quot;</span><span class="si">#{</span><span class="n">filename</span><span class="si">}</span><span class="se">\&quot;</span><span class="s2">&quot;</span>
-</span><span class='line'>    <span class="n">headers</span><span class="o">[</span><span class="s2">&quot;Content-Transfer-Encoding&quot;</span><span class="o">]</span> <span class="o">=</span> <span class="s2">&quot;binary&quot;</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="n">csv_string</span> <span class="o">=</span> <span class="no">FasterCSV</span><span class="o">.</span><span class="n">generate</span> <span class="k">do</span> <span class="o">|</span><span class="n">csv</span><span class="o">|</span>
-</span><span class='line'>    <span class="n">csv</span> <span class="o">&lt;&lt;</span> <span class="o">[</span><span class="s2">&quot;Genus&quot;</span><span class="p">,</span><span class="s2">&quot;Species&quot;</span><span class="p">,</span><span class="s2">&quot;Common Name&quot;</span><span class="p">,</span><span class="s2">&quot;Pet Name&quot;</span><span class="p">,</span><span class="s2">&quot;Gender&quot;</span><span class="o">]</span>
-</span><span class='line'>    <span class="n">inverts</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">i</span><span class="o">|</span>
-</span><span class='line'>      <span class="n">csv</span> <span class="o">&lt;&lt;</span> <span class="o">[</span><span class="n">i</span><span class="o">.</span><span class="n">scientific_name</span><span class="p">,</span><span class="n">i</span><span class="o">.</span><span class="n">scientific_name</span><span class="p">,</span><span class="n">i</span><span class="o">.</span><span class="n">common_name</span><span class="p">,</span><span class="n">i</span><span class="o">.</span><span class="n">pet_name</span><span class="p">,</span><span class="n">i</span><span class="o">.</span><span class="n">gender</span><span class="o">]</span>
-</span><span class='line'>    <span class="k">end</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'>  <span class="n">render</span> <span class="ss">:text</span> <span class="o">=&gt;</span> <span class="n">csv_string</span>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>NOTE: <em>Developers using Ruby 1.8 &lt;= must install gem:fastercsv</em></p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header class="page-header">
-    
-      <h1 class="entry-title"><a href="/blog/bare-bones-paypal-express-checkout-nvp-api/">Bare Bones Paypal Express Checkout NVP API</a></h1>
+      <h1 class="entry-title">Bare Bones Paypal Express Checkout NVP API</h1>
     
     
       <p class="meta">
@@ -290,14 +116,14 @@
 
 <time datetime="2010-04-03T20:19:00-05:00" pubdate data-updated="true">Apr 3<span>rd</span>, 2010</time>
         
-         | <a href="/blog/bare-bones-paypal-express-checkout-nvp-api/#disqus_thread">Comments</a>
+         | <a href="#disqus_thread">Comments</a>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><p>I&#8217;m not sure why <a href="http://paypal.com">Paypal</a> has written documentation, regarding its own Express Checkout name-value-pair API, with such a lack of enthusiasm. The classes used with the Paypal API are extremely easy to use. All of this is likely contributing to the confusion about using Express Checkout. But I’m here now, to save your application, and hopefully your sanity.</p>
+<div class="entry-content"><p>I&#8217;m not sure why <a href="http://paypal.com">Paypal</a> has written documentation, regarding its own Express Checkout name-value-pair API, with such a lack of enthusiasm. The classes used with the Paypal API are extremely easy to use. All of this is likely contributing to the confusion about using Express Checkout. But I’m here now, to save your application, and hopefully your sanity.</p>
 
 <p>I’m going to explain why the API objects work and what happens when they’re called. There’s a few different ways that you could go about setting up the product and/or service details. So I’ll keep this post relative to the main focus points and let you handle the before and after parts on an individual basis.</p>
 
@@ -501,22 +327,16 @@
 
 <p>Don&#8217;t forget to adjust your database schema for <em>address2</em> in <strong>$details</strong> when available.</p>
 </div>
-  
-  
 
 
-    </article>
-  
-  
-    <article>
+  <footer>
+    <p class="meta">
       
-  <header class="page-header">
-    
-      <h1 class="entry-title"><a href="/blog/simple-flickr-gallery-implementation/">Simple Flickr Gallery Implementation</a></h1>
-    
-    
-      <p class="meta">
-        
+  
+
+<span class="byline author vcard">Posted by <span class="fn"><a href="http://github.com/michaelminter" target="_blank" class="github_link">Michael Minter</a></span></span>
+
+      
 
 
 
@@ -528,74 +348,48 @@
   
 
 
-<time datetime="2010-03-24T15:23:00-05:00" pubdate data-updated="true">Mar 24<span>th</span>, 2010</time>
-        
-         | <a href="/blog/simple-flickr-gallery-implementation/#disqus_thread">Comments</a>
-        
-      </p>
+<time datetime="2010-04-03T20:19:00-05:00" pubdate data-updated="true">Apr 3<span>rd</span>, 2010</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/api/'>API</a>, <a class='category' href='/blog/categories/php/'>PHP</a>
+  
+</span>
+
+
+    </p>
     
-  </header>
-
-
-  <div class="entry-content"><p>In my search for finding a simple solution to any problem, I usually cross many and many blogs and articles, discussing whatever topic. But with so much detail that the solution becomes a problem in itself. So I often times end up resolved to research on my own. In this case, I share the simplest programming method for displaying a <a href="http://flickr.com" title="Flickr">Flickr</a> gallery, with PHP.</p>
-
-<h2>Assembling Your Variables</h2>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="nv">$api_key</span>  <span class="o">=</span> <span class="s">&#39;cr79h3t7g387ghc3fh7338ch87c3ch734&#39;</span><span class="p">;</span>
-</span><span class='line'><span class="nv">$user_id</span>  <span class="o">=</span> <span class="s">&#39;33822702%40N08&#39;</span><span class="p">;</span>
-</span><span class='line'><span class="nv">$per_page</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'><span class="nv">$xml</span>      <span class="o">=</span> <span class="s">&#39;http://api.flickr.com/services/rest/?method=flickr.people.getPublicPhotos&amp;api_key=&#39;</span><span class="o">.</span><span class="nv">$api_key</span><span class="o">.</span><span class="s">&#39;&amp;user_id=&#39;</span><span class="o">.</span><span class="nv">$user_id</span><span class="o">.</span><span class="s">&#39;&amp;per_page=&#39;</span><span class="o">.</span><span class="nv">$per_page</span><span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'><span class="nv">$flickr</span>   <span class="o">=</span> <span class="n">simplexml_load_file</span><span class="p">(</span><span class="nv">$xml</span><span class="p">);</span>
-</span><span class='line'><span class="k">foreach</span><span class="p">(</span><span class="nv">$flickr</span><span class="o">-&gt;</span><span class="n">photos</span><span class="o">-&gt;</span><span class="n">photo</span> <span class="n">as</span> <span class="nv">$p</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>    <span class="n">echo</span> <span class="s">&#39;&lt;a href=&quot;http://www.flickr.com/photos/&#39;</span><span class="o">.</span><span class="nv">$p</span><span class="p">[</span><span class="s">&#39;owner&#39;</span><span class="p">]</span><span class="o">.</span><span class="s">&#39;/&#39;</span><span class="o">.</span><span class="nv">$p</span><span class="p">[</span><span class="s">&#39;id&#39;</span><span class="p">]</span><span class="o">.</span><span class="s">&#39;&quot;&gt;&#39;</span><span class="p">;</span>
-</span><span class='line'>    <span class="n">echo</span> <span class="s">&#39;&lt;img src=&quot;http://farm&#39;</span><span class="o">.</span><span class="nv">$p</span><span class="p">[</span><span class="s">&#39;farm&#39;</span><span class="p">]</span><span class="o">.</span><span class="s">&#39;.static.flickr.com/&#39;</span><span class="o">.</span><span class="nv">$p</span><span class="p">[</span><span class="s">&#39;server&#39;</span><span class="p">]</span><span class="o">.</span><span class="s">&#39;/&#39;</span><span class="o">.</span><span class="nv">$p</span><span class="p">[</span><span class="s">&#39;id&#39;</span><span class="p">]</span><span class="o">.</span><span class="s">&#39;_&#39;</span><span class="o">.</span><span class="nv">$p</span><span class="p">[</span><span class="s">&#39;secret&#39;</span><span class="p">]</span><span class="o">.</span><span class="s">&#39;_s.jpg&quot;&gt;&#39;</span><span class="p">;</span>
-</span><span class='line'>    <span class="n">echo</span> <span class="s">&#39;&lt;/a&gt;&#39;</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><strong>$api_key</strong> is part of an authentication device that allows your server and Flickr to “shake hands” sort of speak. <a href="http://www.flickr.com/services/api/keys/" title="Flickr API Key">You can get your Flickr API key here</a>.</p>
-
-<p><strong>$user_id</strong> is how Flickr identifies you. This value can be found in the URL of your Flickr “photostream”. <a href="http://www.flickr.com/photos/33822702@N08/" title="Michael Minter's Flickr">Here&#8217;s mine for reference</a>.</p>
-
-<p><strong>$per_page</strong> refers to how many photos will be retrieved from your photostream. Though this limiter is optional, the default count is, “all”. Which means if you have 1,000 plus photos, it could be a very bad thing, for your viewer’s browser load time.</p>
-
-<p><strong>$xml</strong> is a link to the webfile that renders a list of your available photos based on previously noted variables. This line can be modified later to include even more search parameters. (see: below)</p>
-
-<p><strong>$flickr</strong> uses a PHP function called, <a href="http://php.net/manual/en/function.simplexml-load-file.php" title="simplexml_load_file function">simplexml_load_file()</a>, which parses an XML file into an object.</p>
-
-<p>In today&#8217;s lesson, <strong>$flickr</strong> becomes an array and we use <a href="http://us2.php.net/manual/en/control-structures.foreach.php" title="foreach function">foreach()</a> to extract the values we need, to display the gallery.</p>
-
-<h2>Summary</h2>
-
-<p>This method is just what I needed. Something small, easily accessible, and scalable. As you experiment with this script, you’ll be afforded the opportunity to use many different features of the API, which Flickr offers. <a href="http://www.flickr.com/services/api/" title="Flickr API Index">Click here to view a full list.</a></p>
+      <div class="sharing">
+  
+  
+  
 </div>
-  
-  
 
-
-    </article>
-  
-  <ul class="pager">
     
-    <li><a href="/blog/archives">Blog Archives</a></li>
     
-  </ul>
+    <section>
+      <h1>Comments</h1>
+      <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 </div>
+    </section>
+    
+    <ul class="pager">
+      
+      <li class="previous"><a class="basic-alignment left"
+        href="/blog/simple-flickr-gallery-implementation/" title="Previous Post:
+        Simple Flickr Gallery Implementation">&laquo; Simple Flickr Gallery Implementation</a></li>
+      
+      <li><a href="/blog/archives">Blog Archives</a></li>
+      
+      <li class="next"><a class="basic-alignment right" href="/blog/export-csv-with-mongoid-and-fastercsv/"
+        title="Next Post: Export CSV">Export CSV
+        &raquo;</a></li>
+      
+    </ul>
+  </footer>
+</article>
+
 <aside class="sidebar-nav span3">
   
     <section class="well">
@@ -670,6 +464,7 @@
   
 </aside>
 
+
     </div>
   </div>
   <footer role="contentinfo" class="page-footer"><hr>
@@ -685,7 +480,10 @@
       var disqus_shortname = 'michaelminter';
       
         
-        var disqus_script = 'count.js';
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://moorberry.net/blog/bare-bones-paypal-express-checkout-nvp-api/';
+        var disqus_url = 'http://moorberry.net/blog/bare-bones-paypal-express-checkout-nvp-api/';
+        var disqus_script = 'embed.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
