@@ -4,7 +4,7 @@
   <title><![CDATA[Category: PHP | Michael Minter]]></title>
   <link href="http://moorberry.net/blog/categories/php/atom.xml" rel="self"/>
   <link href="http://moorberry.net/"/>
-  <updated>2012-08-21T10:20:23-05:00</updated>
+  <updated>2012-08-21T11:04:15-05:00</updated>
   <id>http://moorberry.net/</id>
   <author>
     <name><![CDATA[Michael Minter]]></name>
@@ -12,6 +12,118 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Dynamically Pre-Render Images]]></title>
+    <link href="http://moorberry.net/blog/content-delivery-network/"/>
+    <updated>2010-04-22T10:48:00-05:00</updated>
+    <id>http://moorberry.net/blog/content-delivery-network</id>
+    <content type="html"><![CDATA[<p>If you’ve been frustrated with having to resize images for the sake of continuity or load time and don’t want to develop an entire caching system than this post will be of great value to you.</p>
+
+<p>Today I will discusses the theory and resolve of applying a system to autonomously resize images, with the GD library for PHP, before they get requested by the browser.</p>
+
+<p>This practice presents many benefits to its use.</p>
+
+<ul>
+<li>Save loads of hard drive space</li>
+<li>Easy to resize div backgrounds</li>
+<li>Faster to call than the use of <a href="/blog/server-vs-client">JavaScript</a>.</li>
+</ul>
+
+
+<h2>Calling the Application With HTML</h2>
+
+<p><code>html
+&lt;img src="image.php?i=image.jpg&amp;s=500" /&gt;
+</code></p>
+
+<p>Calling the php script is this easy. You can place this tag anywhere on any page and be able to display an image, with exact value constraints, and as many times as you need.</p>
+
+<h2>Developing the image.php Application</h2>
+
+<p><code>perl
+header("Content-Type: image/jpeg");
+</code></p>
+
+<p>header() will make sure that the browser is aware how to handle the applicaton. Here it enables the page to be viewed as a jpeg source.</p>
+
+<p>``` perl
+if (!isset($_GET['s'])) {</p>
+
+<pre><code>$size = 160;
+</code></pre>
+
+<p>} else {</p>
+
+<pre><code>$size = $_GET['s'];
+</code></pre>
+
+<p>}
+$image = $_GET['i'];</p>
+
+<p>list($width, $height) = getimagesize($image);</p>
+
+<p>$ratio = $width/$height;</p>
+
+<p>if ($ratio > 1) {</p>
+
+<pre><code>$newWidth  = $size;
+$newHeight = $size/$ratio;
+</code></pre>
+
+<p>} else {</p>
+
+<pre><code>$newHeight = $size;
+$newWidth  = $size*$ratio;
+</code></pre>
+
+<p>}</p>
+
+<h1>creates a copy of the loaded image</h1>
+
+<p>$create = imagecreatefromjpeg($image);</p>
+
+<h1>creates a blank template to work from</h1>
+
+<p>$template = imagecreatetruecolor($newWidth,$newHeight);</p>
+
+<h1>copies the original onto the new template</h1>
+
+<p>imagecopyresized($template, $create, 0, 0, 0, 0, $newWidth, $newHeight, $width, $height);</p>
+
+<h1>displays the image</h1>
+
+<p>ImageJpeg($template);
+```</p>
+
+<p>Usually I break this larger portion of my post up into smaller pieces so I can reference all the code being used and what it does. But the fundamentals are so well noted and easy to navigate, that I figured even if I left it as so, that you should have no problem implementing this into your own work.</p>
+
+<h2>Error catching</h2>
+
+<p>If source material is not working properly. Issue the following:</p>
+
+<p>``` perl
+if(!function_exists('imagecreatetruecolor')) {</p>
+
+<pre><code>exit('Err, function : imagecreatetruecolor does not exist');
+</code></pre>
+
+<p>}
+```</p>
+
+<p>function_exists() will check the currently active Apache function repository, both internal and user-defined, to see if the listed function matches anything available.</p>
+
+<p>If you’re receiving the error message than the server you’re running this code on does not support the GD library and you must either set it up manually or contact an administrator to do so for you.</p>
+
+<p>Also note that only Jpeg formats are acceptable by this set up. Extending is not a difficult task. I only wanted you to understand the basics and be able to evolve with PHP from my writings.</p>
+
+<h2>Summary</h2>
+
+<p>Hopefully I’ve left more than enough room for you to adapt this into your own projects. You can add on to this with many of the GD library features documented by the PHP network.</p>
+
+<p>If you develop an extension or even a class, from these tips, please feel free to share by commenting back and letting me know what you’ve done.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Bare Bones Paypal Express Checkout NVP API]]></title>
