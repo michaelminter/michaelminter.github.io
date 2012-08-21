@@ -1,0 +1,17 @@
+body {
+  padding-bottom: 40px;
+}
+h1 {
+  margin-bottom: 15px;
+}
+img {
+  max-width: 100%;
+}
+.sharing, .meta, .pager {
+  margin: 20px 0px 20px 0px;
+}
+.page-footer p {
+  text-align: center;
+}
+
+#coderwall #coderwall_container { padding:0 15px; }
