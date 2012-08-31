@@ -4,7 +4,7 @@
   <title><![CDATA[Category: API | Michael Minter]]></title>
   <link href="http://moorberry.net/blog/categories/api/atom.xml" rel="self"/>
   <link href="http://moorberry.net/"/>
-  <updated>2012-08-21T17:44:55-05:00</updated>
+  <updated>2012-08-31T16:38:11-05:00</updated>
   <id>http://moorberry.net/</id>
   <author>
     <name><![CDATA[Michael Minter]]></name>
@@ -19,6 +19,9 @@
     <updated>2011-12-10T12:52:00-06:00</updated>
     <id>http://moorberry.net/blog/html-not-rendering-in-gmail</id>
     <content type="html"><![CDATA[<p>I’ve been handling many of my company’s email campaigns for some time now and I can honestly say that it’s been pretty fun from a technical stand-point. There’s a lot that goes into email marketing (not including the marketing/sales implications). It has it’s own conventions, ideologies, and I believe to the utmost that there’s a larger future than presumed in store for the sometimes misunderstood technology. (I’m patiently waiting for a mobile device header-type.)</p>
+
+<!--more-->
+
 
 <p>Recently I’ve been using my new skills while working on my own applications using <a href="http://sendgrid.com/" title="SendGrid">SendGrid</a> as an alternative SMTP and email analytics tool. And I’ve only really come across one major programmable error. If you use a desktop client instead of a browser for viewing emails, as I do oftentimes, then this issue might not be so apparent (till now).</p>
 
@@ -50,11 +53,14 @@ end
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Bare Bones Paypal Express Checkout NVP API]]></title>
+    <title type="html"><![CDATA[Paypal Express Checkout NVP API]]></title>
     <link href="http://moorberry.net/blog/paypal-express-checkout-nvp-api/"/>
     <updated>2010-04-03T20:19:00-05:00</updated>
     <id>http://moorberry.net/blog/paypal-express-checkout-nvp-api</id>
     <content type="html"><![CDATA[<p>I'm not sure why <a href="http://paypal.com">Paypal</a> has written documentation, regarding its own Express Checkout name-value-pair API, with such a lack of enthusiasm. The classes used with the Paypal API are extremely easy to use. All of this is likely contributing to the confusion about using Express Checkout. But I’m here now, to save your application, and hopefully your sanity.</p>
+
+<!--more-->
+
 
 <p>I’m going to explain why the API objects work and what happens when they’re called. There’s a few different ways that you could go about setting up the product and/or service details. So I’ll keep this post relative to the main focus points and let you handle the before and after parts on an individual basis.</p>
 
@@ -204,6 +210,9 @@ Array
     <updated>2010-03-24T15:23:00-05:00</updated>
     <id>http://moorberry.net/blog/simple-flickr-gallery</id>
     <content type="html"><![CDATA[<p>In my search for finding a simple solution to any problem, I usually cross many and many blogs and articles, discussing whatever topic. But with so much detail that the solution becomes a problem in itself. So I often times end up resolved to research on my own. In this case, I share the simplest programming method for displaying a <a href="http://flickr.com" title="Flickr">Flickr</a> gallery, with PHP.</p>
+
+<!--more-->
+
 
 <h2>Assembling Your Variables</h2>
 

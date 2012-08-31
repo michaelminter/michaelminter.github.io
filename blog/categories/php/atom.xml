@@ -4,7 +4,7 @@
   <title><![CDATA[Category: PHP | Michael Minter]]></title>
   <link href="http://moorberry.net/blog/categories/php/atom.xml" rel="self"/>
   <link href="http://moorberry.net/"/>
-  <updated>2012-08-21T17:44:55-05:00</updated>
+  <updated>2012-08-31T16:38:11-05:00</updated>
   <id>http://moorberry.net/</id>
   <author>
     <name><![CDATA[Michael Minter]]></name>
@@ -19,6 +19,9 @@
     <updated>2010-04-22T10:48:00-05:00</updated>
     <id>http://moorberry.net/blog/content-delivery-network</id>
     <content type="html"><![CDATA[<p>If you’ve been frustrated with having to resize images for the sake of continuity or load time and don’t want to develop an entire caching system than this post will be of great value to you.</p>
+
+<!--more-->
+
 
 <p>Today I will discusses the theory and resolve of applying a system to autonomously resize images, with the GD library for PHP, before they get requested by the browser.</p>
 
@@ -126,11 +129,14 @@ if(!function_exists('imagecreatetruecolor')) {</p>
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Bare Bones Paypal Express Checkout NVP API]]></title>
+    <title type="html"><![CDATA[Paypal Express Checkout NVP API]]></title>
     <link href="http://moorberry.net/blog/paypal-express-checkout-nvp-api/"/>
     <updated>2010-04-03T20:19:00-05:00</updated>
     <id>http://moorberry.net/blog/paypal-express-checkout-nvp-api</id>
     <content type="html"><![CDATA[<p>I'm not sure why <a href="http://paypal.com">Paypal</a> has written documentation, regarding its own Express Checkout name-value-pair API, with such a lack of enthusiasm. The classes used with the Paypal API are extremely easy to use. All of this is likely contributing to the confusion about using Express Checkout. But I’m here now, to save your application, and hopefully your sanity.</p>
+
+<!--more-->
+
 
 <p>I’m going to explain why the API objects work and what happens when they’re called. There’s a few different ways that you could go about setting up the product and/or service details. So I’ll keep this post relative to the main focus points and let you handle the before and after parts on an individual basis.</p>
 
@@ -280,6 +286,9 @@ Array
     <updated>2010-03-24T15:23:00-05:00</updated>
     <id>http://moorberry.net/blog/simple-flickr-gallery</id>
     <content type="html"><![CDATA[<p>In my search for finding a simple solution to any problem, I usually cross many and many blogs and articles, discussing whatever topic. But with so much detail that the solution becomes a problem in itself. So I often times end up resolved to research on my own. In this case, I share the simplest programming method for displaying a <a href="http://flickr.com" title="Flickr">Flickr</a> gallery, with PHP.</p>
+
+<!--more-->
+
 
 <h2>Assembling Your Variables</h2>
 

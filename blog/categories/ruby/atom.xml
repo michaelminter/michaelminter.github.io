@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Ruby | Michael Minter]]></title>
   <link href="http://moorberry.net/blog/categories/ruby/atom.xml" rel="self"/>
   <link href="http://moorberry.net/"/>
-  <updated>2012-08-21T17:44:55-05:00</updated>
+  <updated>2012-08-31T16:38:11-05:00</updated>
   <id>http://moorberry.net/</id>
   <author>
     <name><![CDATA[Michael Minter]]></name>
@@ -19,6 +19,9 @@
     <updated>2011-12-10T12:52:00-06:00</updated>
     <id>http://moorberry.net/blog/html-not-rendering-in-gmail</id>
     <content type="html"><![CDATA[<p>I’ve been handling many of my company’s email campaigns for some time now and I can honestly say that it’s been pretty fun from a technical stand-point. There’s a lot that goes into email marketing (not including the marketing/sales implications). It has it’s own conventions, ideologies, and I believe to the utmost that there’s a larger future than presumed in store for the sometimes misunderstood technology. (I’m patiently waiting for a mobile device header-type.)</p>
+
+<!--more-->
+
 
 <p>Recently I’ve been using my new skills while working on my own applications using <a href="http://sendgrid.com/" title="SendGrid">SendGrid</a> as an alternative SMTP and email analytics tool. And I’ve only really come across one major programmable error. If you use a desktop client instead of a browser for viewing emails, as I do oftentimes, then this issue might not be so apparent (till now).</p>
 
@@ -55,6 +58,9 @@ end
     <updated>2011-11-14T15:15:00-06:00</updated>
     <id>http://moorberry.net/blog/export-csv</id>
     <content type="html"><![CDATA[<p>In my research I found a hundred and more different ways to manage the task of exporting data into a CSV file. Whenever I’m learning something new, on a new system or with a new language, I like to build the process myself from scratch. And being a minimalist programmer it just seems fitting. Enjoy</p>
+
+<!--more-->
+
 
 <p>``` ruby
 def export_inverts

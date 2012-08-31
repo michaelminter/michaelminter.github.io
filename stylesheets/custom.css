@@ -1,8 +1,16 @@
 body {
+  background: whiteSmoke url(/images/background.gif) repeat-x;
   padding-bottom: 40px;
 }
 h1 {
+  font-family: 'league_gothic';
   margin-bottom: 15px;
+  text-transform:uppercase;
+}
+p {
+  color: #333333;
+  font-size:16px;
+  line-height:22px;
 }
 img {
   max-width: 100%;
@@ -14,4 +22,15 @@ img {
   text-align: center;
 }
 
+@font-face {
+  font-family: 'league_gothic';
+  src: url('/fonts/League_Gothic-webfont.ttf');
+}
+
 #coderwall #coderwall_container { padding:0 15px; }
+
+#google_adspace_container { padding:20px 0 20px 35px; }
+
+h1 a { color:#BD600B; }
+
+h1 a:hover { text-decoration:none; }

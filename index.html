@@ -24,22 +24,39 @@
   <link href="/stylesheets/bootstrap/responsive.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/stylesheets/syntax/syntax.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/stylesheets/custom.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/stylesheets/slabtext.css" media="screen, projection" rel="stylesheet" type="text/css">
   
   <script src="/javascripts/libs/jquery.js"></script>
   <script src="/javascripts/libs/modernizr-2.0.js"></script>
   <script src="/javascripts/libs/bootstrap.js"></script>
   <script src="/javascripts/libs/bootstrap-dropdown.js"></script>
   <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <script src="/javascripts/jquery.slabtext.min.js" type="text/javascript"></script>
+  
   <link href="/atom.xml" rel="alternate" title="Michael Minter" type="application/atom+xml">
   <script type="text/javascript">
-  $('.dropdown-toggle').dropdown();
+  $(window).load(function() {
+    setTimeout(slabTextHeadlines, 1000);
+  });
+
+
+  $(document).ready(function(){
+    $('.dropdown-toggle').dropdown();
+  });
+  
+  function slabTextHeadlines() {
+    $("h1.justify").slabText({
+      // Don't slabtext the headers if the viewport is under 380px
+      "viewportBreakpoint":380
+    });
+  }
 </script>
 
   
 
 </head>
 
-<body   >
+<body   class="no-sidebar"  >
   <nav role="navigation"><div class="navbar">
   <div class="navbar-inner">
     <div class="container">
@@ -92,7 +109,7 @@
 </nav>
   <div class="container">
     <div class="row-fluid">
-      <div class="span9">
+      <div class="span12">
   
   
   
@@ -100,7 +117,7 @@
       
   <header class="page-header">
     
-      <h1 class="entry-title"><a href="/blog/html-not-rendering-in-gmail/">HTML Not Rendering in Gmail</a></h1>
+      <h1 class="entry-title justify"><a href="/blog/html-not-rendering-in-gmail/">HTML Not Rendering in Gmail</a></h1>
     
     
       <p class="meta">
@@ -127,46 +144,12 @@
 
   <div class="entry-content"><p>I’ve been handling many of my company’s email campaigns for some time now and I can honestly say that it’s been pretty fun from a technical stand-point. There’s a lot that goes into email marketing (not including the marketing/sales implications). It has it’s own conventions, ideologies, and I believe to the utmost that there’s a larger future than presumed in store for the sometimes misunderstood technology. (I’m patiently waiting for a mobile device header-type.)</p>
 
-<p>Recently I’ve been using my new skills while working on my own applications using <a href="http://sendgrid.com/" title="SendGrid">SendGrid</a> as an alternative SMTP and email analytics tool. And I’ve only really come across one major programmable error. If you use a desktop client instead of a browser for viewing emails, as I do oftentimes, then this issue might not be so apparent (till now).</p>
-
-<p>I recently was witness to how Gmail handles email headers in regards to HTML v. text-only. Gmail’s SaaS actually only reads the latter MIME-type and throws away the rest. So if you have a text version being made available, and you want your emails to be seen strictly as HTML, you must render the HTML version in your code LAST. Here is a Ruby on Rails example:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Notifier</span> <span class="o">&lt;</span> <span class="no">ActionMailer</span><span class="o">::</span><span class="no">Base</span>
-</span><span class='line'>  <span class="kp">include</span> <span class="no">SendGrid</span>
-</span><span class='line'>  <span class="n">default</span> <span class="ss">:from</span> <span class="o">=&gt;</span> <span class="no">Rails</span><span class="o">.</span><span class="n">configuration</span><span class="o">.</span><span class="n">sendgrid</span><span class="o">.</span><span class="n">reply_to</span>
-</span><span class='line'>  <span class="n">sendgrid_enable</span> <span class="ss">:opentrack</span><span class="p">,</span> <span class="ss">:clicktrack</span><span class="p">,</span> <span class="ss">:ganalytics</span>
-</span><span class='line'>  <span class="n">sendgrid_category</span> <span class="ss">:testing</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="k">def</span> <span class="nf">user_updated</span><span class="p">(</span><span class="n">user</span><span class="p">)</span>
-</span><span class='line'>    <span class="vi">@user</span> <span class="o">=</span> <span class="n">user</span>
-</span><span class='line'>    <span class="n">mail</span><span class="p">(</span> <span class="ss">:to</span> <span class="o">=&gt;</span> <span class="vi">@user</span><span class="o">.</span><span class="n">email</span><span class="p">,</span>
-</span><span class='line'>          <span class="ss">:subject</span> <span class="o">=&gt;</span> <span class="s2">&quot;Your information has been updated.&quot;</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="nb">format</span><span class="o">|</span>
-</span><span class='line'>      <span class="nb">format</span><span class="o">.</span><span class="n">text</span> <span class="p">{</span> <span class="s2">&quot;</span><span class="si">#{</span><span class="n">user</span><span class="o">.</span><span class="n">first_name</span><span class="si">}</span><span class="s2">,</span><span class="se">\n\n</span><span class="s2">This is an auto-response to inform you that your information has changed.&quot;</span> <span class="p">}</span>
-</span><span class='line'>      <span class="nb">format</span><span class="o">.</span><span class="n">html</span> <span class="p">{</span> <span class="n">render</span> <span class="ss">:layout</span> <span class="o">=&gt;</span> <span class="s1">&#39;autoresponse&#39;</span> <span class="p">}</span>
-</span><span class='line'>    <span class="k">end</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Super “thanks” go out to the <a href="http://sendgrid.com/" title="SendGrid">SendGrid</a> crew for their constantly superior customer service skills and for helping me out on my way to becoming an email marketing specialist.</p>
 </div>
   
+  
+    <footer>
+      <a rel="full-article" href="/blog/html-not-rendering-in-gmail/">Read on &rarr;</a>
+    </footer>
   
 
 
@@ -177,7 +160,7 @@
       
   <header class="page-header">
     
-      <h1 class="entry-title"><a href="/blog/export-csv/">Export CSV</a></h1>
+      <h1 class="entry-title justify"><a href="/blog/export-csv/">Export CSV</a></h1>
     
     
       <p class="meta">
@@ -204,64 +187,12 @@
 
   <div class="entry-content"><p>In my research I found a hundred and more different ways to manage the task of exporting data into a CSV file. Whenever I’m learning something new, on a new system or with a new language, I like to build the process myself from scratch. And being a minimalist programmer it just seems fitting. Enjoy</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">def</span> <span class="nf">export_inverts</span>
-</span><span class='line'>  <span class="nb">require</span> <span class="s1">&#39;fastercsv&#39;</span>
-</span><span class='line'>  <span class="n">inverts</span>  <span class="o">=</span> <span class="no">Invert</span><span class="o">.</span><span class="n">all</span>
-</span><span class='line'>  <span class="n">filename</span> <span class="o">=</span> <span class="n">params</span><span class="o">[</span><span class="ss">:action</span><span class="o">]</span> <span class="o">+</span> <span class="s2">&quot;.csv&quot;</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="c1">#this is required if you want this to work with IE</span>
-</span><span class='line'>  <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">env</span><span class="o">[</span><span class="s1">&#39;HTTP_USER_AGENT&#39;</span><span class="o">]</span> <span class="o">=~</span> <span class="sr">/msie/i</span>
-</span><span class='line'>    <span class="n">headers</span><span class="o">[</span><span class="s1">&#39;Pragma&#39;</span><span class="o">]</span> <span class="o">=</span> <span class="s1">&#39;public&#39;</span>
-</span><span class='line'>    <span class="n">headers</span><span class="o">[</span><span class="s2">&quot;Content-type&quot;</span><span class="o">]</span> <span class="o">=</span> <span class="s2">&quot;text/plain&quot;</span>
-</span><span class='line'>    <span class="n">headers</span><span class="o">[</span><span class="s1">&#39;Cache-Control&#39;</span><span class="o">]</span> <span class="o">=</span> <span class="s1">&#39;no-cache, must-revalidate, post-check=0, pre-check=0&#39;</span>
-</span><span class='line'>    <span class="n">headers</span><span class="o">[</span><span class="s1">&#39;Content-Disposition&#39;</span><span class="o">]</span> <span class="o">=</span> <span class="s2">&quot;attachment; filename=</span><span class="se">\&quot;</span><span class="si">#{</span><span class="n">filename</span><span class="si">}</span><span class="se">\&quot;</span><span class="s2">&quot;</span>
-</span><span class='line'>    <span class="n">headers</span><span class="o">[</span><span class="s1">&#39;Expires&#39;</span><span class="o">]</span> <span class="o">=</span> <span class="s2">&quot;0&quot;</span>
-</span><span class='line'>  <span class="k">else</span>
-</span><span class='line'>    <span class="n">headers</span><span class="o">[</span><span class="s2">&quot;Content-Type&quot;</span><span class="o">]</span> <span class="o">||=</span> <span class="s1">&#39;text/csv&#39;</span>
-</span><span class='line'>    <span class="n">headers</span><span class="o">[</span><span class="s2">&quot;Content-Disposition&quot;</span><span class="o">]</span> <span class="o">=</span> <span class="s2">&quot;attachment; filename=</span><span class="se">\&quot;</span><span class="si">#{</span><span class="n">filename</span><span class="si">}</span><span class="se">\&quot;</span><span class="s2">&quot;</span>
-</span><span class='line'>    <span class="n">headers</span><span class="o">[</span><span class="s2">&quot;Content-Transfer-Encoding&quot;</span><span class="o">]</span> <span class="o">=</span> <span class="s2">&quot;binary&quot;</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="n">csv_string</span> <span class="o">=</span> <span class="no">FasterCSV</span><span class="o">.</span><span class="n">generate</span> <span class="k">do</span> <span class="o">|</span><span class="n">csv</span><span class="o">|</span>
-</span><span class='line'>    <span class="n">csv</span> <span class="o">&lt;&lt;</span> <span class="o">[</span><span class="s2">&quot;Genus&quot;</span><span class="p">,</span><span class="s2">&quot;Species&quot;</span><span class="p">,</span><span class="s2">&quot;Common Name&quot;</span><span class="p">,</span><span class="s2">&quot;Pet Name&quot;</span><span class="p">,</span><span class="s2">&quot;Gender&quot;</span><span class="o">]</span>
-</span><span class='line'>    <span class="n">inverts</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">i</span><span class="o">|</span>
-</span><span class='line'>      <span class="n">csv</span> <span class="o">&lt;&lt;</span> <span class="o">[</span><span class="n">i</span><span class="o">.</span><span class="n">scientific_name</span><span class="p">,</span><span class="n">i</span><span class="o">.</span><span class="n">scientific_name</span><span class="p">,</span><span class="n">i</span><span class="o">.</span><span class="n">common_name</span><span class="p">,</span><span class="n">i</span><span class="o">.</span><span class="n">pet_name</span><span class="p">,</span><span class="n">i</span><span class="o">.</span><span class="n">gender</span><span class="o">]</span>
-</span><span class='line'>    <span class="k">end</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'>  <span class="n">render</span> <span class="ss">:text</span> <span class="o">=&gt;</span> <span class="n">csv_string</span>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>NOTE: <em>Developers using Ruby 1.8 &lt;= must install gem:fastercsv</em></p>
 </div>
   
+  
+    <footer>
+      <a rel="full-article" href="/blog/export-csv/">Read on &rarr;</a>
+    </footer>
   
 
 
@@ -272,7 +203,7 @@
       
   <header class="page-header">
     
-      <h1 class="entry-title"><a href="/blog/content-delivery-network/">Dynamically Pre-Render Images</a></h1>
+      <h1 class="entry-title justify"><a href="/blog/content-delivery-network/">Dynamically Pre-Render Images</a></h1>
     
     
       <p class="meta">
@@ -299,118 +230,12 @@
 
   <div class="entry-content"><p>If you’ve been frustrated with having to resize images for the sake of continuity or load time and don’t want to develop an entire caching system than this post will be of great value to you.</p>
 
-<p>Today I will discusses the theory and resolve of applying a system to autonomously resize images, with the GD library for PHP, before they get requested by the browser.</p>
-
-<p>This practice presents many benefits to its use.</p>
-
-<ul>
-<li>Save loads of hard drive space</li>
-<li>Easy to resize div backgrounds</li>
-<li>Faster to call than the use of <a href="/blog/server-vs-client">JavaScript</a>.</li>
-</ul>
-
-
-<h2>Calling the Application With HTML</h2>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;img</span> <span class="na">src=</span><span class="s">&quot;image.php?i=image.jpg&amp;s=500&quot;</span> <span class="nt">/&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Calling the php script is this easy. You can place this tag anywhere on any page and be able to display an image, with exact value constraints, and as many times as you need.</p>
-
-<h2>Developing the image.php Application</h2>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="n">header</span><span class="p">(</span><span class="s">&quot;Content-Type: image/jpeg&quot;</span><span class="p">);</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>header() will make sure that the browser is aware how to handle the applicaton. Here it enables the page to be viewed as a jpeg source.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">isset</span><span class="p">(</span><span class="nv">$_GET</span><span class="p">[</span><span class="s">&#39;s&#39;</span><span class="p">]))</span> <span class="p">{</span>
-</span><span class='line'>    <span class="nv">$size</span> <span class="o">=</span> <span class="mi">160</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-</span><span class='line'>    <span class="nv">$size</span> <span class="o">=</span> <span class="nv">$_GET</span><span class="p">[</span><span class="s">&#39;s&#39;</span><span class="p">];</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'><span class="nv">$image</span> <span class="o">=</span> <span class="nv">$_GET</span><span class="p">[</span><span class="s">&#39;i&#39;</span><span class="p">];</span>
-</span><span class='line'>
-</span><span class='line'><span class="n">list</span><span class="p">(</span><span class="nv">$width</span><span class="p">,</span> <span class="nv">$height</span><span class="p">)</span> <span class="o">=</span> <span class="n">getimagesize</span><span class="p">(</span><span class="nv">$image</span><span class="p">);</span>
-</span><span class='line'>
-</span><span class='line'><span class="nv">$ratio</span> <span class="o">=</span> <span class="nv">$width</span><span class="o">/</span><span class="nv">$height</span><span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">if</span> <span class="p">(</span><span class="nv">$ratio</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>    <span class="nv">$newWidth</span>  <span class="o">=</span> <span class="nv">$size</span><span class="p">;</span>
-</span><span class='line'>    <span class="nv">$newHeight</span> <span class="o">=</span> <span class="nv">$size</span><span class="o">/</span><span class="nv">$ratio</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-</span><span class='line'>    <span class="nv">$newHeight</span> <span class="o">=</span> <span class="nv">$size</span><span class="p">;</span>
-</span><span class='line'>    <span class="nv">$newWidth</span>  <span class="o">=</span> <span class="nv">$size</span><span class="o">*</span><span class="nv">$ratio</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'><span class="c1"># creates a copy of the loaded image</span>
-</span><span class='line'><span class="nv">$create</span> <span class="o">=</span> <span class="n">imagecreatefromjpeg</span><span class="p">(</span><span class="nv">$image</span><span class="p">);</span>
-</span><span class='line'><span class="c1"># creates a blank template to work from</span>
-</span><span class='line'><span class="nv">$template</span> <span class="o">=</span> <span class="n">imagecreatetruecolor</span><span class="p">(</span><span class="nv">$newWidth</span><span class="p">,</span><span class="nv">$newHeight</span><span class="p">);</span>
-</span><span class='line'><span class="c1"># copies the original onto the new template</span>
-</span><span class='line'><span class="n">imagecopyresized</span><span class="p">(</span><span class="nv">$template</span><span class="p">,</span> <span class="nv">$create</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="nv">$newWidth</span><span class="p">,</span> <span class="nv">$newHeight</span><span class="p">,</span> <span class="nv">$width</span><span class="p">,</span> <span class="nv">$height</span><span class="p">);</span>
-</span><span class='line'><span class="c1"># displays the image</span>
-</span><span class='line'><span class="n">ImageJpeg</span><span class="p">(</span><span class="nv">$template</span><span class="p">);</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Usually I break this larger portion of my post up into smaller pieces so I can reference all the code being used and what it does. But the fundamentals are so well noted and easy to navigate, that I figured even if I left it as so, that you should have no problem implementing this into your own work.</p>
-
-<h2>Error catching</h2>
-
-<p>If source material is not working properly. Issue the following:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">function_exists</span><span class="p">(</span><span class="s">&#39;imagecreatetruecolor&#39;</span><span class="p">))</span> <span class="p">{</span>
-</span><span class='line'>    <span class="nb">exit</span><span class="p">(</span><span class="s">&#39;Err, function : imagecreatetruecolor does not exist&#39;</span><span class="p">);</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>function_exists() will check the currently active Apache function repository, both internal and user-defined, to see if the listed function matches anything available.</p>
-
-<p>If you’re receiving the error message than the server you’re running this code on does not support the GD library and you must either set it up manually or contact an administrator to do so for you.</p>
-
-<p>Also note that only Jpeg formats are acceptable by this set up. Extending is not a difficult task. I only wanted you to understand the basics and be able to evolve with PHP from my writings.</p>
-
-<h2>Summary</h2>
-
-<p>Hopefully I’ve left more than enough room for you to adapt this into your own projects. You can add on to this with many of the GD library features documented by the PHP network.</p>
-
-<p>If you develop an extension or even a class, from these tips, please feel free to share by commenting back and letting me know what you’ve done.</p>
 </div>
   
+  
+    <footer>
+      <a rel="full-article" href="/blog/content-delivery-network/">Read on &rarr;</a>
+    </footer>
   
 
 
@@ -421,7 +246,7 @@
       
   <header class="page-header">
     
-      <h1 class="entry-title"><a href="/blog/paypal-express-checkout-nvp-api/">Bare Bones Paypal Express Checkout NVP API</a></h1>
+      <h1 class="entry-title justify"><a href="/blog/paypal-express-checkout-nvp-api/">Paypal Express Checkout NVP API</a></h1>
     
     
       <p class="meta">
@@ -448,209 +273,12 @@
 
   <div class="entry-content"><p>I&#8217;m not sure why <a href="http://paypal.com">Paypal</a> has written documentation, regarding its own Express Checkout name-value-pair API, with such a lack of enthusiasm. The classes used with the Paypal API are extremely easy to use. All of this is likely contributing to the confusion about using Express Checkout. But I’m here now, to save your application, and hopefully your sanity.</p>
 
-<p>I’m going to explain why the API objects work and what happens when they’re called. There’s a few different ways that you could go about setting up the product and/or service details. So I’ll keep this post relative to the main focus points and let you handle the before and after parts on an individual basis.</p>
-
-<h2>Referring payment authentication</h2>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="nv">$paypal</span> <span class="o">=</span> <span class="k">new</span> <span class="n">SetExpressCheckout</span><span class="p">(</span><span class="nv">$totalPrice</span><span class="p">);</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>We start out by calling the <strong>SetExpressCheckOut()</strong> class. This class caller instantiates the method you’ll use to set up the parameters required for redirecting the customer <em>to</em> Paypal <em>and back</em>. A variable of the total price has to be set to complete the initiation of this class.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="nv">$paypal</span> <span class="o">=</span> <span class="k">new</span> <span class="n">SetExpressCheckout</span><span class="p">(</span><span class="nv">$totalPrice</span><span class="p">);</span>
-</span><span class='line'>
-</span><span class='line'><span class="nv">$paypal</span><span class="o">-&gt;</span><span class="n">setNVP</span><span class="p">(</span><span class="s">&quot;RETURNURL&quot;</span><span class="p">,</span> <span class="s">&quot;http://yourURL.com/confirm.php&quot;</span><span class="p">);</span>
-</span><span class='line'><span class="nv">$paypal</span><span class="o">-&gt;</span><span class="n">setNVP</span><span class="p">(</span><span class="s">&quot;HDRIMG&quot;</span><span class="p">,</span> <span class="s">&quot;http://yourURL.com/image.jpg&quot;</span><span class="p">);</span>
-</span><span class='line'><span class="nv">$paypal</span><span class="o">-&gt;</span><span class="n">setNVP</span><span class="p">(</span><span class="s">&quot;EMAIL&quot;</span><span class="p">,</span> <span class="s">&quot;$userEmail&quot;</span><span class="p">);</span> <span class="sr">//</span> <span class="n">customer</span><span class="err">&#39;</span><span class="n">s</span> <span class="n">email</span>
-</span><span class='line'><span class="nv">$paypal</span><span class="o">-&gt;</span><span class="n">setNVP</span><span class="p">(</span><span class="s">&quot;AMT&quot;</span><span class="p">,</span> <span class="nv">$totalPrice</span><span class="p">);</span>
-</span><span class='line'><span class="nv">$paypal</span><span class="o">-&gt;</span><span class="n">setNVP</span><span class="p">(</span><span class="s">&quot;SHIPPINGAMT&quot;</span><span class="p">,</span> <span class="s">&quot;32&quot;</span><span class="p">);</span>
-</span><span class='line'><span class="nv">$paypal</span><span class="o">-&gt;</span><span class="n">setNVP</span><span class="p">(</span><span class="s">&quot;CUSTOM&quot;</span><span class="p">,</span> <span class="s">&quot;Anything you want to put&quot;</span><span class="p">);</span>
-</span><span class='line'><span class="nv">$paypal</span><span class="o">-&gt;</span><span class="n">setNVP</span><span class="p">(</span><span class="s">&quot;INVNUM&quot;</span><span class="p">,</span> <span class="nv">$uniqueID</span><span class="p">);</span> <span class="sr">//</span> <span class="n">personal</span> <span class="n">invoice</span> <span class="n">number</span>
-</span><span class='line'>
-</span><span class='line'><span class="nv">$paypal</span><span class="o">-&gt;</span><span class="n">getResponse</span><span class="p">();</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Before you submit for a transfer to Paypal, know that there are optional values you can send with the setNVP() function, to customize the payment process. All values that can be found, by default, in the etc/NVP/SetExpressCheckout.ini file. I’ve included a list of common practice examples and how to use them in this template.</p>
-
-<p>getResponse() sends the user’s browser to Paypal for authentication of credit information. Specifically to a URL that you’ll have to variably set between test mode (sandbox) and live, in the file named etc/NVP/PayPalNVP.ini.</p>
-
-<h2>Completing the Sale</h2>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="nv">$paypal</span>  <span class="o">=</span> <span class="k">new</span> <span class="n">GetExpressCheckoutDetails</span><span class="p">;</span>
-</span><span class='line'><span class="nv">$details</span> <span class="o">=</span> <span class="nv">$paypal</span><span class="o">-&gt;</span><span class="n">getResponse</span><span class="p">();</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><strong>GetExpressCheckoutDetails()</strong> is a class that is most responsible for presenting the custom specifications that you originally sent with SetExpressCheckOut() and SetNVP().</p>
-
-<p><strong>getResponse()</strong> will gather all of the available options as an array, labelled $details.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="nv">$payment</span>  <span class="o">=</span> <span class="k">new</span> <span class="n">DoExpressCheckoutPayment</span><span class="p">(</span><span class="nv">$totalPrice</span><span class="p">);</span>
-</span><span class='line'><span class="nv">$response</span> <span class="o">=</span> <span class="nv">$payment</span><span class="o">-&gt;</span><span class="n">getResponse</span><span class="p">();</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><strong>DoExpressCheckoutPayment()</strong> will instinctively initiate a communication with Paypal to notify the service that you are ready for the payment to be transferred to your account. The only necessary requisite, of calling this class and it calling to action, is to include the total price in its variable containment field.</p>
-
-<p><strong>getResponse()</strong> will gather the resulting responses by DoExpressCheckoutPayment() and include them in an array, labelled $response.</p>
-
-<p>It could be said that you could apply another (final) verification for your customer to submit before the transaction is completed by DoExpressCheckoutPayment(). But not technically necessary.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="k">if</span> <span class="p">(</span><span class="nv">$response</span><span class="p">[</span><span class="s">&#39;PAYMENTSTATUS&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s">&#39;Completed&#39;</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>    <span class="c1"># process information</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>One of the returned values in $response will be the PAYMENTSTATUS key. This is a string result that confirms whether or not the money has made been payed to your account. It will definitely be useful when you set up your system to print an invoice on complete, or some insightfully-formatted summary on failure.</p>
-
-<h2>Displaying results from getResponse</h2>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-<span class='line-number'>37</span>
-<span class='line-number'>38</span>
-<span class='line-number'>39</span>
-<span class='line-number'>40</span>
-<span class='line-number'>41</span>
-<span class='line-number'>42</span>
-<span class='line-number'>43</span>
-<span class='line-number'>44</span>
-<span class='line-number'>45</span>
-<span class='line-number'>46</span>
-<span class='line-number'>47</span>
-<span class='line-number'>48</span>
-<span class='line-number'>49</span>
-<span class='line-number'>50</span>
-<span class='line-number'>51</span>
-<span class='line-number'>52</span>
-</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="n">echo</span> <span class="s">&#39;&lt;pre&gt;&#39;</span><span class="p">;</span>
-</span><span class='line'><span class="n">print_r</span><span class="p">(</span><span class="nv">$details</span><span class="p">);</span>
-</span><span class='line'><span class="n">echo</span> <span class="s">&#39;&lt;pre&gt;&#39;</span><span class="p">;</span>
-</span><span class='line'><span class="n">print_r</span><span class="p">(</span><span class="nv">$response</span><span class="p">);</span>
-</span><span class='line'>
-</span><span class='line'><span class="c1"># The above code should print out something similar to the following:</span>
-</span><span class='line'>
-</span><span class='line'><span class="n">Array</span>
-</span><span class='line'><span class="p">(</span>
-</span><span class='line'>    <span class="p">[</span><span class="n">TOKEN</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="n">EC</span><span class="nv">%2d8DS53628GJ4630109</span>
-</span><span class='line'>    <span class="p">[</span><span class="n">TIMESTAMP</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="mi">2010</span><span class="nv">%2d03%2d31T08%3a25%3a40Z</span>
-</span><span class='line'>    <span class="p">[</span><span class="n">CORRELATIONID</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="n">ce3e460d38d2f</span>
-</span><span class='line'>    <span class="p">[</span><span class="n">ACK</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="n">Success</span>
-</span><span class='line'>    <span class="p">[</span><span class="n">VERSION</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="mi">51</span><span class="nv">%2e0</span>
-</span><span class='line'>    <span class="p">[</span><span class="n">BUILD</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="mi">1247606</span>
-</span><span class='line'>    <span class="p">[</span><span class="n">EMAIL</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="n">test_acct_36654645742_per</span><span class="nv">%40domain%2ecom</span>
-</span><span class='line'>    <span class="p">[</span><span class="n">PAYERID</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="n">W96GXTA5P9BRN</span>
-</span><span class='line'>    <span class="p">[</span><span class="n">PAYERSTATUS</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="n">verified</span>
-</span><span class='line'>    <span class="p">[</span><span class="n">FIRSTNAME</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="n">Test</span>
-</span><span class='line'>    <span class="p">[</span><span class="n">LASTNAME</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="n">User</span>
-</span><span class='line'>    <span class="p">[</span><span class="n">COUNTRYCODE</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="n">US</span>
-</span><span class='line'>    <span class="p">[</span><span class="n">SHIPTONAME</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="n">Test</span><span class="nv">%20User</span>
-</span><span class='line'>    <span class="p">[</span><span class="n">SHIPTOSTREET</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="mi">1</span><span class="nv">%20Main%20St</span>
-</span><span class='line'>    <span class="p">[</span><span class="n">SHIPTOCITY</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="n">San</span><span class="nv">%20Jose</span>
-</span><span class='line'>    <span class="p">[</span><span class="n">SHIPTOSTATE</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="n">CA</span>
-</span><span class='line'>    <span class="p">[</span><span class="n">SHIPTOZIP</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="mi">95131</span>
-</span><span class='line'>    <span class="p">[</span><span class="n">SHIPTOCOUNTRYCODE</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="n">US</span>
-</span><span class='line'>    <span class="p">[</span><span class="n">SHIPTOCOUNTRYNAME</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="n">United</span><span class="nv">%20States</span>
-</span><span class='line'>    <span class="p">[</span><span class="n">ADDRESSSTATUS</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="n">Confirmed</span>
-</span><span class='line'>    <span class="p">[</span><span class="n">CUSTOM</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="n">Anything</span> <span class="n">you</span> <span class="n">want</span> <span class="n">to</span> <span class="n">put</span>
-</span><span class='line'>    <span class="p">[</span><span class="n">INVNUM</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="n">IYUUFEOAS0ME3MTI</span>
-</span><span class='line'><span class="p">)</span>
-</span><span class='line'><span class="n">Array</span>
-</span><span class='line'><span class="p">(</span>
-</span><span class='line'>    <span class="p">[</span><span class="n">TOKEN</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="n">EC</span><span class="nv">%2d8DS53628GJ4630109</span>
-</span><span class='line'>    <span class="p">[</span><span class="n">TIMESTAMP</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="mi">2010</span><span class="nv">%2d03%2d31T08%3a25%3a43Z</span>
-</span><span class='line'>    <span class="p">[</span><span class="n">CORRELATIONID</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="n">b1989df39a0ca</span>
-</span><span class='line'>    <span class="p">[</span><span class="n">ACK</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="n">Success</span>
-</span><span class='line'>    <span class="p">[</span><span class="n">VERSION</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="mi">51</span><span class="nv">%2e0</span>
-</span><span class='line'>    <span class="p">[</span><span class="n">BUILD</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="mi">1247606</span>
-</span><span class='line'>    <span class="p">[</span><span class="n">TRANSACTIONID</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="mi">1</span><span class="n">PR0061154034542X</span>
-</span><span class='line'>    <span class="p">[</span><span class="n">TRANSACTIONTYPE</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="n">expresscheckout</span>
-</span><span class='line'>    <span class="p">[</span><span class="n">PAYMENTTYPE</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="n">instant</span>
-</span><span class='line'>    <span class="p">[</span><span class="n">ORDERTIME</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="mi">2010</span><span class="nv">%2d03%2d31T08%3a25%3a42Z</span>
-</span><span class='line'>    <span class="p">[</span><span class="n">AMT</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="mi">152</span><span class="nv">%2e00</span>
-</span><span class='line'>    <span class="p">[</span><span class="n">FEEAMT</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="mi">4</span><span class="nv">%2e71</span>
-</span><span class='line'>    <span class="p">[</span><span class="n">TAXAMT</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="mi">0</span><span class="nv">%2e00</span>
-</span><span class='line'>    <span class="p">[</span><span class="n">CURRENCYCODE</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="n">USD</span>
-</span><span class='line'>    <span class="p">[</span><span class="n">PAYMENTSTATUS</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="n">Completed</span>
-</span><span class='line'>    <span class="p">[</span><span class="n">PENDINGREASON</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="n">None</span>
-</span><span class='line'>    <span class="p">[</span><span class="n">REASONCODE</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="n">None</span>
-</span><span class='line'><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>Testing</h2>
-
-<p>If you don’t have a <a href="https://developer.paypal.com/">Paypal developer account</a>, than you should certainly sign up for one to use Paypal’s Sandbox, which makes a mock version of Paypal available for testing. Comes complete with personal and business accounts, each with their own credentials, and unlimited funds.</p>
-
-<h2>Summary</h2>
-
-<p>Follow the preceding order and you could easily narrow this code down to a a single file, with enough if() constructs, or span it out to many.</p>
-
-<p>You might be left wondering why it seems less daunting than you have expected. That would be because you’re right. These few objects are all that’s needed to handle a shopping cart system on your website.</p>
-
-<p>Maybe Paypal will use this post to refer new users trying to understand how this system works. But I doubt it.</p>
-
-<h3>Note</h3>
-
-<p>Don&#8217;t forget to adjust your database schema for <em>address2</em> in <strong>$details</strong> when available.</p>
 </div>
   
+  
+    <footer>
+      <a rel="full-article" href="/blog/paypal-express-checkout-nvp-api/">Read on &rarr;</a>
+    </footer>
   
 
 
@@ -661,7 +289,7 @@
       
   <header class="page-header">
     
-      <h1 class="entry-title"><a href="/blog/server-vs-client/">Server vs Client</a></h1>
+      <h1 class="entry-title justify"><a href="/blog/server-vs-client/">Server vs Client</a></h1>
     
     
       <p class="meta">
@@ -688,85 +316,12 @@
 
   <div class="entry-content"><p>I can only presume that it’s because of the passionate advent of JQuery, that there has been an increasing rise of using Javascript, in precedence of PHP. This circumstance is arguably the sole cause to how and why designers are simply not learning a better way. I’m here to enlighten you.</p>
 
-<p>In opening, I’d like to express, that I hold no animosity for Javascript. Actually I quite often fancy a touch of its elegant lure and almost regularly indulge my viewers with its properties to control aesthetics at a dynamic fashion. But it has its place. If PHP can serve the same purpose, than its obvious strengths, should not be taken for granted.</p>
-
-<p>One prominent example of this that I seem to notice more often in use than others, is the  application of color alternating rows with HTML tables, or also favorably known as the “zebra” effect. Which I’ll be using for my reference material.</p>
-
-<h2>PHP</h2>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="k">for</span> <span class="p">(</span><span class="nv">$i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="nv">$i</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">;</span><span class="nv">$i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>    <span class="k">if</span> <span class="p">((</span><span class="nv">$i</span> <span class="nv">%</span> <span class="nv">2</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>        <span class="n">echo</span> <span class="s">&#39;&lt;tr class=&quot;zebra&quot;&gt;&#39;</span><span class="p">;</span>
-</span><span class='line'>    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-</span><span class='line'>        <span class="n">echo</span> <span class="s">&#39;&lt;tr&gt;&#39;</span><span class="p">;</span>
-</span><span class='line'>    <span class="p">}</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>The for() loop, does the accumulating work. It exponentially raises the default value ($i) by one, each iteration, so that the modulus operator (%) can equate the remainder of $i divided by two. So every instance of an even number represented by $i would evaluate to zero.</p>
-
-<h2>Ruby on Rails</h2>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">&lt;</span><span class="sx">% @items.each </span><span class="k">do</span> <span class="o">|</span><span class="n">item</span><span class="o">|</span> <span class="sx">%&gt;</span>
-</span><span class='line'><span class="sx">  &lt;tr class=&quot;&lt;%= cycle(&quot;even&quot;, &quot;odd&quot;) %&gt;</span><span class="s2">&quot;&gt;</span>
-</span><span class='line'><span class="s2">    &lt;!-- use item --&gt;</span>
-</span><span class='line'><span class="s2">  &lt;/tr&gt;</span>
-</span><span class='line'><span class="s2">&lt;% end %&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>JQuery</h2>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="nv">$</span><span class="err">(</span><span class="nv">document</span><span class="p">)</span><span class="o">.</span><span class="n">ready</span><span class="p">(</span><span class="n">function</span><span class="p">(){</span>
-</span><span class='line'>    <span class="vg">$(</span><span class="s">&quot;tr:even&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">css</span><span class="p">(</span><span class="s">&quot;background-color&quot;</span><span class="p">,</span> <span class="s">&quot;#EFEFEF&quot;</span><span class="p">);</span>
-</span><span class='line'>    <span class="vg">$(</span><span class="s">&quot;tr:odd&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">css</span><span class="p">(</span><span class="s">&quot;background-color&quot;</span><span class="p">,</span> <span class="s">&quot;#FFFFFF&quot;</span><span class="p">);</span>
-</span><span class='line'><span class="p">});</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>The JQuery even and odd filters are used as index selectors. This method can be used on any page element with just a little bit of reverse engineering.</p>
-
-<h2>Discovering the Front-End</h2>
-
-<p>If you were to analyze the speed of using only Javascript, you would find that it is 16% slower, compared to PHP [1]. Though that number might seem relatively low in scale, because it is, consider all of the other factors when developing for the web.</p>
-
-<p>80% of the average user’s response time is spent on the front-end [2]. This time, is composed of downloading all of the elements necessary to make up the page (Images, libraries, scripts, stylesheets and more). Reducing the number of elements, in turn, reduces the number of HTTP requests required to render the page.</p>
-
-<p>With PHP everything is rendered before any HTTP requests are sent by the server.</p>
-
-<p>http://chart.apis.google.com/chart?cht=p&amp;chd=t:13,87&amp;chs=300x180&amp;chco=32cd32&amp;chdl=13.05%|86.95%&amp;chtt=GOOGLE&amp;chts=32cd32,12</p>
-
-<p>http://chart.apis.google.com/chart?cht=p&amp;chd=t:20,80&amp;chs=300x180&amp;chco=006699&amp;chdl=20.09%|79.91%&amp;chtt=PHP+ROCKSTAR&amp;chts=006699,12</p>
-
-<p>Graphically interpreted above are the details associated with load times. This analysis completes the HTTP request cycle from initialization. The darker portion, of each representation, shows the percentage of work involved by the server. As consistency shows, a lot of web design and development, relies mostly on what’s being delivered to the browser.</p>
-
-<h2>Summary</h2>
-
-<p>It’s certain that a professional web server is going to best the average home network set-up, in performance, any day. It’s your responsibility to take advantage of that, by running some server-side code, to save your guests the frustration of dealing with an idle load time.</p>
-
-<h3>References</h3>
-
-<p>[1] http://www.timestretch.com/FractalBenchmark.html
-[2] http://developer.yahoo.net/blog/archives/2007/03/high_performanc.html</p>
 </div>
   
+  
+    <footer>
+      <a rel="full-article" href="/blog/server-vs-client/">Read on &rarr;</a>
+    </footer>
   
 
 
@@ -777,7 +332,7 @@
       
   <header class="page-header">
     
-      <h1 class="entry-title"><a href="/blog/simple-flickr-gallery/">Simple Flickr Gallery Implementation</a></h1>
+      <h1 class="entry-title justify"><a href="/blog/simple-flickr-gallery/">Simple Flickr Gallery Implementation</a></h1>
     
     
       <p class="meta">
@@ -804,52 +359,12 @@
 
   <div class="entry-content"><p>In my search for finding a simple solution to any problem, I usually cross many and many blogs and articles, discussing whatever topic. But with so much detail that the solution becomes a problem in itself. So I often times end up resolved to research on my own. In this case, I share the simplest programming method for displaying a <a href="http://flickr.com" title="Flickr">Flickr</a> gallery, with PHP.</p>
 
-<h2>Assembling Your Variables</h2>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="nv">$api_key</span>  <span class="o">=</span> <span class="s">&#39;cr79h3t7g387ghc3fh7338ch87c3ch734&#39;</span><span class="p">;</span>
-</span><span class='line'><span class="nv">$user_id</span>  <span class="o">=</span> <span class="s">&#39;33822702%40N08&#39;</span><span class="p">;</span>
-</span><span class='line'><span class="nv">$per_page</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'><span class="nv">$xml</span>      <span class="o">=</span> <span class="s">&#39;http://api.flickr.com/services/rest/?method=flickr.people.getPublicPhotos&amp;api_key=&#39;</span><span class="o">.</span><span class="nv">$api_key</span><span class="o">.</span><span class="s">&#39;&amp;user_id=&#39;</span><span class="o">.</span><span class="nv">$user_id</span><span class="o">.</span><span class="s">&#39;&amp;per_page=&#39;</span><span class="o">.</span><span class="nv">$per_page</span><span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'><span class="nv">$flickr</span>   <span class="o">=</span> <span class="n">simplexml_load_file</span><span class="p">(</span><span class="nv">$xml</span><span class="p">);</span>
-</span><span class='line'><span class="k">foreach</span><span class="p">(</span><span class="nv">$flickr</span><span class="o">-&gt;</span><span class="n">photos</span><span class="o">-&gt;</span><span class="n">photo</span> <span class="n">as</span> <span class="nv">$p</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>    <span class="n">echo</span> <span class="s">&#39;&lt;a href=&quot;http://www.flickr.com/photos/&#39;</span><span class="o">.</span><span class="nv">$p</span><span class="p">[</span><span class="s">&#39;owner&#39;</span><span class="p">]</span><span class="o">.</span><span class="s">&#39;/&#39;</span><span class="o">.</span><span class="nv">$p</span><span class="p">[</span><span class="s">&#39;id&#39;</span><span class="p">]</span><span class="o">.</span><span class="s">&#39;&quot;&gt;&#39;</span><span class="p">;</span>
-</span><span class='line'>    <span class="n">echo</span> <span class="s">&#39;&lt;img src=&quot;http://farm&#39;</span><span class="o">.</span><span class="nv">$p</span><span class="p">[</span><span class="s">&#39;farm&#39;</span><span class="p">]</span><span class="o">.</span><span class="s">&#39;.static.flickr.com/&#39;</span><span class="o">.</span><span class="nv">$p</span><span class="p">[</span><span class="s">&#39;server&#39;</span><span class="p">]</span><span class="o">.</span><span class="s">&#39;/&#39;</span><span class="o">.</span><span class="nv">$p</span><span class="p">[</span><span class="s">&#39;id&#39;</span><span class="p">]</span><span class="o">.</span><span class="s">&#39;_&#39;</span><span class="o">.</span><span class="nv">$p</span><span class="p">[</span><span class="s">&#39;secret&#39;</span><span class="p">]</span><span class="o">.</span><span class="s">&#39;_s.jpg&quot;&gt;&#39;</span><span class="p">;</span>
-</span><span class='line'>    <span class="n">echo</span> <span class="s">&#39;&lt;/a&gt;&#39;</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><strong>$api_key</strong> is part of an authentication device that allows your server and Flickr to “shake hands” sort of speak. <a href="http://www.flickr.com/services/api/keys/" title="Flickr API Key">You can get your Flickr API key here</a>.</p>
-
-<p><strong>$user_id</strong> is how Flickr identifies you. This value can be found in the URL of your Flickr “photostream”. <a href="http://www.flickr.com/photos/33822702@N08/" title="Michael Minter's Flickr">Here&#8217;s mine for reference</a>.</p>
-
-<p><strong>$per_page</strong> refers to how many photos will be retrieved from your photostream. Though this limiter is optional, the default count is, “all”. Which means if you have 1,000 plus photos, it could be a very bad thing, for your viewer’s browser load time.</p>
-
-<p><strong>$xml</strong> is a link to the webfile that renders a list of your available photos based on previously noted variables. This line can be modified later to include even more search parameters. (see: below)</p>
-
-<p><strong>$flickr</strong> uses a PHP function called, <a href="http://php.net/manual/en/function.simplexml-load-file.php" title="simplexml_load_file function">simplexml_load_file()</a>, which parses an XML file into an object.</p>
-
-<p>In today&#8217;s lesson, <strong>$flickr</strong> becomes an array and we use <a href="http://us2.php.net/manual/en/control-structures.foreach.php" title="foreach function">foreach()</a> to extract the values we need, to display the gallery.</p>
-
-<h2>Summary</h2>
-
-<p>This method is just what I needed. Something small, easily accessible, and scalable. As you experiment with this script, you’ll be afforded the opportunity to use many different features of the API, which Flickr offers. <a href="http://www.flickr.com/services/api/" title="Flickr API Index">Click here to view a full list.</a></p>
 </div>
   
+  
+    <footer>
+      <a rel="full-article" href="/blog/simple-flickr-gallery/">Read on &rarr;</a>
+    </footer>
   
 
 
@@ -861,83 +376,6 @@
     
   </ul>
 </div>
-<aside class="sidebar-nav span3">
-  
-    <section class="well">
-  <ul id="recent_posts" class="nav nav-list">
-    <li class="nav-header">Recent Posts</li>
-    
-      <li class="post">
-        <a href="/blog/html-not-rendering-in-gmail/">HTML Not Rendering in Gmail</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/export-csv/">Export CSV</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/content-delivery-network/">Dynamically Pre-Render Images</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/paypal-express-checkout-nvp-api/">Bare Bones Paypal Express Checkout NVP API</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/server-vs-client/">Server vs Client</a>
-      </li>
-    
-  </ul>
-</section>
-<section class="well">
-  <ul class="nav"><li class="nav-header">Recent Comments</li></ul>
-  <div id="dsq-recentcomments" class="dsq-widget"><script type="text/javascript" src="http://disqus.com/forums/michaelminter/recent_comments_widget.js"></script></div>
-</section>
-
-
-
-
-
-<section class="well" id="coderwall">
-  <ul class="nav"><li class="nav-header">Coderwall Badges</li></ul>
-  <div id="coderwall_container">
-    <script type="text/javascript">
-      function display_coderwall(args) {
-        var badges = args["data"]["badges"];
-        var wall = '';
-        for ( var i = 0; i < badges.length; i++ ) {
-          var alt_txt   = badges[i]["name"];
-          var title_txt = badges[i]["name"] + ' - ' + badges[i]["description"];
-          wall += '<a href="http://coderwall.com/michaelminter/"><img src="'
-            + badges[i]["badge"]
-            + '" width="48" height="48" alt="' + alt_txt
-            + '" title="' + title_txt
-            + '"/></a>';
-        }
-        document.write(wall);
-      }
-    </script>
-    <script src="http://coderwall.com/michaelminter.json?callback=display_coderwall"></script>
-    
-    <br /><br />
-    
-    
-    <p><a href="http://coderwall.com/michaelminter"><img src="http://api.coderwall.com/michaelminter/endorsecount.png" /></a></p>
-    
-  </div>
-</section>
-<section id="google_adspace">
-  <script type="text/javascript">
-    google_ad_client = "ca-pub-7424434269432645";
-    /* Blog - Sidebar */
-    google_ad_slot = "3122450024";
-    google_ad_width = 120;
-    google_ad_height = 600;
-  </script>
-  <script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script>
-</section>
-  
-</aside>
 
     </div>
   </div>
