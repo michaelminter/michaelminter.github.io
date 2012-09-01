@@ -33,7 +33,7 @@ img {
 
 #coderwall #coderwall_container { padding:0 15px; }
 
-#google_adspace_container { padding:20px 0 20px 35px; }
+.adsense_container { margin:0 auto;padding:40px 0;width:728px; }
 
 h1 a { color:#BD600B; }
 
