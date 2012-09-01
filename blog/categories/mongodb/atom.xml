@@ -4,7 +4,7 @@
   <title><![CDATA[Category: MongoDB | Michael Minter]]></title>
   <link href="http://moorberry.net/blog/categories/mongodb/atom.xml" rel="self"/>
   <link href="http://moorberry.net/"/>
-  <updated>2012-08-31T16:48:15-05:00</updated>
+  <updated>2012-08-31T20:16:23-05:00</updated>
   <id>http://moorberry.net/</id>
   <author>
     <name><![CDATA[Michael Minter]]></name>
@@ -14,7 +14,7 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Export CSV]]></title>
+    <title type="html"><![CDATA[Export Data as CSV]]></title>
     <link href="http://moorberry.net/blog/export-csv/"/>
     <updated>2011-11-14T15:15:00-06:00</updated>
     <id>http://moorberry.net/blog/export-csv</id>
