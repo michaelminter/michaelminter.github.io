@@ -2,10 +2,13 @@
 layout: post
 title: "Dynamically Pre-Render Images"
 date: 2010-04-22 10:48
+author: '<a href="/" target="_blank" alt="Homepage" title="Michael Minter">Michael Minter</a>'
 comments: true
 categories: [PHP]
 ---
 If you’ve been frustrated with having to resize images for the sake of continuity or load time and don’t want to develop an entire caching system than this post will be of great value to you.
+
+<!--more-->
 
 Today I will discusses the theory and resolve of applying a system to autonomously resize images, with the GD library for PHP, before they get requested by the browser.
 

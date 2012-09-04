@@ -1,12 +1,15 @@
 ---
 layout: post
-title: "Export CSV"
-author: '<a href="http://github.com/michaelminter" target="_blank" class="github_link">Michael Minter</a>'
+title: "Export Data as CSV"
+author: '<a href="/" target="_blank" alt="Homepage" title="Michael Minter">Michael Minter</a>'
 date: 2011-11-14 15:15
 comments: true
 categories: [Ruby, MongoDB]
 ---
+
 In my research I found a hundred and more different ways to manage the task of exporting data into a CSV file. Whenever I’m learning something new, on a new system or with a new language, I like to build the process myself from scratch. And being a minimalist programmer it just seems fitting. Enjoy
+
+<!--more-->
 
 ``` ruby
 def export_inverts

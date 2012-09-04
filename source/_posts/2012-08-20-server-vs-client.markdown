@@ -1,12 +1,15 @@
 ---
 layout: post
 title: "Server vs Client"
-author: '<a href="http://github.com/michaelminter" target="_blank" class="github_link">Michael Minter</a>'
+author: '<a href="/" target="_blank" alt="Homepage" title="Michael Minter">Michael Minter</a>'
 date: 2010-03-25 21:11
 comments: true
 categories: 
 ---
+
 I can only presume that it’s because of the passionate advent of JQuery, that there has been an increasing rise of using Javascript, in precedence of PHP. This circumstance is arguably the sole cause to how and why designers are simply not learning a better way. I’m here to enlighten you.
+
+<!--more-->
 
 In opening, I’d like to express, that I hold no animosity for Javascript. Actually I quite often fancy a touch of its elegant lure and almost regularly indulge my viewers with its properties to control aesthetics at a dynamic fashion. But it has its place. If PHP can serve the same purpose, than its obvious strengths, should not be taken for granted.
 

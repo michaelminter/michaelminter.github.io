@@ -1,3 +1,17 @@
 <script type="text/javascript">
-  $('.dropdown-toggle').dropdown();
+  $(window).load(function() {
+    setTimeout(slabTextHeadlines, 1000);
+  });
+
+
+  $(document).ready(function(){
+    $('.dropdown-toggle').dropdown();
+  });
+  
+  function slabTextHeadlines() {
+    $("h1.justify").slabText({
+      // Don't slabtext the headers if the viewport is under 380px
+      "viewportBreakpoint":380
+    });
+  }
 </script>

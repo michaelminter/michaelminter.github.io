@@ -1,12 +1,15 @@
 ---
 layout: post
-title: "Bare Bones Paypal Express Checkout NVP API"
-author: '<a href="http://github.com/michaelminter" target="_blank" class="github_link">Michael Minter</a>'
+title: "Paypal Express Checkout NVP API"
+author: '<a href="/" target="_blank" alt="Homepage" title="Michael Minter">Michael Minter</a>'
 date: 2010-04-03 20:19
 comments: true
 categories: [PHP, API]
 ---
+
 I'm not sure why [Paypal](http://paypal.com) has written documentation, regarding its own Express Checkout name-value-pair API, with such a lack of enthusiasm. The classes used with the Paypal API are extremely easy to use. All of this is likely contributing to the confusion about using Express Checkout. But I’m here now, to save your application, and hopefully your sanity.
+
+<!--more-->
 
 I’m going to explain why the API objects work and what happens when they’re called. There’s a few different ways that you could go about setting up the product and/or service details. So I’ll keep this post relative to the main focus points and let you handle the before and after parts on an individual basis.
 

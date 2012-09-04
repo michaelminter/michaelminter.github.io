@@ -1,13 +1,15 @@
 ---
 layout: post
 title: "Simple Flickr Gallery Implementation"
-author: '<a href="http://github.com/michaelminter" target="_blank" class="github_link">Michael Minter</a>'
+author: '<a href="/" target="_blank" alt="Homepage" title="Michael Minter">Michael Minter</a>'
 date: 2010-03-24 15:23
 comments: true
 categories: [PHP, API]
 ---
 
 In my search for finding a simple solution to any problem, I usually cross many and many blogs and articles, discussing whatever topic. But with so much detail that the solution becomes a problem in itself. So I often times end up resolved to research on my own. In this case, I share the simplest programming method for displaying a [Flickr](http://flickr.com "Flickr") gallery, with PHP.
+
+<!--more-->
 
 ##Assembling Your Variables
 
