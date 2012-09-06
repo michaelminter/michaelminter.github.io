@@ -4,7 +4,7 @@
   <title><![CDATA[Category: API | Michael Minter]]></title>
   <link href="http://moorberry.net/blog/categories/api/atom.xml" rel="self"/>
   <link href="http://moorberry.net/"/>
-  <updated>2012-09-03T21:16:54-05:00</updated>
+  <updated>2012-09-06T17:11:12-05:00</updated>
   <id>http://moorberry.net/</id>
   <author>
     <name><![CDATA[Michael Minter]]></name>
@@ -21,6 +21,11 @@
     <content type="html"><![CDATA[<p>I’ve been handling many of my company’s email campaigns for some time now and I can honestly say that it’s been pretty fun from a technical stand-point. There’s a lot that goes into email marketing (not including the marketing/sales implications). It has it’s own conventions, ideologies, and I believe to the utmost that there’s a larger future than presumed in store for the sometimes misunderstood technology. (I’m patiently waiting for a mobile device header-type.)</p>
 
 <!--more-->
+
+
+
+
+<div style="margin:0 auto 20px;width:940px;"><img src="http://moorberry.net/images/posts/sendgrid-banner.jpeg" title="SendGrid" alt="SendGrid" /></div>
 
 
 <p>Recently I’ve been using my new skills while working on my own applications using <a href="http://sendgrid.tellapal.com/a/clk/1zzx0" title="SendGrid">SendGrid</a> as an alternative SMTP and email analytics tool. And I’ve only really come across one major programmable error. If you use a desktop client instead of a browser for viewing emails, as I do oftentimes, then this issue might not be so apparent (till now).</p>
@@ -62,6 +67,11 @@ end
 <!--more-->
 
 
+
+
+<div style="margin:0 auto 20px;width:600px;"><img src="http://moorberry.net/images/posts/checkout01.jpg" title="SendGrid" alt="SendGrid" /></div>
+
+
 <p>I’m going to explain why the API objects work and what happens when they’re called. There’s a few different ways that you could go about setting up the product and/or service details. So I’ll keep this post relative to the main focus points and let you handle the before and after parts on an individual basis.</p>
 
 <h2>Referring payment authentication</h2>
@@ -89,6 +99,9 @@ $paypal->setNVP("INVNUM", $uniqueID); // personal invoice number</p>
 <p>Before you submit for a transfer to Paypal, know that there are optional values you can send with the setNVP() function, to customize the payment process. All values that can be found, by default, in the etc/NVP/SetExpressCheckout.ini file. I’ve included a list of common practice examples and how to use them in this template.</p>
 
 <p>getResponse() sends the user’s browser to Paypal for authentication of credit information. Specifically to a URL that you’ll have to variably set between test mode (sandbox) and live, in the file named etc/NVP/PayPalNVP.ini.</p>
+
+<div style="margin:0 auto 20px;width:600px;"><img src="http://moorberry.net/images/posts/checkout02.jpg" title="SendGrid" alt="SendGrid" /></div>
+
 
 <h2>Completing the Sale</h2>
 
