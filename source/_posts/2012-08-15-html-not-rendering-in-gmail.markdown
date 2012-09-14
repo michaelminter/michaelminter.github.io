@@ -11,6 +11,8 @@ I’ve been handling many of my company’s email campaigns for some time now an
 
 <!--more-->
 
+<div style="margin:0 auto 20px;width:940px;"><img src="/images/posts/sendgrid-banner.jpeg" title="SendGrid" alt="SendGrid" /></div>
+
 Recently I’ve been using my new skills while working on my own applications using [SendGrid](http://sendgrid.tellapal.com/a/clk/1zzx0 "SendGrid") as an alternative SMTP and email analytics tool. And I’ve only really come across one major programmable error. If you use a desktop client instead of a browser for viewing emails, as I do oftentimes, then this issue might not be so apparent (till now).
 
 I recently was witness to how Gmail handles email headers in regards to HTML v. text-only. Gmail’s SaaS actually only reads the latter MIME-type and throws away the rest. So if you have a text version being made available, and you want your emails to be seen strictly as HTML, you must render the HTML version in your code LAST. Here is a Ruby on Rails example:

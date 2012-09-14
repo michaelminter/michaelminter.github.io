@@ -11,6 +11,8 @@ I'm not sure why [Paypal](http://paypal.com) has written documentation, regardin
 
 <!--more-->
 
+<div style="margin:0 auto 20px;width:600px;"><img src="/images/posts/checkout01.jpg" title="SendGrid" alt="SendGrid" /></div>
+
 I’m going to explain why the API objects work and what happens when they’re called. There’s a few different ways that you could go about setting up the product and/or service details. So I’ll keep this post relative to the main focus points and let you handle the before and after parts on an individual basis.
 
 ##Referring payment authentication
@@ -38,6 +40,8 @@ $paypal->getResponse();
 Before you submit for a transfer to Paypal, know that there are optional values you can send with the setNVP() function, to customize the payment process. All values that can be found, by default, in the etc/NVP/SetExpressCheckout.ini file. I’ve included a list of common practice examples and how to use them in this template.
 
 getResponse() sends the user’s browser to Paypal for authentication of credit information. Specifically to a URL that you’ll have to variably set between test mode (sandbox) and live, in the file named etc/NVP/PayPalNVP.ini.
+
+<div style="margin:0 auto 20px;width:600px;"><img src="/images/posts/checkout02.jpg" title="SendGrid" alt="SendGrid" /></div>
 
 ##Completing the Sale
 
