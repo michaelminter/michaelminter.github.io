@@ -184,22 +184,33 @@ h1#logo {
   width: 850px;
   margin-top: 60px;
 }
-
-#slider{overflow: hidden; width: 710px; height: 255px; margin:auto}	
-#slider ul, #slider li{
+#slider{
+  overflow: hidden;
+  width: 710px;
+  height: 255px;
+  margin:auto;
+}
+#slider ul, #slider li {
   margin:0;
   padding:0;
   list-style:none;
   }
-#slider li{ 
+#slider li { 
   width:710px;
   height:255px;
   overflow:hidden; 
-  }	
-#prevBtn, #nextBtn{ display:block; width:42px; height:42px; position:absolute; left:17px; top:303px; 
-  }	
-#nextBtn{ left:791px; 
-  }
+}	
+#prevBtn, #nextBtn {
+  display:block;
+  width:42px;
+  height:42px;
+  position:absolute;
+  left:17px;
+  top:303px; 
+}
+#nextBtn {
+  left:791px; 
+}
 #prevBtn a, #nextBtn a{  
   display:block;
   width:42px;
