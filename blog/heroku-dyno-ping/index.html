@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>HTML Not Rendering in Gmail - Michael Minter</title>
+  <title>Keeping Your Heroku Dyno Awake - Michael Minter</title>
   <meta name="author" content="Michael Minter">
 
   
-  <meta name="description" content="I’ve been handling many of my company’s email campaigns for some time now and I can honestly say that it’s been pretty fun from a technical stand- &hellip;">
+  <meta name="description" content="If your app has only a single web dyno running, it will idle out - irrespective of the number of worker dynos. You have to have more than one web &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -21,7 +21,7 @@
   <link rel="icon" href="http://gravatar.com/avatar/8afb20e206dc3d2e010ebbe812ebaa09.png?s=16" />
   
   
-  <link rel="canonical" href="http://moorberry.net/blog/html-not-rendering-in-gmail">
+  <link rel="canonical" href="http://moorberry.net/blog/heroku-dyno-ping">
   <link href="/stylesheets/bootstrap/bootstrap.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/stylesheets/bootstrap/responsive.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/stylesheets/syntax/syntax.css" media="screen, projection" rel="stylesheet" type="text/css">
@@ -128,7 +128,7 @@
   
   <header class="page-header">
     
-      <h1 class="entry-title justify">HTML Not Rendering in Gmail</h1>
+      <h1 class="entry-title justify">Keeping Your Heroku Dyno Awake</h1>
     
     
       <p class="meta">
@@ -144,7 +144,7 @@
   
 
 
-<time datetime="2011-12-10T12:52:00-06:00" pubdate data-updated="true">Dec 10<span>th</span>, 2011</time>
+<time datetime="2012-09-20T16:23:00-05:00" pubdate data-updated="true">Sep 20<span>th</span>, 2012</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -153,54 +153,45 @@
   </header>
 
 
-<div class="entry-content"><p>I’ve been handling many of my company’s email campaigns for some time now and I can honestly say that it’s been pretty fun from a technical stand-point. There’s a lot that goes into email marketing (not including the marketing/sales implications). It has it’s own conventions, ideologies, and I believe to the utmost that there’s a larger future than presumed in store for the sometimes misunderstood technology. (I’m patiently waiting for a mobile device header-type.)</p>
+<div class="entry-content"><p>If your app has only a single web dyno running, it will idle out - irrespective of the number of worker dynos. You have to have more than one web dyno to prevent idling.</p>
 
 <!--more-->
 
 
+<p>Apps that have scaled the number of web dynos (dynos running the web process type) so that only a single web dyno is running, will have that web dyno idled out after one hour of inactivity. When this happens, you’ll see the following in your logs:</p>
+
+<pre><code>2011-05-30T19:11:09+00:00 heroku[web.1]: Idling
+2011-05-30T19:11:17+00:00 heroku[web.1]: Stopping process with SIGTERM
+</code></pre>
+
+<p>When you access the app in your web browser or by some other means of sending an HTTP request, the routing mesh will signal the dyno manifold to unidle (or “wake up”) your dyno to run the web process type:</p>
+
+<pre><code>2011-05-30T22:17:43+00:00 heroku[web.1]: Unidling
+2011-05-30T22:17:43+00:00 heroku[web.1]: State changed from created to starting
+</code></pre>
+
+<p>This causes a few second delay for this first request. Subsequent requests will perform normally.</p>
+
+<p><em>Apps that have more than 1 web dyno running are never idled out. Workers dynos are never idled out.</em></p>
+
+<h2>The Good News</h2>
+
+<p>Overcome this nuisance by touching the site at least every hour so that the dyno doesn&#8217;t have time to fall asleep.</p>
+
+<div style="margin:0 auto 20px;width:932px;"><img src="https://s3.amazonaws.com/moorberry_net/console_ping.png" alt="console preview" /></div>
 
 
-<div style="margin:0 auto 20px;width:940px;"><img src="/images/posts/sendgrid-banner.jpeg" title="SendGrid" alt="SendGrid" /></div>
+<p>You can sign up for a service provider, <strong>free</strong> at <a href="http://pingdom.com" target="_blank">Pingdom</a>, that will ping your application at designated intervals.</p>
+
+<p><strong>Ping</strong> is a network protocol that sends ICMP <em>echo request</em> packets to the target host and waits for a response.</p>
+
+<div style="margin:0 auto 20px;width:1009px;"><a href="http://pingdom.com" target="_blank"><img src="https://s3.amazonaws.com/moorberry_net/pingdom_dashboard.png" alt="Pingdom" /></a></div>
 
 
-<p>Recently I’ve been using my new skills while working on my own applications using <a href="http://sendgrid.tellapal.com/a/clk/1zzx0" title="SendGrid">SendGrid</a> as an alternative SMTP and email analytics tool. And I’ve only really come across one major programmable error. If you use a desktop client instead of a browser for viewing emails, as I do oftentimes, then this issue might not be so apparent (till now).</p>
+<p>Pingdom is loaded with features including availability to a public page to view when the last time your host was checked, get alerts via email or SMS, and many other analytics.</p>
 
-<p>I recently was witness to how Gmail handles email headers in regards to HTML v. text-only. Gmail’s SaaS actually only reads the latter MIME-type and throws away the rest. So if you have a text version being made available, and you want your emails to be seen strictly as HTML, you must render the HTML version in your code LAST. Here is a Ruby on Rails example:</p>
+<div style="margin:0 auto 20px;width:1009px;"><a href="http://pingdom.com" target="_blank"><img src="https://s3.amazonaws.com/moorberry_net/pingdom_public.png" style="border:none;" alt="Pingdom" /></a></div>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Notifier</span> <span class="o">&lt;</span> <span class="no">ActionMailer</span><span class="o">::</span><span class="no">Base</span>
-</span><span class='line'>  <span class="kp">include</span> <span class="no">SendGrid</span>
-</span><span class='line'>  <span class="n">default</span> <span class="ss">:from</span> <span class="o">=&gt;</span> <span class="no">Rails</span><span class="o">.</span><span class="n">configuration</span><span class="o">.</span><span class="n">sendgrid</span><span class="o">.</span><span class="n">reply_to</span>
-</span><span class='line'>  <span class="n">sendgrid_enable</span> <span class="ss">:opentrack</span><span class="p">,</span> <span class="ss">:clicktrack</span><span class="p">,</span> <span class="ss">:ganalytics</span>
-</span><span class='line'>  <span class="n">sendgrid_category</span> <span class="ss">:testing</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="k">def</span> <span class="nf">user_updated</span><span class="p">(</span><span class="n">user</span><span class="p">)</span>
-</span><span class='line'>    <span class="vi">@user</span> <span class="o">=</span> <span class="n">user</span>
-</span><span class='line'>    <span class="n">mail</span><span class="p">(</span> <span class="ss">:to</span> <span class="o">=&gt;</span> <span class="vi">@user</span><span class="o">.</span><span class="n">email</span><span class="p">,</span>
-</span><span class='line'>          <span class="ss">:subject</span> <span class="o">=&gt;</span> <span class="s2">&quot;Your information has been updated.&quot;</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="nb">format</span><span class="o">|</span>
-</span><span class='line'>      <span class="nb">format</span><span class="o">.</span><span class="n">text</span> <span class="p">{</span> <span class="s2">&quot;</span><span class="si">#{</span><span class="n">user</span><span class="o">.</span><span class="n">first_name</span><span class="si">}</span><span class="s2">,</span><span class="se">\n\n</span><span class="s2">This is an auto-response to inform you that your information has changed.&quot;</span> <span class="p">}</span>
-</span><span class='line'>      <span class="nb">format</span><span class="o">.</span><span class="n">html</span> <span class="p">{</span> <span class="n">render</span> <span class="ss">:layout</span> <span class="o">=&gt;</span> <span class="s1">&#39;autoresponse&#39;</span> <span class="p">}</span>
-</span><span class='line'>    <span class="k">end</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Super “thanks” go out to the <a href="http://sendgrid.tellapal.com/a/clk/1zzx0" title="SendGrid">SendGrid</a> crew for their constantly superior customer service skills and for helping me out on my way to becoming an email marketing specialist.</p>
 </div>
 
 
@@ -223,12 +214,12 @@
   
 
 
-<time datetime="2011-12-10T12:52:00-06:00" pubdate data-updated="true">Dec 10<span>th</span>, 2011</time>
+<time datetime="2012-09-20T16:23:00-05:00" pubdate data-updated="true">Sep 20<span>th</span>, 2012</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/api/'>API</a>, <a class='category' href='/blog/categories/ruby/'>Ruby</a>
+    <a class='category' href='/blog/categories/api/'>API</a>, <a class='category' href='/blog/categories/shell/'>Shell</a>
   
 </span>
 
@@ -264,14 +255,10 @@
     <ul class="pager">
       
       <li class="previous"><a class="basic-alignment left"
-        href="/blog/export-csv/" title="Previous Post:
-        Export Data as CSV">&laquo; Export Data as CSV</a></li>
+        href="/blog/html-not-rendering-in-gmail/" title="Previous Post:
+        HTML Not Rendering in Gmail">&laquo; HTML Not Rendering in Gmail</a></li>
       
       <li><a href="/blog/archives">Blog Archives</a></li>
-      
-      <li class="next"><a class="basic-alignment right" href="/blog/heroku-dyno-ping/"
-        title="Next Post: Keeping Your Heroku Dyno Awake">Keeping Your Heroku Dyno Awake
-        &raquo;</a></li>
       
     </ul>
   </footer>
@@ -294,8 +281,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://moorberry.net/blog/html-not-rendering-in-gmail/';
-        var disqus_url = 'http://moorberry.net/blog/html-not-rendering-in-gmail/';
+        var disqus_identifier = 'http://moorberry.net/blog/heroku-dyno-ping/';
+        var disqus_url = 'http://moorberry.net/blog/heroku-dyno-ping/';
         var disqus_script = 'embed.js';
       
     (function () {
