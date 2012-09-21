@@ -4,7 +4,7 @@
   <title><![CDATA[Category: API | Michael Minter]]></title>
   <link href="http://moorberry.net/blog/categories/api/atom.xml" rel="self"/>
   <link href="http://moorberry.net/"/>
-  <updated>2012-09-21T11:57:27-05:00</updated>
+  <updated>2012-09-21T12:06:11-05:00</updated>
   <id>http://moorberry.net/</id>
   <author>
     <name><![CDATA[Michael Minter]]></name>
@@ -55,6 +55,8 @@
 
 <div style="margin:0 auto 20px;width:1009px;"><a href="http://pingdom.com" target="_blank"><img src="https://s3.amazonaws.com/moorberry_net/pingdom_public.png" style="border:none;" alt="Pingdom" /></a></div>
 
+
+<p>I chose to sample <a href="http://pingdom.com" target="_blank" style="font-weight:bold;">Pingdom</a> because it affords the least amount of work in setting up at a free price. Please post any alternatives you can think of in the comments below.</p>
 ]]></content>
   </entry>
   
