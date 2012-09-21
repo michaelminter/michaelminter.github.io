@@ -9,7 +9,7 @@
   <meta name="author" content="Michael Minter">
 
   
-  <meta name="description" content="If your app has only a single web dyno running, it will idle out - irrespective of the number of worker dynos. You have to have more than one web &hellip;">
+  <meta name="description" content="Apps that have scaled the number of web dynos (dynos running the web process type) so that only a single web dyno is running, will have that web dyno &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -155,7 +155,7 @@
   </header>
 
 
-  <div class="entry-content"><p>If your app has only a single web dyno running, it will idle out - irrespective of the number of worker dynos. You have to have more than one web dyno to prevent idling.</p>
+  <div class="entry-content"><p>Apps that have scaled the number of web dynos (dynos running the web process type) so that only a single web dyno is running, will have that web dyno idled out after one hour of inactivity. When this happens, you’ll see the following in your logs:</p>
 
 </div>
   

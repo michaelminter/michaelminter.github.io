@@ -9,7 +9,7 @@
   <meta name="author" content="Michael Minter">
 
   
-  <meta name="description" content="If your app has only a single web dyno running, it will idle out - irrespective of the number of worker dynos. You have to have more than one web &hellip;">
+  <meta name="description" content="Apps that have scaled the number of web dynos (dynos running the web process type) so that only a single web dyno is running, will have that web dyno &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -153,18 +153,16 @@
   </header>
 
 
-<div class="entry-content"><p>If your app has only a single web dyno running, it will idle out - irrespective of the number of worker dynos. You have to have more than one web dyno to prevent idling.</p>
+<div class="entry-content"><p>Apps that have scaled the number of web dynos (dynos running the web process type) so that only a single web dyno is running, will have that web dyno idled out after one hour of inactivity. When this happens, you’ll see the following in your logs:</p>
 
 <!--more-->
 
-
-<p>Apps that have scaled the number of web dynos (dynos running the web process type) so that only a single web dyno is running, will have that web dyno idled out after one hour of inactivity. When this happens, you’ll see the following in your logs:</p>
 
 <pre><code>2011-05-30T19:11:09+00:00 heroku[web.1]: Idling
 2011-05-30T19:11:17+00:00 heroku[web.1]: Stopping process with SIGTERM
 </code></pre>
 
-<p>When you access the app in your web browser or by some other means of sending an HTTP request, the routing mesh will signal the dyno manifold to unidle (or “wake up”) your dyno to run the web process type:</p>
+<p>When you access the app in your web browser or by some other means of sending an HTTP request, the routing mesh will signal the dyno manifold to unidle (or &#8220;wake up&#8221;) your dyno to run the web process type:</p>
 
 <pre><code>2011-05-30T22:17:43+00:00 heroku[web.1]: Unidling
 2011-05-30T22:17:43+00:00 heroku[web.1]: State changed from created to starting
@@ -176,19 +174,19 @@
 
 <h2>The Good News</h2>
 
-<p>Overcome this nuisance by touching the site at least every hour so that the dyno doesn&#8217;t have time to fall asleep.</p>
+<p>Overcome this nuisance by touching the site at least every hour so that the dyno doesn&#8217;t have time to begin idling.</p>
 
 <div style="margin:0 auto 20px;width:932px;"><img src="https://s3.amazonaws.com/moorberry_net/console_ping.png" alt="console preview" /></div>
 
 
-<p>You can sign up for a service provider, <strong>free</strong> at <a href="http://pingdom.com" target="_blank">Pingdom</a>, that will ping your application at designated intervals.</p>
+<p>You can sign up for a service provider, <strong>free</strong> at <a href="http://pingdom.com" target="_blank" style="font-weight:bold;">Pingdom</a>, that will ping your application at designated intervals.</p>
 
 <p><strong>Ping</strong> is a network protocol that sends ICMP <em>echo request</em> packets to the target host and waits for a response.</p>
 
 <div style="margin:0 auto 20px;width:1009px;"><a href="http://pingdom.com" target="_blank"><img src="https://s3.amazonaws.com/moorberry_net/pingdom_dashboard.png" alt="Pingdom" /></a></div>
 
 
-<p>Pingdom is loaded with features including availability to a public page to view when the last time your host was checked, get alerts via email or SMS, and many other analytics.</p>
+<p><a href="http://pingdom.com" target="_blank" style="font-weight:bold;">Pingdom</a> is loaded with features; including availability to a public page to view when the last time your host was checked, alerts via email or SMS, and many other features.</p>
 
 <div style="margin:0 auto 20px;width:1009px;"><a href="http://pingdom.com" target="_blank"><img src="https://s3.amazonaws.com/moorberry_net/pingdom_public.png" style="border:none;" alt="Pingdom" /></a></div>
 
