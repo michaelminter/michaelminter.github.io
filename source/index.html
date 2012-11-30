@@ -1,259 +1,42 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+---
+layout: default
+---
 
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-  <title>Moorberry Solutions | Michael Minter</title> <!-- The websites title. You can change this to whatever you want. -->
-  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-  <meta http-equiv="Content-Script-Type" content="text/javascript" />
-  <meta http-equiv="Content-Language" content="en" /> 
-  <meta http-equiv="Cache-control" content="no-cache" />
-  <meta http-equiv="imagetoolbar" content="no" />
-  <meta name="robots" content="index,follow" /> 
-  <meta name="revisit-after" content="2 weeks" /> <!-- Tells the search engines (Google, MSN, Yahoo...etc) bots when to revisit your website.  -->
-  
-  <link rel="shortcut icon" href="http://gravatar.com/avatar/8afb20e206dc3d2e010ebbe812ebaa09.png?s=16" title="Favicon" />
-  
-  <link type="text/css" rel="stylesheet" media="screen" href="/stylesheets/coffee.css" />
-  <link type="text/css" rel="stylesheet" media="screen" href="http://moorberry.biz/slimbox/css/slimbox.css" />
-  
-  <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
-  <script type="text/javascript" src="http://moorberry.biz/smoothscroll.js"></script>
-  <script type="text/javascript" src="http://moorberry.biz/slider/js/easySlider1.5.js"></script>
-  <script src="http://moorberry.biz/slimbox/js/slimbox.js" type="text/javascript"></script>
-  
-  <!--[if IE 7]>
-  <script defer type="text/javascript" src="http://moorberry.biz/pngfix.js"></script>
-  <![endif]-->
-  
-<script type="text/javascript">
-  $(document).ready(function(){ 
-    $("#slider").easySlider({
-      auto: true, // The Slider script. "true" keeps it running automatic, "false" turns the automatic movement off.
-      continuous: true // The Slider script. "true" keeps it running continuing, "false" turns it off
-    });
-    
-    $("#menu li a").click(function() {
-      $("#menu li a.current").removeClass("current");
-      $(this).addClass("current");      
-    });
-        
-    $("#sendmessage").click(function() {
-      $("#menu li a.current").removeClass("current");
-      $("#contact-link").addClass("current");     
-    });
-  }); 
-</script>
-
-</head>
-<body>
-
-<div id="wrapper">
-  <div id="anchor"><a name="top" id="top"></a></div>
-  <div id="header">
-    <div id="header-m1"></div>
-    <h1 id="logo" style="position:relative;"><a href="/">Michael Minter</a></h1>
-    <div id="header-m2"></div>
-    <div id="navigation">     
-      <a href="#top">HOME</a>
-      <a href="#about">ABOUT</a>
-      <a href="#folio">PORTFOLIO</a>
-      <a href="#contact">CONTACT</a>
-      <a href="/blog">BLOG</a>
+<div id="front-wrapper">
+  <div id="hero">
+    <div id="hero-inner" class="container">
+      {% include custom/intro.html %}
     </div>
   </div>
-    <div id="slide-wrapper">
-      <div id="slider">
-        <ul>
-          <li style="background:url(/images/slider_captive_inverts.jpeg) no-repeat center top;"><a href="#folio"><img src="/images/slider_frame.png" /></a></li>
-          <li style="background:url(/images/slider/fracture_50_perc.png) no-repeat center top;"><a href="#folio"><img src="/images/slider_frame.png" /></a></li>
-          <li style="background:url(/images/slider_open_tag.png) no-repeat center top;"><a href="#folio"><img src="/images/slider_frame.png" /></a></li>
-          <li style="background:url(/images/slider_tuna_treats.jpeg) no-repeat center top;"><a href="#folio"><img src="/images/slider_frame.png" /></a></li>
+  <section id="sub-hero">
+    <div class="container">
+      {% include custom/widgets.html %}
+    </div>
+  </section>
+  <div class="container">
+    <div class="row" id="post-container">
+    {% assign index = true %}
+    {% for post in paginator.posts %}
+    {% assign content = post.content %}
+      <article class="span4">
+        {% include article.html %}
+      </article>
+    {% endfor %}
+    </div>
+      <div class="row">
+        <ul class="pager">
+          {% if paginator.next_page %}
+            <li class="previous">
+              <a href="{{paginator.next_page}}">&larr; Older</a>
+            </li>
+          {% endif %}
+          {% if paginator.previous_page %}
+            <li class="next">
+              <a class="next" href="{{paginator.previous_page}}">Newer &rarr;</a>
+            </li>
+          {% endif %}
         </ul>
       </div>
-    </div>
-    <div id="header-content" style="display:none;">
-      <h1>WORKING WITH WEB DESIGNERS & SMALL BUSINESSES TO GET THINGS DONE</h1>
-    </div>
-    <div id="homepage-wrapper">
-      <div id="homepage-m1"></div>
-      <div id="homepage-c1">
-        <h2>SOFTWARE</h2>
-        <img src="/images/brackets_48.png" style="float:left;margin-right:10px;opacity:0.2;filter:alpha(opacity=20);" />
-        <p>Frequent code services I perform include; data integration and management control, payment processing, mobile version replication, and user authentication.</p>
-        <p><a href="http://github.com/michaelminter" target="_blank">fork me <img src="/images/github_16.png" style="margin-bottom:-5px;" /> at github</a></p>
-      </div>
-      <div id="homepage-m2"></div>
-      <div id="homepage-c2">
-        <h2>MARKETING</h2>
-        <p><img src="/images/iphone_48.png" style="float:left;margin-right:10px;opacity:0.2;filter:alpha(opacity=20);">Google Analytics, Mail Chimp, Survey Monkey, Search Engine Optimization</p>
-        <p>Ad networks, Social Media (Twitter, Facebook, and more), Blogs, Conference Visibility, Email Marketing, Mobile Marketing.</p>
-      </div>
-      <div id="homepage-m3"></div>
-      <div id="homepage-c3">
-        <h2>HOSTING</h2>
-        <p><img src="/images/cloud_48.png" style="float:left;margin-right:10px;opacity:0.2;filter:alpha(opacity=20);">Pick Moorberry Solutions as your hosting-provider, and never worry about compliancy.</p>
-        <p>Cloud hosting currently <strong>available</strong> per web development package. <a href="#contact">Contact me</a> to find out more about this offer.</p>
-      </div>
-    </div>
-    <br class="dirtyLittleTrick"  />
-    
-    <!-- Separator || Do Not Remove or Change -->
-    <div class="divider"><img src="/images/separator_line_left.gif" alt="" width="412" height="28" /><a href="#top"><img src="/images/separator_line_button.gif" alt="Go top" width="28" height="28" /></a><img src="/images/separator_line_right.gif" alt="" width="410" height="28" /></div>
-    <!-- End Speparator || Do not Remove -->
-    
-    <div id="about-wrapper">
-      <div id="about-m1"></div>
-      <div id="about-c1">
-        <h2>HELLO, MY NAME IS MICHAEL MINTER</h2>
-        <div style="background:transparent url(/images/gravatar_frame.png) no-repeat 0 0;float:left;height:179px;padding:15px 0 0 15px;width:179px;"><img src="http://gravatar.com/avatar/8afb20e206dc3d2e010ebbe812ebaa09.png?d=mm&r=PG&s=149" /></div>
-        <p>Currently hiding out in <strong>Austin, TX</strong>. I have a passion for developing awesome web-based applications.</p>
-        <p>I have been programming desktop and web applications for more than 4 years, <em>professionally</em>. My outstanding position at <a href="http://sitefm.com" target="_blank">SiteFM</a> keeps me very busy which means I'm not currently available for any <em>big projects</em>. But please feel free to <a href="#contact">contact me</a> anyway with any questions you have and I'll get back to you as soon as possible.</a></p>
-      </div>
-      <div id="about-m2"><a name="about" id="about"></a></div>
-      <div id="about-c2">
-        <h2>SKILLS ASSESSMENT</h2>
-      <p><strong>I create beautiful works of art.</strong><br />Though my art is mostly in the code.</p>
-      <table width="250" cellpadding="5" cellspacing="0" style="margin-bottom:20px;">
-        <tr>
-          <td width="170">Ruby on Rails</td>
-          <td width="80" style="text-align:right;">
-            <img src="/images/check.png" style="margin-right:3px;" /><img src="/images/check.png" style="margin-right:3px;" /><img src="/images/check.png" />
-          </td>
-        </tr>
-        <tr style="background:#EFEFEF;">
-          <td width="170">Javascript (incl., JQuery)</td>
-          <td width="80" style="text-align:right;">
-            <img src="/images/check.png" style="margin-right:3px;" /><img src="/images/check.png" style="margin-right:3px;" /><img src="/images/check.png" />
-          </td>
-        </tr>
-        <tr>
-          <td width="170">Testing (RSpec, Cuc., etc.)</td>
-          <td width="80" style="text-align:right;">
-            <img src="/images/check.png" style="margin-right:3px;opacity:0.2;filter:alpha(opacity=20);" /><img src="/images/check.png" style="margin-right:3px;" /><img src="/images/check.png" />
-          </td>
-        </tr>
-        <tr style="background:#EFEFEF;">
-          <td width="170">HTML5 UI Design</td>
-          <td width="80" style="text-align:right;">
-            <img src="/images/check.png" style="margin-right:3px;opacity:0.2;filter:alpha(opacity=20);" /><img src="/images/check.png" style="margin-right:3px;" /><img src="/images/check.png" />
-          </td>
-        </tr>
-      </table>
-    </div>
-  </div>
-  <br class="dirtyLittleTrick"  />
-  <!-- Separator || Do Not Remove or Change -->
-  <div class="divider"><img src="/images/separator_line_left.gif" alt="" width="412" height="28" /><a href="#top"><img src="/images/separator_line_button.gif" alt="Go top" width="28" height="28" /></a><img src="/images/separator_line_right.gif" alt="" width="410" height="28" /></div>
-  <!-- End Speparator || Do not Remove -->
-  <div id="folio-wrapper">
-    <a name="folio" id="folio"></a>
-    <h2>SOME OF MY FAVORITE PROJECTS</h2>
-    <table width="850" border="0" cellpadding="0" cellspacing="0" class="table-margin">
-      <tr>
-        <td width="268" height="178" align="left" valign="top">
-          <div style="background:url(/images/portfolio/captive_inverts.jpeg);height:158px;width:268px;"><a href="http://captiveinverts.com" target="_blank" title="Captive Inverts" ><img src="/images/portfolio_frame.png" alt="Captive Inverts" /></a></div>
-        </td>
-        <td width="22" height="178" align="left" valign="top">&nbsp;</td>
-        <td width="268" height="178" align="left" valign="top">
-          <div style="background:url(/images/portfolio/amburoads.jpeg);height:158px;margin:0;padding:0;width:268px;"><a href="http://github.com/michaelminter/amburoads" target="_blank" title="Amburoads"><img src="/images/portfolio_frame.png" alt="Amburoads" /></a></div>
-        </td>
-        <td width="22" height="178" align="left" valign="top">&nbsp;</td>
-        <td width="268" height="178" align="left" valign="top">
-          <div style="background:url(/images/portfolio/pwdapp.png) no-repeat 16px 16px;height:158px;margin:0;padding:0;width:268px;"><a href="http://github.com/michaelminter/pwdapp" target="_blank" title="pwdapp"><img src="/images/portfolio_frame.png" alt="pwdapp" /></a></div>
-        </td>
-      </tr>
-      <tr>
-        <td width="268" height="158" align="left" valign="top">
-          <div style="background:url(/images/portfolio/tampon_chrome_extension2.jpeg) no-repeat -50px 17px;height:158px;width:268px;"><a href="https://chrome.google.com/webstore/detail/tampon/ejmcpgicnkdnjmfmhmpklinjnoeccfng" target="_blank" title="Tamponapp Chrome Extension" ><img src="/images/portfolio_frame.png" alt="Tamponapp" /></a></div>
-        </td>
-        <td width="22" height="158" align="left" valign="top">&nbsp;</td>
-        <td width="268" height="158" align="left" valign="top">
-          <div style="background:url(/images/portfolio/fracture_chrome_extension.png) no-repeat 0 0;height:158px;width:268px;"><a href="https://chrome.google.com/webstore/detail/fracture-it/pbalkailkgnkbjnbfphpdlhlplnkngcj" target="_blank" title="Fracture.it Chrome Extension" ><img src="/images/portfolio_frame.png" alt="Fracture.it Chrome Extension" /></a></div>
-        </td>
-        <td width="22" height="158" align="left" valign="top">&nbsp;</td>
-        <td width="268" height="158" align="left" valign="top">
-          <div style="background:url(/images/portfolio/fracture_20_perc.png) no-repeat center 17px;height:158px;margin:0;padding:0;width:268px;"><a href="http://fracture.it" target="_blank" title="My Inverts"><img src="/images/portfolio_frame.png" alt="Fracture.it" /></a>
-        </td>
-      </tr>
-    </table>      
-  </div>
-  <br class="dirtyLittleTrick"  />
-  <!-- Separator || Do Not Remove or Change -->
-  <div class="divider"><img src="/images/separator_line_left.gif" alt="" width="412" height="28" /><a href="#top"><img src="/images/separator_line_button.gif" alt="Go top" width="28" height="28" /></a><img src="/images/separator_line_right.gif" alt="" width="410" height="28" /></div>
-  <!-- End Speparator || Do not Remove -->
-  <div id="contact-wrapper">
-    <div id="contact-m1"></div>
-    <div id="contact-c1">
-      <h2>QUESTIONS? GET IN TOUCH WITH ME</h2>
-      <p>If you are inquiring about custom feature development, please submit your company website's URL, along with details of required services. I will get back to you as soon as possible.</p>
-      <br />
-      <div id="note"></div>
-      <div id="fields">
-        <form action="http://getsimpleform.com/messages?form_api_token=8e9b6bda28840dead4c77feac4a8a624" method="post">
-          <table width="550" border="0" cellpadding="0" cellspacing="0">
-            <tr>
-              <td width="225" valign="top">
-                <strong>Name:</strong><br />
-                <input name="name" type="text" class="form_nm" />
-                <br /><br />
-                <strong>Email:</strong><br />
-                <input name="email" type="text" class="form_nm" />
-                <br /><br />
-                <strong>Interested in...</strong><br />
-                <select name="subject" class="form_nm">
-                  <option>Question/Comment</option>
-                  <option>Hiring</option>
-                  <option>Contract</option>
-                  <option>Consultation</option>
-                  <option>Presentation</option>
-                  <option>Interview</option>
-                  <option>Social Meeting</option>
-                </select>
-              </td>
-              <td width="325" valign="top">
-                <div align="left">
-                  <strong>Message:</strong><br />
-                  <textarea name="message" class="form_tf" cols="" rows=""></textarea>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td colspan="2" style="text-align:right;">
-                <input name="send_button" src="/images/send_button.gif" alt="Send" title="Send" type="image" id="submit_button" />
-              </td>
-            </tr>
-          </table>
-        </form>
-      </div>
-    </div>
-    <div id="contact-m2"><a name="contact" id="contact"></a></div>
-    <div id="contact-c2">
-      <h2>SOCIAL CONTACT</h2>
-      <div id="coderwall"></div>
-      <p><a href="http://coderwall.com/michaelminter" target="_blank"><img src="http://api.coderwall.com/michaelminter/endorsecount.png" /></a></p>
-      <script type="text/javascript">
-        $(document).ready(function(){
-          $.getJSON("http://www.coderwall.com/michaelminter.json?callback=?", function(data) {
-            $.each(data.data.badges, function(i, item) {
-              $('#coderwall').append('<a href="http://coderwall.com/michaelminter" target="_blank" class="coderwall_badge"><img src="'+item.badge+'" title="'+item.name+': '+item.description+'" alt="'+item.name+'" style="height:90px;margin:5px;width:90px;" /></a>');            
-            });
-          });
-        });
-      </script>
-    </div>
-  </div>
-  <br class="dirtyLittleTrick" />
-  <!-- Separator || Do Not Remove or Change -->
-  <div class="divider"><img src="/images/separator_line_left.gif" alt="" width="412" height="28" /><a href="#top"><img src="/images/separator_line_button.gif" alt="Go top" width="28" height="28" /></a><img src="/images/separator_line_right.gif" alt="" width="410" height="28" /></div>
-  <!-- End Speparator || Do not Remove -->
-  <div id="copy">
-    <div align="center">Copryight © 2012 Moorberry Solutions - All rights reserved
-      -  <a href="http://validator.w3.org/check/referer" target="_blank"> 
-      <span class="Stil2">XHTML</span></a> &amp; <a href="http://jigsaw.w3.org/css-validator/check/referer" target="_blank">
-      <span class="Stil2">CSS</span></a>
-    </div>
   </div>
 </div>
 
-</body>
-</html>

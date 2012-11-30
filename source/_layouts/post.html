@@ -1,63 +1,27 @@
 ---
-layout: default
 single: true
-sidebar: false
 ---
+{% capture root_url %}{{ site.root | strip_slash }}{% endcapture %}
+{% include head.html %}
+<body {% if page.body_id %} id="{{ page.body_id }}" {% endif %} {% if page.sidebar == false %} class="no-sidebar" {% endif %} {% if page.sidebar == 'collapse' or site.sidebar == 'collapse' %} class="collapse-sidebar sidebar-footer" {% endif %}>
+  <nav role="navigation">{% include navigation.html %}</nav>
+  <div class="wrapper_single">
+    <div class="container">
+      <article class="span8 offset2" role="article">
+        {% include article.html %}
 
-{% if page.sidebar == false %}
-<article class="hentry span12" role="article">
-{% else %}
-<article class="hentry span9" role="article">
-{% endif %}
-  {% include article.html %}
-  <footer>
-    <p class="meta">
-      {% include post/author.html %}
-      {% include post/date.html %}{% if updated %}{{ updated }}{% else %}{{ time }}{% endif %}
-      {% include post/categories.html %}
-    </p>
-    {% unless page.sharing == false %}
-      {% include post/sharing.html %}
-    {% endunless %}
-    <div class="adsense_container">
-      <script type="text/javascript"><!--
-      google_ad_client = "ca-pub-7424434269432645";
-      /* moorberry.net */
-      google_ad_slot = "9787006707";
-      google_ad_width = 728;
-      google_ad_height = 90;
-      //-->
-      </script>
-      <script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script><br /><br />
-      <iframe scrolling="no" style="border: 0; width: 728px; height: 90px;" src="http://coinurl.com/get.php?id=559"></iframe>
+      </article>
     </div>
-    {% if site.disqus_short_name and page.comments == true %}
-    <section>
-      <h1>Comments</h1>
-      <div id="disqus_thread" aria-live="polite">{% include post/disqus_thread.html %}</div>
-    </section>
-    {% endif %}
-    <ul class="pager">
-      {% if page.previous.url %}
-      <li class="previous"><a class="basic-alignment left"
-        href="{{page.previous.url}}" title="Previous Post:
-        {{page.previous.title}}">&laquo; {{page.previous.title}}</a></li>
+    <div class="container">	
+      {% if site.disqus_short_name and page.comments == true %}
+        <section>
+          <h1>Comments</h1>
+          <div id="disqus_thread" aria-live="polite">{% include post/disqus_thread.html %}</div>
+        </section>
       {% endif %}
-      <li><a href="/blog/archives">Blog Archives</a></li>
-      {% if page.next.url %}
-      <li class="next"><a class="basic-alignment right" href="{{page.next.url}}"
-        title="Next Post: {{page.next.title}}">{{page.next.title}}
-        &raquo;</a></li>
-      {% endif %}
-    </ul>
-  </footer>
-</article>
-{% unless page.sidebar == false %}
-<aside class="sidebar-nav span3">
-  {% if site.post_asides.size %}
-    {% include_array post_asides %}
-  {% else %}
-    {% include_array default_asides %}
-  {% endif %}
-</aside>
-{% endunless %}
+    </div>
+  </div>
+  {% include footer.html %}
+  {% include after_footer.html %}
+</body>
+</html>

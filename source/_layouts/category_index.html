@@ -1,7 +1,6 @@
 ---
 layout: page
 footer: false
-sidebar: false
 ---
 
 <div id="blog-archives" class="category">
@@ -9,9 +8,9 @@ sidebar: false
 {% capture this_year %}{{ post.date | date: "%Y" }}{% endcapture %}
 {% unless year == this_year %}
   {% assign year = this_year %}
-  <h1>{{ year }}</h1>
+  <h2>{{ year }}</h2>
 {% endunless %}
-<article>
+<article class="archive-article-format">
   {% include archive_post.html %}
 </article>
 {% endfor %}
