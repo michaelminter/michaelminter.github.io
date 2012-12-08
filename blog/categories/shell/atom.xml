@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Shell | Michael Minter]]></title>
   <link href="http://moorberry.net/blog/categories/shell/atom.xml" rel="self"/>
   <link href="http://moorberry.net/"/>
-  <updated>2012-12-04T22:08:03-06:00</updated>
+  <updated>2012-12-07T22:39:17-06:00</updated>
   <id>http://moorberry.net/</id>
   <author>
     <name><![CDATA[Michael Minter]]></name>
@@ -41,20 +41,17 @@
 
 <p>Overcome this nuisance by touching the site at least every hour so that the dyno doesn't have time to begin idling.</p>
 
-<div style="margin:0 auto 20px;width:932px;"><img src="http://moorberry.net/images/posts/console_ping.png" alt="console preview" /></div>
-
+<p><img src="http://moorberry.net/images/posts/console_ping.png" alt="console preview" style="width:710px;" /></p>
 
 <p>You can sign up for a service provider, <strong>free</strong> at <a href="http://pingdom.com" target="_blank" style="font-weight:bold;">Pingdom</a>, that will ping your application at designated intervals.</p>
 
 <p><strong>Ping</strong> is a network protocol that sends ICMP <em>echo request</em> packets to the target host and waits for a response.</p>
 
-<div style="margin:0 auto 20px;width:1009px;"><a href="http://pingdom.com" target="_blank"><img src="http://moorberry.net/images/posts/pingdom_dashboard.png" alt="Pingdom" /></a></div>
-
+<p><a href="http://pingdom.com" target="_blank"><img src="http://moorberry.net/images/posts/pingdom_dashboard.png" alt="Pingdom" style="width:710px;" /></a></p>
 
 <p><a href="http://pingdom.com" target="_blank" style="font-weight:bold;">Pingdom</a> is loaded with features; including availability to a public page to view when the last time your host was checked, alerts via email or SMS, and many other features.</p>
 
-<div style="margin:0 auto 20px;width:1009px;"><a href="http://pingdom.com" target="_blank"><img src="http://moorberry.net/images/posts/pingdom_public.png" style="border:none;" alt="Pingdom" /></a></div>
-
+<p><a href="http://pingdom.com" target="_blank"><img src="http://moorberry.net/images/posts/pingdom_public.png" style="border:none;" alt="Pingdom" style="width:710px;" /></a></p>
 
 <p>I chose to sample <a href="http://pingdom.com" target="_blank" style="font-weight:bold;">Pingdom</a> because it affords the least amount of work in setting up at a free price. Please post any alternatives you can think of in the comments below.</p>
 ]]></content>

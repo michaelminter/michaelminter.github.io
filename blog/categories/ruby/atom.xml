@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Ruby | Michael Minter]]></title>
   <link href="http://moorberry.net/blog/categories/ruby/atom.xml" rel="self"/>
   <link href="http://moorberry.net/"/>
-  <updated>2012-12-04T22:08:03-06:00</updated>
+  <updated>2012-12-07T22:39:17-06:00</updated>
   <id>http://moorberry.net/</id>
   <author>
     <name><![CDATA[Michael Minter]]></name>
@@ -23,10 +23,7 @@
 <!--more-->
 
 
-
-
-<div style="margin:0 auto 20px;width:940px;"><img src="http://moorberry.net/images/posts/sendgrid-banner.jpeg" title="SendGrid" alt="SendGrid" /></div>
-
+<p><img src="http://moorberry.net/images/posts/sendgrid-banner.jpeg" title="SendGrid" alt="SendGrid" style="width:710px;" /></p>
 
 <p>Recently I’ve been using my new skills while working on my own applications using <a href="http://sendgrid.tellapal.com/a/clk/1zzx0" title="SendGrid">SendGrid</a> as an alternative SMTP and email analytics tool. And I’ve only really come across one major programmable error. If you use a desktop client instead of a browser for viewing emails, as I do oftentimes, then this issue might not be so apparent (till now).</p>
 

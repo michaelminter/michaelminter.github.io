@@ -29,3 +29,12 @@ html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abb
   width:250px;
   border-bottom:1px solid #eee;
 }
+
+.comments_wrapper {
+  background:#EEEEEE;
+}
+
+.comments_wrapper section {
+  margin:0 auto;
+  width:1170px;
+}

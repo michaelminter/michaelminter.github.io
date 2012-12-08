@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Java | Michael Minter]]></title>
+  <link href="http://moorberry.net/blog/categories/java/atom.xml" rel="self"/>
+  <link href="http://moorberry.net/"/>
+  <updated>2012-12-07T22:39:17-06:00</updated>
+  <id>http://moorberry.net/</id>
+  <author>
+    <name><![CDATA[Michael Minter]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Activate Java Console in Mac]]></title>
+    <link href="http://moorberry.net/blog/java-console-mac/"/>
+    <updated>2012-09-10T10:41:00-05:00</updated>
+    <id>http://moorberry.net/blog/java-console-mac</id>
+    <content type="html"><![CDATA[<p>Recently been working with AutoCAD files for <a href="http://sitefm.com">my company</a>. Because CAD files, or DWF/DWG files are based on a proprietory software package, there's not a lot of documentation on working with them, and even less if you want to render them in your own product.</p>
+
+<!--more-->
+
+
+<p>I was fortunate enough to come across <a href="http://cadviewer.com">CADViewer</a>. They're support is awesome and their product's API is superior to others available. The only catch is that they're a bit pricey. But eh.</p>
+
+<p>When you need to debug a Java applet running on your website, there's only one way, and that's with Mac's built-in Java console.</p>
+
+<pre><code>Applications &gt; Utilities &gt; Java Console
+</code></pre>
+
+<p>... and select 'Show console' with any other options you'd like to show up.</p>
+]]></content>
+  </entry>
+  
+</feed>
