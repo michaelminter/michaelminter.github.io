@@ -25,16 +25,16 @@ This causes a few second delay for this first request. Subsequent requests will 
 ##The Good News
 Overcome this nuisance by touching the site at least every hour so that the dyno doesn't have time to begin idling.
 
-<div style="margin:0 auto 20px;width:932px;"><img src="/images/posts/console_ping.png" alt="console preview" /></div>
+<img src="/images/posts/console_ping.png" alt="console preview" style="width:710px;" />
 
 You can sign up for a service provider, **free** at <a href="http://pingdom.com" target="_blank" style="font-weight:bold;">Pingdom</a>, that will ping your application at designated intervals.
 
 **Ping** is a network protocol that sends ICMP *echo request* packets to the target host and waits for a response.
 
-<div style="margin:0 auto 20px;width:1009px;"><a href="http://pingdom.com" target="_blank"><img src="/images/posts/pingdom_dashboard.png" alt="Pingdom" /></a></div>
+<a href="http://pingdom.com" target="_blank"><img src="/images/posts/pingdom_dashboard.png" alt="Pingdom" style="width:710px;" /></a>
 
 <a href="http://pingdom.com" target="_blank" style="font-weight:bold;">Pingdom</a> is loaded with features; including availability to a public page to view when the last time your host was checked, alerts via email or SMS, and many other features.
 
-<div style="margin:0 auto 20px;width:1009px;"><a href="http://pingdom.com" target="_blank"><img src="/images/posts/pingdom_public.png" style="border:none;" alt="Pingdom" /></a></div>
+<a href="http://pingdom.com" target="_blank"><img src="/images/posts/pingdom_public.png" style="border:none;" alt="Pingdom" style="width:710px;" /></a>
 
 I chose to sample <a href="http://pingdom.com" target="_blank" style="font-weight:bold;">Pingdom</a> because it affords the least amount of work in setting up at a free price. Please post any alternatives you can think of in the comments below.
