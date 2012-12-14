@@ -41,6 +41,10 @@
 <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
 <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
 
+<link rel="stylesheet" type="text/css" href="/stylesheets/proudify.css" />
+
+<link rel="shortcut icon" href="http://gravatar.com/avatar/8afb20e206dc3d2e010ebbe812ebaa09.png?s=16" title="Favicon" />
+
   
   <script type="text/javascript">
     var _gaq = _gaq || [];
@@ -242,31 +246,9 @@ posted in
   <div class="container">
     <div class="row">
   <div class="span3">
-    <h2>recent posts</h2>
-    <ul class="recent_posts">
-      
-        <li>
-          <a href="/blog/heroku-dyno-ping/">Keeping Your Heroku Dyno Awake</a>
-        </li>
-      
-        <li>
-          <a href="/blog/java-console-mac/">Activate Java Console in Mac</a>
-        </li>
-      
-        <li>
-          <a href="/blog/html-not-rendering-in-gmail/">HTML Not Rendering in Gmail</a>
-        </li>
-      
-        <li>
-          <a href="/blog/export-csv/">Export Data as CSV</a>
-        </li>
-      
-        <li>
-          <a href="/blog/content-delivery-network/">Dynamically Pre-Render Images</a>
-        </li>
-      
-    </ul>
-    <h2><a href="/blog/archives">archives</a></h2>
+    <h2>coderwall badges</h2>
+    <div id="proudify"></div>
+    <a href="http://coderwall.com/michaelminter" target="_blank"><img src="http://api.coderwall.com/michaelminter/endorsecount.png" alt="Endorse" id="endorse_button" /></a>
   </div>
   <div class="span3">
     
@@ -302,7 +284,6 @@ posted in
 <a href="https://github.com/michaelminter/" rel="tooltip" title="Github"><img class="social_icon" title="Github" alt="github icon" src="/images/glyphicons_381_github.png"></a>
 <a href="http://stackoverflow.com/users/388253/michael-minter" rel="tooltip" title="Stack Overflow"><img class="social_icon" title="Stack Overflow" alt="stack overflow icon" src="/images/glyphicons_400_stack_overflow.png"></a>
 <a href="http://www.linkedin.com/in/mminter" rel="tooltip" title="Linkedin"><img class="social_icon" title="Linkedin" alt="Linkedin icon" src="/images/glyphicons_377_linked_in.png"></a>
-<a href="http://twitter.com/mothore" rel="tooltip" title="Twitter"><img class="social_icon" title="Twitter" alt="Twitter icon" src="/images/glyphicons_391_twitter_t.png"></a>
 <a href="https://plus.google.com/110730291563876857467" rel="tooltip" title="Google Plus"><img class="social_icon" title="Google Plus" alt="Google Plus icon" src="/images/glyphicons_386_google_plus.png"></a>
 <h2>contact at</h2>
 <a href="mailto:michael@moorberry.net">michael@moorberry.net</a>
@@ -326,13 +307,17 @@ posted in
   </div>
 </footer>
 
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" type="text/javascript"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" type="text/javascript"></script>
+<script type="text/javascript" src="/javascripts/jquery-proudify.min.js"></script>
 <script>window.jQuery || document.write('<script src="/javascripts/libs/jquery-1.7.2.min.js" type="text/javascript"><\/script>')</script>
 <script src="/javascripts/libs/bootstrap.min.js" type="text/javascript"></script>
 <script src="/javascripts/jquery.tweet.js" type="text/javascript"></script>
 <script src="/javascripts/jquery.instagram.js" type="text/javascript"></script>
 <script src="/javascripts/libs/jquery.masonry.min.js" type="text/javascript"></script>
 <script src="/javascripts/custom.js" type="text/javascript"></script>
+<script type="text/javascript">
+  $('#proudify').proudify({username:'michaelminter',service:'coderwall'});
+</script>
 
 
 <script type="text/javascript">
