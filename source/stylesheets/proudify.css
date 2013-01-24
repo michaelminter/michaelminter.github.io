@@ -98,3 +98,9 @@
 #endorse_button {
   margin:10px 0 0;
 }
+
+dd, dt {
+	font-size:16px;
+	line-height:1.7;
+	margin-bottom:0 !important;
+}
