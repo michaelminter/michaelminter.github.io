@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Rails | Michael Minter]]></title>
+  <link href="http://moorberry.net/blog/categories/rails/atom.xml" rel="self"/>
+  <link href="http://moorberry.net/"/>
+  <updated>2013-02-06T18:08:26-06:00</updated>
+  <id>http://moorberry.net/</id>
+  <author>
+    <name><![CDATA[Michael Minter]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Special Notes Lookup in Rails]]></title>
+    <link href="http://moorberry.net/blog/notes/"/>
+    <updated>2013-02-06T17:52:00-06:00</updated>
+    <id>http://moorberry.net/blog/notes</id>
+    <content type="html"><![CDATA[<p>You can add some special notes to your source code comments in Rails to remind you later of stuff you need to do:</p>
+
+<!--more-->
+
+
+<p>``` perl
+class Article &lt; ActiveRecord::Base
+  # TODO add named_scopes
+  # FIXME method A is broken
+  # OPTIMIZE improve the code</p>
+
+<p>  has_many :comments
+  ....
+end
+```</p>
+
+<p>Some programming IDEs, such as <a href="http://www.aptana.com/" target="_blank">Aptana Studio</a>, will even highlight the key notation part.</p>
+
+<p>Now, from the command line, you can list these special notes with a rake task:</p>
+
+<p><code>html
+$ rake notes
+app/models/article.rb:
+  * [2] [TODO] add named_scopes
+  * [3] [FIXME] method A is broken
+  * [4] [OPTIMIZE] improve the code
+</code></p>
+
+<p>You can also list notes of each kind individually with rake notes:todo, rake notes:fixme and rake notes:optimize.</p>
+
+<p>You can even list your own, custom notes with rake notes:custom ANNOTATION=MYANNO.</p>
+]]></content>
+  </entry>
+  
+</feed>
