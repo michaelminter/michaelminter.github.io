@@ -9,4 +9,17 @@
 <script type="text/javascript">
   $('#proudify').proudify({username:'michaelminter',service:'coderwall'});
 </script>
+<script type="text/javascript" src="/javascripts/jquery.timeago.js"></script>
+<script type="text/javascript" src="/javascripts/jquery.github-activity.js"></script>
+<script type="text/javascript">
+  $(function() {
+    $("ul#activity").githubActivityFor('michaelminter', {
+      'limit': 3,
+      'wrap': function(item) {
+        item.prepend('<img src="/images/github_16.png" style="float:left;margin:0 5px 0 0;" />');
+        return item
+      }
+    });
+  });
+</script>
 {% include custom/after_footer.html %}
