@@ -1,12 +1,12 @@
 ---
 layout: post
 title: "Special Notes Lookup in Rails"
-date: 2013-02-06 17:52
+date: 2012-11-06 17:52
 comments: true
 categories: [Ruby, Rails, rake]
 ---
 
-You can add some special notes to your source code comments in Rails to remind you later of stuff you need to do:
+Add special notes to your source code comments in Rails to later remind you of tasks you need to complete:
 
 <!--more-->
 
@@ -15,13 +15,13 @@ class Article < ActiveRecord::Base
   # TODO add named_scopes
   # FIXME method A is broken
   # OPTIMIZE improve the code 
-
+	
   has_many :comments
   ....
 end
 ```
 
-Some programming IDEs, such as <a href="http://www.aptana.com/" target="_blank">Aptana Studio</a>, will even highlight the key notation part.
+Some programming IDEs, such as <a href="http://www.aptana.com/" target="_blank">Aptana Studio 3</a> (free), will even highlight the key notation part.
 
 Now, from the command line, you can list these special notes with a rake task:
 
@@ -33,6 +33,6 @@ app/models/article.rb:
   * [4] [OPTIMIZE] improve the code
 ```
 
-You can also list notes of each kind individually with rake notes:todo, rake notes:fixme and rake notes:optimize.
+You can also list notes of each kind individually with `rake notes:todo`, `rake notes:fixme` and `rake notes:optimize`.
 
-You can even list your own, custom notes with rake notes:custom ANNOTATION=MYANNO.
+You can even list your own, custom notes with `rake notes:custom ANNOTATION=MYANNO`.
