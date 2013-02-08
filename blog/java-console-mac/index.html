@@ -222,14 +222,7 @@ posted in
   </div>
   <div class="span2">
     <h2>found on</h2>
-
-
-
-
-
-
-
-<a href="http://twitter.com/mothore" rel="tooltip" title="Twitter"><img class="social_icon" title="Twitter" alt="Twitter icon" src="/images/glyphicons_391_twitter_t.png"></a>
+<a href="mailto:michael@moorberry.net" rel="tooltip" title="Email Michael"><img src="/images/glyphicons_399_e-mail.png" alt="email icon" class="social_icon"></a>
 
 
 
@@ -238,12 +231,25 @@ posted in
 
 
 
-<a href="https://github.com/michaelminter/" rel="tooltip" title="Github"><img class="social_icon" title="Github" alt="github icon" src="/images/glyphicons_381_github.png"></a>
-<a href="http://stackoverflow.com/users/388253/michael-minter" rel="tooltip" title="Stack Overflow"><img class="social_icon" title="Stack Overflow" alt="stack overflow icon" src="/images/glyphicons_400_stack_overflow.png"></a>
-<a href="http://www.linkedin.com/in/mminter" rel="tooltip" title="Linkedin"><img class="social_icon" title="Linkedin" alt="Linkedin icon" src="/images/glyphicons_377_linked_in.png"></a>
-<a href="https://plus.google.com/110730291563876857467" rel="tooltip" title="Google Plus"><img class="social_icon" title="Google Plus" alt="Google Plus icon" src="/images/glyphicons_386_google_plus.png"></a>
-<h2>contact at</h2>
-<a href="mailto:michael@moorberry.net">michael@moorberry.net</a>
+<a href="http://twitter.com/mothore" rel="tooltip" title="Twitter" target="_blank"><img class="social_icon" title="Twitter" alt="Twitter icon" src="/images/glyphicons_391_twitter_t.png"></a>
+
+
+
+
+
+
+
+
+<a href="https://github.com/michaelminter/" rel="tooltip" title="Github" target="_blank"><img class="social_icon" title="Github" alt="github icon" src="/images/glyphicons_381_github.png"></a>
+<a href="http://stackoverflow.com/users/388253/michael-minter" rel="tooltip" title="Stack Overflow" target="_blank"><img class="social_icon" title="Stack Overflow" alt="stack overflow icon" src="/images/glyphicons_400_stack_overflow.png"></a>
+<a href="http://www.linkedin.com/in/mminter" rel="tooltip" title="Linkedin" target="_blank"><img class="social_icon" title="Linkedin" alt="Linkedin icon" src="/images/glyphicons_377_linked_in.png"></a>
+<!--a href="https://plus.google.com/110730291563876857467" rel="tooltip" title="Google Plus"><img class="social_icon" title="Google Plus" alt="Google Plus icon" src="/images/glyphicons_386_google_plus.png"></a-->
+
+<br /><br /><br />
+
+<a href="http://stackoverflow.com/users/388253/michael-minter" target="_blank">
+<img src="http://stackoverflow.com/users/flair/388253.png" width="170" alt="profile for Michael Minter at Stack Overflow, Q&amp;A for professional and enthusiast programmers" title="profile for Michael Minter at Stack Overflow, Q&amp;A for professional and enthusiast programmers">
+</a>
   </div>
 </div>
 
@@ -274,6 +280,19 @@ posted in
 <script src="/javascripts/custom.js" type="text/javascript"></script>
 <script type="text/javascript">
   $('#proudify').proudify({username:'michaelminter',service:'coderwall'});
+</script>
+<script type="text/javascript" src="/javascripts/jquery.timeago.js"></script>
+<script type="text/javascript" src="/javascripts/jquery.github-activity.js"></script>
+<script type="text/javascript">
+  $(function() {
+    $("ul#activity").githubActivityFor('michaelminter', {
+      'limit': 3,
+      'wrap': function(item) {
+        item.prepend('<img src="/images/github_16.png" style="float:left;margin:0 5px 0 0;" />');
+        return item
+      }
+    });
+  });
 </script>
 
 
