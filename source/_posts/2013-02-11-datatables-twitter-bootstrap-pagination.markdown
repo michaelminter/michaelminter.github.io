@@ -3,7 +3,7 @@ layout: post
 title: "Pagination & DataTables with Twitter Boostrap"
 date: 2013-02-11 14:34
 comments: true
-categories: 
+categories: ['jQuery','Twitter Bootstrap','DataTables']
 ---
 As a developer who likes to spend more time with beautiful object-oriented code rather than mark-up, <a href="http://datatables.net" target="_blank">DataTables</a> is a wonderful tool for me, with a growing list of extendable features.
 
