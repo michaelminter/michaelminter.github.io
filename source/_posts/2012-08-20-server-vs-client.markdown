@@ -4,7 +4,7 @@ title: "Server vs Client"
 author: '<a href="/" target="_blank" alt="Homepage" title="Michael Minter">Michael Minter</a>'
 date: 2010-03-25 21:11
 comments: true
-categories: 
+categories: ['Javascript', 'PHP', 'Ruby']
 ---
 
 I can only presume that it’s because of the passionate advent of JQuery, that there has been an increasing rise of using Javascript, in precedence of PHP. This circumstance is arguably the sole cause to how and why designers are simply not learning a better way. I’m here to enlighten you.
