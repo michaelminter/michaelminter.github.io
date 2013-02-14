@@ -4,7 +4,7 @@
   <title><![CDATA[Category: API | Michael Minter]]></title>
   <link href="http://moorberry.net/blog/categories/api/atom.xml" rel="self"/>
   <link href="http://moorberry.net/"/>
-  <updated>2013-02-11T15:21:16-06:00</updated>
+  <updated>2013-02-14T14:33:24-06:00</updated>
   <id>http://moorberry.net/</id>
   <author>
     <name><![CDATA[Michael Minter]]></name>
@@ -259,10 +259,10 @@ Array
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Simple Flickr Gallery Implementation]]></title>
-    <link href="http://moorberry.net/blog/simple-flickr-gallery/"/>
+    <title type="html"><![CDATA[PHP Flickr Gallery]]></title>
+    <link href="http://moorberry.net/blog/php-flickr-gallery/"/>
     <updated>2010-03-24T15:23:00-05:00</updated>
-    <id>http://moorberry.net/blog/simple-flickr-gallery</id>
+    <id>http://moorberry.net/blog/php-flickr-gallery</id>
     <content type="html"><![CDATA[<p>In my search for finding a simple solution to any problem, I usually cross many and many blogs and articles, discussing whatever topic. But with so much detail that the solution becomes a problem in itself. So I often times end up resolved to research on my own. In this case, I share the simplest programming method for displaying a <a href="http://flickr.com" title="Flickr">Flickr</a> gallery, with PHP.</p>
 
 <!--more-->
