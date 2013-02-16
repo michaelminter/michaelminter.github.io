@@ -9,3 +9,50 @@
   line-height:24px;
   list-style:disk !important;
 }
+#endorse_button {
+  margin:10px 0 0;
+}
+
+dd, dt {
+	font-size:16px;
+	line-height:1.7;
+	margin-bottom:0 !important;
+}
+#activity {
+  font-family: Helvetica, Arial, Verdana;
+  font-size: 0.9em;
+  font-weight: bold;
+  color: #333;
+  width: 270px;
+  margin: 3em auto;
+}
+
+#activity a {
+  /*color: #345678;*/
+  text-decoration: none;
+}
+
+#activity a:hover {
+  text-decoration: underline;
+}
+
+#activity {
+  display: block;
+  margin: auto;
+}
+
+#activity li {
+  list-style-type: none;
+  padding:10px;
+  width:250px;
+  border-bottom:1px solid #eee;
+}
+
+.comments_wrapper {
+  background:#EEEEEE;
+}
+
+.comments_wrapper section {
+  margin:0 auto;
+  width:1170px;
+}
