@@ -4,7 +4,7 @@
   <title><![CDATA[Category: PHP | Michael Minter]]></title>
   <link href="http://moorberry.net/blog/categories/php/atom.xml" rel="self"/>
   <link href="http://moorberry.net/"/>
-  <updated>2013-02-15T21:31:24-06:00</updated>
+  <updated>2013-02-15T22:33:42-06:00</updated>
   <id>http://moorberry.net/</id>
   <author>
     <name><![CDATA[Michael Minter]]></name>
@@ -14,7 +14,7 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Dynamically Pre-Render Images]]></title>
+    <title type="html"><![CDATA[Dynamically Render Images with PHP]]></title>
     <link href="http://moorberry.net/blog/content-delivery-network/"/>
     <updated>2010-04-22T10:48:00-05:00</updated>
     <id>http://moorberry.net/blog/content-delivery-network</id>
@@ -32,6 +32,9 @@
 <li>Easy to resize div backgrounds</li>
 <li>Faster to call than the use of <a href="/blog/server-vs-client">JavaScript</a>.</li>
 </ul>
+
+
+<br style="clear:both;" />
 
 
 <h2>Calling the Application With HTML</h2>
@@ -293,10 +296,12 @@ Array
     <link href="http://moorberry.net/blog/server-vs-client/"/>
     <updated>2010-03-25T21:11:00-05:00</updated>
     <id>http://moorberry.net/blog/server-vs-client</id>
-    <content type="html"><![CDATA[<p>I can only presume that it’s because of the passionate advent of JQuery, that there has been an increasing rise of using Javascript, in precedence of PHP. This circumstance is arguably the sole cause to how and why designers are simply not learning a better way. I’m here to enlighten you.</p>
+    <content type="html"><![CDATA[<p>My presumption is that it’s because of the passionate advent of JQuery, that there has been an increasing rise of using Javascript, in precedence of a server side language like PHP or Ruby. This circumstance is arguably the sole cause to how and why, <em>mostly designers</em>, are simply not learning a better way. I’m here to enlighten you.</p>
 
 <!--more-->
 
+
+<p><a href="http://moorberry.net/images/posts/versus.jpg"><img src="http://moorberry.net/images/posts/versus.jpg" alt="Versus" /></a></p>
 
 <p>In opening, I’d like to express, that I hold no animosity for Javascript. Actually I quite often fancy a touch of its elegant lure and almost regularly indulge my viewers with its properties to control aesthetics at a dynamic fashion. But it has its place. If PHP can serve the same purpose, than its obvious strengths, should not be taken for granted.</p>
 
@@ -354,19 +359,22 @@ $("tr:odd").css("background-color", "#FFFFFF");
 
 <p>With PHP everything is rendered before any HTTP requests are sent by the server.</p>
 
-<p>http://chart.apis.google.com/chart?cht=p&amp;chd=t:13,87&amp;chs=300x180&amp;chco=32cd32&amp;chdl=13.05%|86.95%&amp;chtt=GOOGLE&amp;chts=32cd32,12</p>
+<p><img src="https://chart.googleapis.com/chart?cht=bvs&chs=714x100&chd=t:13,20|87,80&chco=4d89f9,c6d9fd&chbh=20&chds=0,160" style="float:left;" /></p>
 
-<p>http://chart.apis.google.com/chart?cht=p&amp;chd=t:20,80&amp;chs=300x180&amp;chco=006699&amp;chdl=20.09%|79.91%&amp;chtt=PHP+ROCKSTAR&amp;chts=006699,12</p>
+<br style="clear:both;" />
+
 
 <p>Graphically interpreted above are the details associated with load times. This analysis completes the HTTP request cycle from initialization. The darker portion, of each representation, shows the percentage of work involved by the server. As consistency shows, a lot of web design and development, relies mostly on what’s being delivered to the browser.</p>
+
+<p><em>in order of appearance: Google, PHP Rockstar</em></p>
 
 <h2>Summary</h2>
 
 <p>It’s certain that a professional web server is going to best the average home network set-up, in performance, any day. It’s your responsibility to take advantage of that, by running some server-side code, to save your guests the frustration of dealing with an idle load time.</p>
 
-<h3>References</h3>
+<h2>References</h2>
 
-<p>[1] http://www.timestretch.com/FractalBenchmark.html
+<p>[1] http://www.timestretch.com/FractalBenchmark.html<br/>
 [2] http://developer.yahoo.net/blog/archives/2007/03/high_performanc.html</p>
 ]]></content>
   </entry>
