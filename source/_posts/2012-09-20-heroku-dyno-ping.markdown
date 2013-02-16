@@ -5,6 +5,7 @@ author: '<a href="/" target="_blank" alt="Homepage" title="Michael Minter">Micha
 date: 2012-09-20 16:23
 comments: true
 categories: [Shell, API]
+photo: '/images/posts/pingdom_public.png'
 ---
 Apps that have scaled the number of web dynos (dynos running the web process type) so that only a single web dyno is running, will have that web dyno idled out after one hour of inactivity. When this happens, you’ll see the following in your logs:
 

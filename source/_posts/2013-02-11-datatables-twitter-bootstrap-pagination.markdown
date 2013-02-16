@@ -1,9 +1,10 @@
 ---
 layout: post
-title: "Pagination & DataTables with Twitter Boostrap"
+title: "DataTables Pagination with Twitter Bootstrap"
 date: 2013-02-11 14:34
 comments: true
 categories: ['jQuery','Twitter Bootstrap','DataTables']
+photo: '/images/posts/pagination.png'
 ---
 As a developer who likes to spend more time with beautiful object-oriented code rather than mark-up, <a href="http://datatables.net" target="_blank">DataTables</a> is a wonderful tool for me, with a growing list of extendable features.
 
@@ -12,6 +13,8 @@ As a developer who likes to spend more time with beautiful object-oriented code 
 > DataTables operates on the principle of progressive enhancement, whereby an enhanced and interactive table will be presented to the end user if their browser has the required capabilities.
 
 One <a href="http://datatables.net/plug-ins/pagination" target="_blank">plug-in</a> that I found will allow your browser to render the default pagination with tags that are designed to work with the popular responsive grid framework: <a href="http://twitter.github.com/bootstrap" target="_blank">Twitter Bootstrap</a>.
+
+<img src="/images/posts/pagination.png" alt="DataTables Pagination with Twitter Bootstrap Design Inteegration" />
 
 ``` javascript
 <!-- more information at: http://www.datatables.net/download/ -->
