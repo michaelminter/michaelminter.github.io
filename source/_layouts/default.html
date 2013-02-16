@@ -3,6 +3,35 @@
 {% include head.html %}
 <body {% if page.body_id %} id="{{ page.body_id }}" {% endif %} {% if page.sidebar == false %} class="no-sidebar" {% endif %} {% if page.sidebar == 'collapse' or site.sidebar == 'collapse' %} class="collapse-sidebar sidebar-footer" {% endif %}>
   {{ content | expand_urls: root_url }}
+  
+  <style type="text/css">
+    #ad_wrapper {
+      background:#f1f1f1;
+      padding:0 0 60px;
+    }
+    #ad_container {
+      clear:both;
+      height:90px;
+      margin:0 auto;
+      /*padding:0 0 0 60px;*/
+      width:728px;
+    }
+  </style>
+  
+  <div id="ad_wrapper">
+    <div id="ad_container">
+      <script type="text/javascript"><!--
+      google_ad_client = "ca-pub-7424434269432645";
+      /* moorberry.net (octopress) */
+      google_ad_slot = "8992473921";
+      google_ad_width = 728;
+      google_ad_height = 90;
+      //-->
+      </script>
+      <script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script>
+    </div>
+  </div>
+  
   {% include footer.html %}
   {% include after_footer.html %}
 </body>
