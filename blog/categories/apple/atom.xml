@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Apple | Michael Minter]]></title>
   <link href="http://moorberry.net/blog/categories/apple/atom.xml" rel="self"/>
   <link href="http://moorberry.net/"/>
-  <updated>2013-02-15T21:04:00-06:00</updated>
+  <updated>2013-02-15T21:31:24-06:00</updated>
   <id>http://moorberry.net/</id>
   <author>
     <name><![CDATA[Michael Minter]]></name>
@@ -18,19 +18,23 @@
     <link href="http://moorberry.net/blog/java-console-mac/"/>
     <updated>2012-09-10T10:41:00-05:00</updated>
     <id>http://moorberry.net/blog/java-console-mac</id>
-    <content type="html"><![CDATA[<p>Recently been working with AutoCAD files for <a href="http://sitefm.com">my company</a>. Because CAD files, or DWF/DWG files are based on a proprietory software package, there's not a lot of documentation on working with them, and even less if you want to render them in your own product.</p>
+    <content type="html"><![CDATA[<p>When you need to debug a Java applet running on your website, there's only one way, and that's with Mac's built-in Java console.</p>
 
 <!--more-->
 
 
-<p>I was fortunate enough to come across <a href="http://cadviewer.com">CADViewer</a>. They're support is awesome and their product's API is superior to others available. The only catch is that they're a bit pricey. But eh.</p>
+<p>Because Adobe DWF files are based on proprietory software, there's not a lot of documentation on working with them, and even less if you want to render them in your own product.</p>
 
-<p>When you need to debug a Java applet running on your website, there's only one way, and that's with Mac's built-in Java console.</p>
+<p>I was fortunate enough to come across a Java Applet by <a href="http://cadviewer.com" target="_blank">CADViewer</a>. They're support is awesome and their product's API is superior to any others I've seen available. They'll even work with you on a price to fit your circumstance.</p>
+
+<p>But to debug any Java Applet in your Mac OS, do this:</p>
 
 <pre><code>Applications &gt; Utilities &gt; Java Console
 </code></pre>
 
-<p>... and select 'Show console' with any other options you'd like to show up.</p>
+<p><a href="http://moorberry.net/images/posts/java-console.png"><img src="http://moorberry.net/images/posts/java-console.png" alit="Java Console in Mac OS X 10.8" /></a></p>
+
+<p>Click the <code>Show console</code> radio button and select any other options you'd like to show up while the Java console is running.</p>
 ]]></content>
   </entry>
   
