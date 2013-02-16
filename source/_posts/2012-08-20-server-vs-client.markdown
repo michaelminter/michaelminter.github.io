@@ -5,11 +5,14 @@ author: '<a href="/" target="_blank" alt="Homepage" title="Michael Minter">Micha
 date: 2010-03-25 21:11
 comments: true
 categories: ['Javascript', 'PHP', 'Ruby']
+photo: '/images/posts/versus.jpg'
 ---
 
-I can only presume that it’s because of the passionate advent of JQuery, that there has been an increasing rise of using Javascript, in precedence of PHP. This circumstance is arguably the sole cause to how and why designers are simply not learning a better way. I’m here to enlighten you.
+My presumption is that it’s because of the passionate advent of JQuery, that there has been an increasing rise of using Javascript, in precedence of a server side language like PHP or Ruby. This circumstance is arguably the sole cause to how and why, _mostly designers_, are simply not learning a better way. I’m here to enlighten you.
 
 <!--more-->
+
+<a href="/images/posts/versus.jpg"><img src="/images/posts/versus.jpg" alt="Versus" /></a>
 
 In opening, I’d like to express, that I hold no animosity for Javascript. Actually I quite often fancy a touch of its elegant lure and almost regularly indulge my viewers with its properties to control aesthetics at a dynamic fashion. But it has its place. If PHP can serve the same purpose, than its obvious strengths, should not be taken for granted.
 
@@ -58,17 +61,18 @@ If you were to analyze the speed of using only Javascript, you would find that i
 
 With PHP everything is rendered before any HTTP requests are sent by the server.
 
-http://chart.apis.google.com/chart?cht=p&chd=t:13,87&chs=300x180&chco=32cd32&chdl=13.05%|86.95%&chtt=GOOGLE&chts=32cd32,12
-
-http://chart.apis.google.com/chart?cht=p&chd=t:20,80&chs=300x180&chco=006699&chdl=20.09%|79.91%&chtt=PHP+ROCKSTAR&chts=006699,12
+<img src="https://chart.googleapis.com/chart?cht=bvs&chs=714x100&chd=t:13,20|87,80&chco=4d89f9,c6d9fd&chbh=20&chds=0,160" style="float:left;" />
+<br style="clear:both;" />
 
 Graphically interpreted above are the details associated with load times. This analysis completes the HTTP request cycle from initialization. The darker portion, of each representation, shows the percentage of work involved by the server. As consistency shows, a lot of web design and development, relies mostly on what’s being delivered to the browser.
+
+_in order of appearance: Google, PHP Rockstar_
 
 ##Summary
 
 It’s certain that a professional web server is going to best the average home network set-up, in performance, any day. It’s your responsibility to take advantage of that, by running some server-side code, to save your guests the frustration of dealing with an idle load time.
 
-###References
+##References
 
-[1] http://www.timestretch.com/FractalBenchmark.html
+[1] http://www.timestretch.com/FractalBenchmark.html  
 [2] http://developer.yahoo.net/blog/archives/2007/03/high_performanc.html

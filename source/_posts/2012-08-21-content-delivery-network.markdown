@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Dynamically Pre-Render Images"
+title: "Dynamically Render Images with PHP"
 date: 2010-04-22 10:48
 author: '<a href="/" target="_blank" alt="Homepage" title="Michael Minter">Michael Minter</a>'
 comments: true
@@ -14,9 +14,11 @@ Today I will discusses the theory and resolve of applying a system to autonomous
 
 This practice presents many benefits to its use.
 
-- Save loads of hard drive space
-- Easy to resize div backgrounds
-- Faster to call than the use of [JavaScript](/blog/server-vs-client).
+* Save loads of hard drive space
+* Easy to resize div backgrounds
+* Faster to call than the use of [JavaScript](/blog/server-vs-client).
+
+<br style="clear:both;" />
 
 ##Calling the Application With HTML
 
