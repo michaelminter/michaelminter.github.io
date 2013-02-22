@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Airbrake | Michael Minter]]></title>
   <link href="http://moorberry.net/blog/categories/airbrake/atom.xml" rel="self"/>
   <link href="http://moorberry.net/"/>
-  <updated>2013-02-21T18:42:57-06:00</updated>
+  <updated>2013-02-21T18:45:09-06:00</updated>
   <id>http://moorberry.net/</id>
   <author>
     <name><![CDATA[Michael Minter]]></name>
@@ -18,7 +18,12 @@
     <link href="http://moorberry.net/blog/airbrake-error-notice-javascript/"/>
     <updated>2013-02-19T12:46:00-06:00</updated>
     <id>http://moorberry.net/blog/airbrake-error-notice-javascript</id>
-    <content type="html"><![CDATA[<p>Right now you may be saying to yourself, "but why not just use an AJAX request inside of my Javascript application or use the Image().src hack..." Well they don't work across all medias.</p>
+    <content type="html"><![CDATA[<p>Right now you may be saying to yourself, "but why not just use an AJAX request inside of my Javascript application or use the Image().src hack..."</p>
+
+<!--more-->
+
+
+<p>Well they don't work across all medias.</p>
 
 <p>You cannot issue requests through the XMLHttpRequest to other domains or subdomains. If you are issuing the request from www.foo.com you also need to target the request at www.foo.com and make certain to remember the www.</p>
 
