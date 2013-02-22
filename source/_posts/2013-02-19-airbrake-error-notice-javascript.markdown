@@ -5,7 +5,11 @@ date: 2013-02-19 12:46
 comments: true
 categories: ['Javascript','Airbrake','Ruby on Rails','Sinatra']
 ---
-Right now you may be saying to yourself, "but why not just use an AJAX request inside of my Javascript application or use the Image().src hack..." Well they don't work across all medias.
+Right now you may be saying to yourself, "but why not just use an AJAX request inside of my Javascript application or use the Image().src hack..."
+
+<!--more-->
+
+Well they don't work across all medias.
 
 You cannot issue requests through the XMLHttpRequest to other domains or subdomains. If you are issuing the request from www.foo.com you also need to target the request at www.foo.com and make certain to remember the www.
 
