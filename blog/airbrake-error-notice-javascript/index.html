@@ -1,12 +1,11 @@
 
-
 <!DOCTYPE html>
 <!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
 <!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Michael Minter</title>
+  <title>Airbrake: Send Error Notices using Javascript - Michael Minter</title>
   <meta name="author" content="Michael Minter">
   <link rel="author" href="humans.txt">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -14,7 +13,7 @@
   
     
   
-  <meta name="description" content=" ">
+  <meta name="description" content="Right now you may be saying to yourself, &#8220;but why not just use an AJAX request inside of my Javascript application or use the Image().src hack &hellip;">
   
   <!-- http://t.co/dKP3o1e -->
   <meta name="HandheldFriendly" content="True">
@@ -22,17 +21,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://moorberry.net/blog/">
+  <link rel="canonical" href="http://moorberry.net/blog/airbrake-error-notice-javascript/">
   <link href="/favicon.png" rel="icon">
   <link href='http://fonts.googleapis.com/css?family=Cantarell' rel='stylesheet' type='text/css'>
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="Michael Minter" type="application/atom+xml">
   <meta name="og:type" content="website" />
   <meta name="og:site_name" content="Michael Minter" />
-  <meta name="og:title" content="Michael Minter" />
-  <meta name="og:description" content=" " />
-  <meta name="og:url" content="http://moorberry.net/blog/index.html"/>
-  <meta name="url" content="http://moorberry.net/blog/index.html">
+  <meta name="og:title" content="Airbrake: Send Error Notices using Javascript" />
+  <meta name="og:description" content="Right now you may be saying to yourself, &#8220;but why not just use an AJAX request inside of my Javascript application or use the Image().src hack &hellip;" />
+  <meta name="og:url" content="http://moorberry.net/blog/airbrake-error-notice-javascript/"/>
+  <meta name="url" content="http://moorberry.net/blog/airbrake-error-notice-javascript/">
+  
+  <meta name="subject" content="AirbrakeJavascriptRuby on RailsSinatra"/>
+  <meta name="category" content="AirbrakeJavascriptRuby on RailsSinatra"/>
   
   <meta name="distribution" content="global">
   <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
@@ -59,20 +61,51 @@
 
 </head>
 
-<body   class="no-sidebar"  >
-  <div class="span12">
-  
-  
-  
-    <article>
+<body   >
+  <nav role="navigation"><div class="navbar">
+  <div class="navbar-inner">
+    <a class="brand" href="/">Michael Minter</a>
+    <ul class="nav">
+      <li><a href="/">Home</a></li>
+      <li><a href="/blog/archives">Archives</a></li>
+    </ul>
+    <ul class="nav" data-subscription="rss">
+      <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
       
-  <header class="page-header index">
+    </ul>
+      
+    <form class="navbar-form" action="http://google.com/search" method="get">
+      <fieldset role="search">
+        <input type="hidden" name="q" value="site:moorberry.net" />
+        <input class="span2" type="text" name="q" results="0" placeholder="Search"/>
+      </fieldset>
+    </form>
+      
     
-      <h1 class="entry-title justify"><a href="/blog/airbrake-error-notice-javascript/">Airbrake: Send Error Notices Using Javascript</a></h1>
-    
-    
-      <p class="meta" style="display:none;">
-        
+  </div>
+</div>
+</nav>
+  <div class="wrapper_single">
+    <div class="container">
+      <article class="span8 offset2" role="article">
+        <div class="article-format">
+  
+    <header>
+      
+        <h1 class="entry-title">Airbrake: Send Error Notices Using Javascript</h1>
+      
+      
+        <p class="meta">
+          
+  
+
+
+  
+    <span class="byline author vcard">by <span class="fn">Michael Minter</span></span>
+  
+
+ - 
+          
 
 
 
@@ -84,16 +117,27 @@
   
 
 
-<time datetime="2013-02-19T12:46:00-06:00" pubdate data-updated="true">Feb 19<span>th</span>, 2013</time>
-        
-         | <a href="/blog/airbrake-error-notice-javascript/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
+<time datetime="2013-02-19T12:46:00-06:00" pubdate data-updated="true">Feb 19<span>th</span>, 2013</time> - 
+          
+
+posted in
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/airbrake/'>Airbrake</a>, <a class='category' href='/blog/categories/javascript/'>Javascript</a>, <a class='category' href='/blog/categories/ruby-on-rails/'>Ruby on Rails</a>, <a class='category' href='/blog/categories/sinatra/'>Sinatra</a>
+  
+</span>
 
 
-  <div class="entry-content"><p>Right now you may be saying to yourself, &#8220;but why not just use an AJAX request inside of my Javascript application or use the Image().src hack&#8230;&#8221; Well they don&#8217;t work across all medias.</p>
+          
+           | <a href="#disqus_thread">Comments</a>
+          
+        </p>
+      
+    </header>
+  
+  
+  
+    <div class="entry-content"><p>Right now you may be saying to yourself, &#8220;but why not just use an AJAX request inside of my Javascript application or use the Image().src hack&#8230;&#8221; Well they don&#8217;t work across all medias.</p>
 
 <p>You cannot issue requests through the XMLHttpRequest to other domains or subdomains. If you are issuing the request from www.foo.com you also need to target the request at www.foo.com and make certain to remember the www.</p>
 
@@ -202,519 +246,53 @@
 </div>
   
   
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header class="page-header index">
-    
-      <h1 class="entry-title justify"><a href="/blog/datatables-twitter-bootstrap-pagination/">DataTables Pagination With Twitter Bootstrap</a></h1>
-    
-    
-      <p class="meta" style="display:none;">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-02-11T14:34:00-06:00" pubdate data-updated="true">Feb 11<span>th</span>, 2013</time>
-        
-         | <a href="/blog/datatables-twitter-bootstrap-pagination/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>As a developer who likes to spend more time with beautiful object-oriented code rather than mark-up, <a href="http://datatables.net" target="_blank">DataTables</a> is a wonderful tool for me, with a growing list of extendable features.</p>
-
-</div>
-  
-  
     <footer>
-      <a rel="full-article" href="/blog/datatables-twitter-bootstrap-pagination/">Read on &rarr;</a>
+      <div style="border:#012b36 1px dashed;margin:40px 0;padding:20px 0 0 20px;">
+        <p>I love sharing! This text is copyrighted under Creative Commons <a href="http://creativecommons.org/licenses/by-nc-sa/3.0/" target="_blank">Attribution-Noncommercial-Share Alike 3.0 Unported</a> license, unless stated otherwise. </p>
+        <p>Let me know how you use it - <a href="#footer-widgets">contact me here.</a></p>
+      </div>
+      
+        <a class="pull-left" href="/blog/datatables-twitter-bootstrap-pagination/" title="Previous Post: DataTables Pagination with Twitter Bootstrap">&laquo; DataTables Pagination with Twitter Bootstrap</a>
+      
+      
     </footer>
   
+</div>
 
-
-    </article>
-  
-  
-    <article>
+      </article>
       
-  <header class="page-header index">
-    
-      <h1 class="entry-title justify"><a href="/blog/link-attributes-jquery-mobile/">Clicked Link Attributes in jQuery Mobile Events</a></h1>
-    
-    
-      <p class="meta" style="display:none;">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-02-06T18:13:00-06:00" pubdate data-updated="true">Feb 6<span>th</span>, 2013</time>
-        
-         | <a href="/blog/link-attributes-jquery-mobile/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>So&#8230;are you tired of writing and rewriting (or commenting out) Javascript and want to handle your clicked link attributes inside of a <a href="http://jquerymobile.com/" target="_blank">jQuery Mobile</a> event? Here&#8217;s how:</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/link-attributes-jquery-mobile/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
+      <style type="text/css">
+        #ad_container {
+          clear:both;
+          height:90px;
+          margin:0 auto;
+          padding:0 0 0 60px;
+          width:720px;
+        }
+      </style>
       
-  <header class="page-header index">
-    
-      <h1 class="entry-title justify"><a href="/blog/notes/">Special Notes Lookup in Rails</a></h1>
-    
-    
-      <p class="meta" style="display:none;">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-11-06T17:52:00-06:00" pubdate data-updated="true">Nov 6<span>th</span>, 2012</time>
-        
-         | <a href="/blog/notes/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Add special notes to your source code comments in Rails to later remind you of tasks you need to complete:</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/notes/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header class="page-header index">
-    
-      <h1 class="entry-title justify"><a href="/blog/heroku-dyno-ping/">Keeping Your Heroku Dyno Awake</a></h1>
-    
-    
-      <p class="meta" style="display:none;">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-09-20T16:23:00-05:00" pubdate data-updated="true">Sep 20<span>th</span>, 2012</time>
-        
-         | <a href="/blog/heroku-dyno-ping/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Apps that have scaled the number of web dynos (dynos running the web process type) so that only a single web dyno is running, will have that web dyno idled out after one hour of inactivity. When this happens, you’ll see the following in your logs:</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/heroku-dyno-ping/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header class="page-header index">
-    
-      <h1 class="entry-title justify"><a href="/blog/java-console-mac/">Activate Java Console in Mac</a></h1>
-    
-    
-      <p class="meta" style="display:none;">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-09-10T10:41:00-05:00" pubdate data-updated="true">Sep 10<span>th</span>, 2012</time>
-        
-         | <a href="/blog/java-console-mac/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>When you need to debug a Java applet running on your website, there&#8217;s only one way, and that&#8217;s with Mac&#8217;s built-in Java console.</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/java-console-mac/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header class="page-header index">
-    
-      <h1 class="entry-title justify"><a href="/blog/html-not-rendering-in-gmail/">HTML Not Rendering in Gmail</a></h1>
-    
-    
-      <p class="meta" style="display:none;">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-12-10T12:52:00-06:00" pubdate data-updated="true">Dec 10<span>th</span>, 2011</time>
-        
-         | <a href="/blog/html-not-rendering-in-gmail/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>I’ve been handling many of my company’s email campaigns for some time now and I can honestly say that it’s been pretty fun from a technical stand-point. There’s a lot that goes into email marketing (not including the marketing/sales implications). It has it’s own conventions, ideologies, and I believe to the utmost that there’s a larger future than presumed in store for the sometimes misunderstood technology. (I’m patiently waiting for a mobile device header-type.)</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/html-not-rendering-in-gmail/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header class="page-header index">
-    
-      <h1 class="entry-title justify"><a href="/blog/export-csv/">Export Data as CSV</a></h1>
-    
-    
-      <p class="meta" style="display:none;">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-11-14T15:15:00-06:00" pubdate data-updated="true">Nov 14<span>th</span>, 2011</time>
-        
-         | <a href="/blog/export-csv/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>In my research I found a hundred and more different ways to manage the task of exporting data into a CSV file. Whenever I’m learning something new, on a new system or with a new language, I like to build the process myself from scratch. And being a minimalist programmer it just seems fitting. Enjoy</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/export-csv/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header class="page-header index">
-    
-      <h1 class="entry-title justify"><a href="/blog/content-delivery-network/">Dynamically Render Images With PHP</a></h1>
-    
-    
-      <p class="meta" style="display:none;">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2010-04-22T10:48:00-05:00" pubdate data-updated="true">Apr 22<span>nd</span>, 2010</time>
-        
-         | <a href="/blog/content-delivery-network/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>If you’ve been frustrated with having to resize images for the sake of continuity or load time and don’t want to develop an entire caching system than this post will be of great value to you.</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/content-delivery-network/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header class="page-header index">
-    
-      <h1 class="entry-title justify"><a href="/blog/paypal-express-checkout-nvp-api/">Paypal Express Checkout NVP API</a></h1>
-    
-    
-      <p class="meta" style="display:none;">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2010-04-03T20:19:00-05:00" pubdate data-updated="true">Apr 3<span>rd</span>, 2010</time>
-        
-         | <a href="/blog/paypal-express-checkout-nvp-api/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>I&#8217;m not sure why <a href="http://paypal.com">Paypal</a> has written documentation, regarding its own Express Checkout name-value-pair API, with such a lack of enthusiasm. The classes used with the Paypal API are extremely easy to use. All of this is likely contributing to the confusion about using Express Checkout. But I’m here now, to save your application, and hopefully your sanity.</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/paypal-express-checkout-nvp-api/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header class="page-header index">
-    
-      <h1 class="entry-title justify"><a href="/blog/server-vs-client/">Server vs Client</a></h1>
-    
-    
-      <p class="meta" style="display:none;">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2010-03-25T21:11:00-05:00" pubdate data-updated="true">Mar 25<span>th</span>, 2010</time>
-        
-         | <a href="/blog/server-vs-client/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>My presumption is that it’s because of the passionate advent of JQuery, that there has been an increasing rise of using Javascript, in precedence of a server side language like PHP or Ruby. This circumstance is arguably the sole cause to how and why, <em>mostly designers</em>, are simply not learning a better way. I’m here to enlighten you.</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/server-vs-client/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header class="page-header index">
-    
-      <h1 class="entry-title justify"><a href="/blog/php-flickr-gallery/">PHP Flickr Gallery</a></h1>
-    
-    
-      <p class="meta" style="display:none;">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2010-03-24T15:23:00-05:00" pubdate data-updated="true">Mar 24<span>th</span>, 2010</time>
-        
-         | <a href="/blog/php-flickr-gallery/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>In my search for finding a simple solution to any problem, I usually cross many and many blogs and articles, discussing whatever topic. But with so much detail that the solution becomes a problem in itself. So I often times end up resolved to research on my own. In this case, I share the simplest programming method for displaying a <a href="http://flickr.com" title="Flickr">Flickr</a> gallery, with PHP.</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/php-flickr-gallery/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  <ul class="pager">
-    
-    <li><a href="/blog/archives">Blog Archives</a></li>
-    
-  </ul>
-</div>
-
-  
-  <style type="text/css">
-    #ad_wrapper {
-      background:#f1f1f1;
-      padding:0 0 60px;
-    }
-    #ad_container {
-      clear:both;
-      height:90px;
-      margin:0 auto;
-      /*padding:0 0 0 60px;*/
-      width:728px;
-    }
-  </style>
-  
-  <div id="ad_wrapper">
-    <div id="ad_container">
-      <script type="text/javascript"><!--
-      google_ad_client = "ca-pub-7424434269432645";
-      /* moorberry.net (octopress) */
-      google_ad_slot = "8992473921";
-      google_ad_width = 728;
-      google_ad_height = 90;
-      //-->
-      </script>
-      <script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script>
+      <div id="ad_container">
+        <script type="text/javascript"><!--
+        google_ad_client = "ca-pub-7424434269432645";
+        /* moorberry.net (octopress) */
+        google_ad_slot = "8992473921";
+        google_ad_width = 728;
+        google_ad_height = 90;
+        //-->
+        </script>
+        <script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script>
+      </div>
     </div>
   </div>
-  
+  <div class="comments_wrapper"> 
+    
+      <section>
+        <h1>Comments</h1>
+        <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+      </section>
+    
+  </div>
   <div id="footer-widgets">
   <div class="container">
     <div class="row">
@@ -816,7 +394,10 @@
       var disqus_shortname = 'michaelminter';
       
         
-        var disqus_script = 'count.js';
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://moorberry.net/blog/airbrake-error-notice-javascript/';
+        var disqus_url = 'http://moorberry.net/blog/airbrake-error-notice-javascript/';
+        var disqus_script = 'embed.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;

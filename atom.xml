@@ -4,7 +4,7 @@
   <title><![CDATA[Michael Minter]]></title>
   <link href="http://moorberry.net/atom.xml" rel="self"/>
   <link href="http://moorberry.net/"/>
-  <updated>2013-02-16T10:28:23-06:00</updated>
+  <updated>2013-02-21T18:42:57-06:00</updated>
   <id>http://moorberry.net/</id>
   <author>
     <name><![CDATA[Michael Minter]]></name>
@@ -12,6 +12,120 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Airbrake: Send Error Notices using Javascript]]></title>
+    <link href="http://moorberry.net/blog/airbrake-error-notice-javascript/"/>
+    <updated>2013-02-19T12:46:00-06:00</updated>
+    <id>http://moorberry.net/blog/airbrake-error-notice-javascript</id>
+    <content type="html"><![CDATA[<p>Right now you may be saying to yourself, &#8220;but why not just use an AJAX request inside of my Javascript application or use the Image().src hack&#8230;&#8221; Well they don&#8217;t work across all medias.</p>
+
+<p>You cannot issue requests through the XMLHttpRequest to other domains or subdomains. If you are issuing the request from www.foo.com you also need to target the request at www.foo.com and make certain to remember the www.</p>
+
+<p>If you really need to hit another domain you can use <a href="http://en.wikipedia.org/wiki/JSONP" target="_blank">JsonP</a> where the browser utilizes the <code>&lt;script&gt;</code> tags ability to load scripts from a different domain. The loaded script then executes a callback function to give you the data. But for regular AJAX calls you cannot leave the source domain at all.</p>
+
+<p>See the Wiki article on <a href="http://en.wikipedia.org/wiki/Same_origin_policy" target="_blank">Same Origin Policy</a></p>
+
+<p>In your Rails/Sinatra application controller file:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">notice</span> <span class="o">=</span> <span class="nx">params</span><span class="p">[</span><span class="o">:</span><span class="nx">notice</span><span class="p">]</span>
+</span><span class='line'><span class="nx">url</span>    <span class="o">=</span> <span class="nx">URI</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="s1">&#39;http://api.airbrake.io/notifier_api/v2/notices&#39;</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">request</span>              <span class="o">=</span> <span class="nx">Net</span><span class="o">::</span><span class="nx">HTTP</span><span class="o">::</span><span class="nx">Post</span><span class="p">.</span><span class="k">new</span><span class="p">(</span><span class="nx">url</span><span class="p">.</span><span class="nx">path</span><span class="p">)</span>
+</span><span class='line'><span class="nx">request</span><span class="p">.</span><span class="nx">content_type</span> <span class="o">=</span> <span class="s1">&#39;text/xml&#39;</span>
+</span><span class='line'><span class="nx">request</span><span class="p">.</span><span class="nx">body</span>         <span class="o">=</span> <span class="s2">&quot;&lt;?xml version=\&quot;1.0\&quot; encoding=\&quot;UTF-8\&quot;?&gt;</span>
+</span><span class='line'><span class="s2">                      &lt;notice version=\&quot;2.3\&quot;&gt;</span>
+</span><span class='line'><span class="s2">                        &lt;api-key&gt;948fhc4h9f98f190a4d69fee945d8b133cc11&lt;/api-key&gt;</span>
+</span><span class='line'><span class="s2">                        &lt;notifier&gt;</span>
+</span><span class='line'><span class="s2">                          &lt;name&gt;Airbrake Notifier&lt;/name&gt;</span>
+</span><span class='line'><span class="s2">                          &lt;version&gt;3.1.6&lt;/version&gt;</span>
+</span><span class='line'><span class="s2">                          &lt;url&gt;http://api.airbrake.io&lt;/url&gt;</span>
+</span><span class='line'><span class="s2">                        &lt;/notifier&gt;</span>
+</span><span class='line'><span class="s2">                        &lt;error&gt;</span>
+</span><span class='line'><span class="s2">                          &lt;class&gt;RuntimeError&lt;/class&gt;</span>
+</span><span class='line'><span class="s2">                          &lt;message&gt;#{notice}&lt;/message&gt;</span>
+</span><span class='line'><span class="s2">                          &lt;backtrace&gt;</span>
+</span><span class='line'><span class="s2">                            &lt;line method=\&quot;public\&quot; file=\&quot;/testapp/app/models/user.rb\&quot; number=\&quot;53\&quot;/&gt;</span>
+</span><span class='line'><span class="s2">                            &lt;line method=\&quot;index\&quot; file=\&quot;/testapp/app/controllers/users_controller.rb\&quot; number=\&quot;14\&quot;/&gt;</span>
+</span><span class='line'><span class="s2">                          &lt;/backtrace&gt;</span>
+</span><span class='line'><span class="s2">                        &lt;/error&gt;</span>
+</span><span class='line'><span class="s2">                        &lt;request&gt;</span>
+</span><span class='line'><span class="s2">                          &lt;url&gt;#{request.url}&lt;/url&gt;</span>
+</span><span class='line'><span class="s2">                          &lt;component/&gt;</span>
+</span><span class='line'><span class="s2">                          &lt;action/&gt;</span>
+</span><span class='line'><span class="s2">                          &lt;cgi-data&gt;</span>
+</span><span class='line'><span class="s2">                            &lt;var key=\&quot;SERVER_NAME\&quot;&gt;example.org&lt;/var&gt;</span>
+</span><span class='line'><span class="s2">                            &lt;var key=\&quot;HTTP_USER_AGENT\&quot;&gt;Mozilla&lt;/var&gt;</span>
+</span><span class='line'><span class="s2">                          &lt;/cgi-data&gt;</span>
+</span><span class='line'><span class="s2">                        &lt;/request&gt;</span>
+</span><span class='line'><span class="s2">                        &lt;server-environment&gt;</span>
+</span><span class='line'><span class="s2">                          &lt;project-root&gt;/testapp&lt;/project-root&gt;</span>
+</span><span class='line'><span class="s2">                          &lt;environment-name&gt;production&lt;/environment-name&gt;</span>
+</span><span class='line'><span class="s2">                          &lt;app-version&gt;1.0.0&lt;/app-version&gt;</span>
+</span><span class='line'><span class="s2">                        &lt;/server-environment&gt;</span>
+</span><span class='line'><span class="s2">                      &lt;/notice&gt;&quot;</span>
+</span><span class='line'><span class="nx">response</span> <span class="o">=</span> <span class="nx">Net</span><span class="o">::</span><span class="nx">HTTP</span><span class="p">.</span><span class="nx">start</span><span class="p">(</span><span class="nx">url</span><span class="p">.</span><span class="nx">host</span><span class="p">,</span> <span class="nx">url</span><span class="p">.</span><span class="nx">port</span><span class="p">)</span> <span class="p">{</span><span class="o">|</span><span class="nx">http</span><span class="o">|</span> <span class="nx">http</span><span class="p">.</span><span class="nx">request</span><span class="p">(</span><span class="nx">request</span><span class="p">)}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>In your javascript:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">function</span> <span class="nx">airbrake</span><span class="p">(</span><span class="nx">notice</span><span class="p">){</span>
+</span><span class='line'>  <span class="kd">var</span> <span class="nx">airbrake</span> <span class="o">=</span> <span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span> <span class="nx">url</span><span class="o">:</span> <span class="s1">&#39;/api/v1/error&#39;</span><span class="p">,</span> <span class="nx">context</span><span class="o">:</span> <span class="nb">document</span><span class="p">.</span><span class="nx">body</span><span class="p">,</span> <span class="nx">cache</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span> <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;POST&#39;</span><span class="p">,</span> <span class="nx">data</span><span class="o">:</span> <span class="p">{</span> <span class="nx">notice</span><span class="o">:</span> <span class="nx">notice</span> <span class="p">}</span> <span class="p">});</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>To call this function, simply:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">airbrake</span> <span class="p">(</span><span class="s2">&quot;This goose won&#39;t cook.&quot;</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Some alternative error/message handlers include: <a href="http://loggly.com" target="_blank">Loggly</a>, <a href="https://papertrailapp.com/" target="_blank">Papertrail</a>, <a href="https://logentries.com/" target="_blank">Log Entries</a>, or better yet create your own with <a href="https://github.com/flyingmachine/whoops" target="_blank">Whoops</a> which later I&#8217;d like to research and develop upon for my own error catching application.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[DataTables Pagination with Twitter Bootstrap]]></title>

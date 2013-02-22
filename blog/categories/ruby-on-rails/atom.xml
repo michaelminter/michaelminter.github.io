@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: Javascript | Michael Minter]]></title>
-  <link href="http://moorberry.net/blog/categories/javascript/atom.xml" rel="self"/>
+  <title><![CDATA[Category: Ruby on Rails | Michael Minter]]></title>
+  <link href="http://moorberry.net/blog/categories/ruby-on-rails/atom.xml" rel="self"/>
   <link href="http://moorberry.net/"/>
   <updated>2013-02-21T18:42:57-06:00</updated>
   <id>http://moorberry.net/</id>
@@ -86,94 +86,6 @@ airbrake ("This goose won't cook.");
 </code></p>
 
 <p>Some alternative error/message handlers include: <a href="http://loggly.com" target="_blank">Loggly</a>, <a href="https://papertrailapp.com/" target="_blank">Papertrail</a>, <a href="https://logentries.com/" target="_blank">Log Entries</a>, or better yet create your own with <a href="https://github.com/flyingmachine/whoops" target="_blank">Whoops</a> which later I'd like to research and develop upon for my own error catching application.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Server vs Client]]></title>
-    <link href="http://moorberry.net/blog/server-vs-client/"/>
-    <updated>2010-03-25T21:11:00-05:00</updated>
-    <id>http://moorberry.net/blog/server-vs-client</id>
-    <content type="html"><![CDATA[<p>My presumption is that it’s because of the passionate advent of JQuery, that there has been an increasing rise of using Javascript, in precedence of a server side language like PHP or Ruby. This circumstance is arguably the sole cause to how and why, <em>mostly designers</em>, are simply not learning a better way. I’m here to enlighten you.</p>
-
-<!--more-->
-
-
-<p><a href="http://moorberry.net/images/posts/versus.jpg"><img src="http://moorberry.net/images/posts/versus.jpg" alt="Versus" /></a></p>
-
-<p>In opening, I’d like to express, that I hold no animosity for Javascript. Actually I quite often fancy a touch of its elegant lure and almost regularly indulge my viewers with its properties to control aesthetics at a dynamic fashion. But it has its place. If PHP can serve the same purpose, than its obvious strengths, should not be taken for granted.</p>
-
-<p>One prominent example of this that I seem to notice more often in use than others, is the  application of color alternating rows with HTML tables, or also favorably known as the “zebra” effect. Which I’ll be using for my reference material.</p>
-
-<h2>PHP</h2>
-
-<p>``` perl
-for ($i = 1;$i &lt; 10;$i++) {</p>
-
-<pre><code>if (($i % 2) == 0) {
-    echo '&lt;tr class="zebra"&gt;';
-} else {
-    echo '&lt;tr&gt;';
-}
-</code></pre>
-
-<p>}
-```</p>
-
-<p>The for() loop, does the accumulating work. It exponentially raises the default value ($i) by one, each iteration, so that the modulus operator (%) can equate the remainder of $i divided by two. So every instance of an even number represented by $i would evaluate to zero.</p>
-
-<h2>Ruby on Rails</h2>
-
-<p>``` ruby
-&lt;% @items.each do |item| %>
-  <tr class="<%= cycle("even", "odd") %>"></p>
-
-<pre><code>&lt;!-- use item --&gt;
-</code></pre>
-
-<p>  </tr>
-&lt;% end %>
-```</p>
-
-<h2>JQuery</h2>
-
-<p>``` perl
-$(document).ready(function(){</p>
-
-<pre><code>$("tr:even").css("background-color", "#EFEFEF");
-$("tr:odd").css("background-color", "#FFFFFF");
-</code></pre>
-
-<p>});
-```</p>
-
-<p>The JQuery even and odd filters are used as index selectors. This method can be used on any page element with just a little bit of reverse engineering.</p>
-
-<h2>Discovering the Front-End</h2>
-
-<p>If you were to analyze the speed of using only Javascript, you would find that it is 16% slower, compared to PHP [1]. Though that number might seem relatively low in scale, because it is, consider all of the other factors when developing for the web.</p>
-
-<p>80% of the average user’s response time is spent on the front-end [2]. This time, is composed of downloading all of the elements necessary to make up the page (Images, libraries, scripts, stylesheets and more). Reducing the number of elements, in turn, reduces the number of HTTP requests required to render the page.</p>
-
-<p>With PHP everything is rendered before any HTTP requests are sent by the server.</p>
-
-<p><img src="https://chart.googleapis.com/chart?cht=bvs&chs=714x100&chd=t:13,20|87,80&chco=4d89f9,c6d9fd&chbh=20&chds=0,160" style="float:left;" /></p>
-
-<br style="clear:both;" />
-
-
-<p>Graphically interpreted above are the details associated with load times. This analysis completes the HTTP request cycle from initialization. The darker portion, of each representation, shows the percentage of work involved by the server. As consistency shows, a lot of web design and development, relies mostly on what’s being delivered to the browser.</p>
-
-<p><em>in order of appearance: Google, PHP Rockstar</em></p>
-
-<h2>Summary</h2>
-
-<p>It’s certain that a professional web server is going to best the average home network set-up, in performance, any day. It’s your responsibility to take advantage of that, by running some server-side code, to save your guests the frustration of dealing with an idle load time.</p>
-
-<h2>References</h2>
-
-<p>[1] http://www.timestretch.com/FractalBenchmark.html<br/>
-[2] http://developer.yahoo.net/blog/archives/2007/03/high_performanc.html</p>
 ]]></content>
   </entry>
   
