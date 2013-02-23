@@ -1,0 +1,412 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>localStorage: Object Relational Mapping - Michael Minter</title>
+  <meta name="author" content="Michael Minter">
+  <link rel="author" href="humans.txt">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+  
+    
+  
+  <meta name="description" content=" An Active Record -like localStorage Object-Relational Mapping library. ">
+  
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://moorberry.net/blog/localstorage-object-relational-mapping/">
+  <link href="/favicon.png" rel="icon">
+  <link href='http://fonts.googleapis.com/css?family=Cantarell' rel='stylesheet' type='text/css'>
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Michael Minter" type="application/atom+xml">
+  <meta name="og:type" content="website" />
+  <meta name="og:site_name" content="Michael Minter" />
+  <meta name="og:title" content="localStorage: Object Relational Mapping" />
+  <meta name="og:description" content=" An Active Record -like localStorage Object-Relational Mapping library. " />
+  <meta name="og:url" content="http://moorberry.net/blog/localstorage-object-relational-mapping/"/>
+  <meta name="url" content="http://moorberry.net/blog/localstorage-object-relational-mapping/">
+  
+  <meta name="subject" content="JavascriptlocalStorage"/>
+  <meta name="category" content="JavascriptlocalStorage"/>
+  
+  <meta name="distribution" content="global">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+<link rel="stylesheet" type="text/css" href="/stylesheets/proudify.css" />
+<link rel="stylesheet" type="text/css" href="/stylesheets/custom.css" />
+<link rel="shortcut icon" href="http://www.gravatar.com/avatar/c40bf0fd76b6d591122a1dab3e88b0fd.png?s=16" title="Favicon" />
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-34437469-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <nav role="navigation"><div class="navbar">
+  <div class="navbar-inner">
+    <a class="brand" href="/">Michael Minter</a>
+    <ul class="nav">
+      <li><a href="/">Home</a></li>
+      <li><a href="/blog/archives">Archives</a></li>
+    </ul>
+    <ul class="nav" data-subscription="rss">
+      <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+      
+    </ul>
+      
+    <form class="navbar-form" action="http://google.com/search" method="get">
+      <fieldset role="search">
+        <input type="hidden" name="q" value="site:moorberry.net" />
+        <input class="span2" type="text" name="q" results="0" placeholder="Search"/>
+      </fieldset>
+    </form>
+      
+    
+  </div>
+</div>
+</nav>
+  <div class="wrapper_single">
+    <div class="container">
+      <article class="span8 offset2" role="article">
+        <div class="article-format">
+  
+    <header>
+      
+        <h1 class="entry-title">localStorage: Object Relational Mapping</h1>
+      
+      
+        <p class="meta">
+          
+  
+
+
+  
+    <span class="byline author vcard">by <span class="fn">Michael Minter</span></span>
+  
+
+ - 
+          
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-02-23T16:31:00-06:00" pubdate data-updated="true">Feb 23<span>rd</span>, 2013</time> - 
+          
+
+posted in
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/javascript/'>Javascript</a>, <a class='category' href='/blog/categories/localstorage/'>localStorage</a>
+  
+</span>
+
+
+          
+           | <a href="#disqus_thread">Comments</a>
+          
+        </p>
+      
+    </header>
+  
+  
+  
+    <div class="entry-content"><p>An Active Record -like localStorage Object-Relational Mapping library.</p>
+
+<!--more-->
+
+
+<p>git source: <a href="https://github.com/michaelminter/localstorage_orm" target="_blank">github.com/michaelminter/localstorage_orm</a></p>
+
+<h2>Data</h2>
+
+<p>Objects should be indexed by id. Example:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="p">{</span><span class="s2">&quot;149&quot;</span><span class="o">:</span><span class="p">{</span><span class="s2">&quot;patient_related&quot;</span><span class="o">:</span><span class="kc">false</span><span class="p">,</span><span class="s2">&quot;lock_version&quot;</span><span class="o">:</span><span class="mi">0</span><span class="p">,</span><span class="s2">&quot;uuid&quot;</span><span class="o">:</span><span class="s2">&quot;918497e0-29a4-012f-1aca-005056af31ef&quot;</span><span class="p">,</span><span class="s2">&quot;updated_at&quot;</span><span class="o">:</span><span class="s2">&quot;2012-01-25T11:04:29-06:00&quot;</span><span class="p">,</span><span class="s2">&quot;facility_id&quot;</span><span class="o">:</span><span class="mi">13</span><span class="p">,</span><span class="s2">&quot;priority_id&quot;</span><span class="o">:</span><span class="mi">108</span><span class="p">,</span><span class="s2">&quot;job_type_id&quot;</span><span class="o">:</span><span class="mi">269</span><span class="p">,</span><span class="s2">&quot;description&quot;</span><span class="o">:</span><span class="s2">&quot;Light burned out&quot;</span><span class="p">,</span><span class="s2">&quot;created_at&quot;</span><span class="o">:</span><span class="s2">&quot;2012-01-25T11:04:29-06:00&quot;</span><span class="p">,</span><span class="s2">&quot;id&quot;</span><span class="o">:</span><span class="mi">149</span><span class="p">},</span><span class="s2">&quot;150&quot;</span><span class="o">:</span><span class="p">{</span><span class="s2">&quot;patient_related&quot;</span><span class="o">:</span><span class="kc">true</span><span class="p">,</span><span class="s2">&quot;lock_version&quot;</span><span class="o">:</span><span class="mi">0</span><span class="p">,</span><span class="s2">&quot;uuid&quot;</span><span class="o">:</span><span class="s2">&quot;9194e050-29a4-012f-1acb-005056af31ef&quot;</span><span class="p">,</span><span class="s2">&quot;updated_at&quot;</span><span class="o">:</span><span class="s2">&quot;2012-01-25T11:04:29-06:00&quot;</span><span class="p">,</span><span class="s2">&quot;facility_id&quot;</span><span class="o">:</span><span class="mi">13</span><span class="p">,</span><span class="s2">&quot;priority_id&quot;</span><span class="o">:</span><span class="mi">109</span><span class="p">,</span><span class="s2">&quot;job_type_id&quot;</span><span class="o">:</span><span class="mi">272</span><span class="p">,</span><span class="s2">&quot;description&quot;</span><span class="o">:</span><span class="s2">&quot;Toilet stopped up&quot;</span><span class="p">,</span><span class="s2">&quot;created_at&quot;</span><span class="o">:</span><span class="s2">&quot;2012-01-25T11:04:29-06:00&quot;</span><span class="p">,</span><span class="s2">&quot;id&quot;</span><span class="o">:</span><span class="mi">150</span><span class="p">},</span><span class="s2">&quot;151&quot;</span><span class="o">:</span><span class="p">{</span><span class="s2">&quot;patient_related&quot;</span><span class="o">:</span><span class="kc">true</span><span class="p">,</span><span class="s2">&quot;lock_version&quot;</span><span class="o">:</span><span class="mi">0</span><span class="p">,</span><span class="s2">&quot;uuid&quot;</span><span class="o">:</span><span class="s2">&quot;919607f0-29a4-012f-1acc-005056af31ef&quot;</span><span class="p">,</span><span class="s2">&quot;updated_at&quot;</span><span class="o">:</span><span class="s2">&quot;2012-01-25T11:04:29-06:00&quot;</span><span class="p">,</span><span class="s2">&quot;facility_id&quot;</span><span class="o">:</span><span class="mi">13</span><span class="p">,</span><span class="s2">&quot;priority_id&quot;</span><span class="o">:</span><span class="mi">109</span><span class="p">,</span><span class="s2">&quot;job_type_id&quot;</span><span class="o">:</span><span class="mi">272</span><span class="p">,</span><span class="s2">&quot;description&quot;</span><span class="o">:</span><span class="s2">&quot;Drain clogged&quot;</span><span class="p">,</span><span class="s2">&quot;created_at&quot;</span><span class="o">:</span><span class="s2">&quot;2012-01-25T11:04:29-06:00&quot;</span><span class="p">,</span><span class="s2">&quot;id&quot;</span><span class="o">:</span><span class="mi">151</span><span class="p">},</span><span class="s2">&quot;152&quot;</span><span class="o">:</span><span class="p">{</span><span class="s2">&quot;patient_related&quot;</span><span class="o">:</span><span class="kc">true</span><span class="p">,</span><span class="s2">&quot;lock_version&quot;</span><span class="o">:</span><span class="mi">0</span><span class="p">,</span><span class="s2">&quot;uuid&quot;</span><span class="o">:</span><span class="s2">&quot;91970ba0-29a4-012f-1acd-005056af31ef&quot;</span><span class="p">,</span><span class="s2">&quot;updated_at&quot;</span><span class="o">:</span><span class="s2">&quot;2012-01-25T11:04:29-06:00&quot;</span><span class="p">,</span><span class="s2">&quot;facility_id&quot;</span><span class="o">:</span><span class="mi">13</span><span class="p">,</span><span class="s2">&quot;priority_id&quot;</span><span class="o">:</span><span class="mi">108</span><span class="p">,</span><span class="s2">&quot;job_type_id&quot;</span><span class="o">:</span><span class="mi">267</span><span class="p">,</span><span class="s2">&quot;description&quot;</span><span class="o">:</span><span class="s2">&quot;Room too cold&quot;</span><span class="p">,</span><span class="s2">&quot;created_at&quot;</span><span class="o">:</span><span class="s2">&quot;2012-01-25T11:04:29-06:00&quot;</span><span class="p">,</span><span class="s2">&quot;id&quot;</span><span class="o">:</span><span class="mi">152</span><span class="p">},</span><span class="s2">&quot;153&quot;</span><span class="o">:</span><span class="p">{</span><span class="s2">&quot;patient_related&quot;</span><span class="o">:</span><span class="kc">true</span><span class="p">,</span><span class="s2">&quot;lock_version&quot;</span><span class="o">:</span><span class="mi">0</span><span class="p">,</span><span class="s2">&quot;uuid&quot;</span><span class="o">:</span><span class="s2">&quot;919801c0-29a4-012f-1ace-005056af31ef&quot;</span><span class="p">,</span><span class="s2">&quot;updated_at&quot;</span><span class="o">:</span><span class="s2">&quot;2012-01-25T11:04:29-06:00&quot;</span><span class="p">,</span><span class="s2">&quot;facility_id&quot;</span><span class="o">:</span><span class="mi">13</span><span class="p">,</span><span class="s2">&quot;priority_id&quot;</span><span class="o">:</span><span class="mi">108</span><span class="p">,</span><span class="s2">&quot;job_type_id&quot;</span><span class="o">:</span><span class="mi">267</span><span class="p">,</span><span class="s2">&quot;description&quot;</span><span class="o">:</span><span class="s2">&quot;Room too hot&quot;</span><span class="p">,</span><span class="s2">&quot;created_at&quot;</span><span class="o">:</span><span class="s2">&quot;2012-01-25T11:04:29-06:00&quot;</span><span class="p">,</span><span class="s2">&quot;id&quot;</span><span class="o">:</span><span class="mi">153</span><span class="p">},</span><span class="s2">&quot;154&quot;</span><span class="o">:</span><span class="p">{</span><span class="s2">&quot;patient_related&quot;</span><span class="o">:</span><span class="kc">false</span><span class="p">,</span><span class="s2">&quot;lock_version&quot;</span><span class="o">:</span><span class="mi">0</span><span class="p">,</span><span class="s2">&quot;uuid&quot;</span><span class="o">:</span><span class="s2">&quot;9198f860-29a4-012f-1acf-005056af31ef&quot;</span><span class="p">,</span><span class="s2">&quot;updated_at&quot;</span><span class="o">:</span><span class="s2">&quot;2013-01-03T21:04:05-06:00&quot;</span><span class="p">,</span><span class="s2">&quot;facility_id&quot;</span><span class="o">:</span><span class="mi">13</span><span class="p">,</span><span class="s2">&quot;priority_id&quot;</span><span class="o">:</span><span class="mi">109</span><span class="p">,</span><span class="s2">&quot;job_type_id&quot;</span><span class="o">:</span><span class="mi">283</span><span class="p">,</span><span class="s2">&quot;description&quot;</span><span class="o">:</span><span class="s2">&quot;Door won&#39;t close&quot;</span><span class="p">,</span><span class="s2">&quot;created_at&quot;</span><span class="o">:</span><span class="s2">&quot;2012-01-25T11:04:29-06:00&quot;</span><span class="p">,</span><span class="s2">&quot;id&quot;</span><span class="o">:</span><span class="mi">154</span><span class="p">},</span><span class="s2">&quot;155&quot;</span><span class="o">:</span><span class="p">{</span><span class="s2">&quot;patient_related&quot;</span><span class="o">:</span><span class="kc">false</span><span class="p">,</span><span class="s2">&quot;lock_version&quot;</span><span class="o">:</span><span class="mi">0</span><span class="p">,</span><span class="s2">&quot;uuid&quot;</span><span class="o">:</span><span class="s2">&quot;9199e740-29a4-012f-1ad0-005056af31ef&quot;</span><span class="p">,</span><span class="s2">&quot;updated_at&quot;</span><span class="o">:</span><span class="s2">&quot;2012-01-25T11:04:29-06:00&quot;</span><span class="p">,</span><span class="s2">&quot;facility_id&quot;</span><span class="o">:</span><span class="mi">13</span><span class="p">,</span><span class="s2">&quot;priority_id&quot;</span><span class="o">:</span><span class="mi">108</span><span class="p">,</span><span class="s2">&quot;job_type_id&quot;</span><span class="o">:</span><span class="mi">269</span><span class="p">,</span><span class="s2">&quot;description&quot;</span><span class="o">:</span><span class="s2">&quot;Power out&quot;</span><span class="p">,</span><span class="s2">&quot;created_at&quot;</span><span class="o">:</span><span class="s2">&quot;2012-01-25T11:04:29-06:00&quot;</span><span class="p">,</span><span class="s2">&quot;id&quot;</span><span class="o">:</span><span class="mi">155</span><span class="p">},</span><span class="s2">&quot;156&quot;</span><span class="o">:</span><span class="p">{</span><span class="s2">&quot;patient_related&quot;</span><span class="o">:</span><span class="kc">true</span><span class="p">,</span><span class="s2">&quot;lock_version&quot;</span><span class="o">:</span><span class="mi">0</span><span class="p">,</span><span class="s2">&quot;uuid&quot;</span><span class="o">:</span><span class="s2">&quot;919ad520-29a4-012f-1ad1-005056af31ef&quot;</span><span class="p">,</span><span class="s2">&quot;updated_at&quot;</span><span class="o">:</span><span class="s2">&quot;2012-01-25T11:04:29-06:00&quot;</span><span class="p">,</span><span class="s2">&quot;facility_id&quot;</span><span class="o">:</span><span class="mi">13</span><span class="p">,</span><span class="s2">&quot;priority_id&quot;</span><span class="o">:</span><span class="mi">108</span><span class="p">,</span><span class="s2">&quot;job_type_id&quot;</span><span class="o">:</span><span class="mi">283</span><span class="p">,</span><span class="s2">&quot;description&quot;</span><span class="o">:</span><span class="s2">&quot;TV is broken&quot;</span><span class="p">,</span><span class="s2">&quot;created_at&quot;</span><span class="o">:</span><span class="s2">&quot;2012-01-25T11:04:29-06:00&quot;</span><span class="p">,</span><span class="s2">&quot;id&quot;</span><span class="o">:</span><span class="mi">156</span><span class="p">},</span><span class="s2">&quot;157&quot;</span><span class="o">:</span><span class="p">{</span><span class="s2">&quot;patient_related&quot;</span><span class="o">:</span><span class="kc">true</span><span class="p">,</span><span class="s2">&quot;lock_version&quot;</span><span class="o">:</span><span class="mi">0</span><span class="p">,</span><span class="s2">&quot;uuid&quot;</span><span class="o">:</span><span class="s2">&quot;919bc420-29a4-012f-1ad2-005056af31ef&quot;</span><span class="p">,</span><span class="s2">&quot;updated_at&quot;</span><span class="o">:</span><span class="s2">&quot;2012-01-25T11:04:29-06:00&quot;</span><span class="p">,</span><span class="s2">&quot;facility_id&quot;</span><span class="o">:</span><span class="mi">13</span><span class="p">,</span><span class="s2">&quot;priority_id&quot;</span><span class="o">:</span><span class="mi">108</span><span class="p">,</span><span class="s2">&quot;job_type_id&quot;</span><span class="o">:</span><span class="mi">272</span><span class="p">,</span><span class="s2">&quot;description&quot;</span><span class="o">:</span><span class="s2">&quot;No hot water&quot;</span><span class="p">,</span><span class="s2">&quot;created_at&quot;</span><span class="o">:</span><span class="s2">&quot;2012-01-25T11:04:29-06:00&quot;</span><span class="p">,</span><span class="s2">&quot;id&quot;</span><span class="o">:</span><span class="mi">157</span><span class="p">},</span><span class="s2">&quot;158&quot;</span><span class="o">:</span><span class="p">{</span><span class="s2">&quot;patient_related&quot;</span><span class="o">:</span><span class="kc">true</span><span class="p">,</span><span class="s2">&quot;lock_version&quot;</span><span class="o">:</span><span class="mi">0</span><span class="p">,</span><span class="s2">&quot;uuid&quot;</span><span class="o">:</span><span class="s2">&quot;919cb3f0-29a4-012f-1ad3-005056af31ef&quot;</span><span class="p">,</span><span class="s2">&quot;updated_at&quot;</span><span class="o">:</span><span class="s2">&quot;2012-01-25T11:04:29-06:00&quot;</span><span class="p">,</span><span class="s2">&quot;facility_id&quot;</span><span class="o">:</span><span class="mi">13</span><span class="p">,</span><span class="s2">&quot;priority_id&quot;</span><span class="o">:</span><span class="mi">108</span><span class="p">,</span><span class="s2">&quot;job_type_id&quot;</span><span class="o">:</span><span class="mi">283</span><span class="p">,</span><span class="s2">&quot;description&quot;</span><span class="o">:</span><span class="s2">&quot;TV remote does not work&quot;</span><span class="p">,</span><span class="s2">&quot;created_at&quot;</span><span class="o">:</span><span class="s2">&quot;2012-01-25T11:04:29-06:00&quot;</span><span class="p">,</span><span class="s2">&quot;id&quot;</span><span class="o">:</span><span class="mi">158</span><span class="p">},</span><span class="s2">&quot;159&quot;</span><span class="o">:</span><span class="p">{</span><span class="s2">&quot;patient_related&quot;</span><span class="o">:</span><span class="kc">false</span><span class="p">,</span><span class="s2">&quot;lock_version&quot;</span><span class="o">:</span><span class="mi">0</span><span class="p">,</span><span class="s2">&quot;uuid&quot;</span><span class="o">:</span><span class="s2">&quot;919da3f0-29a4-012f-1ad4-005056af31ef&quot;</span><span class="p">,</span><span class="s2">&quot;updated_at&quot;</span><span class="o">:</span><span class="s2">&quot;2012-01-25T11:04:29-06:00&quot;</span><span class="p">,</span><span class="s2">&quot;facility_id&quot;</span><span class="o">:</span><span class="mi">13</span><span class="p">,</span><span class="s2">&quot;priority_id&quot;</span><span class="o">:</span><span class="mi">109</span><span class="p">,</span><span class="s2">&quot;job_type_id&quot;</span><span class="o">:</span><span class="mi">272</span><span class="p">,</span><span class="s2">&quot;description&quot;</span><span class="o">:</span><span class="s2">&quot;Water leak&quot;</span><span class="p">,</span><span class="s2">&quot;created_at&quot;</span><span class="o">:</span><span class="s2">&quot;2012-01-25T11:04:29-06:00&quot;</span><span class="p">,</span><span class="s2">&quot;id&quot;</span><span class="o">:</span><span class="mi">159</span><span class="p">},</span><span class="s2">&quot;652&quot;</span><span class="o">:</span><span class="p">{</span><span class="s2">&quot;patient_related&quot;</span><span class="o">:</span><span class="kc">false</span><span class="p">,</span><span class="s2">&quot;lock_version&quot;</span><span class="o">:</span><span class="mi">0</span><span class="p">,</span><span class="s2">&quot;uuid&quot;</span><span class="o">:</span><span class="s2">&quot;da2dede0-3839-0130-1c8c-065142d3bcb8&quot;</span><span class="p">,</span><span class="s2">&quot;updated_at&quot;</span><span class="o">:</span><span class="s2">&quot;2013-01-03T19:13:36-06:00&quot;</span><span class="p">,</span><span class="s2">&quot;facility_id&quot;</span><span class="o">:</span><span class="mi">13</span><span class="p">,</span><span class="s2">&quot;priority_id&quot;</span><span class="o">:</span><span class="mi">108</span><span class="p">,</span><span class="s2">&quot;job_type_id&quot;</span><span class="o">:</span><span class="mi">283</span><span class="p">,</span><span class="s2">&quot;description&quot;</span><span class="o">:</span><span class="s2">&quot;Empty cardboard bailer&quot;</span><span class="p">,</span><span class="s2">&quot;created_at&quot;</span><span class="o">:</span><span class="s2">&quot;2013-01-03T19:13:20-06:00&quot;</span><span class="p">,</span><span class="s2">&quot;id&quot;</span><span class="o">:</span><span class="mi">652</span><span class="p">},</span><span class="s2">&quot;653&quot;</span><span class="o">:</span><span class="p">{</span><span class="s2">&quot;patient_related&quot;</span><span class="o">:</span><span class="kc">true</span><span class="p">,</span><span class="s2">&quot;lock_version&quot;</span><span class="o">:</span><span class="mi">0</span><span class="p">,</span><span class="s2">&quot;uuid&quot;</span><span class="o">:</span><span class="s2">&quot;ffe96d10-3839-0130-1c90-065142d3bcb8&quot;</span><span class="p">,</span><span class="s2">&quot;updated_at&quot;</span><span class="o">:</span><span class="s2">&quot;2013-01-03T19:14:23-06:00&quot;</span><span class="p">,</span><span class="s2">&quot;facility_id&quot;</span><span class="o">:</span><span class="mi">13</span><span class="p">,</span><span class="s2">&quot;priority_id&quot;</span><span class="o">:</span><span class="mi">108</span><span class="p">,</span><span class="s2">&quot;job_type_id&quot;</span><span class="o">:</span><span class="mi">267</span><span class="p">,</span><span class="s2">&quot;description&quot;</span><span class="o">:</span><span class="s2">&quot;Ice machine not working&quot;</span><span class="p">,</span><span class="s2">&quot;created_at&quot;</span><span class="o">:</span><span class="s2">&quot;2013-01-03T19:14:23-06:00&quot;</span><span class="p">,</span><span class="s2">&quot;id&quot;</span><span class="o">:</span><span class="mi">653</span><span class="p">},</span><span class="s2">&quot;654&quot;</span><span class="o">:</span><span class="p">{</span><span class="s2">&quot;patient_related&quot;</span><span class="o">:</span><span class="kc">false</span><span class="p">,</span><span class="s2">&quot;lock_version&quot;</span><span class="o">:</span><span class="mi">0</span><span class="p">,</span><span class="s2">&quot;uuid&quot;</span><span class="o">:</span><span class="s2">&quot;2f7b3830-383a-0130-1c99-065142d3bcb8&quot;</span><span class="p">,</span><span class="s2">&quot;updated_at&quot;</span><span class="o">:</span><span class="s2">&quot;2013-01-03T19:15:43-06:00&quot;</span><span class="p">,</span><span class="s2">&quot;facility_id&quot;</span><span class="o">:</span><span class="mi">13</span><span class="p">,</span><span class="s2">&quot;priority_id&quot;</span><span class="o">:</span><span class="mi">107</span><span class="p">,</span><span class="s2">&quot;job_type_id&quot;</span><span class="o">:</span><span class="mi">267</span><span class="p">,</span><span class="s2">&quot;description&quot;</span><span class="o">:</span><span class="s2">&quot;Defrost refridgerator&quot;</span><span class="p">,</span><span class="s2">&quot;created_at&quot;</span><span class="o">:</span><span class="s2">&quot;2013-01-03T19:15:43-06:00&quot;</span><span class="p">,</span><span class="s2">&quot;id&quot;</span><span class="o">:</span><span class="mi">654</span><span class="p">},</span><span class="s2">&quot;655&quot;</span><span class="o">:</span><span class="p">{</span><span class="s2">&quot;patient_related&quot;</span><span class="o">:</span><span class="kc">false</span><span class="p">,</span><span class="s2">&quot;lock_version&quot;</span><span class="o">:</span><span class="mi">0</span><span class="p">,</span><span class="s2">&quot;uuid&quot;</span><span class="o">:</span><span class="s2">&quot;8fb19ba0-383a-0130-1ca0-065142d3bcb8&quot;</span><span class="p">,</span><span class="s2">&quot;updated_at&quot;</span><span class="o">:</span><span class="s2">&quot;2013-01-03T19:18:25-06:00&quot;</span><span class="p">,</span><span class="s2">&quot;facility_id&quot;</span><span class="o">:</span><span class="mi">13</span><span class="p">,</span><span class="s2">&quot;priority_id&quot;</span><span class="o">:</span><span class="mi">107</span><span class="p">,</span><span class="s2">&quot;job_type_id&quot;</span><span class="o">:</span><span class="mi">283</span><span class="p">,</span><span class="s2">&quot;description&quot;</span><span class="o">:</span><span class="s2">&quot;Cabinet broken&quot;</span><span class="p">,</span><span class="s2">&quot;created_at&quot;</span><span class="o">:</span><span class="s2">&quot;2013-01-03T19:18:25-06:00&quot;</span><span class="p">,</span><span class="s2">&quot;id&quot;</span><span class="o">:</span><span class="mi">655</span><span class="p">},</span><span class="s2">&quot;656&quot;</span><span class="o">:</span><span class="p">{</span><span class="s2">&quot;patient_related&quot;</span><span class="o">:</span><span class="kc">false</span><span class="p">,</span><span class="s2">&quot;lock_version&quot;</span><span class="o">:</span><span class="mi">0</span><span class="p">,</span><span class="s2">&quot;uuid&quot;</span><span class="o">:</span><span class="s2">&quot;dfd7c390-3848-0130-6525-065142f28507&quot;</span><span class="p">,</span><span class="s2">&quot;updated_at&quot;</span><span class="o">:</span><span class="s2">&quot;2013-01-03T21:01:05-06:00&quot;</span><span class="p">,</span><span class="s2">&quot;facility_id&quot;</span><span class="o">:</span><span class="mi">13</span><span class="p">,</span><span class="s2">&quot;priority_id&quot;</span><span class="o">:</span><span class="mi">107</span><span class="p">,</span><span class="s2">&quot;job_type_id&quot;</span><span class="o">:</span><span class="mi">283</span><span class="p">,</span><span class="s2">&quot;description&quot;</span><span class="o">:</span><span class="s2">&quot;Remove bed&quot;</span><span class="p">,</span><span class="s2">&quot;created_at&quot;</span><span class="o">:</span><span class="s2">&quot;2013-01-03T21:00:52-06:00&quot;</span><span class="p">,</span><span class="s2">&quot;id&quot;</span><span class="o">:</span><span class="mi">656</span><span class="p">},</span><span class="s2">&quot;657&quot;</span><span class="o">:</span><span class="p">{</span><span class="s2">&quot;patient_related&quot;</span><span class="o">:</span><span class="kc">true</span><span class="p">,</span><span class="s2">&quot;lock_version&quot;</span><span class="o">:</span><span class="mi">0</span><span class="p">,</span><span class="s2">&quot;uuid&quot;</span><span class="o">:</span><span class="s2">&quot;f5de0a10-3848-0130-652b-065142f28507&quot;</span><span class="p">,</span><span class="s2">&quot;updated_at&quot;</span><span class="o">:</span><span class="s2">&quot;2013-01-03T21:01:36-06:00&quot;</span><span class="p">,</span><span class="s2">&quot;facility_id&quot;</span><span class="o">:</span><span class="mi">13</span><span class="p">,</span><span class="s2">&quot;priority_id&quot;</span><span class="o">:</span><span class="mi">109</span><span class="p">,</span><span class="s2">&quot;job_type_id&quot;</span><span class="o">:</span><span class="mi">283</span><span class="p">,</span><span class="s2">&quot;description&quot;</span><span class="o">:</span><span class="s2">&quot;Need bed&quot;</span><span class="p">,</span><span class="s2">&quot;created_at&quot;</span><span class="o">:</span><span class="s2">&quot;2013-01-03T21:01:29-06:00&quot;</span><span class="p">,</span><span class="s2">&quot;id&quot;</span><span class="o">:</span><span class="mi">657</span><span class="p">},</span><span class="s2">&quot;658&quot;</span><span class="o">:</span><span class="p">{</span><span class="s2">&quot;patient_related&quot;</span><span class="o">:</span><span class="kc">true</span><span class="p">,</span><span class="s2">&quot;lock_version&quot;</span><span class="o">:</span><span class="mi">0</span><span class="p">,</span><span class="s2">&quot;uuid&quot;</span><span class="o">:</span><span class="s2">&quot;2923eae0-3849-0130-6531-065142f28507&quot;</span><span class="p">,</span><span class="s2">&quot;updated_at&quot;</span><span class="o">:</span><span class="s2">&quot;2013-01-03T21:02:55-06:00&quot;</span><span class="p">,</span><span class="s2">&quot;facility_id&quot;</span><span class="o">:</span><span class="mi">13</span><span class="p">,</span><span class="s2">&quot;priority_id&quot;</span><span class="o">:</span><span class="mi">109</span><span class="p">,</span><span class="s2">&quot;job_type_id&quot;</span><span class="o">:</span><span class="mi">272</span><span class="p">,</span><span class="s2">&quot;description&quot;</span><span class="o">:</span><span class="s2">&quot;Toilet overflowing&quot;</span><span class="p">,</span><span class="s2">&quot;created_at&quot;</span><span class="o">:</span><span class="s2">&quot;2013-01-03T21:02:55-06:00&quot;</span><span class="p">,</span><span class="s2">&quot;id&quot;</span><span class="o">:</span><span class="mi">658</span><span class="p">},</span><span class="s2">&quot;659&quot;</span><span class="o">:</span><span class="p">{</span><span class="s2">&quot;patient_related&quot;</span><span class="o">:</span><span class="kc">false</span><span class="p">,</span><span class="s2">&quot;lock_version&quot;</span><span class="o">:</span><span class="mi">0</span><span class="p">,</span><span class="s2">&quot;uuid&quot;</span><span class="o">:</span><span class="s2">&quot;e3e490e0-3851-0130-6653-065142f28507&quot;</span><span class="p">,</span><span class="s2">&quot;updated_at&quot;</span><span class="o">:</span><span class="s2">&quot;2013-01-03T22:05:24-06:00&quot;</span><span class="p">,</span><span class="s2">&quot;facility_id&quot;</span><span class="o">:</span><span class="mi">13</span><span class="p">,</span><span class="s2">&quot;priority_id&quot;</span><span class="o">:</span><span class="mi">109</span><span class="p">,</span><span class="s2">&quot;job_type_id&quot;</span><span class="o">:</span><span class="mi">283</span><span class="p">,</span><span class="s2">&quot;description&quot;</span><span class="o">:</span><span class="s2">&quot;Noise&quot;</span><span class="p">,</span><span class="s2">&quot;created_at&quot;</span><span class="o">:</span><span class="s2">&quot;2013-01-03T22:05:24-06:00&quot;</span><span class="p">,</span><span class="s2">&quot;id&quot;</span><span class="o">:</span><span class="mi">659</span><span class="p">}}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Ruby Tip</h3>
+
+<p>You can index by a hash by each record&#8217;s unique ID using the Rails Enumerable method: <a href="http://apidock.com/rails/Enumerable/index_by" target="_blank">index_by</a>.</p>
+
+<blockquote><p>Convert an enumerable to a hash.</p></blockquote>
+
+<h3>Example</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">Workorder</span><span class="p">.</span><span class="nx">all</span><span class="p">.</span><span class="nx">index_by</span><span class="p">(</span><span class="o">&amp;:</span><span class="nx">id</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Constructor</h2>
+
+<p>Initialize a new model class. If no localStorage table (key) is available one is created when the below code is parsed:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">var</span> <span class="nx">Workorder</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Model</span><span class="p">(</span><span class="s1">&#39;workorders&#39;</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Find</h2>
+
+<p>The following will return the referenced object that belongs to its associated ID:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">Workorder</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="mi">101</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Where</h2>
+
+<p>The following will return all workorders <em>where</em> the created_at date is less than the decalred <em>date</em> variable.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">var</span> <span class="nx">date</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">();</span>
+</span><span class='line'><span class="nx">Workorder</span><span class="p">.</span><span class="nx">where</span><span class="p">({</span><span class="nx">name</span><span class="o">:</span><span class="s2">&quot;MichaelMinter&quot;</span><span class="p">,</span><span class="nx">age</span><span class="o">:</span><span class="mi">28</span><span class="p">,</span><span class="nx">created_at</span><span class="o">:</span><span class="nx">date</span><span class="p">,</span><span class="nx">admin</span><span class="o">:</span><span class="kc">true</span><span class="p">},{</span><span class="nx">created_at</span><span class="o">:</span><span class="s1">&#39;&lt;&#39;</span><span class="p">})</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Variable Types</h3>
+
+<ul>
+<li><strong>String</strong> utilizes Regex. Because the lookups are an object you <em>cannot</em> use something like: <code>{description:"a",description:"b"}</code> but you <em>can</em> do <code>{description:"[a-b]"}</code></li>
+<li><strong>Numbers</strong> will only search literal integeral values. A variable string type, &#8220;1&#8221; is not the same as the variable number type, 1.</li>
+<li><strong>Object</strong> is exclusive to dates and an option object <code>{due_date:"&gt;"}</code> is required to evaluaute references.</li>
+<li><strong>Boolean</strong> will only search literal boolean values. So <code>{notifications:true}</code> is <em>not</em> the same as <code>{notifications:"true"}</code>.</li>
+<li><strong>Null</strong> will return any empty, or <em>null</em>, values. <code>null</code> is not the same as <code>""</code>.</li>
+</ul>
+
+
+<h2>More</h2>
+
+<p>Extends <strong>Storage</strong></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="k">if</span> <span class="p">(</span><span class="nb">window</span><span class="p">.</span><span class="nx">Storage</span><span class="p">){</span>
+</span><span class='line'>  <span class="nx">Storage</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">setObject</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="s2">&quot;use strict&quot;</span><span class="p">;</span>
+</span><span class='line'>    <span class="k">this</span><span class="p">.</span><span class="nx">setItem</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">value</span><span class="p">));</span>
+</span><span class='line'>  <span class="p">};</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="nx">Storage</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">getObject</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">key</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="s2">&quot;use strict&quot;</span><span class="p">;</span>
+</span><span class='line'>    <span class="kd">var</span> <span class="nx">value</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">getItem</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
+</span><span class='line'>    <span class="k">return</span> <span class="nx">value</span> <span class="o">&amp;&amp;</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
+</span><span class='line'>  <span class="p">};</span>
+</span><span class='line'><span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span><span class='line'>  <span class="nx">alert</span><span class="p">(</span><span class="s1">&#39;localStorage is not supported on this browser&#39;</span><span class="p">)</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>git source: <a href="https://github.com/michaelminter/localstorage_orm" target="_blank">github.com/michaelminter/localstorage_orm</a></p>
+</div>
+  
+  
+    <footer>
+      <div style="border:#012b36 1px dashed;margin:40px 0;padding:20px 0 0 20px;">
+        <p>I love sharing! This text is copyrighted under Creative Commons <a href="http://creativecommons.org/licenses/by-nc-sa/3.0/" target="_blank">Attribution-Noncommercial-Share Alike 3.0 Unported</a> license, unless stated otherwise. </p>
+        <p>Let me know how you use it - <a href="#footer-widgets">contact me here.</a></p>
+      </div>
+      
+        <a class="pull-left" href="/blog/airbrake-error-notice-javascript/" title="Previous Post: Airbrake: Send Error Notices using Javascript">&laquo; Airbrake: Send Error Notices using Javascript</a>
+      
+      
+    </footer>
+  
+</div>
+
+      </article>
+      
+      <style type="text/css">
+        #ad_container {
+          clear:both;
+          height:90px;
+          margin:0 auto;
+          padding:0 0 0 60px;
+          width:720px;
+        }
+      </style>
+      
+      <div id="ad_container">
+        <script type="text/javascript"><!--
+        google_ad_client = "ca-pub-7424434269432645";
+        /* moorberry.net (octopress) */
+        google_ad_slot = "8992473921";
+        google_ad_width = 728;
+        google_ad_height = 90;
+        //-->
+        </script>
+        <script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script>
+      </div>
+    </div>
+  </div>
+  <div class="comments_wrapper"> 
+    
+      <section>
+        <h1>Comments</h1>
+        <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+      </section>
+    
+  </div>
+  <div id="footer-widgets">
+  <div class="container">
+    <div class="row">
+  <div class="span3">
+    <h2>coderwall badges</h2>
+<div id="proudify"></div>
+<a href="http://coderwall.com/michaelminter" target="_blank"><img src="http://api.coderwall.com/michaelminter/endorsecount.png" alt="Endorse" id="endorse_button" /></a>
+  </div>
+  <div class="span3">
+    <h2>github</h2>
+<ul id="activity"></ul>
+  </div>
+  <div class="span4">
+    <h2>twitter</h2>
+<a href="https://twitter.com/mothore" class="twitter-follow-button" data-show-count="true" data-lang="en" target="_blank">Follow @mothore</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+<div class="tweet" data-twitter-user="mothore">
+</div>
+  </div>
+  <div class="span2">
+    <h2>found on</h2>
+<a href="mailto:michael@moorberry.net" rel="tooltip" title="Email Michael"><img src="/images/glyphicons_399_e-mail.png" alt="email icon" class="social_icon"></a>
+
+
+<a href="https://github.com/michaelminter/" rel="tooltip" title="Github"><img class="social_icon" title="Github" alt="github icon" src="/images/glyphicons_381_github.png"></a>
+
+
+
+
+
+
+
+<a href="http://twitter.com/mothore" rel="tooltip" title="Twitter" target="_blank"><img class="social_icon" title="Twitter" alt="Twitter icon" src="/images/glyphicons_391_twitter_t.png"></a>
+
+
+
+
+
+
+
+
+<a href="https://github.com/michaelminter/" rel="tooltip" title="Github" target="_blank"><img class="social_icon" title="Github" alt="github icon" src="/images/glyphicons_381_github.png"></a>
+<a href="http://stackoverflow.com/users/388253/michael-minter" rel="tooltip" title="Stack Overflow" target="_blank"><img class="social_icon" title="Stack Overflow" alt="stack overflow icon" src="/images/glyphicons_400_stack_overflow.png"></a>
+<a href="http://www.linkedin.com/in/mminter" rel="tooltip" title="Linkedin" target="_blank"><img class="social_icon" title="Linkedin" alt="Linkedin icon" src="/images/glyphicons_377_linked_in.png"></a>
+<!--a href="https://plus.google.com/110730291563876857467" rel="tooltip" title="Google Plus"><img class="social_icon" title="Google Plus" alt="Google Plus icon" src="/images/glyphicons_386_google_plus.png"></a-->
+
+<br /><br /><br />
+
+<a href="http://stackoverflow.com/users/388253/michael-minter" target="_blank">
+<img src="http://stackoverflow.com/users/flair/388253.png" width="170" alt="profile for Michael Minter at Stack Overflow, Q&amp;A for professional and enthusiast programmers" title="profile for Michael Minter at Stack Overflow, Q&amp;A for professional and enthusiast programmers">
+</a>
+  </div>
+</div>
+
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-left">
+  All content is under Copyright &copy; 2010-2013 by the individual authors of this blog and is released<br />under the <a href="http://creativecommons.org/licenses/by-nc-sa/3.0/" target="_blank">Attribution-Noncommercial-Share Alike 3.0 Unported</a> license.<br />
+</p>
+<p class="pull-right">
+  <span>Powered by <a href="http://octopress.org/">Octopress</a>.</span>
+  
+    <!--span>Design by <a href="http://www.AdrianArtiles.com">Adrian Artiles</a>.</span-->
+  
+</p>
+
+  </div>
+</footer>
+
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" type="text/javascript"></script>
+<script type="text/javascript" src="/javascripts/jquery-proudify.min.js"></script>
+<script>window.jQuery || document.write('<script src="/javascripts/libs/jquery-1.7.2.min.js" type="text/javascript"><\/script>')</script>
+<script src="/javascripts/libs/bootstrap.min.js" type="text/javascript"></script>
+<script src="/javascripts/jquery.tweet.js" type="text/javascript"></script>
+<script src="/javascripts/jquery.instagram.js" type="text/javascript"></script>
+<script src="/javascripts/libs/jquery.masonry.min.js" type="text/javascript"></script>
+<script src="/javascripts/custom.js" type="text/javascript"></script>
+<script type="text/javascript">
+  $('#proudify').proudify({username:'michaelminter',service:'coderwall'});
+</script>
+<script type="text/javascript" src="/javascripts/jquery.timeago.js"></script>
+<script type="text/javascript" src="/javascripts/jquery.github-activity.js"></script>
+<script type="text/javascript">
+  $(function() {
+    $("ul#activity").githubActivityFor('michaelminter', {
+      'limit': 3,
+      'wrap': function(item) {
+        item.prepend('<img src="/images/github_16.png" style="float:left;margin:0 5px 0 0;" />');
+        return item
+      }
+    });
+  });
+</script>
+
+
+<script type="text/javascript">
+      var disqus_shortname = 'michaelminter';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://moorberry.net/blog/localstorage-object-relational-mapping/';
+        var disqus_url = 'http://moorberry.net/blog/localstorage-object-relational-mapping/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+</body>
+</html>
