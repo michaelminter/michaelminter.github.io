@@ -5,7 +5,6 @@ date: 2012-09-10 10:41
 comments: true
 categories: [Apple, Java]
 author: '<a href="/" target="_blank" alt="Homepage" title="Michael Minter">Michael Minter</a>'
-photo: '/images/posts/java-console.png'
 <!-- published: false -->
 ---
 

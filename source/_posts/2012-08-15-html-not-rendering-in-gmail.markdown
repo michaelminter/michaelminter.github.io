@@ -5,7 +5,6 @@ date: 2011-12-10 12:52
 comments: true
 author: '<a href="/" target="_blank" alt="Homepage" title="Michael Minter">Michael Minter</a>'
 categories: [Ruby, API]
-photo: '/images/posts/sendgrid-banner.jpeg'
 ---
 
 I’ve been handling many of my company’s email campaigns for some time now and I can honestly say that it’s been pretty fun from a technical stand-point. There’s a lot that goes into email marketing (not including the marketing/sales implications). It has it’s own conventions, ideologies, and I believe to the utmost that there’s a larger future than presumed in store for the sometimes misunderstood technology. (I’m patiently waiting for a mobile device header-type.)

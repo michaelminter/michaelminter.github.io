@@ -56,3 +56,9 @@ dd, dt {
   margin:0 auto;
   width:1170px;
 }
+ul.tweet_list {
+  list-style-type:none;
+}
+ul.tweet_list li {
+  list-style-type:none;
+}

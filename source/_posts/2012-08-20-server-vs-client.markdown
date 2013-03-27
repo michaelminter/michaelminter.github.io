@@ -5,7 +5,6 @@ author: '<a href="/" target="_blank" alt="Homepage" title="Michael Minter">Micha
 date: 2010-03-25 21:11
 comments: true
 categories: ['Javascript', 'PHP', 'Ruby']
-photo: '/images/posts/versus.jpg'
 ---
 
 My presumption is that it’s because of the passionate advent of JQuery, that there has been an increasing rise of using Javascript, in precedence of a server side language like PHP or Ruby. This circumstance is arguably the sole cause to how and why, _mostly designers_, are simply not learning a better way. I’m here to enlighten you.

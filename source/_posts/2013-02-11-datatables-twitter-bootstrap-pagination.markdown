@@ -4,7 +4,6 @@ title: "DataTables Pagination with Twitter Bootstrap"
 date: 2013-02-11 14:34
 comments: true
 categories: ['jQuery','Twitter Bootstrap','DataTables']
-photo: '/images/posts/pagination.png'
 ---
 As a developer who likes to spend more time with beautiful object-oriented code rather than mark-up, <a href="http://datatables.net" target="_blank">DataTables</a> is a wonderful tool for me, with a growing list of extendable features.
 
