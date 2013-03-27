@@ -4,7 +4,7 @@
   <title><![CDATA[Category: PHP | Michael Minter]]></title>
   <link href="http://moorberry.net/blog/categories/php/atom.xml" rel="self"/>
   <link href="http://moorberry.net/"/>
-  <updated>2013-02-23T16:46:48-06:00</updated>
+  <updated>2013-03-27T18:13:29-05:00</updated>
   <id>http://moorberry.net/</id>
   <author>
     <name><![CDATA[Michael Minter]]></name>
@@ -136,7 +136,7 @@ if(!function_exists('imagecreatetruecolor')) {</p>
     <link href="http://moorberry.net/blog/paypal-express-checkout-nvp-api/"/>
     <updated>2010-04-03T20:19:00-05:00</updated>
     <id>http://moorberry.net/blog/paypal-express-checkout-nvp-api</id>
-    <content type="html"><![CDATA[<p>I'm not sure why <a href="http://paypal.com">Paypal</a> has written documentation, regarding its own Express Checkout name-value-pair API, with such a lack of enthusiasm. The classes used with the Paypal API are extremely easy to use. All of this is likely contributing to the confusion about using Express Checkout. But I’m here now, to save your application, and hopefully your sanity.</p>
+    <content type="html"><![CDATA[<p>I'm not sure why <a href="http://paypal.com">Paypal</a> has written documentation, regarding its own Express Checkout name-value-pair API, with no enthusiasm at all. The classes used with the Paypal API are extremely easy to use. All of this is likely contributing to the confusion about using Express Checkout. But I’m here now, to save your application, and hopefully your sanity.</p>
 
 <!--more-->
 

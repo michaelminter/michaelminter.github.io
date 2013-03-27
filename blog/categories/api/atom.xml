@@ -4,7 +4,7 @@
   <title><![CDATA[Category: API | Michael Minter]]></title>
   <link href="http://moorberry.net/blog/categories/api/atom.xml" rel="self"/>
   <link href="http://moorberry.net/"/>
-  <updated>2013-02-23T16:46:48-06:00</updated>
+  <updated>2013-03-27T18:13:29-05:00</updated>
   <id>http://moorberry.net/</id>
   <author>
     <name><![CDATA[Michael Minter]]></name>
@@ -12,6 +12,60 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Send Text Message Through Email]]></title>
+    <link href="http://moorberry.net/blog/send-text-message-through-email/"/>
+    <updated>2013-03-27T17:20:00-05:00</updated>
+    <id>http://moorberry.net/blog/send-text-message-through-email</id>
+    <content type="html"><![CDATA[<p>If you'd like to send a TXT message through email rather than use a SaaS application, such as <a href="http://twilio.com" target="_blank" alt="Twilio" title="Twilio">Twilio</a>, you can send SMS messages through SMTP.</p>
+
+<!--more-->
+
+
+<p>Below is a list of some common gateway email handlers to turn emails into TXTs. Just switch out the default phone number for the one you want to communicate with:</p>
+
+<p><strong>AT&amp;T</strong><br/>
+1234567890@txt.att.net</p>
+
+<p><strong>Metro PCS</strong><br/>
+1234567890@mymetropcs.com</p>
+
+<p><strong>T-Mobile</strong><br/>
+1234567890@tmomail.net</p>
+
+<p><strong>U.S. Cellular</strong><br/>
+1234567890@email.uscc.net</p>
+
+<p><strong>Cricket Wireless</strong><br/>
+1234567890@sms.mycricket.com</p>
+
+<p><strong>Sprint</strong><br/>
+1234567890@messaging.sprintpcs.com</p>
+
+<p><strong>TracFone</strong><br/>
+1234567890@mmst5.tracfone.com</p>
+
+<p><strong>Verizon</strong><br/>
+1234567890@vtext.com</p>
+
+<p><em>If you know any handlers I haven't included, please leave a note in the comments section below, and I'll update the above list as soon as possible. Thanks</em></p>
+
+<p>Some caveats to this transaction method:</p>
+
+<ul>
+<li>All mobile carriers format the message to their own liking. Some just include the sender's email address, while other carriers will return the entire email header (which can be quite costly to small viewing areas.)</li>
+<li>You'll have to know which subscriber your target is using. Unless you use a service like <a href="http://twilio.com" target="_blank" alt="Twilio" title="Twilio" style="color:red;">Twilio</a> you do not need to know how you're sending the message. Just so long as you use a valid phone number.</li>
+</ul>
+
+
+<h2>Twilio</h2>
+
+<p><img src="http://moorberry.net/images/posts/twilio.jpg" alt="Twilio Logo" title="Twilio Logo" /></p>
+
+<p>Try out <a href="http://twilio.com" target="_blank" alt="Twilio" title="Twilio" style="color:red;">Twilio</a>. They offer a <a href="http://twilio.com" target="_blank" alt="Twilio Free Plan" title="Twilio Free Plan" style="color:red;font-weight:bold;">free plan</a> that includes 200 messages to send each month and maintains a series of APIs that are <a href="http://www.twilio.com/blog/2012/02/adding-twilio-sms-messaging-to-your-rails-app.html" target="_blank" alt="Adding Twilio SMS Messaging to your Rails App" title="Adding Twilio SMS Messaging to your Rails App">easy to use</a> and <a href="https://github.com/twilio" target="_blank" alt="Twilio Github" title="Github Twilio">open source</a>.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Keeping Your Heroku Dyno Awake]]></title>
@@ -103,7 +157,7 @@ end
     <link href="http://moorberry.net/blog/paypal-express-checkout-nvp-api/"/>
     <updated>2010-04-03T20:19:00-05:00</updated>
     <id>http://moorberry.net/blog/paypal-express-checkout-nvp-api</id>
-    <content type="html"><![CDATA[<p>I'm not sure why <a href="http://paypal.com">Paypal</a> has written documentation, regarding its own Express Checkout name-value-pair API, with such a lack of enthusiasm. The classes used with the Paypal API are extremely easy to use. All of this is likely contributing to the confusion about using Express Checkout. But I’m here now, to save your application, and hopefully your sanity.</p>
+    <content type="html"><![CDATA[<p>I'm not sure why <a href="http://paypal.com">Paypal</a> has written documentation, regarding its own Express Checkout name-value-pair API, with no enthusiasm at all. The classes used with the Paypal API are extremely easy to use. All of this is likely contributing to the confusion about using Express Checkout. But I’m here now, to save your application, and hopefully your sanity.</p>
 
 <!--more-->
 
