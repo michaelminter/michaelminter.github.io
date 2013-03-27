@@ -4,7 +4,7 @@
   <title><![CDATA[Category: API | Michael Minter]]></title>
   <link href="http://moorberry.net/blog/categories/api/atom.xml" rel="self"/>
   <link href="http://moorberry.net/"/>
-  <updated>2013-03-27T18:46:45-05:00</updated>
+  <updated>2013-03-27T18:50:21-05:00</updated>
   <id>http://moorberry.net/</id>
   <author>
     <name><![CDATA[Michael Minter]]></name>
@@ -58,6 +58,8 @@
 <li>You'll have to know which subscriber your target is using. Unless you use a service like <a href="http://twilio.com" target="_blank" alt="Twilio" title="Twilio" style="color:red;">Twilio</a> you do not need to know how you're sending the message. Just so long as you use a valid phone number.</li>
 </ul>
 
+
+<p>&nbsp;</p>
 
 <h2>Twilio</h2>
 
