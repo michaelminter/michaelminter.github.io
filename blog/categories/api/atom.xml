@@ -4,7 +4,7 @@
   <title><![CDATA[Category: API | Michael Minter]]></title>
   <link href="http://moorberry.net/blog/categories/api/atom.xml" rel="self"/>
   <link href="http://moorberry.net/"/>
-  <updated>2013-03-28T02:12:07-05:00</updated>
+  <updated>2013-03-28T02:27:17-05:00</updated>
   <id>http://moorberry.net/</id>
   <author>
     <name><![CDATA[Michael Minter]]></name>
@@ -55,7 +55,7 @@
 
 <ul>
 <li>All mobile carriers format the message to their own liking. Some just include the sender's email address, while other carriers will return the entire email header (which can be quite costly to small viewing areas.)</li>
-<li>You'll have to know which subscriber your target is using. Unless you use a service like <a href="http://twilio.com" target="_blank" alt="Twilio" title="Twilio" style="color:red;">Twilio</a> you do not need to know how you're sending the message. Just so long as you use a valid phone number.</li>
+<li>You'll have to know which subscriber your target is using. But use a service like <a href="http://twilio.com" target="_blank" alt="Twilio" title="Twilio" style="color:red;">Twilio</a> and you don't need to know how you're sending the message &mdash; Just so long as you use a valid phone number.</li>
 </ul>
 
 
