@@ -41,7 +41,7 @@ _If you know any handlers I haven't included, please leave a note in the comment
 Some caveats to this transaction method:
 
 * All mobile carriers format the message to their own liking. Some just include the sender's email address, while other carriers will return the entire email header (which can be quite costly to small viewing areas.) 
-* You'll have to know which subscriber your target is using. Unless you use a service like <a href="http://twilio.com" target="_blank" alt="Twilio" title="Twilio" style="color:red;">Twilio</a> you do not need to know how you're sending the message. Just so long as you use a valid phone number.
+* You'll have to know which subscriber your target is using. But use a service like <a href="http://twilio.com" target="_blank" alt="Twilio" title="Twilio" style="color:red;">Twilio</a> and you don't need to know how you're sending the message &mdash; Just so long as you use a valid phone number.
 
 &nbsp;
 
