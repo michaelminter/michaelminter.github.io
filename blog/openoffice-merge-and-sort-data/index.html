@@ -5,7 +5,7 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Send Text Message Through Email - Michael Minter</title>
+  <title>OpenOffice: Merge and Sort Data - Michael Minter</title>
   <meta name="author" content="Michael Minter">
   <link rel="author" href="humans.txt">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -13,7 +13,7 @@
   
     
   
-  <meta name="description" content=" If you&#8217;d like to send a TXT message through email rather than use a SaaS application, such as Twilio, you can send SMS messages through SMTP. ">
+  <meta name="description" content=" You need to construct an array using a list of pre-existing values but firstly have to sort the order of that list. ">
   
   <!-- http://t.co/dKP3o1e -->
   <meta name="HandheldFriendly" content="True">
@@ -21,20 +21,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://moorberry.net/blog/send-text-message-through-email/">
+  <link rel="canonical" href="http://moorberry.net/blog/openoffice-merge-and-sort-data/">
   <link href="/favicon.png" rel="icon">
   <link href='http://fonts.googleapis.com/css?family=Cantarell' rel='stylesheet' type='text/css'>
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="Michael Minter" type="application/atom+xml">
   <meta name="og:type" content="website" />
   <meta name="og:site_name" content="Michael Minter" />
-  <meta name="og:title" content="Send Text Message Through Email" />
-  <meta name="og:description" content=" If you&#8217;d like to send a TXT message through email rather than use a SaaS application, such as Twilio, you can send SMS messages through SMTP. " />
-  <meta name="og:url" content="http://moorberry.net/blog/send-text-message-through-email/"/>
-  <meta name="url" content="http://moorberry.net/blog/send-text-message-through-email/">
+  <meta name="og:title" content="OpenOffice: Merge and Sort Data" />
+  <meta name="og:description" content=" You need to construct an array using a list of pre-existing values but firstly have to sort the order of that list. " />
+  <meta name="og:url" content="http://moorberry.net/blog/openoffice-merge-and-sort-data/"/>
+  <meta name="url" content="http://moorberry.net/blog/openoffice-merge-and-sort-data/">
   
-  <meta name="subject" content="APIEmailText Messaging"/>
-  <meta name="category" content="APIEmailText Messaging"/>
+  <meta name="subject" content="data"/>
+  <meta name="category" content="data"/>
   
   <meta name="distribution" content="global">
   <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
@@ -106,7 +106,7 @@
   
     <header>
       
-        <h1 class="entry-title">Send Text Message Through Email</h1>
+        <h1 class="entry-title">OpenOffice: Merge and Sort Data</h1>
       
       
         <p class="meta">
@@ -131,13 +131,13 @@
   
 
 
-<time datetime="2013-03-27T17:20:00-05:00" pubdate data-updated="true">Mar 27<span>th</span>, 2013</time> - 
+<time datetime="2013-05-14T22:55:00-05:00" pubdate data-updated="true">May 14<span>th</span>, 2013</time> - 
           
 
 posted in
 <span class="categories">
   
-    <a class='category' href='/blog/categories/api/'>API</a>, <a class='category' href='/blog/categories/email/'>Email</a>, <a class='category' href='/blog/categories/text-messaging/'>Text Messaging</a>
+    <a class='category' href='/blog/categories/data/'>data</a>
   
 </span>
 
@@ -151,54 +151,87 @@ posted in
   
   
   
-    <div class="entry-content"><p>If you&#8217;d like to send a TXT message through email rather than use a SaaS application, such as <a href="http://twilio.com" target="_blank" alt="Twilio" title="Twilio">Twilio</a>, you can send SMS messages through SMTP.</p>
+    <div class="entry-content"><p>You need to <strong>construct an array using a list of pre-existing values</strong> but firstly have to <strong>sort the order</strong> of that list.</p>
 
 <!--more-->
 
 
-<p>Below is a list of some common gateway email handlers to turn emails into TXTs. Just switch out the default phone number for the one you want to communicate with:</p>
+<p>There are plenty of alternatives but I enjoy using <a href="http://www.openoffice.org/" target="_blank" title="OpenOffice"><strong>OpenOffice</strong></a> for these simple string inclusions.</p>
 
-<p><strong>AT&amp;T</strong><br/>
-1234567890@txt.att.net</p>
+<p>OpenOffice is <strong>open source</strong> and available for use on <strong>all major operating systems</strong>.</p>
 
-<p><strong>Metro PCS</strong><br/>
-1234567890@mymetropcs.com</p>
-
-<p><strong>T-Mobile</strong><br/>
-1234567890@tmomail.net</p>
-
-<p><strong>U.S. Cellular</strong><br/>
-1234567890@email.uscc.net</p>
-
-<p><strong>Cricket Wireless</strong><br/>
-1234567890@sms.mycricket.com</p>
-
-<p><strong>Sprint</strong><br/>
-1234567890@messaging.sprintpcs.com</p>
-
-<p><strong>TracFone</strong><br/>
-1234567890@mmst5.tracfone.com</p>
-
-<p><strong>Verizon</strong><br/>
-1234567890@vtext.com</p>
-
-<p><em>If you know any handlers I haven&#8217;t included, please leave a note in the comments section below, and I&#8217;ll update the above list as soon as possible. Thanks</em></p>
-
-<p>Some caveats to this transaction method:</p>
-
-<ul>
-<li>All mobile carriers format the message to their own liking. Some just include the sender&#8217;s email address, while other carriers will return the entire email header (which can be quite costly to small viewing areas.)</li>
-<li>You&#8217;ll have to know which subscriber your target is using. But use a service like <a href="http://twilio.com" target="_blank" alt="Twilio" title="Twilio" style="color:red;">Twilio</a> and you don&#8217;t need to know how you&#8217;re sending the message &mdash; Just so long as you use a valid phone number.</li>
-</ul>
+<!--## Let's Get Started-->
 
 
-<p>&nbsp;</p>
+<h3>Collect Data</h3>
 
-<h2>Twilio</h2>
+<p>Copy your list of values.</p>
 
-<p><img src="/images/posts/twilio.jpg" alt="Twilio Logo" title="Twilio Logo" /></p>
+<p>Select the top cell in the column you want your list to reside.</p>
 
-<p>Try out <a href="http://twilio.com" target="_blank" alt="Twilio" title="Twilio" style="color:red;">Twilio</a>. They offer a <a href="http://twilio.com" target="_blank" alt="Twilio Free Plan" title="Twilio Free Plan" style="color:red;font-weight:bold;">free plan</a> that includes 200 messages to send each month and maintains a series of APIs that are <a href="http://www.twilio.com/blog/2012/02/adding-twilio-sms-messaging-to-your-rails-app.html" target="_blank" alt="Adding Twilio SMS Messaging to your Rails App" title="Adding Twilio SMS Messaging to your Rails App">easy to use</a> and <a href="https://github.com/twilio" target="_blank" alt="Twilio Github" title="Github Twilio">open source</a>.</p>
+<p><em>When you paste the values in OpenOffice, as long as they&#8217;re separated by a line break, OpenOffice will automatically separate each value into a new row of whichever column you&#8217;ve designated.</em></p>
+
+<h3>Sort</h3>
+
+<p>Sort the list by hilighting the data and perform the following:</p>
+
+<p><code>Data &gt; Sort &gt; Options</code></p>
+
+<p>Unselect the checkbox labeled &#8221;<em>Range contains column labels.</em>&#8221;</p>
+
+<p>Click <code>OK</code></p>
+
+<p><em>This option prevents column headers from being sorted with the rest of the data. Since we don&#8217;t have any column headers, like in a CSV file, we need to deactivate this feature.</em></p>
+
+<p><img src="/images/posts/openoffice-1.jpg" alt="OpenOffice" /></p>
+
+<h3>Prepare</h3>
+
+<p>Create the prepending or appending content at the top of the column to the left or right of the working list.</p>
+
+<p>Point your cursor to the bottom-right corner of the cell you just filled, hold down your left mouse button, and move downwards to the bottom of the working column.</p>
+
+<p><em>This action will copy the active cell to all of the other cells touched by your hover action. Do this over again for further columns.</em></p>
+
+<h3>Merge</h3>
+
+<p>Use the following Calc function in the column that you want the new data to be returned.</p>
+
+<blockquote><p><a href="http://wiki.openoffice.org/wiki/Documentation/How_Tos/Calc:_CONCATENATE_function" target="_blank" alt="CONCATENATE Documentation"><strong>Concatenate</strong></a>: Combines several text strings into one string.</p></blockquote>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>=CONCATENATE( A1; ":"; B1; ":"; C1 )</span></code></pre></td></tr></table></div></figure>
+
+
+<p>or you can use the simple version:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>= A1 & ":" & B1 & ":" & C1</span></code></pre></td></tr></table></div></figure>
+
+
+<p><img src="/images/posts/openoffice-2.jpg" alt="OpenOffice" /></p>
+
+<p>Where cell <strong>A1</strong> contains <code>"</code>, cell <strong>B1</strong> contains <code>actionmailer</code>, and cell <strong>C1</strong> contains <code>",</code> returns <code>"actionamailer",</code>.</p>
+
+<p>Hit <code>return</code></p>
+
+<p>Just like when you copied the prep data, grab the bottom-right corner of the working cell and drag it directly down to the target end point.</p>
+
+<p><em>This will copy the concatenation function across all of the modified cells. So if you change a value in another column, from its row, OpenOffice will generate new content for the concatenated cell.</em></p>
+
+<p>Your column is now ready for inclusion in production-ready code. Just highlight the readied cells, copy, and paste into your program editor of choice.</p>
+
+<h3>Further Reading</h3>
+
+<p>When you paste the new column into your text editor you might notice special quotes that OpenOffice magicly replaces upon creation. You can disable the automatic conversion of ASCII &#8220;straight&#8221; quotes into typographic “curly” quotes by going to:</p>
+
+<p><code>Tools &gt; AutoCorrect Options &gt; Localized Options</code></p>
+
+<p>Scan down to the container marked &#8220;Double Quotes&#8221; and make sure the checkbox labeled &#8220;Replace&#8221; is unchecked.</p>
+
+<p>Click <code>OK</code></p>
+
+<p><img src="/images/posts/openoffice-3.jpg" alt="OpenOffice" /></p>
 </div>
   
   
@@ -208,10 +241,8 @@ posted in
         <p>Let me know how you use it - <a href="#footer-widgets" alt="Contact Michael" title="Contact Michael">contact me here.</a></p>
       </div>
       
-        <a class="pull-left" href="/blog/localstorage-object-relational-mapping/" title="Previous Post: localStorage: Object Relational Mapping">&laquo; localStorage: Object Relational Mapping</a>
+        <a class="pull-left" href="/blog/eloquent-ruby-book-review/" title="Previous Post: Book Review: Eloquent Ruby">&laquo; Book Review: Eloquent Ruby</a>
       
-      
-        <a class="pull-right" href="/blog/eloquent-ruby-book-review/" title="Next Post: Book Review: Eloquent Ruby">Book Review: Eloquent Ruby &raquo;</a>
       
     </footer>
   
@@ -354,8 +385,8 @@ posted in
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://moorberry.net/blog/send-text-message-through-email/';
-        var disqus_url = 'http://moorberry.net/blog/send-text-message-through-email/';
+        var disqus_identifier = 'http://moorberry.net/blog/openoffice-merge-and-sort-data/';
+        var disqus_url = 'http://moorberry.net/blog/openoffice-merge-and-sort-data/';
         var disqus_script = 'embed.js';
       
     (function () {
