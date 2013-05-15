@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Eloquent Ruby Book Review"
+title: "Book Review: Eloquent Ruby"
 date: 2013-04-06 16:00
 comments: true
 categories: [Ruby,Review]
