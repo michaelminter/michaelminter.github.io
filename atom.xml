@@ -4,7 +4,7 @@
   <title><![CDATA[Michael Minter]]></title>
   <link href="http://moorberry.net/atom.xml" rel="self"/>
   <link href="http://moorberry.net/"/>
-  <updated>2013-08-12T12:13:50-05:00</updated>
+  <updated>2013-08-12T12:15:02-05:00</updated>
   <id>http://moorberry.net/</id>
   <author>
     <name><![CDATA[Michael Minter]]></name>
@@ -18,7 +18,7 @@
     <link href="http://moorberry.net/blog/android-javascript-debugging/"/>
     <updated>2013-08-12T11:23:00-05:00</updated>
     <id>http://moorberry.net/blog/android-javascript-debugging</id>
-    <content type="html"><![CDATA[<p>As a web developer, I have to use <code>console.log</code> a lot, to see what&#8217;s going on with Javascript in my web applications, and Android Browser does <strong>not</strong> make this <strong>an easy task</strong>.</p>
+    <content type="html"><![CDATA[<p>As a web developer, I have to use <code>console.log</code> a lot to see what&#8217;s going on with Javascript in my web applications, and Android Browser does <strong>not</strong> make this <strong>an easy task</strong>.</p>
 
 <!-- more -->
 
