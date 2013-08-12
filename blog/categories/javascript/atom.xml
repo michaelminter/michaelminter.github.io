@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Javascript | Michael Minter]]></title>
   <link href="http://moorberry.net/blog/categories/javascript/atom.xml" rel="self"/>
   <link href="http://moorberry.net/"/>
-  <updated>2013-05-15T00:24:33-05:00</updated>
+  <updated>2013-08-12T11:36:52-05:00</updated>
   <id>http://moorberry.net/</id>
   <author>
     <name><![CDATA[Michael Minter]]></name>
@@ -12,6 +12,28 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[android javascript debugging]]></title>
+    <link href="http://moorberry.net/blog/android-javascript-debugging/"/>
+    <updated>2013-08-12T11:23:00-05:00</updated>
+    <id>http://moorberry.net/blog/android-javascript-debugging</id>
+    <content type="html"><![CDATA[<p>I had to debug javascript on my web app from an Android device. Here's how I did it.</p>
+
+<!-- more -->
+
+
+<p>As a web developer, I have to use console.log(...) a lot to see what's going on with my javascript web application, and the Android browser doesn't make this an easy task.</p>
+
+<p>Initial searches brought up articles suggesting use of the Android SDK, plugging my phone into my computer, setting up the debug bridge, etc. This sounded like a lot of work.</p>
+
+<p>There is a way to do javascript debugging entirely on your phone without needing the Android SDK.</p>
+
+<p>Download a log view from the android market (e.g. search for logcat). This shows all log messages. Most logcat viewers will let you search/filter. Search for <strong>"browser"</strong>. All console.log messages will come up there.</p>
+
+<p>One difference from desktop web inspectors: The Android web browser only prints the first argument to console.log(...). So you should do <code>console.log("here's my variable "+var);</code> rather than <code>console.log("here's my variable ", var);</code></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[localStorage: Object Relational Mapping]]></title>
