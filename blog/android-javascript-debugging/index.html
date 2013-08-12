@@ -13,7 +13,7 @@
   
     
   
-  <meta name="description" content="As a web developer, I have to use console.log(...) a lot, to see what&#8217;s going on with Javascript in my web apps, and Android Browser doesn&# &hellip;">
+  <meta name="description" content="As a web developer, I have to use console.log() a lot, to see what&#8217;s going on with Javascript in my web applications, and Android Browser does &hellip;">
   
   <!-- http://t.co/dKP3o1e -->
   <meta name="HandheldFriendly" content="True">
@@ -29,7 +29,7 @@
   <meta name="og:type" content="website" />
   <meta name="og:site_name" content="Michael Minter" />
   <meta name="og:title" content="android javascript debugging" />
-  <meta name="og:description" content="As a web developer, I have to use console.log(...) a lot, to see what&#8217;s going on with Javascript in my web apps, and Android Browser doesn&# &hellip;" />
+  <meta name="og:description" content="As a web developer, I have to use console.log() a lot, to see what&#8217;s going on with Javascript in my web applications, and Android Browser does &hellip;" />
   <meta name="og:url" content="http://moorberry.net/blog/android-javascript-debugging/"/>
   <meta name="url" content="http://moorberry.net/blog/android-javascript-debugging/">
   
@@ -151,7 +151,7 @@ posted in
   
   
   
-    <div class="entry-content"><p>As a web developer, I have to use <code>console.log(...)</code> a lot, to see what&#8217;s going on with Javascript in my web apps, and Android Browser doesn&#8217;t make this an easy task.</p>
+    <div class="entry-content"><p>As a web developer, I have to use <code>console.log()</code> a lot, to see what&#8217;s going on with Javascript in my web applications, and Android Browser does <strong>not</strong> make this <strong>an easy task</strong>.</p>
 
 <!-- more -->
 
@@ -160,9 +160,21 @@ posted in
 
 <p>There is a way to do <strong>Javascript debugging</strong> entirely on your phone <strong>without the Android SDK</strong>.</p>
 
-<p>Download a log viewer from the android market (e.g. <strong>logcat</strong>). This shows all log messages. Most log viewers will let you search/filter. Search the term <strong>browser</strong>. All <code>console.log(...)</code> messages will come up there.</p>
+<p>Download a log viewer from the android market (e.g. <strong>logcat</strong>). This shows all log messages. Most log viewers will let you search/filter. Search the term <strong>browser</strong>. All <code>console.log()</code> messages will come up there.</p>
 
-<p>One difference from desktop web inspectors: Android Browser only prints the first argument to <code>console.log(...)</code>. So you should do <code>console.log("here's my variable "+var);</code> rather than <code>console.log("here's my variable ", var);</code></p>
+<p>One difference from desktop web inspectors: Android Browser <strong>only prints the first argument</strong> to <code>console.log()</code>. So instead of:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;here&#39;s my variable &quot;</span><span class="p">,</span> <span class="kd">var</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>you should write it like:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;here&#39;s my variable &quot;</span> <span class="o">+</span> <span class="kd">var</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
 </div>
   
   

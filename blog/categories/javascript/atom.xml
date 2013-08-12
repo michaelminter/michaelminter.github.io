@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Javascript | Michael Minter]]></title>
   <link href="http://moorberry.net/blog/categories/javascript/atom.xml" rel="self"/>
   <link href="http://moorberry.net/"/>
-  <updated>2013-08-12T11:56:50-05:00</updated>
+  <updated>2013-08-12T12:05:38-05:00</updated>
   <id>http://moorberry.net/</id>
   <author>
     <name><![CDATA[Michael Minter]]></name>
@@ -31,11 +31,15 @@
 
 <p>One difference from desktop web inspectors: Android Browser <strong>only prints the first argument</strong> to <code>console.log()</code>. So instead of:</p>
 
-<p><code>console.log("here's my variable ", var);</code></p>
+<p><code>javascript
+console.log("here's my variable ", var);
+</code></p>
 
 <p>you should write it like:</p>
 
-<p><code>console.log("here's my variable " + var);</code></p>
+<p><code>javascript
+console.log("here's my variable " + var);
+</code></p>
 ]]></content>
   </entry>
   
