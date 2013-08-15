@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Rails | Michael Minter]]></title>
   <link href="http://moorberry.net/blog/categories/rails/atom.xml" rel="self"/>
   <link href="http://moorberry.net/"/>
-  <updated>2013-08-15T16:35:57-05:00</updated>
+  <updated>2013-08-15T16:37:14-05:00</updated>
   <id>http://moorberry.net/</id>
   <author>
     <name><![CDATA[Michael Minter]]></name>
@@ -29,7 +29,7 @@
 
 <p>acts_as_paranoid, by default, assumes the table has a <em>deleted_at</em> date/time field.  Most normal model operations will work, but there will be some oddities.</p>
 
-<p><code>ruby
+<p><code>
 $ script/server generate migration deleted_at:datetime
 </code></p>
 
@@ -60,7 +60,7 @@ gem 'acts_as_paranoid', :git =&gt; 'git://github.com/technoweenie/acts_as_parano
 </code>
 <strong>Run bundler</strong></p>
 
-<p><code>ruby
+<p><code>
 $ bundle install
 </code>
 <strong>Add the requestor to your model</strong> (app/models/widgets.rb)</p>
