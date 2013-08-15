@@ -3,7 +3,7 @@ layout: post
 title: "Octopress: Custom Images on Index"
 date: 2013-02-25 20:36
 comments: true
-categories: 
+categories: [Octopress]
 published: false
 ---
 
