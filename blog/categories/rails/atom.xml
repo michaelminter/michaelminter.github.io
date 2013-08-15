@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Rails | Michael Minter]]></title>
   <link href="http://moorberry.net/blog/categories/rails/atom.xml" rel="self"/>
   <link href="http://moorberry.net/"/>
-  <updated>2013-08-15T16:34:08-05:00</updated>
+  <updated>2013-08-15T16:35:57-05:00</updated>
   <id>http://moorberry.net/</id>
   <author>
     <name><![CDATA[Michael Minter]]></name>
@@ -29,13 +29,13 @@
 
 <p>acts_as_paranoid, by default, assumes the table has a <em>deleted_at</em> date/time field.  Most normal model operations will work, but there will be some oddities.</p>
 
-<p><code>
+<p><code>ruby
 $ script/server generate migration deleted_at:datetime
 </code></p>
 
 <p>And then modify your migration file (app/db/migrations/000000000000_add_deleted_at…rb)to look something like:</p>
 
-<p>```
+<p>``` ruby
 class AddDeletedAtToWidgets &lt; ActiveRecord::Migration
   def self.up</p>
 
@@ -55,17 +55,17 @@ end
 
 <p><strong>Add the gem source to your Gemfile</strong> (app/Gemfile)</p>
 
-<p><code>
+<p><code>ruby
 gem 'acts_as_paranoid', :git =&gt; 'git://github.com/technoweenie/acts_as_paranoid.git', :branch =&gt; 'integration_gem'
 </code>
 <strong>Run bundler</strong></p>
 
-<p><code>
+<p><code>ruby
 $ bundle install
 </code>
 <strong>Add the requestor to your model</strong> (app/models/widgets.rb)</p>
 
-<p><code>
+<p><code>ruby
 class Widget &lt; ActiveRecord::Base
   acts_as_paranoid
 end
@@ -73,97 +73,97 @@ end
 
 <p>If you'd like to set a <strong>custom column for acts_as_paranoid</strong> just use the following options in your class method:</p>
 
-<p><code>
+<p><code>ruby
 acts_as_paranoid :with =&gt; 'destroyed_at'
 </code></p>
 
 <h2>Use</h2>
 
-<p>```
+<p>``` ruby
 Widget.find(:all)</p>
 
 <h1>=> SELECT * FROM widgets WHERE widgets.deleted_at IS NULL</h1>
 
 <p>```</p>
 
-<p>```
+<p>``` ruby
 Widget.find(:first, :conditions => ['title = ?', 'test'], :order => 'title')</p>
 
 <h1>=> SELECT * FROM widgets WHERE widgets.deleted_at IS NULL AND title = 'test' ORDER BY title LIMIT 1</h1>
 
 <p>```</p>
 
-<p>```
+<p>``` ruby
 Widget.find_with_deleted(:all)</p>
 
 <h1>=> SELECT * FROM widgets</h1>
 
 <p>```</p>
 
-<p>```
+<p>``` ruby
 Widget.find(:all, :with_deleted => true)</p>
 
 <h1>=> SELECT * FROM widgets</h1>
 
 <p>```</p>
 
-<p>```
+<p>``` ruby
 Widget.find_with_deleted(1).deleted?</p>
 
 <h1>=> Returns true if the record was previously destroyed, false if not</h1>
 
 <p>```</p>
 
-<p>```
+<p>``` ruby
 Widget.count</p>
 
 <h1>=> SELECT COUNT(*) FROM widgets WHERE widgets.deleted_at IS NULL</h1>
 
 <p>```</p>
 
-<p>```
+<p>``` ruby
 Widget.count ['title = ?', 'test']</p>
 
 <h1>=> SELECT COUNT(*) FROM widgets WHERE widgets.deleted_at IS NULL AND title = 'test'</h1>
 
 <p>```</p>
 
-<p>```
+<p>``` ruby
 Widget.count_with_deleted</p>
 
 <h1>=> SELECT COUNT(*) FROM widgets</h1>
 
 <p>```</p>
 
-<p>```
+<p>``` ruby
 Widget.delete_all</p>
 
 <h1>=> UPDATE widgets SET deleted_at = '2013-08-15 13:01:59'</h1>
 
 <p>```</p>
 
-<p>```
+<p>``` ruby
 Widget.delete_all!</p>
 
 <h1>=> DELETE FROM widgets</h1>
 
 <p>```</p>
 
-<p>```
+<p>``` ruby
 @widget.destroy</p>
 
 <h1>=> UPDATE widgets SET deleted_at = '2013-08-15 13:01:59' WHERE id = 1</h1>
 
 <p>```</p>
 
-<p>```
+<p>``` ruby
 @widget.destroy!</p>
 
 <h1>=> DELETE FROM widgets WHERE id = 1</h1>
 
 <p>```</p>
 
-<p>```
+<p>``` ruby
 @widget.recover!</p>
 
 <h1>=> UPDATE widgets SET deleted_at = NULL WHERE id = 1</h1>
