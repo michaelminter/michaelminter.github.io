@@ -4,7 +4,7 @@
   <title><![CDATA[Michael Minter]]></title>
   <link href="http://moorberry.net/atom.xml" rel="self"/>
   <link href="http://moorberry.net/"/>
-  <updated>2013-08-12T13:39:03-05:00</updated>
+  <updated>2013-08-15T16:34:08-05:00</updated>
   <id>http://moorberry.net/</id>
   <author>
     <name><![CDATA[Michael Minter]]></name>
@@ -12,6 +12,182 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Rails 2 and acts_as_paranoid]]></title>
+    <link href="http://moorberry.net/blog/rails-2-acts-as-paranoid/"/>
+    <updated>2013-08-15T16:31:00-05:00</updated>
+    <id>http://moorberry.net/blog/rails-2-acts-as-paranoid</id>
+    <content type="html"><![CDATA[<p>Overrides some basic Active Record methods for the current model so that calling #destroy sets a <em>deleted_at</em> field to the current timestamp.</p>
+
+<!-- more -->
+
+
+<h2>Setup</h2>
+
+<p><strong>Create migration file</strong></p>
+
+<p>acts_as_paranoid, by default, assumes the table has a <em>deleted_at</em> date/time field.  Most normal model operations will work, but there will be some oddities.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ script/server generate migration deleted_at:datetime</span></code></pre></td></tr></table></div></figure>
+
+
+<p>And then modify your migration file (app/db/migrations/000000000000_add_deleted_at…rb)to look something like:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>class AddDeletedAtToWidgets &lt; ActiveRecord::Migration
+</span><span class='line'>  def self.up
+</span><span class='line'>    add_column :widgets, :deleted_at, :datetime, :null =&gt; true
+</span><span class='line'>  end
+</span><span class='line'>
+</span><span class='line'>  def self.down
+</span><span class='line'>    remove_column :widgets, :deleted_at
+</span><span class='line'>  end
+</span><span class='line'>end</span></code></pre></td></tr></table></div></figure>
+
+
+<p><strong>Add the gem source to your Gemfile</strong> (app/Gemfile)</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>gem 'acts_as_paranoid', :git =&gt; 'git://github.com/technoweenie/acts_as_paranoid.git', :branch =&gt; 'integration_gem'</span></code></pre></td></tr></table></div></figure>
+
+
+<p><strong>Run bundler</strong></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ bundle install</span></code></pre></td></tr></table></div></figure>
+
+
+<p><strong>Add the requestor to your model</strong> (app/models/widgets.rb)</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>class Widget &lt; ActiveRecord::Base
+</span><span class='line'>  acts_as_paranoid
+</span><span class='line'>end</span></code></pre></td></tr></table></div></figure>
+
+
+<p>If you&#8217;d like to set a <strong>custom column for acts_as_paranoid</strong> just use the following options in your class method:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>acts_as_paranoid :with =&gt; 'destroyed_at'</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Use</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Widget.find(:all)
+</span><span class='line'># =&gt; SELECT * FROM widgets WHERE widgets.deleted_at IS NULL</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Widget.find(:first, :conditions =&gt; ['title = ?', 'test'], :order =&gt; 'title')
+</span><span class='line'># =&gt; SELECT * FROM widgets WHERE widgets.deleted_at IS NULL AND title = 'test' ORDER BY title LIMIT 1</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Widget.find_with_deleted(:all)
+</span><span class='line'># =&gt; SELECT * FROM widgets</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Widget.find(:all, :with_deleted =&gt; true)
+</span><span class='line'># =&gt; SELECT * FROM widgets</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Widget.find_with_deleted(1).deleted?
+</span><span class='line'># =&gt; Returns true if the record was previously destroyed, false if not </span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Widget.count
+</span><span class='line'># =&gt; SELECT COUNT(*) FROM widgets WHERE widgets.deleted_at IS NULL</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Widget.count ['title = ?', 'test']
+</span><span class='line'># =&gt; SELECT COUNT(*) FROM widgets WHERE widgets.deleted_at IS NULL AND title = 'test'</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Widget.count_with_deleted
+</span><span class='line'># =&gt; SELECT COUNT(*) FROM widgets</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Widget.delete_all
+</span><span class='line'># =&gt; UPDATE widgets SET deleted_at = '2013-08-15 13:01:59'</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Widget.delete_all!
+</span><span class='line'># =&gt; DELETE FROM widgets</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>@widget.destroy
+</span><span class='line'># =&gt; UPDATE widgets SET deleted_at = '2013-08-15 13:01:59' WHERE id = 1</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>@widget.destroy!
+</span><span class='line'># =&gt; DELETE FROM widgets WHERE id = 1</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>@widget.recover!
+</span><span class='line'># =&gt; UPDATE widgets SET deleted_at = NULL WHERE id = 1</span></code></pre></td></tr></table></div></figure>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Android Javascript Debugging]]></title>

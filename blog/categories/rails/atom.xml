@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Rails | Michael Minter]]></title>
   <link href="http://moorberry.net/blog/categories/rails/atom.xml" rel="self"/>
   <link href="http://moorberry.net/"/>
-  <updated>2013-08-12T13:39:03-05:00</updated>
+  <updated>2013-08-15T16:34:08-05:00</updated>
   <id>http://moorberry.net/</id>
   <author>
     <name><![CDATA[Michael Minter]]></name>
@@ -12,6 +12,165 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Rails 2 and acts_as_paranoid]]></title>
+    <link href="http://moorberry.net/blog/rails-2-acts-as-paranoid/"/>
+    <updated>2013-08-15T16:31:00-05:00</updated>
+    <id>http://moorberry.net/blog/rails-2-acts-as-paranoid</id>
+    <content type="html"><![CDATA[<p>Overrides some basic Active Record methods for the current model so that calling #destroy sets a <em>deleted_at</em> field to the current timestamp.</p>
+
+<!-- more -->
+
+
+<h2>Setup</h2>
+
+<p><strong>Create migration file</strong></p>
+
+<p>acts_as_paranoid, by default, assumes the table has a <em>deleted_at</em> date/time field.  Most normal model operations will work, but there will be some oddities.</p>
+
+<p><code>
+$ script/server generate migration deleted_at:datetime
+</code></p>
+
+<p>And then modify your migration file (app/db/migrations/000000000000_add_deleted_at…rb)to look something like:</p>
+
+<p>```
+class AddDeletedAtToWidgets &lt; ActiveRecord::Migration
+  def self.up</p>
+
+<pre><code>add_column :widgets, :deleted_at, :datetime, :null =&gt; true
+</code></pre>
+
+<p>  end</p>
+
+<p>  def self.down</p>
+
+<pre><code>remove_column :widgets, :deleted_at
+</code></pre>
+
+<p>  end
+end
+```</p>
+
+<p><strong>Add the gem source to your Gemfile</strong> (app/Gemfile)</p>
+
+<p><code>
+gem 'acts_as_paranoid', :git =&gt; 'git://github.com/technoweenie/acts_as_paranoid.git', :branch =&gt; 'integration_gem'
+</code>
+<strong>Run bundler</strong></p>
+
+<p><code>
+$ bundle install
+</code>
+<strong>Add the requestor to your model</strong> (app/models/widgets.rb)</p>
+
+<p><code>
+class Widget &lt; ActiveRecord::Base
+  acts_as_paranoid
+end
+</code></p>
+
+<p>If you'd like to set a <strong>custom column for acts_as_paranoid</strong> just use the following options in your class method:</p>
+
+<p><code>
+acts_as_paranoid :with =&gt; 'destroyed_at'
+</code></p>
+
+<h2>Use</h2>
+
+<p>```
+Widget.find(:all)</p>
+
+<h1>=> SELECT * FROM widgets WHERE widgets.deleted_at IS NULL</h1>
+
+<p>```</p>
+
+<p>```
+Widget.find(:first, :conditions => ['title = ?', 'test'], :order => 'title')</p>
+
+<h1>=> SELECT * FROM widgets WHERE widgets.deleted_at IS NULL AND title = 'test' ORDER BY title LIMIT 1</h1>
+
+<p>```</p>
+
+<p>```
+Widget.find_with_deleted(:all)</p>
+
+<h1>=> SELECT * FROM widgets</h1>
+
+<p>```</p>
+
+<p>```
+Widget.find(:all, :with_deleted => true)</p>
+
+<h1>=> SELECT * FROM widgets</h1>
+
+<p>```</p>
+
+<p>```
+Widget.find_with_deleted(1).deleted?</p>
+
+<h1>=> Returns true if the record was previously destroyed, false if not</h1>
+
+<p>```</p>
+
+<p>```
+Widget.count</p>
+
+<h1>=> SELECT COUNT(*) FROM widgets WHERE widgets.deleted_at IS NULL</h1>
+
+<p>```</p>
+
+<p>```
+Widget.count ['title = ?', 'test']</p>
+
+<h1>=> SELECT COUNT(*) FROM widgets WHERE widgets.deleted_at IS NULL AND title = 'test'</h1>
+
+<p>```</p>
+
+<p>```
+Widget.count_with_deleted</p>
+
+<h1>=> SELECT COUNT(*) FROM widgets</h1>
+
+<p>```</p>
+
+<p>```
+Widget.delete_all</p>
+
+<h1>=> UPDATE widgets SET deleted_at = '2013-08-15 13:01:59'</h1>
+
+<p>```</p>
+
+<p>```
+Widget.delete_all!</p>
+
+<h1>=> DELETE FROM widgets</h1>
+
+<p>```</p>
+
+<p>```
+@widget.destroy</p>
+
+<h1>=> UPDATE widgets SET deleted_at = '2013-08-15 13:01:59' WHERE id = 1</h1>
+
+<p>```</p>
+
+<p>```
+@widget.destroy!</p>
+
+<h1>=> DELETE FROM widgets WHERE id = 1</h1>
+
+<p>```</p>
+
+<p>```
+@widget.recover!</p>
+
+<h1>=> UPDATE widgets SET deleted_at = NULL WHERE id = 1</h1>
+
+<p>```</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Special Notes Lookup in Rails]]></title>

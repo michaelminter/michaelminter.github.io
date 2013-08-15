@@ -5,7 +5,7 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Android Javascript Debugging - Michael Minter</title>
+  <title>Rails 2 and acts_as_paranoid - Michael Minter</title>
   <meta name="author" content="Michael Minter">
   <link rel="author" href="humans.txt">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -13,7 +13,7 @@
   
     
   
-  <meta name="description" content="As a web developer, I have to use console.log a lot to see what&#8217;s going on with Javascript in my web applications, and Android Browser does &hellip;">
+  <meta name="description" content=" Overrides some basic Active Record methods for the current model so that calling #destroy sets a deleted_at field to the current timestamp. ">
   
   <!-- http://t.co/dKP3o1e -->
   <meta name="HandheldFriendly" content="True">
@@ -21,20 +21,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://moorberry.net/blog/android-javascript-debugging/">
+  <link rel="canonical" href="http://moorberry.net/blog/rails-2-acts-as-paranoid/">
   <link href="/favicon.png" rel="icon">
   <link href='http://fonts.googleapis.com/css?family=Cantarell' rel='stylesheet' type='text/css'>
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="Michael Minter" type="application/atom+xml">
   <meta name="og:type" content="website" />
   <meta name="og:site_name" content="Michael Minter" />
-  <meta name="og:title" content="Android Javascript Debugging" />
-  <meta name="og:description" content="As a web developer, I have to use console.log a lot to see what&#8217;s going on with Javascript in my web applications, and Android Browser does &hellip;" />
-  <meta name="og:url" content="http://moorberry.net/blog/android-javascript-debugging/"/>
-  <meta name="url" content="http://moorberry.net/blog/android-javascript-debugging/">
+  <meta name="og:title" content="Rails 2 and acts_as_paranoid" />
+  <meta name="og:description" content=" Overrides some basic Active Record methods for the current model so that calling #destroy sets a deleted_at field to the current timestamp. " />
+  <meta name="og:url" content="http://moorberry.net/blog/rails-2-acts-as-paranoid/"/>
+  <meta name="url" content="http://moorberry.net/blog/rails-2-acts-as-paranoid/">
   
-  <meta name="subject" content="Javascript"/>
-  <meta name="category" content="Javascript"/>
+  <meta name="subject" content="RailsRuby"/>
+  <meta name="category" content="RailsRuby"/>
   
   <meta name="distribution" content="global">
   <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
@@ -106,7 +106,7 @@
   
     <header>
       
-        <h1 class="entry-title">Android Javascript Debugging</h1>
+        <h1 class="entry-title">Rails 2 and Acts_as_paranoid</h1>
       
       
         <p class="meta">
@@ -131,13 +131,13 @@
   
 
 
-<time datetime="2013-08-12T11:23:00-05:00" pubdate data-updated="true">Aug 12<span>th</span>, 2013</time> - 
+<time datetime="2013-08-15T16:31:00-05:00" pubdate data-updated="true">Aug 15<span>th</span>, 2013</time> - 
           
 
 posted in
 <span class="categories">
   
-    <a class='category' href='/blog/categories/javascript/'>Javascript</a>
+    <a class='category' href='/blog/categories/rails/'>Rails</a>, <a class='category' href='/blog/categories/ruby/'>Ruby</a>
   
 </span>
 
@@ -151,29 +151,173 @@ posted in
   
   
   
-    <div class="entry-content"><p>As a web developer, I have to use <code>console.log</code> a lot to see what&#8217;s going on with Javascript in my web applications, and Android Browser does <strong>not</strong> make this <strong>an easy task</strong>.</p>
+    <div class="entry-content"><p>Overrides some basic Active Record methods for the current model so that calling #destroy sets a <em>deleted_at</em> field to the current timestamp.</p>
 
 <!-- more -->
 
 
-<p>Initial searches brought up articles suggesting use of the Android SDK, plugging my phone into my computer, setting up the debug bridge, et cetera. That&#8217;s a lot of work.</p>
+<h2>Setup</h2>
 
-<p>There is a way to do <strong>Javascript debugging</strong> entirely on your phone <strong>without the Android SDK</strong>.</p>
+<p><strong>Create migration file</strong></p>
 
-<p><strong>Install</strong> a log viewer from the Android Market (example: <em>logcat</em>). This shows all of your systems log messages. Most log viewers will let you search/filter. <strong>Search</strong> for the term, &#8221;<em>browser</em>&#8221;. All <code>console.log</code> messages will show up using this keyword.</p>
+<p>acts_as_paranoid, by default, assumes the table has a <em>deleted_at</em> date/time field.  Most normal model operations will work, but there will be some oddities.</p>
 
-<p>One difference from desktop web inspectors: Android Browser <strong>only prints the first argument</strong> from <code>console.log</code>. So instead of:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;here&#39;s my variable &quot;</span><span class="p">,</span> <span class="kd">var</span><span class="p">);</span>
-</span></code></pre></td></tr></table></div></figure>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ script/server generate migration deleted_at:datetime</span></code></pre></td></tr></table></div></figure>
 
 
-<p>you should write it like:</p>
+<p>And then modify your migration file (app/db/migrations/000000000000_add_deleted_at…rb)to look something like:</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;here&#39;s my variable &quot;</span> <span class="o">+</span> <span class="kd">var</span><span class="p">);</span>
-</span></code></pre></td></tr></table></div></figure>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>class AddDeletedAtToWidgets &lt; ActiveRecord::Migration
+</span><span class='line'>  def self.up
+</span><span class='line'>    add_column :widgets, :deleted_at, :datetime, :null =&gt; true
+</span><span class='line'>  end
+</span><span class='line'>
+</span><span class='line'>  def self.down
+</span><span class='line'>    remove_column :widgets, :deleted_at
+</span><span class='line'>  end
+</span><span class='line'>end</span></code></pre></td></tr></table></div></figure>
+
+
+<p><strong>Add the gem source to your Gemfile</strong> (app/Gemfile)</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>gem 'acts_as_paranoid', :git =&gt; 'git://github.com/technoweenie/acts_as_paranoid.git', :branch =&gt; 'integration_gem'</span></code></pre></td></tr></table></div></figure>
+
+
+<p><strong>Run bundler</strong></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ bundle install</span></code></pre></td></tr></table></div></figure>
+
+
+<p><strong>Add the requestor to your model</strong> (app/models/widgets.rb)</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>class Widget &lt; ActiveRecord::Base
+</span><span class='line'>  acts_as_paranoid
+</span><span class='line'>end</span></code></pre></td></tr></table></div></figure>
+
+
+<p>If you&#8217;d like to set a <strong>custom column for acts_as_paranoid</strong> just use the following options in your class method:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>acts_as_paranoid :with =&gt; 'destroyed_at'</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Use</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Widget.find(:all)
+</span><span class='line'># =&gt; SELECT * FROM widgets WHERE widgets.deleted_at IS NULL</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Widget.find(:first, :conditions =&gt; ['title = ?', 'test'], :order =&gt; 'title')
+</span><span class='line'># =&gt; SELECT * FROM widgets WHERE widgets.deleted_at IS NULL AND title = 'test' ORDER BY title LIMIT 1</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Widget.find_with_deleted(:all)
+</span><span class='line'># =&gt; SELECT * FROM widgets</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Widget.find(:all, :with_deleted =&gt; true)
+</span><span class='line'># =&gt; SELECT * FROM widgets</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Widget.find_with_deleted(1).deleted?
+</span><span class='line'># =&gt; Returns true if the record was previously destroyed, false if not </span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Widget.count
+</span><span class='line'># =&gt; SELECT COUNT(*) FROM widgets WHERE widgets.deleted_at IS NULL</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Widget.count ['title = ?', 'test']
+</span><span class='line'># =&gt; SELECT COUNT(*) FROM widgets WHERE widgets.deleted_at IS NULL AND title = 'test'</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Widget.count_with_deleted
+</span><span class='line'># =&gt; SELECT COUNT(*) FROM widgets</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Widget.delete_all
+</span><span class='line'># =&gt; UPDATE widgets SET deleted_at = '2013-08-15 13:01:59'</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Widget.delete_all!
+</span><span class='line'># =&gt; DELETE FROM widgets</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>@widget.destroy
+</span><span class='line'># =&gt; UPDATE widgets SET deleted_at = '2013-08-15 13:01:59' WHERE id = 1</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>@widget.destroy!
+</span><span class='line'># =&gt; DELETE FROM widgets WHERE id = 1</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>@widget.recover!
+</span><span class='line'># =&gt; UPDATE widgets SET deleted_at = NULL WHERE id = 1</span></code></pre></td></tr></table></div></figure>
 
 </div>
   
@@ -184,10 +328,8 @@ posted in
         <p>Let me know how you use it - <a href="#footer-widgets" alt="Contact Michael" title="Contact Michael">contact me here.</a></p>
       </div>
       
-        <a class="pull-left" href="/blog/openoffice-merge-and-sort-data/" title="Previous Post: OpenOffice: Merge and Sort Data">&laquo; OpenOffice: Merge and Sort Data</a>
+        <a class="pull-left" href="/blog/android-javascript-debugging/" title="Previous Post: Android Javascript Debugging">&laquo; Android Javascript Debugging</a>
       
-      
-        <a class="pull-right" href="/blog/rails-2-acts-as-paranoid/" title="Next Post: Rails 2 and acts_as_paranoid">Rails 2 and acts_as_paranoid &raquo;</a>
       
     </footer>
   
@@ -330,8 +472,8 @@ posted in
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://moorberry.net/blog/android-javascript-debugging/';
-        var disqus_url = 'http://moorberry.net/blog/android-javascript-debugging/';
+        var disqus_identifier = 'http://moorberry.net/blog/rails-2-acts-as-paranoid/';
+        var disqus_url = 'http://moorberry.net/blog/rails-2-acts-as-paranoid/';
         var disqus_script = 'embed.js';
       
     (function () {
