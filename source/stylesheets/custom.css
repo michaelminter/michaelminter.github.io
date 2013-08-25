@@ -1,3 +1,11 @@
+#header-widgets div {
+  padding:20px 0;
+  text-align:center;
+}
+#header-widgets div img {
+  margin:0;
+}
+
 #front-wrapper {
   border-bottom:none;
 }
