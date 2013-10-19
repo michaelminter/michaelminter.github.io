@@ -33,7 +33,20 @@
       </footer>
     {% endif %}
   {% else %}
-    <div class="entry-content">{{ content }}</div>
+    <div class="entry-content">
+      <div id="ad_container_inside_article" style="clear:both;height:90px;margin:20px auto;padding:0;width:720px;">
+        <script type="text/javascript"><!--
+        google_ad_client = "ca-pub-7424434269432645";
+        /* moorberry.net (octopress) */
+        google_ad_slot = "8992473921";
+        google_ad_width = 728;
+        google_ad_height = 90;
+        //-->
+        </script>
+        <script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script>
+      </div>
+      {{ content }}
+    </div>
   {% endif %}
   {% unless index %}
     <footer>
