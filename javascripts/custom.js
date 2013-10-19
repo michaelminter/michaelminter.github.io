@@ -9,6 +9,8 @@ $(function(){
     );
   }
 
+  $('#ad_container_inside_article').appendTo('.entry-content p:eq(3)')
+
   // $(".tweet").tweet({
   //   username: $('.tweet').data('twitter-user'),
   //   join_text: "auto",
