@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: data | Michael Minter]]></title>
+  <title><![CDATA[Category: data | Moorberry Solutions]]></title>
   <link href="http://moorberry.net/blog/categories/data/atom.xml" rel="self"/>
   <link href="http://moorberry.net/"/>
-  <updated>2013-10-23T09:14:36-05:00</updated>
+  <updated>2013-10-29T23:21:28-05:00</updated>
   <id>http://moorberry.net/</id>
   <author>
     <name><![CDATA[Michael Minter]]></name>
@@ -50,7 +50,7 @@
 
 <p><em>This option prevents column headers from being sorted with the rest of the data. Since we don't have any column headers, like in a CSV file, we need to deactivate this feature.</em></p>
 
-<p><img src="http://moorberry.net/images/posts/openoffice-1.jpg" alt="OpenOffice" /></p>
+<p><img src="http://moorberry.net/images/posts/openoffice-1.jpg" alt="OpenOffice" width="100%" /></p>
 
 <h3>Prepare</h3>
 
@@ -76,7 +76,7 @@
 = A1 &amp; ":" &amp; B1 &amp; ":" &amp; C1
 </code></p>
 
-<p><img src="http://moorberry.net/images/posts/openoffice-2.jpg" alt="OpenOffice" /></p>
+<p><img src="http://moorberry.net/images/posts/openoffice-2.jpg" alt="OpenOffice" width="100%" /></p>
 
 <p>Where cell <strong>A1</strong> contains <code>"</code>, cell <strong>B1</strong> contains <code>actionmailer</code>, and cell <strong>C1</strong> contains <code>",</code> returns <code>"actionamailer",</code>.</p>
 
@@ -98,7 +98,7 @@
 
 <p>Click <code>OK</code></p>
 
-<p><img src="http://moorberry.net/images/posts/openoffice-3.jpg" alt="OpenOffice" /></p>
+<p><img src="http://moorberry.net/images/posts/openoffice-3.jpg" alt="OpenOffice" width="100%" /></p>
 ]]></content>
   </entry>
   

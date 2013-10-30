@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: Javascript | Michael Minter]]></title>
+  <title><![CDATA[Category: Javascript | Moorberry Solutions]]></title>
   <link href="http://moorberry.net/blog/categories/javascript/atom.xml" rel="self"/>
   <link href="http://moorberry.net/"/>
-  <updated>2013-10-23T09:14:36-05:00</updated>
+  <updated>2013-10-29T23:21:28-05:00</updated>
   <id>http://moorberry.net/</id>
   <author>
     <name><![CDATA[Michael Minter]]></name>
@@ -233,7 +233,7 @@ airbrake ("This goose won't cook.");
 <!--more-->
 
 
-<p><a href="http://moorberry.net/images/posts/versus.jpg"><img src="http://moorberry.net/images/posts/versus.jpg" alt="Versus" /></a></p>
+<p><a href="http://moorberry.net/images/posts/versus.jpg"><img src="http://moorberry.net/images/posts/versus.jpg" alt="Versus" width="100%" /></a></p>
 
 <p>In opening, I’d like to express, that I hold no animosity for Javascript. Actually I quite often fancy a touch of its elegant lure and almost regularly indulge my viewers with its properties to control aesthetics at a dynamic fashion. But it has its place. If PHP can serve the same purpose, than its obvious strengths, should not be taken for granted.</p>
 

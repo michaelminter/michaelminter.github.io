@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: PHP | Michael Minter]]></title>
+  <title><![CDATA[Category: PHP | Moorberry Solutions]]></title>
   <link href="http://moorberry.net/blog/categories/php/atom.xml" rel="self"/>
   <link href="http://moorberry.net/"/>
-  <updated>2013-10-23T09:14:36-05:00</updated>
+  <updated>2013-10-29T23:21:28-05:00</updated>
   <id>http://moorberry.net/</id>
   <author>
     <name><![CDATA[Michael Minter]]></name>
@@ -143,7 +143,7 @@ if(!function_exists('imagecreatetruecolor')) {</p>
 
 
 
-<div style="margin:0 auto 20px;width:600px;"><img src="http://moorberry.net/images/posts/checkout01.jpg" title="SendGrid" alt="SendGrid" /></div>
+<div style="margin:0 auto 20px;width:600px;"><img src="http://moorberry.net/images/posts/checkout01.jpg" title="SendGrid" alt="SendGrid" width="100%" /></div>
 
 
 <p>I’m going to explain why the API objects work and what happens when they’re called. There’s a few different ways that you could go about setting up the product and/or service details. So I’ll keep this post relative to the main focus points and let you handle the before and after parts on an individual basis.</p>
@@ -174,7 +174,7 @@ $paypal->setNVP("INVNUM", $uniqueID); // personal invoice number</p>
 
 <p>getResponse() sends the user’s browser to Paypal for authentication of credit information. Specifically to a URL that you’ll have to variably set between test mode (sandbox) and live, in the file named etc/NVP/PayPalNVP.ini.</p>
 
-<div style="margin:0 auto 20px;width:600px;"><img src="http://moorberry.net/images/posts/checkout02.jpg" title="SendGrid" alt="SendGrid" /></div>
+<div style="margin:0 auto 20px;width:600px;"><img src="http://moorberry.net/images/posts/checkout02.jpg" title="SendGrid" alt="SendGrid" width="100%" /></div>
 
 
 <h2>Completing the Sale</h2>
@@ -301,7 +301,7 @@ Array
 <!--more-->
 
 
-<p><a href="http://moorberry.net/images/posts/versus.jpg"><img src="http://moorberry.net/images/posts/versus.jpg" alt="Versus" /></a></p>
+<p><a href="http://moorberry.net/images/posts/versus.jpg"><img src="http://moorberry.net/images/posts/versus.jpg" alt="Versus" width="100%" /></a></p>
 
 <p>In opening, I’d like to express, that I hold no animosity for Javascript. Actually I quite often fancy a touch of its elegant lure and almost regularly indulge my viewers with its properties to control aesthetics at a dynamic fashion. But it has its place. If PHP can serve the same purpose, than its obvious strengths, should not be taken for granted.</p>
 

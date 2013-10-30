@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: API | Michael Minter]]></title>
+  <title><![CDATA[Category: API | Moorberry Solutions]]></title>
   <link href="http://moorberry.net/blog/categories/api/atom.xml" rel="self"/>
   <link href="http://moorberry.net/"/>
-  <updated>2013-10-23T09:14:36-05:00</updated>
+  <updated>2013-10-29T23:21:28-05:00</updated>
   <id>http://moorberry.net/</id>
   <author>
     <name><![CDATA[Michael Minter]]></name>
@@ -97,17 +97,17 @@
 
 <p>Overcome this nuisance by touching the site at least every hour so that the dyno doesn't have time to begin idling.</p>
 
-<p><img src="http://moorberry.net/images/posts/console_ping.png" alt="console preview" style="width:710px;" /></p>
+<p><img src="http://moorberry.net/images/posts/console_ping.png" alt="console preview" style="width:100%;" /></p>
 
 <p>You can sign up for a service provider, <strong>free</strong> at <a href="http://pingdom.com" target="_blank" style="font-weight:bold;">Pingdom</a>, that will ping your application at designated intervals.</p>
 
 <p><strong>Ping</strong> is a network protocol that sends ICMP <em>echo request</em> packets to the target host and waits for a response.</p>
 
-<p><a href="http://pingdom.com" target="_blank"><img src="http://moorberry.net/images/posts/pingdom_dashboard.png" alt="Pingdom" style="width:710px;" /></a></p>
+<p><a href="http://pingdom.com" target="_blank"><img src="http://moorberry.net/images/posts/pingdom_dashboard.png" alt="Pingdom" style="width:100%;" /></a></p>
 
 <p><a href="http://pingdom.com" target="_blank" style="font-weight:bold;">Pingdom</a> is loaded with features; including availability to a public page to view when the last time your host was checked, alerts via email or SMS, and many other features.</p>
 
-<p><a href="http://pingdom.com" target="_blank"><img src="http://moorberry.net/images/posts/pingdom_public.png" style="border:none;" alt="Pingdom" style="width:710px;" /></a></p>
+<p><a href="http://pingdom.com" target="_blank"><img src="http://moorberry.net/images/posts/pingdom_public.png" style="border:none;" alt="Pingdom" style="width:100%;" /></a></p>
 
 <p>I chose to sample <a href="http://pingdom.com" target="_blank" style="font-weight:bold;">Pingdom</a> because it affords the least amount of work in setting up at a free price. Please post any alternatives you can think of in the comments below.</p>
 ]]></content>
@@ -123,7 +123,7 @@
 <!--more-->
 
 
-<p><img src="http://moorberry.net/images/posts/sendgrid-banner.jpeg" title="SendGrid" alt="SendGrid" style="width:710px;" /></p>
+<p><img src="http://moorberry.net/images/posts/sendgrid-banner.jpeg" title="SendGrid" alt="SendGrid" style="width:100%;" /></p>
 
 <p>Recently I’ve been using my new skills while working on my own applications using <a href="http://sendgrid.tellapal.com/a/clk/1zzx0" title="SendGrid">SendGrid</a> as an alternative SMTP and email analytics tool. And I’ve only really come across one major programmable error. If you use a desktop client instead of a browser for viewing emails, as I do oftentimes, then this issue might not be so apparent (till now).</p>
 
@@ -166,7 +166,7 @@ end
 
 
 
-<div style="margin:0 auto 20px;width:600px;"><img src="http://moorberry.net/images/posts/checkout01.jpg" title="SendGrid" alt="SendGrid" /></div>
+<div style="margin:0 auto 20px;width:600px;"><img src="http://moorberry.net/images/posts/checkout01.jpg" title="SendGrid" alt="SendGrid" width="100%" /></div>
 
 
 <p>I’m going to explain why the API objects work and what happens when they’re called. There’s a few different ways that you could go about setting up the product and/or service details. So I’ll keep this post relative to the main focus points and let you handle the before and after parts on an individual basis.</p>
@@ -197,7 +197,7 @@ $paypal->setNVP("INVNUM", $uniqueID); // personal invoice number</p>
 
 <p>getResponse() sends the user’s browser to Paypal for authentication of credit information. Specifically to a URL that you’ll have to variably set between test mode (sandbox) and live, in the file named etc/NVP/PayPalNVP.ini.</p>
 
-<div style="margin:0 auto 20px;width:600px;"><img src="http://moorberry.net/images/posts/checkout02.jpg" title="SendGrid" alt="SendGrid" /></div>
+<div style="margin:0 auto 20px;width:600px;"><img src="http://moorberry.net/images/posts/checkout02.jpg" title="SendGrid" alt="SendGrid" width="100%" /></div>
 
 
 <h2>Completing the Sale</h2>

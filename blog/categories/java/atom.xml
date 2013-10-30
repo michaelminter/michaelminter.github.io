@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: Java | Michael Minter]]></title>
+  <title><![CDATA[Category: Java | Moorberry Solutions]]></title>
   <link href="http://moorberry.net/blog/categories/java/atom.xml" rel="self"/>
   <link href="http://moorberry.net/"/>
-  <updated>2013-10-23T09:14:36-05:00</updated>
+  <updated>2013-10-29T23:21:28-05:00</updated>
   <id>http://moorberry.net/</id>
   <author>
     <name><![CDATA[Michael Minter]]></name>
@@ -32,7 +32,7 @@
 <pre><code>Applications &gt; Utilities &gt; Java Console
 </code></pre>
 
-<p><a href="http://moorberry.net/images/posts/java-console.png"><img src="http://moorberry.net/images/posts/java-console.png" alit="Java Console in Mac OS X 10.8" /></a></p>
+<p><a href="http://moorberry.net/images/posts/java-console.png"><img src="http://moorberry.net/images/posts/java-console.png" alit="Java Console in Mac OS X 10.8" width="100%" /></a></p>
 
 <p>Click the <code>Show console</code> radio button and select any other options you'd like to show up while the Java console is running.</p>
 ]]></content>
