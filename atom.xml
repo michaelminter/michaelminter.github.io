@@ -4,7 +4,7 @@
   <title><![CDATA[Moorberry Solutions]]></title>
   <link href="http://moorberry.net/atom.xml" rel="self"/>
   <link href="http://moorberry.net/"/>
-  <updated>2013-12-11T22:01:55-06:00</updated>
+  <updated>2013-12-11T22:04:51-06:00</updated>
   <id>http://moorberry.net/</id>
   <author>
     <name><![CDATA[Michael Minter]]></name>
@@ -41,6 +41,8 @@
 </span><span class='line'><span class="k">ORDER</span> <span class="k">BY</span> <span class="n">distance</span> <span class="k">ASC</span><span class="p">;</span>
 </span></code></pre></td></tr></table></div></figure>
 
+
+<p>Replace <code>#{latitude}</code> with the value for the latitude you want to match against the database and do the same for <code>#{longitude}</code></p>
 
 <p><strong>Distance</strong> is measured in miles.</p>
 
