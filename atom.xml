@@ -4,7 +4,7 @@
   <title><![CDATA[Moorberry Solutions]]></title>
   <link href="http://moorberry.net/atom.xml" rel="self"/>
   <link href="http://moorberry.net/"/>
-  <updated>2013-12-11T20:41:33-06:00</updated>
+  <updated>2013-12-11T21:45:33-06:00</updated>
   <id>http://moorberry.net/</id>
   <author>
     <name><![CDATA[Michael Minter]]></name>
@@ -42,7 +42,7 @@
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p><strong>note:</strong> <em>distance</em> is equated to miles.</p>
+<p><strong>note:</strong> <em>distance</em> is measured in miles.</p>
 ]]></content>
   </entry>
   
