@@ -4,7 +4,7 @@
   <title><![CDATA[Moorberry Solutions]]></title>
   <link href="http://moorberry.net/atom.xml" rel="self"/>
   <link href="http://moorberry.net/"/>
-  <updated>2013-12-11T22:05:50-06:00</updated>
+  <updated>2013-12-11T22:13:03-06:00</updated>
   <id>http://moorberry.net/</id>
   <author>
     <name><![CDATA[Michael Minter]]></name>
@@ -24,6 +24,19 @@
 
 
 <p>Searching for a user by distance, in your database, is easy with <strong>Postgres</strong>. Just create a users table with, at minimum, columns named <em>latitude</em> and <em>longitude</em>.</p>
+
+<h2>Data</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">postgres</span><span class="o">=</span><span class="c"># SELECT * FROM users;</span>
+</span><span class='line'>+----+------+----------+-----------+
+</span><span class='line'>| id | name | latitude | longitude |
+</span><span class='line'>+----+------+----------+-----------+
+</span></code></pre></td></tr></table></div></figure>
+
 
 <h2>SQL</h2>
 
