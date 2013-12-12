@@ -4,7 +4,7 @@
   <title><![CDATA[Moorberry Solutions]]></title>
   <link href="http://moorberry.net/atom.xml" rel="self"/>
   <link href="http://moorberry.net/"/>
-  <updated>2013-12-11T20:36:03-06:00</updated>
+  <updated>2013-12-11T20:40:47-06:00</updated>
   <id>http://moorberry.net/</id>
   <author>
     <name><![CDATA[Michael Minter]]></name>
@@ -14,10 +14,10 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Postgres: Search and Sort by Distance with Latitude and Longitude]]></title>
-    <link href="http://moorberry.net/blog/postgres-search-distance-with-latitude-and-longitude/"/>
+    <title type="html"><![CDATA[Postgres: Search and Sort by Distance]]></title>
+    <link href="http://moorberry.net/blog/postgres-search-distance/"/>
     <updated>2013-12-11T13:01:00-06:00</updated>
-    <id>http://moorberry.net/blog/postgres-search-distance-with-latitude-and-longitude</id>
+    <id>http://moorberry.net/blog/postgres-search-distance</id>
     <content type="html"><![CDATA[<p>Request users by radial distance and sort by nearest to farthest, vice versa, or whatever other attributes you&#8217;d like to include.</p>
 
 <!-- more -->
