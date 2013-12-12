@@ -4,7 +4,7 @@
   <title><![CDATA[Moorberry Solutions]]></title>
   <link href="http://moorberry.net/atom.xml" rel="self"/>
   <link href="http://moorberry.net/"/>
-  <updated>2013-12-11T22:13:03-06:00</updated>
+  <updated>2013-12-11T22:17:08-06:00</updated>
   <id>http://moorberry.net/</id>
   <author>
     <name><![CDATA[Michael Minter]]></name>
@@ -60,6 +60,8 @@
 <p><strong>Distance</strong> is measured in miles.</p>
 
 <p>To change the distance to kilometers&mdash;multiply the output number by 1.609344 (1 mile == 1.609344 kilometers).</p>
+
+<p>This will also work in MySQL and likely Oracle.</p>
 ]]></content>
   </entry>
   
