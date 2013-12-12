@@ -9,7 +9,7 @@
   <meta name="author" content="Michael Minter">
 
   
-  <meta name="description" content="Request users by radial distance and sort by nearest to farthest, vice versa, or whatever other attributes you&#8217;d like to include. Searching for &hellip;">
+  <meta name="description" content="Request users by radial distance and sort by nearest to farthest, vice versa, or whatever other attributes you&#8217;d like to include. ">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -20,7 +20,7 @@
   <meta name="og:type" content="website" />
   <meta name="og:site_name" content="Moorberry Solutions" />
   <meta name="og:title" content="Moorberry Solutions" />
-  <meta name="og:description" content="Request users by radial distance and sort by nearest to farthest, vice versa, or whatever other attributes you&#8217;d like to include. Searching for &hellip;" />
+  <meta name="og:description" content="Request users by radial distance and sort by nearest to farthest, vice versa, or whatever other attributes you&#8217;d like to include. " />
   <meta name="og:url" content="http://moorberry.net/blog/index.html"/>
   <meta name="url" content="http://moorberry.net/blog/index.html">
   
@@ -83,30 +83,12 @@
 
   <div class="entry-content"><p>Request users by radial distance and sort by nearest to farthest, vice versa, or whatever other attributes you&#8217;d like to include.</p>
 
-<!-- read_more -->
-
-
-<p>Searching for a user by distance, in your database, is easy with <strong>Postgres</strong>. Just create a users table with, at minimum, columns named <em>latitude</em> and <em>longitude</em>.</p>
-
-<h2>SQL</h2>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>SELECT name, distance
-</span><span class='line'>FROM 
-</span><span class='line'>( SELECT name, ((ACOS(SIN(#{latitude} * PI() / 180) * SIN(u.latitude * PI() / 180) + COS(#{latitude} * PI() / 180) * COS(u.latitude * PI() / 180) * COS((#{longitude} - u.longitude) * PI() / 180)) * 180 / PI()) * 60 * 1.1515) as distance  
-</span><span class='line'>FROM users u ) d
-</span><span class='line'>WHERE distance &lt;= 5 
-</span><span class='line'>ORDER BY distance ASC;</span></code></pre></td></tr></table></div></figure>
-
-
-<p><strong>note:</strong> <em>distance</em> is equated to miles.</p>
 </div>
   
+  
+    <footer>
+      <a rel="full-article" href="/blog/postgres-search-distance-with-latitude-and-longitude/">Read on &rarr;</a>
+    </footer>
   
 
 
