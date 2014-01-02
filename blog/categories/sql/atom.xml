@@ -4,7 +4,7 @@
   <title><![CDATA[Category: SQL | Moorberry Solutions]]></title>
   <link href="http://moorberry.net/blog/categories/sql/atom.xml" rel="self"/>
   <link href="http://moorberry.net/"/>
-  <updated>2013-12-25T10:03:26-06:00</updated>
+  <updated>2014-01-02T10:00:38-06:00</updated>
   <id>http://moorberry.net/</id>
   <author>
     <name><![CDATA[Michael Minter]]></name>
@@ -39,7 +39,7 @@ postgres=# SELECT * FROM users;
 <p><code>sql
 SELECT name, distance
 FROM
-( SELECT name, ((ACOS(SIN(#{latitude} * PI() / 180) * SIN(u.latitude * PI() / 180) + COS(#{latitude} * PI() / 180) * COS(u.latitude * PI() / 180) * COS((#{longitude} - u.longitude) * PI() / 180)) * 180 / PI()) * 60 * 1.1515) as distance  
+( SELECT name, ((ACOS(SIN(#{latitude} * PI() / 180) * SIN(u.latitude * PI() / 180) + COS(#{latitude} * PI() / 180) * COS(u.latitude * PI() / 180) * COS((#{longitude} - u.longitude) * PI() / 180)) * 180 / PI()) * 60 * 1.1515) as distance
 FROM users u ) d
 WHERE distance &lt;= 5
 ORDER BY distance ASC;
@@ -51,7 +51,7 @@ ORDER BY distance ASC;
 
 <p>Replace <code>#{latitude}</code> with the value for the latitude you want to match against the database and do the same for <code>#{longitude}</code></p>
 
-<p>This will also work in MySQL and likely Oracle.</p>
+<p>This will work in any SQL relational database, including <strong>MySQL</strong> and <strong>Oracle</strong>.</p>
 ]]></content>
   </entry>
   
