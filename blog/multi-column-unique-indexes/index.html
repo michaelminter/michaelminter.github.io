@@ -1,0 +1,404 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Multi Column Unique Indexes - Moorberry Solutions</title>
+  <meta name="author" content="Michael Minter">
+
+  
+  <meta name="description" content="SQL Multi Column Unique Indexes When a database key is created from a combination of two or more columns, the key is called a composite key. Each &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <meta name="og:type" content="website" />
+  <meta name="og:site_name" content="Moorberry Solutions" />
+  <meta name="og:title" content="Multi Column Unique Indexes" />
+  <meta name="og:description" content="SQL Multi Column Unique Indexes When a database key is created from a combination of two or more columns, the key is called a composite key. Each &hellip;" />
+  <meta name="og:url" content="http://moorberry.net/blog/multi-column-unique-indexes/"/>
+  <meta name="url" content="http://moorberry.net/blog/multi-column-unique-indexes/">
+  
+  <meta name="subject" content="SQL"/>
+  <meta name="category" content="SQL"/>
+  
+  <meta name="distribution" content="global">
+
+  
+  <link rel="canonical" href="http://moorberry.net/blog/multi-column-unique-indexes">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/styles.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Moorberry Solutions" type="application/atom+xml">
+  
+</head>
+
+<body   >
+  <div class="aux-container">
+    <a id="nav-toggle" href="#sidr"></a>
+    <a id="search-toggle"></a>
+</div>
+
+<header class="header-container clearfix">
+        <a href="/"><img src="/images/ah-frame.jpg" onerror="this.onerror=null; this.src='ah-frame.jpg'" alt="Moorberry"></a>
+</header>
+
+
+  <div class="main-container">
+    <div class="main wrapper clearfix">
+    	
+    	<aside>
+			
+			  	<div class="search-container">
+					<form action="http://google.com/search" method="get">
+						<fieldset role="search">
+							<input type="hidden" name="q" value="site:moorberry.net" />
+							<input class="search-field" type="text" name="q" results="0" placeholder=""/>
+							<input class="submit" type="submit" value=""/>
+						</fieldset>
+					</form>
+				</div>
+			
+		  <div id="main-nav">
+	<nav>
+		<ul>
+			<li>
+      	
+					<h3>Recent Posts</h3>
+<ul>
+	
+    <li>
+    	<a href="/blog/multi-column-unique-indexes/" title="Multi Column Unique Indexes">Multi Column Unique Indexes</a>
+    </li>
+    
+    <li>
+    	<a href="/blog/postgres-search-distance/" title="Postgres: Search and Sort by Distance">Postgres: Search and Sort by Distance</a>
+    </li>
+    
+    <li>
+    	<a href="/blog/rails-2-acts-as-paranoid/" title="Rails 2 and acts_as_paranoid">Rails 2 and Acts_as_paranoid</a>
+    </li>
+    
+    <li>
+    	<a href="/blog/android-javascript-debugging/" title="Android Javascript Debugging">Android Javascript Debugging</a>
+    </li>
+    
+    <li>
+    	<a href="/blog/openoffice-merge-and-sort-data/" title="OpenOffice: Merge and Sort Data">OpenOffice: Merge and Sort Data</a>
+    </li>
+    
+</ul>
+
+
+
+
+<section class="well" id="google_adspace_container" style="border-top: 5px solid rgb(55, 77, 97);margin-top:15px;padding-top:15px;">
+  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <!-- moorberry-250x250 -->
+  <ins class="adsbygoogle"
+       style="display:inline-block;width:250px;height:250px"
+       data-ad-client="ca-pub-7424434269432645"
+       data-ad-slot="8000817928"></ins>
+  <script>
+    (adsbygoogle = window.adsbygoogle || []).push({});
+  </script>
+</section>
+
+				
+      </li>
+			<li>
+       	<ul>
+				  <li><span>Projects - </span><a href="http://www.codekindness.com" target="_blank">CodeKindness</a>
+        	<li><span>Github - </span><a href="http://www.github.com/michaelminter" target="_blank">github.com/michaelminter</a></li>
+          <li><span>Twitter - </span><a href="http://www.twitter.com/mothore" target="_blank">@mothore</a></li>
+          <li><span>Email - </span><a href="mailto:michael@moorberry.net" target="_blank">michael at moorberry</a></li>
+        </ul>
+      </li>
+    </ul>
+  </nav>
+</div>
+		</aside>
+		
+      <div>
+<article class="post">
+	<header>
+  <div class="article-tags">
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/sql/'>SQL</a>
+  
+</span>
+
+
+  </div>
+  
+    <h1>
+      Multi Column Unique Indexes
+    </h1>
+  
+</header>
+<section id="post-content">
+	
+		<p>When a database key is created from a combination of two or more columns, the key is called a <strong>composite key</strong>. Each column may not be unique by itself within the database table but when combined with the other column(s) in the composite key, the combination is unique.</p>
+
+<!-- more -->
+
+
+<p>The following data is taken from the <strong>Google DFP Report API</strong> example source code.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">CREATE</span> <span class="k">TABLE</span> <span class="o">`</span><span class="n">src_dfp</span><span class="o">`</span> <span class="p">(</span>
+</span><span class='line'>  <span class="o">`</span><span class="n">id</span><span class="o">`</span> <span class="nb">int</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span> <span class="n">unsigned</span> <span class="k">NOT</span> <span class="k">NULL</span> <span class="n">AUTO_INCREMENT</span><span class="p">,</span>
+</span><span class='line'>  <span class="o">`</span><span class="n">ad_unit_1</span><span class="o">`</span> <span class="nb">varchar</span><span class="p">(</span><span class="mi">255</span><span class="p">)</span> <span class="k">COLLATE</span> <span class="n">utf8_unicode_ci</span> <span class="k">DEFAULT</span> <span class="k">NULL</span><span class="p">,</span>
+</span><span class='line'>  <span class="o">`</span><span class="n">ad_unit_2</span><span class="o">`</span> <span class="nb">varchar</span><span class="p">(</span><span class="mi">255</span><span class="p">)</span> <span class="k">COLLATE</span> <span class="n">utf8_unicode_ci</span> <span class="k">DEFAULT</span> <span class="k">NULL</span><span class="p">,</span>
+</span><span class='line'>  <span class="o">`</span><span class="n">ad_unit_id_1</span><span class="o">`</span> <span class="nb">int</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span> <span class="k">DEFAULT</span> <span class="k">NULL</span><span class="p">,</span>
+</span><span class='line'>  <span class="o">`</span><span class="n">ad_unit_id_2</span><span class="o">`</span> <span class="nb">int</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span> <span class="k">DEFAULT</span> <span class="k">NULL</span><span class="p">,</span>
+</span><span class='line'>  <span class="o">`</span><span class="n">advertiser_id</span><span class="o">`</span> <span class="nb">int</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span> <span class="k">DEFAULT</span> <span class="k">NULL</span><span class="p">,</span>
+</span><span class='line'>  <span class="o">`</span><span class="n">advertiser_name</span><span class="o">`</span> <span class="nb">varchar</span><span class="p">(</span><span class="mi">255</span><span class="p">)</span> <span class="k">COLLATE</span> <span class="n">utf8_unicode_ci</span> <span class="k">DEFAULT</span> <span class="k">NULL</span><span class="p">,</span>
+</span><span class='line'>  <span class="o">`</span><span class="n">creative_id</span><span class="o">`</span> <span class="nb">bigint</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span> <span class="k">DEFAULT</span> <span class="k">NULL</span><span class="p">,</span>
+</span><span class='line'>  <span class="o">`</span><span class="n">creative_name</span><span class="o">`</span> <span class="nb">varchar</span><span class="p">(</span><span class="mi">255</span><span class="p">)</span> <span class="k">COLLATE</span> <span class="n">utf8_unicode_ci</span> <span class="k">DEFAULT</span> <span class="k">NULL</span><span class="p">,</span>
+</span><span class='line'>  <span class="o">`</span><span class="nb">date</span><span class="o">`</span> <span class="nb">date</span> <span class="k">DEFAULT</span> <span class="k">NULL</span><span class="p">,</span>
+</span><span class='line'>  <span class="o">`</span><span class="n">line_item_cost_per_unit</span><span class="o">`</span> <span class="nb">int</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span> <span class="k">DEFAULT</span> <span class="k">NULL</span><span class="p">,</span>
+</span><span class='line'>  <span class="o">`</span><span class="n">line_item_cost_type</span><span class="o">`</span> <span class="nb">varchar</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span> <span class="k">COLLATE</span> <span class="n">utf8_unicode_ci</span> <span class="k">DEFAULT</span> <span class="k">NULL</span><span class="p">,</span>
+</span><span class='line'>  <span class="o">`</span><span class="n">line_item_end_date_time</span><span class="o">`</span> <span class="n">datetime</span> <span class="k">DEFAULT</span> <span class="k">NULL</span><span class="p">,</span>
+</span><span class='line'>  <span class="o">`</span><span class="n">line_item_id</span><span class="o">`</span> <span class="nb">int</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span> <span class="k">DEFAULT</span> <span class="k">NULL</span><span class="p">,</span>
+</span><span class='line'>  <span class="o">`</span><span class="n">line_item_name</span><span class="o">`</span> <span class="nb">varchar</span><span class="p">(</span><span class="mi">255</span><span class="p">)</span> <span class="k">COLLATE</span> <span class="n">utf8_unicode_ci</span> <span class="k">DEFAULT</span> <span class="k">NULL</span><span class="p">,</span>
+</span><span class='line'>  <span class="o">`</span><span class="n">line_item_start_date_time</span><span class="o">`</span> <span class="n">datetime</span> <span class="k">DEFAULT</span> <span class="k">NULL</span><span class="p">,</span>
+</span><span class='line'>  <span class="o">`</span><span class="n">line_item_type</span><span class="o">`</span> <span class="nb">varchar</span><span class="p">(</span><span class="mi">255</span><span class="p">)</span> <span class="k">COLLATE</span> <span class="n">utf8_unicode_ci</span> <span class="k">DEFAULT</span> <span class="k">NULL</span><span class="p">,</span>
+</span><span class='line'>  <span class="o">`</span><span class="n">merged_ad_server_clicks</span><span class="o">`</span> <span class="nb">int</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span> <span class="k">DEFAULT</span> <span class="k">NULL</span><span class="p">,</span>
+</span><span class='line'>  <span class="o">`</span><span class="n">merged_ad_server_impressions</span><span class="o">`</span> <span class="nb">int</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span> <span class="k">DEFAULT</span> <span class="k">NULL</span><span class="p">,</span>
+</span><span class='line'>  <span class="o">`</span><span class="n">order_end_date_time</span><span class="o">`</span> <span class="n">datetime</span> <span class="k">DEFAULT</span> <span class="k">NULL</span><span class="p">,</span>
+</span><span class='line'>  <span class="o">`</span><span class="n">order_id</span><span class="o">`</span> <span class="nb">int</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span> <span class="k">DEFAULT</span> <span class="k">NULL</span><span class="p">,</span>
+</span><span class='line'>  <span class="o">`</span><span class="n">order_name</span><span class="o">`</span> <span class="nb">varchar</span><span class="p">(</span><span class="mi">255</span><span class="p">)</span> <span class="k">COLLATE</span> <span class="n">utf8_unicode_ci</span> <span class="k">DEFAULT</span> <span class="k">NULL</span><span class="p">,</span>
+</span><span class='line'>  <span class="o">`</span><span class="n">order_start_date_time</span><span class="o">`</span> <span class="n">datetime</span> <span class="k">DEFAULT</span> <span class="k">NULL</span><span class="p">,</span>
+</span><span class='line'>  <span class="o">`</span><span class="n">created_at</span><span class="o">`</span> <span class="n">datetime</span> <span class="k">DEFAULT</span> <span class="n">NOW</span><span class="p">(),</span>
+</span><span class='line'>  <span class="o">`</span><span class="n">updated_at</span><span class="o">`</span> <span class="n">datetime</span> <span class="k">DEFAULT</span> <span class="k">NULL</span><span class="p">,</span>
+</span><span class='line'>  <span class="k">PRIMARY</span> <span class="k">KEY</span> <span class="p">(</span><span class="o">`</span><span class="n">id</span><span class="o">`</span><span class="p">),</span>
+</span><span class='line'>  <span class="k">UNIQUE</span> <span class="k">KEY</span> <span class="o">`</span><span class="n">composite_dfp</span><span class="o">`</span> <span class="p">(</span><span class="o">`</span><span class="nb">date</span><span class="o">`</span><span class="p">,</span><span class="o">`</span><span class="n">ad_unit_id_1</span><span class="o">`</span><span class="p">,</span><span class="o">`</span><span class="n">ad_unit_id_2</span><span class="o">`</span><span class="p">,</span><span class="o">`</span><span class="n">advertiser_id</span><span class="o">`</span><span class="p">,</span><span class="o">`</span><span class="n">creative_id</span><span class="o">`</span><span class="p">,</span><span class="o">`</span><span class="n">line_item_id</span><span class="o">`</span><span class="p">,</span><span class="o">`</span><span class="n">order_id</span><span class="o">`</span><span class="p">)</span>
+</span><span class='line'><span class="p">)</span> <span class="n">ENGINE</span><span class="o">=</span><span class="n">InnoDB</span> <span class="k">DEFAULT</span> <span class="n">CHARSET</span><span class="o">=</span><span class="n">utf8</span> <span class="k">COLLATE</span><span class="o">=</span><span class="n">utf8_unicode_ci</span><span class="p">;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Or to modify an existing table:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">ALTER</span> <span class="k">TABLE</span> <span class="n">src_dfp</span> <span class="k">ADD</span> <span class="k">UNIQUE</span> <span class="k">index</span> <span class="n">composite_dfp</span> <span class="p">(</span><span class="nb">date</span><span class="p">,</span> <span class="n">ad_unit_id_1</span><span class="p">,</span> <span class="n">ad_unit_id_2</span><span class="p">,</span> <span class="n">advertiser_id</span><span class="p">,</span> <span class="n">creative_id</span><span class="p">,</span> <span class="n">line_item_id</span><span class="p">,</span> <span class="n">order_id</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<p></p>
+
+
+<p>Which will generate these keys:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>+------------+---------------+-------------------+---------------+-----------+-------------+----------+--------+
+</span><span class='line'>| Non Unique |   Key Name    | Sequence in Index |  Column Name  | Collation | Cardinality | Sub Part | Packed |
+</span><span class='line'>+------------+---------------+-------------------+---------------+-----------+-------------+----------+--------+
+</span><span class='line'>|          0 | PRIMARY       |                 1 | id            | A         |           0 | NULL     | NULL   |
+</span><span class='line'>|          0 | composite_dfp |                 1 | date          | A         |           1 | NULL     | NULL   |
+</span><span class='line'>|          0 | composite_dfp |                 2 | ad_unit_id_1  | A         |           2 | NULL     | NULL   |
+</span><span class='line'>|          0 | composite_dfp |                 3 | ad_unit_id_2  | A         |           3 | NULL     | NULL   |
+</span><span class='line'>|          0 | composite_dfp |                 4 | advertiser_id | A         |           4 | NULL     | NULL   |
+</span><span class='line'>|          0 | composite_dfp |                 5 | creative_id   | A         |           5 | NULL     | NULL   |
+</span><span class='line'>|          0 | composite_dfp |                 6 | line_item_id  | A         |           6 | NULL     | NULL   |
+</span><span class='line'>|          0 | composite_dfp |                 7 | order_id      | A         |           7 | NULL     | NULL   |
+</span><span class='line'>+------------+---------------+-------------------+---------------+-----------+-------------+----------+--------+
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><em>Don&#8217;t let the color highlighting above fool you. <strong>date</strong> is another column in the table.</em></p>
+
+<p>Now, if you try to rerun the same import against existing data, you&#8217;ll receive the following error message: <code>Duplicate entry '2014-01-14-83243539-236269939-15980539-32298017059-67086499-1643' for key 'composite_dfp'</code></p>
+
+<p>A <strong>UNIQUE</strong> index creates a constraint such that all values in the index must be distinct. An error occurs if you try to add a new row with a key value that matches an existing row. This constraint does not apply to NULL values <strong>except for the BDB storage engine</strong>. For other engines, a UNIQUE index allows multiple NULL values for columns that can contain NULL. <a href="http://dev.mysql.com/doc/refman/5.0/en/create-index.html">Document Source</a></p>
+
+<h2>MySQL Workbench</h2>
+
+<p><strong>1.</strong> Go to the edit window for the table you&#8217;re working on</p>
+
+<p><img src="/images/posts/mysql-workbench.jpg" alt="MySQL Workbench" width="100%" /></p>
+
+<p><strong>2.</strong> Add a new index in the far-left screen by clicking on the new index row and giving the new index a name<br />
+<strong>3.</strong> Select the <strong>UNIQUE</strong> type<br />
+<strong>4.</strong> Check all of the corresponding index columns to the right</p>
+
+		<div id="embedded-ad-container" style="clear:both;height:280px;margin:20px auto;padding:0;width:336px;">
+      <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+      <!-- moorberry-embedded -->
+      <ins class="adsbygoogle"
+           style="display:inline-block;width:336px;height:280px"
+           data-ad-client="ca-pub-7424434269432645"
+           data-ad-slot="8712168324"></ins>
+      <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+      </script>
+	  </div>
+	
+</section>
+<footer>
+  <div class="article-date">
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-01-15T13:45:00-06:00" pubdate data-updated="true">Jan 15<span>th</span>, 2014</time>
+  </div>
+</footer>
+
+	
+	  <section class="comments">
+	    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+	  </section>
+	
+</article>
+</div>
+
+<!-- AddThis Button BEGIN -->
+<div class="addthis_toolbox addthis_floating_style addthis_counter_style" style="padding-top:10px;right:0;top:262px;">
+  <a class="addthis_button_facebook_like" fb:like:layout="box_count"></a>
+  <a class="addthis_button_tweet" tw:count="vertical"></a>
+  <!--a class="addthis_button_google_plusone" g:plusone:size="tall"></a-->
+  <!-- Place this tag where you want the +1 button to render. -->
+  <div class="g-plusone" data-size="tall"></div>
+
+  <!-- Place this tag after the last +1 button tag. -->
+  <script type="text/javascript">
+    (function() {
+      var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+      po.src = 'https://apis.google.com/js/platform.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+    })();
+  </script>
+  <a class="addthis_counter"></a>
+</div>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=xa-51685d3f427968b8"></script>
+<!-- AddThis Button END -->
+
+    </div>
+  </div>
+  <footer class="main-footer">
+	<section class="interior-footer">
+		<span class="credit">Powered by <a href="http://octopress.org" target="_blank" title="Octopress">Octopress</a></span>
+	</section>
+</footer>
+
+<script src="/javascripts/modernizr-2.0.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+<script src="/javascripts/octopress.js" type="text/javascript"></script>
+<script src="/javascripts/jquery.sidr.min.js"></script>
+<script src="/javascripts/ah-blue.js"></script>
+<script src="/javascripts/custom.js"></script>
+
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-34437469-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+
+
+  
+
+
+<script type="text/javascript">
+      var disqus_shortname = 'michaelminter';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://moorberry.net/blog/multi-column-unique-indexes/';
+        var disqus_url = 'http://moorberry.net/blog/multi-column-unique-indexes/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+</body>
+</html>
