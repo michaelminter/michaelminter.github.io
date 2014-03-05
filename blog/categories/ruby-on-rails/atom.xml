@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: Ruby on Rails | Moorberry Solutions]]></title>
+  <title><![CDATA[Category: Ruby on Rails | Michael Minter]]></title>
   <link href="http://moorberry.net/blog/categories/ruby-on-rails/atom.xml" rel="self"/>
   <link href="http://moorberry.net/"/>
-  <updated>2014-01-16T12:37:43-06:00</updated>
+  <updated>2014-03-04T23:36:14-06:00</updated>
   <id>http://moorberry.net/</id>
   <author>
     <name><![CDATA[Michael Minter]]></name>
