@@ -20,6 +20,6 @@ But to debug any Java Applet in your Mac OS, do this:
 
     Applications > Utilities > Java Console
 
-<a href="/images/posts/java-console.png"><img src="/images/posts/java-console.png" alit="Java Console in Mac OS X 10.8" /></a>
+<a href="/images/posts/java-console.png"><img src="/images/posts/java-console.png" alit="Java Console in Mac OS X 10.8" width="100%" /></a>
 
 Click the `Show console` radio button and select any other options you'd like to show up while the Java console is running.

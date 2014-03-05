@@ -11,7 +11,7 @@ I’ve been handling many of my company’s email campaigns for some time now an
 
 <!--more-->
 
-<img src="/images/posts/sendgrid-banner.jpeg" title="SendGrid" alt="SendGrid" style="width:710px;" />
+<img src="/images/posts/sendgrid-banner.jpeg" title="SendGrid" alt="SendGrid" style="width:100%;" />
 
 Recently I’ve been using my new skills while working on my own applications using [SendGrid](http://sendgrid.tellapal.com/a/clk/1zzx0 "SendGrid") as an alternative SMTP and email analytics tool. And I’ve only really come across one major programmable error. If you use a desktop client instead of a browser for viewing emails, as I do oftentimes, then this issue might not be so apparent (till now).
 

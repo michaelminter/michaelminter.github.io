@@ -11,7 +11,7 @@ My presumption is that it’s because of the passionate advent of JQuery, that t
 
 <!--more-->
 
-<a href="/images/posts/versus.jpg"><img src="/images/posts/versus.jpg" alt="Versus" /></a>
+<a href="/images/posts/versus.jpg"><img src="/images/posts/versus.jpg" alt="Versus" width="100%" /></a>
 
 In opening, I’d like to express, that I hold no animosity for Javascript. Actually I quite often fancy a touch of its elegant lure and almost regularly indulge my viewers with its properties to control aesthetics at a dynamic fashion. But it has its place. If PHP can serve the same purpose, than its obvious strengths, should not be taken for granted.
 

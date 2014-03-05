@@ -36,7 +36,7 @@ Click `OK`
 
 _This option prevents column headers from being sorted with the rest of the data. Since we don't have any column headers, like in a CSV file, we need to deactivate this feature._
 
-<img src="/images/posts/openoffice-1.jpg" alt="OpenOffice" />
+<img src="/images/posts/openoffice-1.jpg" alt="OpenOffice" width="100%" />
 
 ### Prepare
 
@@ -62,7 +62,7 @@ or you can use the simple version:
 = A1 & ":" & B1 & ":" & C1
 ```
 
-<img src="/images/posts/openoffice-2.jpg" alt="OpenOffice" />
+<img src="/images/posts/openoffice-2.jpg" alt="OpenOffice" width="100%" />
 
 Where cell __A1__ contains `"`, cell __B1__ contains `actionmailer`, and cell __C1__ contains `",` returns `"actionamailer",`.
 
@@ -84,4 +84,4 @@ Scan down to the container marked "Double Quotes" and make sure the checkbox lab
 
 Click `OK`
 
-<img src="/images/posts/openoffice-3.jpg" alt="OpenOffice" />
+<img src="/images/posts/openoffice-3.jpg" alt="OpenOffice" width="100%" />

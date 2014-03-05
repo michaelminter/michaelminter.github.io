@@ -13,7 +13,7 @@ As a developer who likes to spend more time with beautiful object-oriented code 
 
 One <a href="http://datatables.net/plug-ins/pagination" target="_blank">plug-in</a> that I found will allow your browser to render the default pagination with tags that are designed to work with the popular responsive grid framework: <a href="http://twitter.github.com/bootstrap" target="_blank">Twitter Bootstrap</a>.
 
-<img src="/images/posts/pagination.png" alt="DataTables Pagination with Twitter Bootstrap Design Inteegration" />
+<img src="/images/posts/pagination.jpg" alt="DataTables Pagination with Twitter Bootstrap Design Inteegration" width="100%" />
 
 ``` javascript
 <!-- more information at: http://www.datatables.net/download/ -->
@@ -35,7 +35,7 @@ One <a href="http://datatables.net/plug-ins/pagination" target="_blank">plug-in<
               0 : Math.ceil( oSettings.fnRecordsDisplay() / oSettings._iDisplayLength )
       };
   }
- 
+
   /* Bootstrap style pagination control */
   $.extend( $.fn.dataTableExt.oPagination, {
       "bootstrap": {
@@ -47,7 +47,7 @@ One <a href="http://datatables.net/plug-ins/pagination" target="_blank">plug-in<
                       fnDraw( oSettings );
                   }
               };
- 
+
               $(nPaging).addClass('pagination').append(
                   '<ul>'+
                       '<li class="prev disabled"><a href="#">&larr; '+oLang.sPrevious+'</a></li>'+
@@ -58,13 +58,13 @@ One <a href="http://datatables.net/plug-ins/pagination" target="_blank">plug-in<
               $(els[0]).bind( 'click.DT', { action: "previous" }, fnClickHandler );
               $(els[1]).bind( 'click.DT', { action: "next" }, fnClickHandler );
           },
- 
+
           "fnUpdate": function ( oSettings, fnDraw ) {
               var iListLength = 5;
               var oPaging = oSettings.oInstance.fnPagingInfo();
               var an = oSettings.aanFeatures.p;
               var i, j, sClass, iStart, iEnd, iHalf=Math.floor(iListLength/2);
- 
+
               if ( oPaging.iTotalPages < iListLength) {
                   iStart = 1;
                   iEnd = oPaging.iTotalPages;
@@ -79,11 +79,11 @@ One <a href="http://datatables.net/plug-ins/pagination" target="_blank">plug-in<
                   iStart = oPaging.iPage - iHalf + 1;
                   iEnd = iStart + iListLength - 1;
               }
- 
+
               for ( i=0, iLen=an.length ; i<iLen ; i++ ) {
                   // Remove the middle elements
                   $('li:gt(0)', an[i]).filter(':not(:last)').remove();
- 
+
                   // Add the new list items and their event handlers
                   for ( j=iStart ; j<=iEnd ; j++ ) {
                       sClass = (j==oPaging.iPage+1) ? 'class="active"' : '';
@@ -95,14 +95,14 @@ One <a href="http://datatables.net/plug-ins/pagination" target="_blank">plug-in<
                               fnDraw( oSettings );
                           } );
                   }
- 
+
                   // Add / remove disabled classes from the static elements
                   if ( oPaging.iPage === 0 ) {
                       $('li:first', an[i]).addClass('disabled');
                   } else {
                       $('li:first', an[i]).removeClass('disabled');
                   }
- 
+
                   if ( oPaging.iPage === oPaging.iTotalPages-1 || oPaging.iTotalPages === 0 ) {
                       $('li:last', an[i]).addClass('disabled');
                   } else {
