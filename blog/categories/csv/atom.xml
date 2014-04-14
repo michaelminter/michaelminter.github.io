@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: Data | Michael Minter]]></title>
-  <link href="http://moorberry.net/blog/categories/data/atom.xml" rel="self"/>
+  <title><![CDATA[Category: CSV | Michael Minter]]></title>
+  <link href="http://moorberry.net/blog/categories/csv/atom.xml" rel="self"/>
   <link href="http://moorberry.net/"/>
   <updated>2014-04-14T00:21:18-05:00</updated>
   <id>http://moorberry.net/</id>
@@ -12,48 +12,6 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
-  
-  <entry>
-    <title type="html"><![CDATA[Postgres: Search and Sort by Distance]]></title>
-    <link href="http://moorberry.net/blog/postgres-search-distance/"/>
-    <updated>2013-12-11T13:01:00-06:00</updated>
-    <id>http://moorberry.net/blog/postgres-search-distance</id>
-    <content type="html"><![CDATA[<p>Request users by radial distance and sort by nearest to farthest, vice versa, or whatever other attributes you'd like to include.</p>
-
-<!-- more -->
-
-
-<p>Searching for a user by distance, in your database, is easy with <strong>Postgres</strong>. Just create a users table with, at minimum, columns named <em>latitude</em> and <em>longitude</em>.</p>
-
-<h2>Data</h2>
-
-<p><code>bash
-postgres=# SELECT * FROM users;
-+----+------+----------+-----------+
-| id | name | latitude | longitude |
-+----+------+----------+-----------+
-</code></p>
-
-<h2>SQL</h2>
-
-<p><code>sql
-SELECT name, distance
-FROM
-( SELECT name, ((ACOS(SIN(#{latitude} * PI() / 180) * SIN(u.latitude * PI() / 180) + COS(#{latitude} * PI() / 180) * COS(u.latitude * PI() / 180) * COS((#{longitude} - u.longitude) * PI() / 180)) * 180 / PI()) * 60 * 1.1515) as distance
-FROM users u ) d
-WHERE distance &lt;= 5
-ORDER BY distance ASC;
-</code></p>
-
-<p>Matches all users <code>WHERE distance &lt;= 5</code> (less than or equal to five <strong>miles</strong>).</p>
-
-<p>To change the distance to kilometers&mdash;multiply the output number by 1.609344 (1 mile == 1.609344 kilometers).</p>
-
-<p>Replace <code>#{latitude}</code> with the value for the latitude you want to match against the database and do the same for <code>#{longitude}</code></p>
-
-<p>This will work in any SQL relational database, including <strong>MySQL</strong> and <strong>Oracle</strong>.</p>
-]]></content>
-  </entry>
   
   <entry>
     <title type="html"><![CDATA[CSV Special Character]]></title>

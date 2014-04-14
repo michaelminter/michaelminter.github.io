@@ -4,7 +4,7 @@
   <title><![CDATA[Michael Minter]]></title>
   <link href="http://moorberry.net/atom.xml" rel="self"/>
   <link href="http://moorberry.net/"/>
-  <updated>2014-04-14T00:03:31-05:00</updated>
+  <updated>2014-04-14T00:21:18-05:00</updated>
   <id>http://moorberry.net/</id>
   <author>
     <name><![CDATA[Michael Minter]]></name>
@@ -18,7 +18,7 @@
     <link href="http://moorberry.net/blog/database-version-control/"/>
     <updated>2014-04-13T23:30:00-05:00</updated>
     <id>http://moorberry.net/blog/database-version-control</id>
-    <content type="html"><![CDATA[<p>The following steps are meant to capture a snapshot of your development database and your staging/production database, compare the two, and provide SQL to consolidate the differences.</p>
+    <content type="html"><![CDATA[<p>The following steps are meant to capture a snapshot of your development database structure and your staging/production database structure, compare the two, and provide SQL to consolidate the differences.</p>
 
 <!-- more -->
 
@@ -336,7 +336,7 @@
 <!-- more -->
 
 
-<p><strong>Google DFP</strong> (Double-click for publishers) uses a special character in their CSV exports. Specifically the thorn character and it&#8217;s a pain. But Ruby can make it better.</p>
+<p><strong>Google DFP</strong> (Double-click for Publishers) uses a special character in their CSV exports. Specifically the thorn character and it&#8217;s a pain. But Ruby can make it better.</p>
 
 <p>You can skip to the bottom of this article for the neccessary code or read on from here for more details about figuring out the path to certainty.</p>
 

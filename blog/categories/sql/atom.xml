@@ -4,7 +4,7 @@
   <title><![CDATA[Category: SQL | Michael Minter]]></title>
   <link href="http://moorberry.net/blog/categories/sql/atom.xml" rel="self"/>
   <link href="http://moorberry.net/"/>
-  <updated>2014-04-14T00:03:31-05:00</updated>
+  <updated>2014-04-14T00:21:18-05:00</updated>
   <id>http://moorberry.net/</id>
   <author>
     <name><![CDATA[Michael Minter]]></name>
@@ -18,7 +18,7 @@
     <link href="http://moorberry.net/blog/database-version-control/"/>
     <updated>2014-04-13T23:30:00-05:00</updated>
     <id>http://moorberry.net/blog/database-version-control</id>
-    <content type="html"><![CDATA[<p>The following steps are meant to capture a snapshot of your development database and your staging/production database, compare the two, and provide SQL to consolidate the differences.</p>
+    <content type="html"><![CDATA[<p>The following steps are meant to capture a snapshot of your development database structure and your staging/production database structure, compare the two, and provide SQL to consolidate the differences.</p>
 
 <!-- more -->
 
