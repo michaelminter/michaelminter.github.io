@@ -1,0 +1,456 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Database Version Control with MySQL Utilities - Michael Minter</title>
+  <meta name="author" content="Michael Minter">
+  <link rel="author" href="humans.txt">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+  
+    
+  
+  <meta name="description" content="The following steps are meant to capture a snapshot of your development database and your staging/production database, compare the two, and provide &hellip;">
+  
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://moorberry.net/blog/database-version-control/">
+  <link href="/favicon.png" rel="icon">
+  <link href='http://fonts.googleapis.com/css?family=Cantarell' rel='stylesheet' type='text/css'>
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Michael Minter" type="application/atom+xml">
+  <meta name="og:type" content="website" />
+  <meta name="og:site_name" content="Michael Minter" />
+  <meta name="og:title" content="Database Version Control with MySQL Utilities" />
+  <meta name="og:description" content="The following steps are meant to capture a snapshot of your development database and your staging/production database, compare the two, and provide &hellip;" />
+  <meta name="og:url" content="http://moorberry.net/blog/database-version-control/"/>
+  <meta name="url" content="http://moorberry.net/blog/database-version-control/">
+  
+  <meta name="subject" content="SQL"/>
+  <meta name="category" content="SQL"/>
+  
+  <meta name="distribution" content="global">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+<link rel="stylesheet" type="text/css" href="/stylesheets/proudify.css" />
+<link rel="stylesheet" type="text/css" href="/stylesheets/custom.css" />
+<link rel="shortcut icon" href="http://www.gravatar.com/avatar/c40bf0fd76b6d591122a1dab3e88b0fd.png?s=16" title="Favicon" />
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-34437469-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <nav role="navigation"><div class="navbar">
+  <div class="navbar-inner">
+    <a class="brand" href="/">Michael Minter</a>
+    <ul class="nav">
+      <li><a href="/">Home</a></li>
+      <li><a href="/blog/archives">Archives</a></li>
+    </ul>
+    <ul class="nav" data-subscription="rss">
+      <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+      
+    </ul>
+      
+    <form class="navbar-form" action="http://google.com/search" method="get">
+      <fieldset role="search">
+        <input type="hidden" name="q" value="site:moorberry.net" />
+        <input class="span2" type="text" name="q" results="0" placeholder="Search"/>
+      </fieldset>
+    </form>
+      
+    
+  </div>
+</div>
+</nav>
+  <div class="wrapper_single" style="padding:40px 0;">
+
+    <div style="clear:both;height:90px;margin:0 auto;padding:0 0 40px 60px;width:720px;">
+      <script type="text/javascript"><!--
+      google_ad_client = "ca-pub-7424434269432645";
+      /* moorberry.net (test) */
+      google_ad_slot = "9894759925";
+      google_ad_width = 728;
+      google_ad_height = 90;
+      //-->
+      </script>
+      <script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+      </script>
+    </div>
+
+    <div class="container">
+      <article class="span8 offset2" role="article">
+        <div class="article-format">
+  
+    <header>
+      
+        <h1 class="entry-title">Database Version Control With MySQL Utilities</h1>
+      
+      
+        <p class="meta">
+          
+  
+
+
+  
+    <span class="byline author vcard">by <span class="fn">Michael Minter</span></span>
+  
+
+ - 
+          
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-04-13T23:30:00-05:00" pubdate data-updated="true">Apr 13<span>th</span>, 2014</time> - 
+          
+
+posted in
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/sql/'>SQL</a>
+  
+</span>
+
+
+          
+           | <a href="#disqus_thread">Comments</a>
+          
+        </p>
+      
+    </header>
+  
+  
+  
+    <div class="entry-content">
+      <div id="ad_container_inside_article" style="clear:both;height:90px;margin:20px auto;padding:0;width:720px;">
+        <script type="text/javascript"><!--
+        google_ad_client = "ca-pub-7424434269432645";
+        /* moorberry.net (octopress) */
+        google_ad_slot = "8992473921";
+        google_ad_width = 728;
+        google_ad_height = 90;
+        //-->
+        </script>
+        <script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script>
+      </div>
+      <p>The following steps are meant to capture a snapshot of your development database and your staging/production database, compare the two, and provide SQL to consolidate the differences.</p>
+
+<!-- more -->
+
+
+<p>This article relates to one of many methods for <strong>database version control</strong> in a singular or team-based environment.</p>
+
+<h2>MySQL Workbench</h2>
+
+<p>Having <strong>MySQL Workbench</strong> is not mandatory for this process. But it&#8217;s a nice interface to consolidate the suite of tools that <strong>MySQL</strong> offers.</p>
+
+<p>Download <a href="http://dev.mysql.com/downloads/tools/workbench/">http://dev.mysql.com/downloads/tools/workbench/</a></p>
+
+<h2>MySQL Utilities</h2>
+
+<p><strong>MySQL Utilities</strong> will install the required programs to finish the fowllowing steps.</p>
+
+<p>Download <a href="http://dev.mysql.com/doc/workbench/en/mysql-utilities.html">http://dev.mysql.com/doc/workbench/en/mysql-utilities.html</a></p>
+
+<h2>Verify MySQL Utilities</h2>
+
+<p>Open <strong>MySQL Workbench</strong>.</p>
+
+<p>Start <strong>MySQL Utilities</strong> from <strong>MySQL Workbench</strong>.</p>
+
+<p><img src="http://dev.mysql.com/doc/workbench/en/images/wb-mysql-utilities-open.png" width="100%" /></p>
+
+<p>The available <strong>MySQL Utilities</strong> programs can be seen in the console window below with the &#8220;help&#8221; command executed.</p>
+
+<p><img src="http://dev.mysql.com/doc/workbench/en/images/wb-mysql-utilities-console.png" width="100%" /></p>
+
+<p>The same can be done by entering <code>mysqluc -e "help utilities"</code> into your console.</p>
+
+<p>If you receive the following error.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Traceback (most recent call last):
+</span><span class='line'>  File "/bin/mysqluc", line 23, in &lt;module&gt;
+</span><span class='line'>  from mysql.utilities.common.options import license_callback, UtilitiesParser
+</span><span class='line'>File "/Library/Python/2.7/site-packages/mysql/utilities/common/options.py", line 34, in     &lt;module&gt;
+</span><span class='line'>from mysql.connector.conversion import MySQLConverter
+</span><span class='line'>ImportError: No module named connector.conversion</span></code></pre></td></tr></table></div></figure>
+
+
+<blockquote><p><strong>ImportError: No module named connector.conversion</strong></p></blockquote>
+
+<p><strong>MySQL Utilities</strong> assumes that the <strong>MySQL Connector</strong> for <strong>Python</strong> has been installed.</p>
+
+<p>Download it here <a href="http://dev.mysql.com/downloads/connector/python/">http://dev.mysql.com/downloads/connector/python/</a></p>
+
+<h2>Compare Databases with mysqldbcompare</h2>
+
+<p>Run <strong>mysqldbcompare</strong>.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>~$ mysqldbcompare --server1=&lt;user&gt;:&lt;password&gt;@&lt;host&gt; --server2=&lt;user&gt;:&lt;password&gt;@localhost dwh_production:dwh_development --run-all-tests --skip-data-check --difftype=sql
+</span><span class='line'># server1 on localhost: ... connected.
+</span><span class='line'># server2 on localhost: ... connected.
+</span><span class='line'># Checking databases dwh_production on server1 and dwh_development on server2
+</span><span class='line'>#</span></code></pre></td></tr></table></div></figure>
+
+
+<p>If you can&#8217;t connect to your database directly, but can <strong>SSH</strong> into the platform that the database server is located on, run:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>~$ ssh -f -N -L 3307:localhost:3306 &lt;user&gt;@&lt;server&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Run <strong>mysqldbcompare</strong>.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>~$ mysqldbcompare --server1=&lt;user&gt;:&lt;password&gt;@localhost:3307 --server2=&lt;user&gt;:&lt;password&gt;@localhost dwh_production:dwh_development --run-all-tests --skip-data-check --difftype=sql
+</span><span class='line'># server1 on localhost: ... connected.
+</span><span class='line'># server2 on localhost: ... connected.
+</span><span class='line'># Checking databases dwh_production on server1 and dwh_development on server2
+</span><span class='line'>#</span></code></pre></td></tr></table></div></figure>
+
+
+<p><strong>TIP:</strong> Generate a file with the above output.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>~$ mysqldbcompare --server1=&lt;database_user&gt;:&lt;database_password&gt;@localhost:3307 --server2=&lt;user&gt;:&lt;password&gt;@localhost dwh_production:dwh_development --run-all-tests --skip-data-check --difftype=sql &gt;&gt; mysqldbcompare.sql</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Now you have all the SQL to <strong>ALTER</strong> your production database structure so that it matches up with your development database structure.</p>
+
+<h2>Import</h2>
+
+<p>Import database <strong>ALTER</strong> statements.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>~$ mysqlimport -u &lt;user&gt; -p&lt;password&gt; dwh_production mysqldbcompare.sql</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Verify</h2>
+
+<p>Get a <strong>DIFF</strong> of the two databases.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>~$ mysqldbcompare --server1=&lt;database_user&gt;:&lt;database_password&gt;@localhost:3307 --server2=&lt;user&gt;:&lt;password&gt;@localhost dwh_production:dwh_development --run-all-tests --skip-data-check</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Resources</h2>
+
+<ul>
+<li><a href="http://dev.mysql.com/doc/mysql-utilities/1.3/en/mysqldbcompare.html">http://dev.mysql.com/doc/mysql-utilities/1.3/en/mysqldbcompare.html</a></li>
+</ul>
+
+
+    </div>
+  
+  
+    <footer>
+      <div style="border:#012b36 1px dashed;margin:40px 0;padding:20px 0 0 20px;">
+        <p>I love sharing! This text is copyrighted under Creative Commons <a href="http://creativecommons.org/licenses/by-nc-sa/3.0/" target="_blank" alt="Share-alike License" title="Share-alike License">Attribution-Noncommercial-Share Alike 3.0 Unported</a> license, unless stated otherwise. </p>
+        <p>Let me know how you use it - <a href="#footer-widgets" alt="Contact Michael" title="Contact Michael">contact me here.</a></p>
+      </div>
+      
+        <a class="pull-left" href="/blog/multi-column-unique-indexes/" title="Previous Post: Multi Column Unique Indexes">&laquo; Multi Column Unique Indexes</a>
+      
+      
+    </footer>
+  
+</div>
+
+      </article>
+      
+      <div id="ad_container" style="clear:both;height:90px;margin:0 auto;padding:0 0 0 60px;width:720px;">
+        <script type="text/javascript"><!--
+        google_ad_client = "ca-pub-7424434269432645";
+        /* moorberry.net (octopress) */
+        google_ad_slot = "8992473921";
+        google_ad_width = 728;
+        google_ad_height = 90;
+        //-->
+        </script>
+        <script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script>
+      </div>
+    </div>
+  </div>
+  <div class="comments_wrapper"> 
+    
+      <section>
+        <h1>Comments</h1>
+        <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+      </section>
+    
+  </div>
+
+  <!-- AddThis Button BEGIN -->
+  <div class="addthis_toolbox addthis_floating_style addthis_counter_style" style="padding-top:10px;right:0;top:212px;">
+    <a class="addthis_button_facebook_like" fb:like:layout="box_count"></a>
+    <a class="addthis_button_tweet" tw:count="vertical"></a>
+    <a class="addthis_button_google_plusone" g:plusone:size="tall"></a>
+    <a class="addthis_counter"></a>
+  </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=xa-51685d3f427968b8"></script>
+  <!-- AddThis Button END -->
+
+  <div id="footer-widgets">
+  <div class="container">
+    <div class="row">
+  <div class="span3">
+    <h2>coderwall badges</h2>
+<div id="proudify"></div>
+<a href="http://coderwall.com/michaelminter" target="_blank"><img src="http://api.coderwall.com/michaelminter/endorsecount.png" alt="Endorse" id="endorse_button" /></a>
+  </div>
+  <div class="span3">
+    <h2>github</h2>
+<ul id="activity"></ul>
+  </div>
+  <div class="span3">
+    <h2>twitter</h2>
+<a href="https://twitter.com/mothore" class="twitter-follow-button" data-show-count="true" data-lang="en" target="_blank">Follow @mothore</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+<div class="tweet" data-twitter-user="mothore"></div>
+  </div>
+  <div class="span3">
+    <h2>about me</h2>
+<p>I have been programming desktop and web applications for more than 7 years. My current <a href="http://www.lin-digital.com/" target="_blank">full-time gig</a> keeps me pretty busy but I still like to get <a href="#top" title="Top of page">personal projects</a> done.</p>
+
+<h2>found on</h2>
+<a href="mailto:michael@moorberry.net" rel="tooltip" title="Email Michael" target="_blank"><img src="/images/glyphicons_399_e-mail.png" alt="email icon" class="social_icon"></a>
+
+
+<a href="https://github.com/michaelminter/" rel="tooltip" title="Github" target="_blank"><img class="social_icon" title="Github" alt="github icon" src="/images/glyphicons_381_github.png"></a>
+
+
+
+
+
+
+
+<a href="http://twitter.com/mothore" rel="tooltip" title="Twitter" target="_blank" target="_blank"><img class="social_icon" title="Twitter" alt="Twitter icon" src="/images/glyphicons_391_twitter_t.png"></a>
+
+
+
+
+
+
+
+
+<a href="http://stackoverflow.com/users/388253/michael-minter" rel="tooltip" title="Stack Overflow" target="_blank"><img class="social_icon" title="Stack Overflow" alt="stack overflow icon" src="/images/glyphicons_400_stack_overflow.png"></a>
+
+<a href="http://www.linkedin.com/in/mminter" rel="tooltip" title="Linkedin" target="_blank"><img class="social_icon" title="Linkedin" alt="Linkedin icon" src="/images/glyphicons_377_linked_in.png"></a>
+<!--a href="https://plus.google.com/110730291563876857467" rel="tooltip" title="Google Plus"><img class="social_icon" title="Google Plus" alt="Google Plus icon" src="/images/glyphicons_386_google_plus.png"></a-->
+
+<br /><br />
+
+<!--h2>contact</h2>
+<a href="mailto:michael@moorberry.net?subject=Found on Moorberry.net" alt="Mail Michal">Michael@moorberry.net</a-->
+
+  </div>
+</div>
+
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-left">
+  All content is under Copyright &copy; 2010-2014 by the individual authors of this blog and is released<br />under the <a href="http://creativecommons.org/licenses/by-nc-sa/3.0/" target="_blank">Attribution-Noncommercial-Share Alike 3.0 Unported</a> license.<br />
+</p>
+<p class="pull-right">
+  <span>Powered by <a href="http://octopress.org/">Octopress</a>.</span>
+  
+    <!--span>Design by <a href="http://www.AdrianArtiles.com">Adrian Artiles</a>.</span-->
+  
+</p>
+
+  </div>
+</footer>
+
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" type="text/javascript"></script>
+<script type="text/javascript" src="/javascripts/jquery-proudify.min.js"></script>
+<script>window.jQuery || document.write('<script src="/javascripts/libs/jquery-1.7.2.min.js" type="text/javascript"><\/script>')</script>
+<script src="/javascripts/libs/bootstrap.min.js" type="text/javascript"></script>
+<script src="/javascripts/libs/jquery.masonry.min.js" type="text/javascript"></script>
+<script src="/javascripts/custom.js" type="text/javascript"></script>
+<script type="text/javascript">
+  $('#proudify').proudify({username:'michaelminter',service:'coderwall'});
+</script>
+<script type="text/javascript" src="/javascripts/jquery.timeago.js"></script>
+<script type="text/javascript" src="/javascripts/jquery.github-activity.js"></script>
+<script type="text/javascript">
+  $(function() {
+    $("ul#activity").githubActivityFor('michaelminter', {
+      'limit': 3,
+      'wrap': function(item) {
+        item.prepend('<img src="/images/github_16.png" style="float:left;margin:0 5px 0 0;" />');
+        return item
+      }
+    });
+  });
+</script>
+
+
+<script type="text/javascript">
+      var disqus_shortname = 'michaelminter';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://moorberry.net/blog/database-version-control/';
+        var disqus_url = 'http://moorberry.net/blog/database-version-control/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+</body>
+</html>

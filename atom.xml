@@ -4,7 +4,7 @@
   <title><![CDATA[Michael Minter]]></title>
   <link href="http://moorberry.net/atom.xml" rel="self"/>
   <link href="http://moorberry.net/"/>
-  <updated>2014-03-04T23:36:14-06:00</updated>
+  <updated>2014-04-13T23:35:56-05:00</updated>
   <id>http://moorberry.net/</id>
   <author>
     <name><![CDATA[Michael Minter]]></name>
@@ -12,6 +12,135 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Database Version Control with MySQL Utilities]]></title>
+    <link href="http://moorberry.net/blog/database-version-control/"/>
+    <updated>2014-04-13T23:30:00-05:00</updated>
+    <id>http://moorberry.net/blog/database-version-control</id>
+    <content type="html"><![CDATA[<p>The following steps are meant to capture a snapshot of your development database and your staging/production database, compare the two, and provide SQL to consolidate the differences.</p>
+
+<!-- more -->
+
+
+<p>This article relates to one of many methods for <strong>database version control</strong> in a singular or team-based environment.</p>
+
+<h2>MySQL Workbench</h2>
+
+<p>Having <strong>MySQL Workbench</strong> is not mandatory for this process. But it&#8217;s a nice interface to consolidate the suite of tools that <strong>MySQL</strong> offers.</p>
+
+<p>Download <a href="http://dev.mysql.com/downloads/tools/workbench/">http://dev.mysql.com/downloads/tools/workbench/</a></p>
+
+<h2>MySQL Utilities</h2>
+
+<p><strong>MySQL Utilities</strong> will install the required programs to finish the fowllowing steps.</p>
+
+<p>Download <a href="http://dev.mysql.com/doc/workbench/en/mysql-utilities.html">http://dev.mysql.com/doc/workbench/en/mysql-utilities.html</a></p>
+
+<h2>Verify MySQL Utilities</h2>
+
+<p>Open <strong>MySQL Workbench</strong>.</p>
+
+<p>Start <strong>MySQL Utilities</strong> from <strong>MySQL Workbench</strong>.</p>
+
+<p><img src="http://dev.mysql.com/doc/workbench/en/images/wb-mysql-utilities-open.png" width="100%" /></p>
+
+<p>The available <strong>MySQL Utilities</strong> programs can be seen in the console window below with the &#8220;help&#8221; command executed.</p>
+
+<p><img src="http://dev.mysql.com/doc/workbench/en/images/wb-mysql-utilities-console.png" width="100%" /></p>
+
+<p>The same can be done by entering <code>mysqluc -e "help utilities"</code> into your console.</p>
+
+<p>If you receive the following error.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Traceback (most recent call last):
+</span><span class='line'>  File "/bin/mysqluc", line 23, in &lt;module&gt;
+</span><span class='line'>  from mysql.utilities.common.options import license_callback, UtilitiesParser
+</span><span class='line'>File "/Library/Python/2.7/site-packages/mysql/utilities/common/options.py", line 34, in     &lt;module&gt;
+</span><span class='line'>from mysql.connector.conversion import MySQLConverter
+</span><span class='line'>ImportError: No module named connector.conversion</span></code></pre></td></tr></table></div></figure>
+
+
+<blockquote><p><strong>ImportError: No module named connector.conversion</strong></p></blockquote>
+
+<p><strong>MySQL Utilities</strong> assumes that the <strong>MySQL Connector</strong> for <strong>Python</strong> has been installed.</p>
+
+<p>Download it here <a href="http://dev.mysql.com/downloads/connector/python/">http://dev.mysql.com/downloads/connector/python/</a></p>
+
+<h2>Compare Databases with mysqldbcompare</h2>
+
+<p>Run <strong>mysqldbcompare</strong>.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>~$ mysqldbcompare --server1=&lt;user&gt;:&lt;password&gt;@&lt;host&gt; --server2=&lt;user&gt;:&lt;password&gt;@localhost dwh_production:dwh_development --run-all-tests --skip-data-check --difftype=sql
+</span><span class='line'># server1 on localhost: ... connected.
+</span><span class='line'># server2 on localhost: ... connected.
+</span><span class='line'># Checking databases dwh_production on server1 and dwh_development on server2
+</span><span class='line'>#</span></code></pre></td></tr></table></div></figure>
+
+
+<p>If you can&#8217;t connect to your database directly, but can <strong>SSH</strong> into the platform that the database server is located on, run:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>~$ ssh -f -N -L 3307:localhost:3306 &lt;user&gt;@&lt;server&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Run <strong>mysqldbcompare</strong>.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>~$ mysqldbcompare --server1=&lt;user&gt;:&lt;password&gt;@localhost:3307 --server2=&lt;user&gt;:&lt;password&gt;@localhost dwh_production:dwh_development --run-all-tests --skip-data-check --difftype=sql
+</span><span class='line'># server1 on localhost: ... connected.
+</span><span class='line'># server2 on localhost: ... connected.
+</span><span class='line'># Checking databases dwh_production on server1 and dwh_development on server2
+</span><span class='line'>#</span></code></pre></td></tr></table></div></figure>
+
+
+<p><strong>TIP:</strong> Generate a file with the above output.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>~$ mysqldbcompare --server1=&lt;database_user&gt;:&lt;database_password&gt;@localhost:3307 --server2=&lt;user&gt;:&lt;password&gt;@localhost dwh_production:dwh_development --run-all-tests --skip-data-check --difftype=sql &gt;&gt; mysqldbcompare.sql</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Now you have all the SQL to <strong>ALTER</strong> your production database structure so that it matches up with your development database structure.</p>
+
+<h2>Import</h2>
+
+<p>Import database <strong>ALTER</strong> statements.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>~$ mysqlimport -u &lt;user&gt; -p&lt;password&gt; dwh_production mysqldbcompare.sql</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Verify</h2>
+
+<p>Get a <strong>DIFF</strong> of the two databases.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>~$ mysqldbcompare --server1=&lt;database_user&gt;:&lt;database_password&gt;@localhost:3307 --server2=&lt;user&gt;:&lt;password&gt;@localhost dwh_production:dwh_development --run-all-tests --skip-data-check</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Resources</h2>
+
+<ul>
+<li><a href="http://dev.mysql.com/doc/mysql-utilities/1.3/en/mysqldbcompare.html">http://dev.mysql.com/doc/mysql-utilities/1.3/en/mysqldbcompare.html</a></li>
+</ul>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Multi Column Unique Indexes]]></title>
@@ -1853,63 +1982,6 @@
 
 <p>[1] http://www.timestretch.com/FractalBenchmark.html<br/>
 [2] http://developer.yahoo.net/blog/archives/2007/03/high_performanc.html</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[PHP Flickr Gallery]]></title>
-    <link href="http://moorberry.net/blog/php-flickr-gallery/"/>
-    <updated>2010-03-24T15:23:00-05:00</updated>
-    <id>http://moorberry.net/blog/php-flickr-gallery</id>
-    <content type="html"><![CDATA[<p>In my search for finding a simple solution to any problem, I usually cross many and many blogs and articles, discussing whatever topic. But with so much detail that the solution becomes a problem in itself. So I often times end up resolved to research on my own. In this case, I share the simplest programming method for displaying a <a href="http://flickr.com" title="Flickr">Flickr</a> gallery, with PHP.</p>
-
-<!--more-->
-
-
-<h2>Assembling Your Variables</h2>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="nv">$api_key</span>  <span class="o">=</span> <span class="s">&#39;cr79h3t7g387ghc3fh7338ch87c3ch734&#39;</span><span class="p">;</span>
-</span><span class='line'><span class="nv">$user_id</span>  <span class="o">=</span> <span class="s">&#39;33822702%40N08&#39;</span><span class="p">;</span>
-</span><span class='line'><span class="nv">$per_page</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'><span class="nv">$xml</span>      <span class="o">=</span> <span class="s">&#39;http://api.flickr.com/services/rest/?method=flickr.people.getPublicPhotos&amp;api_key=&#39;</span><span class="o">.</span><span class="nv">$api_key</span><span class="o">.</span><span class="s">&#39;&amp;user_id=&#39;</span><span class="o">.</span><span class="nv">$user_id</span><span class="o">.</span><span class="s">&#39;&amp;per_page=&#39;</span><span class="o">.</span><span class="nv">$per_page</span><span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'><span class="nv">$flickr</span>   <span class="o">=</span> <span class="n">simplexml_load_file</span><span class="p">(</span><span class="nv">$xml</span><span class="p">);</span>
-</span><span class='line'><span class="k">foreach</span><span class="p">(</span><span class="nv">$flickr</span><span class="o">-&gt;</span><span class="n">photos</span><span class="o">-&gt;</span><span class="n">photo</span> <span class="n">as</span> <span class="nv">$p</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>    <span class="n">echo</span> <span class="s">&#39;&lt;a href=&quot;http://www.flickr.com/photos/&#39;</span><span class="o">.</span><span class="nv">$p</span><span class="p">[</span><span class="s">&#39;owner&#39;</span><span class="p">]</span><span class="o">.</span><span class="s">&#39;/&#39;</span><span class="o">.</span><span class="nv">$p</span><span class="p">[</span><span class="s">&#39;id&#39;</span><span class="p">]</span><span class="o">.</span><span class="s">&#39;&quot;&gt;&#39;</span><span class="p">;</span>
-</span><span class='line'>    <span class="n">echo</span> <span class="s">&#39;&lt;img src=&quot;http://farm&#39;</span><span class="o">.</span><span class="nv">$p</span><span class="p">[</span><span class="s">&#39;farm&#39;</span><span class="p">]</span><span class="o">.</span><span class="s">&#39;.static.flickr.com/&#39;</span><span class="o">.</span><span class="nv">$p</span><span class="p">[</span><span class="s">&#39;server&#39;</span><span class="p">]</span><span class="o">.</span><span class="s">&#39;/&#39;</span><span class="o">.</span><span class="nv">$p</span><span class="p">[</span><span class="s">&#39;id&#39;</span><span class="p">]</span><span class="o">.</span><span class="s">&#39;_&#39;</span><span class="o">.</span><span class="nv">$p</span><span class="p">[</span><span class="s">&#39;secret&#39;</span><span class="p">]</span><span class="o">.</span><span class="s">&#39;_s.jpg&quot;&gt;&#39;</span><span class="p">;</span>
-</span><span class='line'>    <span class="n">echo</span> <span class="s">&#39;&lt;/a&gt;&#39;</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><strong>$api_key</strong> is part of an authentication device that allows your server and Flickr to “shake hands” sort of speak. <a href="http://www.flickr.com/services/api/keys/" title="Flickr API Key">You can get your Flickr API key here</a>.</p>
-
-<p><strong>$user_id</strong> is how Flickr identifies you. This value can be found in the URL of your Flickr “photostream”. <a href="http://www.flickr.com/photos/33822702@N08/" title="Michael Minter's Flickr">Here&#8217;s mine for reference</a>.</p>
-
-<p><strong>$per_page</strong> refers to how many photos will be retrieved from your photostream. Though this limiter is optional, the default count is, “all”. Which means if you have 1,000 plus photos, it could be a very bad thing, for your viewer’s browser load time.</p>
-
-<p><strong>$xml</strong> is a link to the webfile that renders a list of your available photos based on previously noted variables. This line can be modified later to include even more search parameters. (see: below)</p>
-
-<p><strong>$flickr</strong> uses a PHP function called, <a href="http://php.net/manual/en/function.simplexml-load-file.php" title="simplexml_load_file function">simplexml_load_file()</a>, which parses an XML file into an object.</p>
-
-<p>In today&#8217;s lesson, <strong>$flickr</strong> becomes an array and we use <a href="http://us2.php.net/manual/en/control-structures.foreach.php" title="foreach function">foreach()</a> to extract the values we need, to display the gallery.</p>
-
-<h2>Summary</h2>
-
-<p>This method is just what I needed. Something small, easily accessible, and scalable. As you experiment with this script, you’ll be afforded the opportunity to use many different features of the API, which Flickr offers. <a href="http://www.flickr.com/services/api/" title="Flickr API Index">Click here to view a full list.</a></p>
 ]]></content>
   </entry>
   
