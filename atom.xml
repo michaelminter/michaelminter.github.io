@@ -4,7 +4,7 @@
   <title><![CDATA[Michael Minter]]></title>
   <link href="http://moorberry.net/atom.xml" rel="self"/>
   <link href="http://moorberry.net/"/>
-  <updated>2014-04-13T23:50:33-05:00</updated>
+  <updated>2014-04-14T00:03:31-05:00</updated>
   <id>http://moorberry.net/</id>
   <author>
     <name><![CDATA[Michael Minter]]></name>
@@ -323,6 +323,65 @@
 <p>Replace <code>#{latitude}</code> with the value for the latitude you want to match against the database and do the same for <code>#{longitude}</code></p>
 
 <p>This will work in any SQL relational database, including <strong>MySQL</strong> and <strong>Oracle</strong>.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[CSV Special Character]]></title>
+    <link href="http://moorberry.net/blog/csv-special-character/"/>
+    <updated>2013-10-08T23:52:00-05:00</updated>
+    <id>http://moorberry.net/blog/csv-special-character</id>
+    <content type="html"><![CDATA[<p>Separate CSV data with a special character (example: thorn &thorn;).</p>
+
+<!-- more -->
+
+
+<p><strong>Google DFP</strong> (Double-click for publishers) uses a special character in their CSV exports. Specifically the thorn character and it&#8217;s a pain. But Ruby can make it better.</p>
+
+<p>You can skip to the bottom of this article for the neccessary code or read on from here for more details about figuring out the path to certainty.</p>
+
+<h2>Unicode</h2>
+
+<p>Find the unicode character. For my example the thorn character <strong>&thorn;</strong> is represented as <strong>u00FE</strong>.</p>
+
+<h3>List Encoding Types available to Ruby 2</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>2.0.0p0 :001 &gt; Encoding.name_list
+</span><span class='line'> <span class="o">=</span>&gt; <span class="o">[</span><span class="s2">&quot;ASCII-8BIT&quot;</span>, <span class="s2">&quot;UTF-8&quot;</span>, <span class="s2">&quot;US-ASCII&quot;</span>, <span class="s2">&quot;Big5&quot;</span>, <span class="s2">&quot;Big5-HKSCS&quot;</span>, <span class="s2">&quot;Big5-UAO&quot;</span>, <span class="s2">&quot;CP949&quot;</span>, <span class="s2">&quot;Emacs-Mule&quot;</span>, <span class="s2">&quot;EUC-JP&quot;</span>, <span class="s2">&quot;EUC-KR&quot;</span>, <span class="s2">&quot;EUC-TW&quot;</span>, <span class="s2">&quot;GB18030&quot;</span>, <span class="s2">&quot;GBK&quot;</span>, <span class="s2">&quot;ISO-8859-1&quot;</span>, <span class="s2">&quot;ISO-8859-2&quot;</span>, <span class="s2">&quot;ISO-8859-3&quot;</span>, <span class="s2">&quot;ISO-8859-4&quot;</span>, <span class="s2">&quot;ISO-8859-5&quot;</span>, <span class="s2">&quot;ISO-8859-6&quot;</span>, <span class="s2">&quot;ISO-8859-7&quot;</span>, <span class="s2">&quot;ISO-8859-8&quot;</span>, <span class="s2">&quot;ISO-8859-9&quot;</span>, <span class="s2">&quot;ISO-8859-10&quot;</span>, <span class="s2">&quot;ISO-8859-11&quot;</span>, <span class="s2">&quot;ISO-8859-13&quot;</span>, <span class="s2">&quot;ISO-8859-14&quot;</span>, <span class="s2">&quot;ISO-8859-15&quot;</span>, <span class="s2">&quot;ISO-8859-16&quot;</span>, <span class="s2">&quot;KOI8-R&quot;</span>, <span class="s2">&quot;KOI8-U&quot;</span>, <span class="s2">&quot;Shift_JIS&quot;</span>, <span class="s2">&quot;UTF-16BE&quot;</span>, <span class="s2">&quot;UTF-16LE&quot;</span>, <span class="s2">&quot;UTF-32BE&quot;</span>, <span class="s2">&quot;UTF-32LE&quot;</span>, <span class="s2">&quot;Windows-31J&quot;</span>, <span class="s2">&quot;Windows-1251&quot;</span>, <span class="s2">&quot;BINARY&quot;</span>, <span class="s2">&quot;IBM437&quot;</span>, <span class="s2">&quot;CP437&quot;</span>, <span class="s2">&quot;IBM737&quot;</span>, <span class="s2">&quot;CP737&quot;</span>, <span class="s2">&quot;IBM775&quot;</span>, <span class="s2">&quot;CP775&quot;</span>, <span class="s2">&quot;CP850&quot;</span>, <span class="s2">&quot;IBM850&quot;</span>, <span class="s2">&quot;IBM852&quot;</span>, <span class="s2">&quot;CP852&quot;</span>, <span class="s2">&quot;IBM855&quot;</span>, <span class="s2">&quot;CP855&quot;</span>, <span class="s2">&quot;IBM857&quot;</span>, <span class="s2">&quot;CP857&quot;</span>, <span class="s2">&quot;IBM860&quot;</span>, <span class="s2">&quot;CP860&quot;</span>, <span class="s2">&quot;IBM861&quot;</span>, <span class="s2">&quot;CP861&quot;</span>, <span class="s2">&quot;IBM862&quot;</span>, <span class="s2">&quot;CP862&quot;</span>, <span class="s2">&quot;IBM863&quot;</span>, <span class="s2">&quot;CP863&quot;</span>, <span class="s2">&quot;IBM864&quot;</span>, <span class="s2">&quot;CP864&quot;</span>, <span class="s2">&quot;IBM865&quot;</span>, <span class="s2">&quot;CP865&quot;</span>, <span class="s2">&quot;IBM866&quot;</span>, <span class="s2">&quot;CP866&quot;</span>, <span class="s2">&quot;IBM869&quot;</span>, <span class="s2">&quot;CP869&quot;</span>, <span class="s2">&quot;Windows-1258&quot;</span>, <span class="s2">&quot;CP1258&quot;</span>, <span class="s2">&quot;GB1988&quot;</span>, <span class="s2">&quot;macCentEuro&quot;</span>, <span class="s2">&quot;macCroatian&quot;</span>, <span class="s2">&quot;macCyrillic&quot;</span>, <span class="s2">&quot;macGreek&quot;</span>, <span class="s2">&quot;macIceland&quot;</span>, <span class="s2">&quot;macRoman&quot;</span>, <span class="s2">&quot;macRomania&quot;</span>, <span class="s2">&quot;macThai&quot;</span>, <span class="s2">&quot;macTurkish&quot;</span>, <span class="s2">&quot;macUkraine&quot;</span>, <span class="s2">&quot;CP950&quot;</span>, <span class="s2">&quot;Big5-HKSCS:2008&quot;</span>, <span class="s2">&quot;CP951&quot;</span>, <span class="s2">&quot;stateless-ISO-2022-JP&quot;</span>, <span class="s2">&quot;eucJP&quot;</span>, <span class="s2">&quot;eucJP-ms&quot;</span>, <span class="s2">&quot;euc-jp-ms&quot;</span>, <span class="s2">&quot;CP51932&quot;</span>, <span class="s2">&quot;EUC-JP-2004&quot;</span>, <span class="s2">&quot;EUC-JISX0213&quot;</span>, <span class="s2">&quot;eucKR&quot;</span>, <span class="s2">&quot;eucTW&quot;</span>, <span class="s2">&quot;GB2312&quot;</span>, <span class="s2">&quot;EUC-CN&quot;</span>, <span class="s2">&quot;eucCN&quot;</span>, <span class="s2">&quot;GB12345&quot;</span>, <span class="s2">&quot;CP936&quot;</span>, <span class="s2">&quot;ISO-2022-JP&quot;</span>, <span class="s2">&quot;ISO2022-JP&quot;</span>, <span class="s2">&quot;ISO-2022-JP-2&quot;</span>, <span class="s2">&quot;ISO2022-JP2&quot;</span>, <span class="s2">&quot;CP50220&quot;</span>, <span class="s2">&quot;CP50221&quot;</span>, <span class="s2">&quot;ISO8859-1&quot;</span>, <span class="s2">&quot;Windows-1252&quot;</span>, <span class="s2">&quot;CP1252&quot;</span>, <span class="s2">&quot;ISO8859-2&quot;</span>, <span class="s2">&quot;Windows-1250&quot;</span>, <span class="s2">&quot;CP1250&quot;</span>, <span class="s2">&quot;ISO8859-3&quot;</span>, <span class="s2">&quot;ISO8859-4&quot;</span>, <span class="s2">&quot;ISO8859-5&quot;</span>, <span class="s2">&quot;ISO8859-6&quot;</span>, <span class="s2">&quot;Windows-1256&quot;</span>, <span class="s2">&quot;CP1256&quot;</span>, <span class="s2">&quot;ISO8859-7&quot;</span>, <span class="s2">&quot;Windows-1253&quot;</span>, <span class="s2">&quot;CP1253&quot;</span>, <span class="s2">&quot;ISO8859-8&quot;</span>, <span class="s2">&quot;Windows-1255&quot;</span>, <span class="s2">&quot;CP1255&quot;</span>, <span class="s2">&quot;ISO8859-9&quot;</span>, <span class="s2">&quot;Windows-1254&quot;</span>, <span class="s2">&quot;CP1254&quot;</span>, <span class="s2">&quot;ISO8859-10&quot;</span>, <span class="s2">&quot;ISO8859-11&quot;</span>, <span class="s2">&quot;TIS-620&quot;</span>, <span class="s2">&quot;Windows-874&quot;</span>, <span class="s2">&quot;CP874&quot;</span>, <span class="s2">&quot;ISO8859-13&quot;</span>, <span class="s2">&quot;Windows-1257&quot;</span>, <span class="s2">&quot;CP1257&quot;</span>, <span class="s2">&quot;ISO8859-14&quot;</span>, <span class="s2">&quot;ISO8859-15&quot;</span>, <span class="s2">&quot;ISO8859-16&quot;</span>, <span class="s2">&quot;CP878&quot;</span>, <span class="s2">&quot;MacJapanese&quot;</span>, <span class="s2">&quot;MacJapan&quot;</span>, <span class="s2">&quot;ASCII&quot;</span>, <span class="s2">&quot;ANSI_X3.4-1968&quot;</span>, <span class="s2">&quot;646&quot;</span>, <span class="s2">&quot;UTF-7&quot;</span>, <span class="s2">&quot;CP65000&quot;</span>, <span class="s2">&quot;CP65001&quot;</span>, <span class="s2">&quot;UTF8-MAC&quot;</span>, <span class="s2">&quot;UTF-8-MAC&quot;</span>, <span class="s2">&quot;UTF-8-HFS&quot;</span>, <span class="s2">&quot;UTF-16&quot;</span>, <span class="s2">&quot;UTF-32&quot;</span>, <span class="s2">&quot;UCS-2BE&quot;</span>, <span class="s2">&quot;UCS-4BE&quot;</span>, <span class="s2">&quot;UCS-4LE&quot;</span>, <span class="s2">&quot;CP932&quot;</span>, <span class="s2">&quot;csWindows31J&quot;</span>, <span class="s2">&quot;SJIS&quot;</span>, <span class="s2">&quot;PCK&quot;</span>, <span class="s2">&quot;CP1251&quot;</span>, <span class="s2">&quot;UTF8-DoCoMo&quot;</span>, <span class="s2">&quot;SJIS-DoCoMo&quot;</span>, <span class="s2">&quot;UTF8-KDDI&quot;</span>, <span class="s2">&quot;SJIS-KDDI&quot;</span>, <span class="s2">&quot;ISO-2022-JP-KDDI&quot;</span>, <span class="s2">&quot;stateless-ISO-2022-JP-KDDI&quot;</span>, <span class="s2">&quot;UTF8-SoftBank&quot;</span>, <span class="s2">&quot;SJIS-SoftBank&quot;</span>, <span class="s2">&quot;locale&quot;</span>, <span class="s2">&quot;external&quot;</span>, <span class="s2">&quot;filesystem&quot;</span>, <span class="s2">&quot;internal&quot;</span><span class="o">]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Determine Encoding Type</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="no">Encoding</span><span class="o">.</span><span class="n">name_list</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">encoding</span><span class="o">|</span>
+</span><span class='line'>  <span class="no">CSV</span><span class="o">.</span><span class="n">foreach</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="p">{</span> <span class="n">encoding</span><span class="ss">:encoding</span><span class="p">,</span> <span class="ss">:col_sep</span> <span class="o">=&gt;</span> <span class="s2">&quot;\u00FE&quot;</span> <span class="p">})</span> <span class="k">do</span> <span class="o">|</span><span class="n">row</span><span class="o">|</span>
+</span><span class='line'>    <span class="nb">puts</span> <span class="s2">&quot;===== </span><span class="si">#{</span><span class="n">encoding</span><span class="si">}</span><span class="s2"> =====&quot;</span>
+</span><span class='line'>    <span class="nb">puts</span> <span class="n">row</span><span class="o">.</span><span class="n">inspect</span>
+</span><span class='line'>    <span class="k">break</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Use Thorn as Delimiter in CSV</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="no">CSV</span><span class="o">.</span><span class="n">foreach</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="p">{</span> <span class="n">encoding</span><span class="ss">:&#39;ISO-8859-1&#39;</span><span class="p">,</span> <span class="ss">:col_sep</span> <span class="o">=&gt;</span> <span class="s2">&quot;\u00FE&quot;</span> <span class="p">})</span> <span class="k">do</span> <span class="o">|</span><span class="n">row</span><span class="o">|</span>
+</span><span class='line'>  <span class="c1"># your code here</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
 ]]></content>
   </entry>
   
@@ -1887,101 +1946,6 @@
 <h3>Note</h3>
 
 <p>Don&#8217;t forget to adjust your database schema for <em>address2</em> in <strong>$details</strong> when available.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Server vs Client]]></title>
-    <link href="http://moorberry.net/blog/server-vs-client/"/>
-    <updated>2010-03-25T21:11:00-05:00</updated>
-    <id>http://moorberry.net/blog/server-vs-client</id>
-    <content type="html"><![CDATA[<p>My presumption is that it’s because of the passionate advent of JQuery, that there has been an increasing rise of using Javascript, in precedence of a server side language like PHP or Ruby. This circumstance is arguably the sole cause to how and why, <em>mostly designers</em>, are simply not learning a better way. I’m here to enlighten you.</p>
-
-<!--more-->
-
-
-<p><a href="http://moorberry.net/images/posts/versus.jpg"><img src="http://moorberry.net/images/posts/versus.jpg" alt="Versus" width="100%" /></a></p>
-
-<p>In opening, I’d like to express, that I hold no animosity for Javascript. Actually I quite often fancy a touch of its elegant lure and almost regularly indulge my viewers with its properties to control aesthetics at a dynamic fashion. But it has its place. If PHP can serve the same purpose, than its obvious strengths, should not be taken for granted.</p>
-
-<p>One prominent example of this that I seem to notice more often in use than others, is the  application of color alternating rows with HTML tables, or also favorably known as the “zebra” effect. Which I’ll be using for my reference material.</p>
-
-<h2>PHP</h2>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="k">for</span> <span class="p">(</span><span class="nv">$i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="nv">$i</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">;</span><span class="nv">$i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>    <span class="k">if</span> <span class="p">((</span><span class="nv">$i</span> <span class="nv">%</span> <span class="nv">2</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>        <span class="n">echo</span> <span class="s">&#39;&lt;tr class=&quot;zebra&quot;&gt;&#39;</span><span class="p">;</span>
-</span><span class='line'>    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-</span><span class='line'>        <span class="n">echo</span> <span class="s">&#39;&lt;tr&gt;&#39;</span><span class="p">;</span>
-</span><span class='line'>    <span class="p">}</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>The for() loop, does the accumulating work. It exponentially raises the default value ($i) by one, each iteration, so that the modulus operator (%) can equate the remainder of $i divided by two. So every instance of an even number represented by $i would evaluate to zero.</p>
-
-<h2>Ruby on Rails</h2>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">&lt;</span><span class="sx">% @items.each </span><span class="k">do</span> <span class="o">|</span><span class="n">item</span><span class="o">|</span> <span class="sx">%&gt;</span>
-</span><span class='line'><span class="sx">  &lt;tr class=&quot;&lt;%= cycle(&quot;even&quot;, &quot;odd&quot;) %&gt;</span><span class="s2">&quot;&gt;</span>
-</span><span class='line'><span class="s2">    &lt;!-- use item --&gt;</span>
-</span><span class='line'><span class="s2">  &lt;/tr&gt;</span>
-</span><span class='line'><span class="s2">&lt;% end %&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>JQuery</h2>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="nv">$</span><span class="err">(</span><span class="nv">document</span><span class="p">)</span><span class="o">.</span><span class="n">ready</span><span class="p">(</span><span class="n">function</span><span class="p">(){</span>
-</span><span class='line'>    <span class="vg">$(</span><span class="s">&quot;tr:even&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">css</span><span class="p">(</span><span class="s">&quot;background-color&quot;</span><span class="p">,</span> <span class="s">&quot;#EFEFEF&quot;</span><span class="p">);</span>
-</span><span class='line'>    <span class="vg">$(</span><span class="s">&quot;tr:odd&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">css</span><span class="p">(</span><span class="s">&quot;background-color&quot;</span><span class="p">,</span> <span class="s">&quot;#FFFFFF&quot;</span><span class="p">);</span>
-</span><span class='line'><span class="p">});</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>The JQuery even and odd filters are used as index selectors. This method can be used on any page element with just a little bit of reverse engineering.</p>
-
-<h2>Discovering the Front-End</h2>
-
-<p>If you were to analyze the speed of using only Javascript, you would find that it is 16% slower, compared to PHP [1]. Though that number might seem relatively low in scale, because it is, consider all of the other factors when developing for the web.</p>
-
-<p>80% of the average user’s response time is spent on the front-end [2]. This time, is composed of downloading all of the elements necessary to make up the page (Images, libraries, scripts, stylesheets and more). Reducing the number of elements, in turn, reduces the number of HTTP requests required to render the page.</p>
-
-<p>With PHP everything is rendered before any HTTP requests are sent by the server.</p>
-
-<p><img src="https://chart.googleapis.com/chart?cht=bvs&chs=714x100&chd=t:13,20|87,80&chco=4d89f9,c6d9fd&chbh=20&chds=0,160" style="float:left;" /></p>
-
-<br style="clear:both;" />
-
-
-<p>Graphically interpreted above are the details associated with load times. This analysis completes the HTTP request cycle from initialization. The darker portion, of each representation, shows the percentage of work involved by the server. As consistency shows, a lot of web design and development, relies mostly on what’s being delivered to the browser.</p>
-
-<p><em>in order of appearance: Google, PHP Rockstar</em></p>
-
-<h2>Summary</h2>
-
-<p>It’s certain that a professional web server is going to best the average home network set-up, in performance, any day. It’s your responsibility to take advantage of that, by running some server-side code, to save your guests the frustration of dealing with an idle load time.</p>
-
-<h2>References</h2>
-
-<p>[1] http://www.timestretch.com/FractalBenchmark.html<br/>
-[2] http://developer.yahoo.net/blog/archives/2007/03/high_performanc.html</p>
 ]]></content>
   </entry>
   
