@@ -4,7 +4,7 @@
   <title><![CDATA[Category: SQL | Michael Minter]]></title>
   <link href="http://moorberry.net/blog/categories/sql/atom.xml" rel="self"/>
   <link href="http://moorberry.net/"/>
-  <updated>2014-04-14T00:21:18-05:00</updated>
+  <updated>2014-04-15T16:43:34-05:00</updated>
   <id>http://moorberry.net/</id>
   <author>
     <name><![CDATA[Michael Minter]]></name>
@@ -47,7 +47,7 @@
 
 <p>The available <strong>MySQL Utilities</strong> programs can be seen in the console window below with the "help" command executed.</p>
 
-<p><img src="http://dev.mysql.com/doc/workbench/en/images/wb-mysql-utilities-console.png" width="100%" /></p>
+<p><img src="http://moorberry.net/images/posts/mysql_utilities_console.jpg" width="100%" /></p>
 
 <p>The same can be done by entering <code>mysqluc -e "help utilities"</code> into your console.</p>
 
