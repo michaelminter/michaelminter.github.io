@@ -190,9 +190,61 @@ posted in
 
 <p><img src="http://dev.mysql.com/doc/workbench/en/images/wb-mysql-utilities-open.png" width="100%" /></p>
 
-<p>The available <strong>MySQL Utilities</strong> programs can be seen in the console window below with the &#8220;help&#8221; command executed.</p>
+<p>The available <strong>MySQL Utilities</strong> programs can be seen in the console output below with the &#8220;help&#8221; command executed.</p>
 
-<p><img src="/images/posts/mysql_utilities_console.jpg" width="100%" /></p>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>~$ mysqluc -e "help utilities"
+</span><span class='line'>Launching console ...
+</span><span class='line'>
+</span><span class='line'>Utility           Description
+</span><span class='line'>----------------  ---------------------------------------------------------
+</span><span class='line'>mysqlauditadmin   audit log maintenance utility
+</span><span class='line'>mysqlauditgrep    audit log search utility
+</span><span class='line'>mysqldbcompare    compare databases for consistency
+</span><span class='line'>mysqldbcopy       copy databases from one server to another
+</span><span class='line'>mysqldbexport     export metadata and data from databases
+</span><span class='line'>mysqldbimport     import metadata and data from files
+</span><span class='line'>mysqldiff         compare object definitions among objects where the
+</span><span class='line'>                  difference is how db1.obj1 differs from db2.obj2
+</span><span class='line'>mysqldiskusage    show disk usage for databases
+</span><span class='line'>mysqlfailover     automatic replication health monitoring and failover
+</span><span class='line'>mysqlfrm          show CREATE TABLE from .frm files
+</span><span class='line'>mysqlindexcheck   check for duplicate or redundant indexes
+</span><span class='line'>mysqlmetagrep     search metadata
+</span><span class='line'>mysqlprocgrep     search process information
+</span><span class='line'>mysqlreplicate    establish replication with a master
+</span><span class='line'>mysqlrpladmin     administration utility for MySQL replication
+</span><span class='line'>mysqlrplcheck     check replication
+</span><span class='line'>mysqlrplshow      show slaves attached to a master
+</span><span class='line'>mysqlserverclone  start another instance of a running server
+</span><span class='line'>mysqlserverinfo   show server information
+</span><span class='line'>mysqluserclone    clone a MySQL user account to one or more new users</span></code></pre></td></tr></table></div></figure>
+
 
 <p>The same can be done by entering <code>mysqluc -e "help utilities"</code> into your console.</p>
 

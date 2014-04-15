@@ -4,7 +4,7 @@
   <title><![CDATA[Category: MySQL | Michael Minter]]></title>
   <link href="http://moorberry.net/blog/categories/mysql/atom.xml" rel="self"/>
   <link href="http://moorberry.net/"/>
-  <updated>2014-04-15T16:43:34-05:00</updated>
+  <updated>2014-04-15T16:50:44-05:00</updated>
   <id>http://moorberry.net/</id>
   <author>
     <name><![CDATA[Michael Minter]]></name>
@@ -45,9 +45,41 @@
 
 <p><img src="http://dev.mysql.com/doc/workbench/en/images/wb-mysql-utilities-open.png" width="100%" /></p>
 
-<p>The available <strong>MySQL Utilities</strong> programs can be seen in the console window below with the "help" command executed.</p>
+<p>The available <strong>MySQL Utilities</strong> programs can be seen in the console output below with the "help" command executed.</p>
 
-<p><img src="http://moorberry.net/images/posts/mysql_utilities_console.jpg" width="100%" /></p>
+<p>```
+~$ mysqluc -e "help utilities"
+Launching console ...</p>
+
+<p>Utility           Description</p>
+
+<hr />
+
+<p>mysqlauditadmin   audit log maintenance utility
+mysqlauditgrep    audit log search utility
+mysqldbcompare    compare databases for consistency
+mysqldbcopy       copy databases from one server to another
+mysqldbexport     export metadata and data from databases
+mysqldbimport     import metadata and data from files
+mysqldiff         compare object definitions among objects where the</p>
+
+<pre><code>              difference is how db1.obj1 differs from db2.obj2
+</code></pre>
+
+<p>mysqldiskusage    show disk usage for databases
+mysqlfailover     automatic replication health monitoring and failover
+mysqlfrm          show CREATE TABLE from .frm files
+mysqlindexcheck   check for duplicate or redundant indexes
+mysqlmetagrep     search metadata
+mysqlprocgrep     search process information
+mysqlreplicate    establish replication with a master
+mysqlrpladmin     administration utility for MySQL replication
+mysqlrplcheck     check replication
+mysqlrplshow      show slaves attached to a master
+mysqlserverclone  start another instance of a running server
+mysqlserverinfo   show server information
+mysqluserclone    clone a MySQL user account to one or more new users
+```</p>
 
 <p>The same can be done by entering <code>mysqluc -e "help utilities"</code> into your console.</p>
 
