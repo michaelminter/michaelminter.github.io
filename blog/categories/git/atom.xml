@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: git | Michael Minter]]></title>
+  <link href="http://moorberry.net/blog/categories/git/atom.xml" rel="self"/>
+  <link href="http://moorberry.net/"/>
+  <updated>2014-05-08T23:08:48-05:00</updated>
+  <id>http://moorberry.net/</id>
+  <author>
+    <name><![CDATA[Michael Minter]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Git Push to Github and Heroku]]></title>
+    <link href="http://moorberry.net/blog/git-push-github-heroku/"/>
+    <updated>2014-05-08T22:58:00-05:00</updated>
+    <id>http://moorberry.net/blog/git-push-github-heroku</id>
+    <content type="html"><![CDATA[<p>Group assign any git repository, on any git provider, and for as many repos as you wish.</p>
+
+<!-- more -->
+
+
+<p><img src="http://moorberry.net/images/posts/remotes.jpg" alt="Remotes Funny" /></p>
+
+<p>From your terminal, <code>cd</code> into where your repository is located and run:</p>
+
+<p><code>
+$&gt; git remote -v
+</code></p>
+
+<p>Should look something like:</p>
+
+<p><code>
+heroku  git@heroku.com:activezoo.git (fetch)
+heroku  git@heroku.com:activezoo.git (push)
+openshift ssh://5340404b5973ca1ff800034d@ruby-activezoo.rhcloud.com/~/git/ruby.git (push)
+openshift ssh://5340404b5973ca1ff800034d@ruby-activezoo.rhcloud.com/~/git/ruby.git (fetch)
+origin  git@github.com:michaelminter/active_zoo.git (push)
+origin  git@github.com:michaelminter/active_zoo.git (fetch)
+</code></p>
+
+<p>Find the Github repo. Usually set up under the <strong>origin</strong> label.</p>
+
+<p>To create the group remote, add the following command, with your Github repo address switched out with the one listed.</p>
+
+<p><code>
+$&gt; git remote add all git@github.com:michaelminter/test.git
+</code></p>
+
+<p>Find the Heroku git repo address and switch it out with the repo in this command. Run the command.</p>
+
+<p><code>
+$&gt; git remote set-url --add all git@heroku.com:test.git
+</code></p>
+
+<p>Keep executing the previous command, switching out the git address, to add more repos to the new "all" remote.</p>
+
+<p><code>
+$&gt; git remote -v
+all git@github.com:michaelminter/active_zoo.git (fetch)
+all git@heroku.com:activezoo.git (push)
+all git@github.com:michaelminter/active_zoo.git (push)
+heroku  git@heroku.com:activezoo.git (fetch)
+heroku  git@heroku.com:activezoo.git (push)
+openshift ssh://5340404b5973ca1ff800034d@ruby-activezoo.rhcloud.com/~/git/ruby.git (push)
+openshift ssh://5340404b5973ca1ff800034d@ruby-activezoo.rhcloud.com/~/git/ruby.git (fetch)
+origin  git@github.com:michaelminter/active_zoo.git (push)
+origin  git@github.com:michaelminter/active_zoo.git (fetch)
+</code></p>
+
+<p>Now you can push the same code to multiple remotes with one command.</p>
+
+<p><code>
+$&gt; git push all [branch]
+</code></p>
+]]></content>
+  </entry>
+  
+</feed>

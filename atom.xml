@@ -4,7 +4,7 @@
   <title><![CDATA[Michael Minter]]></title>
   <link href="http://moorberry.net/atom.xml" rel="self"/>
   <link href="http://moorberry.net/"/>
-  <updated>2014-04-15T16:50:44-05:00</updated>
+  <updated>2014-05-08T23:08:48-05:00</updated>
   <id>http://moorberry.net/</id>
   <author>
     <name><![CDATA[Michael Minter]]></name>
@@ -12,6 +12,86 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Git Push to Github and Heroku]]></title>
+    <link href="http://moorberry.net/blog/git-push-github-heroku/"/>
+    <updated>2014-05-08T22:58:00-05:00</updated>
+    <id>http://moorberry.net/blog/git-push-github-heroku</id>
+    <content type="html"><![CDATA[<p>Group assign any git repository, on any git provider, and for as many repos as you wish.</p>
+
+<!-- more -->
+
+
+<p><img src="http://moorberry.net/images/posts/remotes.jpg" alt="Remotes Funny" /></p>
+
+<p>From your terminal, <code>cd</code> into where your repository is located and run:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$&gt; git remote -v</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Should look something like:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>heroku  git@heroku.com:activezoo.git (fetch)
+</span><span class='line'>heroku  git@heroku.com:activezoo.git (push)
+</span><span class='line'>openshift ssh://5340404b5973ca1ff800034d@ruby-activezoo.rhcloud.com/~/git/ruby.git (push)
+</span><span class='line'>openshift ssh://5340404b5973ca1ff800034d@ruby-activezoo.rhcloud.com/~/git/ruby.git (fetch)
+</span><span class='line'>origin  git@github.com:michaelminter/active_zoo.git (push)
+</span><span class='line'>origin  git@github.com:michaelminter/active_zoo.git (fetch)</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Find the Github repo. Usually set up under the <strong>origin</strong> label.</p>
+
+<p>To create the group remote, add the following command, with your Github repo address switched out with the one listed.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$&gt; git remote add all git@github.com:michaelminter/test.git</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Find the Heroku git repo address and switch it out with the repo in this command. Run the command.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$&gt; git remote set-url --add all git@heroku.com:test.git</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Keep executing the previous command, switching out the git address, to add more repos to the new &#8220;all&#8221; remote.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$&gt; git remote -v
+</span><span class='line'>all git@github.com:michaelminter/active_zoo.git (fetch)
+</span><span class='line'>all git@heroku.com:activezoo.git (push)
+</span><span class='line'>all git@github.com:michaelminter/active_zoo.git (push)
+</span><span class='line'>heroku  git@heroku.com:activezoo.git (fetch)
+</span><span class='line'>heroku  git@heroku.com:activezoo.git (push)
+</span><span class='line'>openshift ssh://5340404b5973ca1ff800034d@ruby-activezoo.rhcloud.com/~/git/ruby.git (push)
+</span><span class='line'>openshift ssh://5340404b5973ca1ff800034d@ruby-activezoo.rhcloud.com/~/git/ruby.git (fetch)
+</span><span class='line'>origin  git@github.com:michaelminter/active_zoo.git (push)
+</span><span class='line'>origin  git@github.com:michaelminter/active_zoo.git (fetch)</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Now you can push the same code to multiple remotes with one command.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$&gt; git push all [branch]</span></code></pre></td></tr></table></div></figure>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Database Version Control with MySQL Utilities]]></title>
@@ -1776,228 +1856,6 @@
 <p>Hopefully I’ve left more than enough room for you to adapt this into your own projects. You can add on to this with many of the GD library features documented by the PHP network.</p>
 
 <p>If you develop an extension or even a class, from these tips, please feel free to share by commenting back and letting me know what you’ve done.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Paypal Express Checkout NVP API]]></title>
-    <link href="http://moorberry.net/blog/paypal-express-checkout-nvp-api/"/>
-    <updated>2010-04-03T20:19:00-05:00</updated>
-    <id>http://moorberry.net/blog/paypal-express-checkout-nvp-api</id>
-    <content type="html"><![CDATA[<p>I&#8217;m not sure why <a href="http://paypal.com">Paypal</a> has written documentation, regarding its own Express Checkout name-value-pair API, with no enthusiasm at all. The classes used with the Paypal API are extremely easy to use. All of this is likely contributing to the confusion about using Express Checkout. But I’m here now, to save your application, and hopefully your sanity.</p>
-
-<!--more-->
-
-
-
-
-<div style="margin:0 auto 20px;width:600px;"><img src="http://moorberry.net/images/posts/checkout01.jpg" title="SendGrid" alt="SendGrid" width="100%" /></div>
-
-
-<p>I’m going to explain why the API objects work and what happens when they’re called. There’s a few different ways that you could go about setting up the product and/or service details. So I’ll keep this post relative to the main focus points and let you handle the before and after parts on an individual basis.</p>
-
-<h2>Referring payment authentication</h2>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="nv">$paypal</span> <span class="o">=</span> <span class="k">new</span> <span class="n">SetExpressCheckout</span><span class="p">(</span><span class="nv">$totalPrice</span><span class="p">);</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>We start out by calling the <strong>SetExpressCheckOut()</strong> class. This class caller instantiates the method you’ll use to set up the parameters required for redirecting the customer <em>to</em> Paypal <em>and back</em>. A variable of the total price has to be set to complete the initiation of this class.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="nv">$paypal</span> <span class="o">=</span> <span class="k">new</span> <span class="n">SetExpressCheckout</span><span class="p">(</span><span class="nv">$totalPrice</span><span class="p">);</span>
-</span><span class='line'>
-</span><span class='line'><span class="nv">$paypal</span><span class="o">-&gt;</span><span class="n">setNVP</span><span class="p">(</span><span class="s">&quot;RETURNURL&quot;</span><span class="p">,</span> <span class="s">&quot;http://yourURL.com/confirm.php&quot;</span><span class="p">);</span>
-</span><span class='line'><span class="nv">$paypal</span><span class="o">-&gt;</span><span class="n">setNVP</span><span class="p">(</span><span class="s">&quot;HDRIMG&quot;</span><span class="p">,</span> <span class="s">&quot;http://yourURL.com/image.jpg&quot;</span><span class="p">);</span>
-</span><span class='line'><span class="nv">$paypal</span><span class="o">-&gt;</span><span class="n">setNVP</span><span class="p">(</span><span class="s">&quot;EMAIL&quot;</span><span class="p">,</span> <span class="s">&quot;$userEmail&quot;</span><span class="p">);</span> <span class="sr">//</span> <span class="n">customer</span><span class="err">&#39;</span><span class="n">s</span> <span class="n">email</span>
-</span><span class='line'><span class="nv">$paypal</span><span class="o">-&gt;</span><span class="n">setNVP</span><span class="p">(</span><span class="s">&quot;AMT&quot;</span><span class="p">,</span> <span class="nv">$totalPrice</span><span class="p">);</span>
-</span><span class='line'><span class="nv">$paypal</span><span class="o">-&gt;</span><span class="n">setNVP</span><span class="p">(</span><span class="s">&quot;SHIPPINGAMT&quot;</span><span class="p">,</span> <span class="s">&quot;32&quot;</span><span class="p">);</span>
-</span><span class='line'><span class="nv">$paypal</span><span class="o">-&gt;</span><span class="n">setNVP</span><span class="p">(</span><span class="s">&quot;CUSTOM&quot;</span><span class="p">,</span> <span class="s">&quot;Anything you want to put&quot;</span><span class="p">);</span>
-</span><span class='line'><span class="nv">$paypal</span><span class="o">-&gt;</span><span class="n">setNVP</span><span class="p">(</span><span class="s">&quot;INVNUM&quot;</span><span class="p">,</span> <span class="nv">$uniqueID</span><span class="p">);</span> <span class="sr">//</span> <span class="n">personal</span> <span class="n">invoice</span> <span class="n">number</span>
-</span><span class='line'>
-</span><span class='line'><span class="nv">$paypal</span><span class="o">-&gt;</span><span class="n">getResponse</span><span class="p">();</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Before you submit for a transfer to Paypal, know that there are optional values you can send with the setNVP() function, to customize the payment process. All values that can be found, by default, in the etc/NVP/SetExpressCheckout.ini file. I’ve included a list of common practice examples and how to use them in this template.</p>
-
-<p>getResponse() sends the user’s browser to Paypal for authentication of credit information. Specifically to a URL that you’ll have to variably set between test mode (sandbox) and live, in the file named etc/NVP/PayPalNVP.ini.</p>
-
-<div style="margin:0 auto 20px;width:600px;"><img src="http://moorberry.net/images/posts/checkout02.jpg" title="SendGrid" alt="SendGrid" width="100%" /></div>
-
-
-<h2>Completing the Sale</h2>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="nv">$paypal</span>  <span class="o">=</span> <span class="k">new</span> <span class="n">GetExpressCheckoutDetails</span><span class="p">;</span>
-</span><span class='line'><span class="nv">$details</span> <span class="o">=</span> <span class="nv">$paypal</span><span class="o">-&gt;</span><span class="n">getResponse</span><span class="p">();</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><strong>GetExpressCheckoutDetails()</strong> is a class that is most responsible for presenting the custom specifications that you originally sent with SetExpressCheckOut() and SetNVP().</p>
-
-<p><strong>getResponse()</strong> will gather all of the available options as an array, labelled $details.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="nv">$payment</span>  <span class="o">=</span> <span class="k">new</span> <span class="n">DoExpressCheckoutPayment</span><span class="p">(</span><span class="nv">$totalPrice</span><span class="p">);</span>
-</span><span class='line'><span class="nv">$response</span> <span class="o">=</span> <span class="nv">$payment</span><span class="o">-&gt;</span><span class="n">getResponse</span><span class="p">();</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><strong>DoExpressCheckoutPayment()</strong> will instinctively initiate a communication with Paypal to notify the service that you are ready for the payment to be transferred to your account. The only necessary requisite, of calling this class and it calling to action, is to include the total price in its variable containment field.</p>
-
-<p><strong>getResponse()</strong> will gather the resulting responses by DoExpressCheckoutPayment() and include them in an array, labelled $response.</p>
-
-<p>It could be said that you could apply another (final) verification for your customer to submit before the transaction is completed by DoExpressCheckoutPayment(). But not technically necessary.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="k">if</span> <span class="p">(</span><span class="nv">$response</span><span class="p">[</span><span class="s">&#39;PAYMENTSTATUS&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s">&#39;Completed&#39;</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>    <span class="c1"># process information</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>One of the returned values in $response will be the PAYMENTSTATUS key. This is a string result that confirms whether or not the money has made been payed to your account. It will definitely be useful when you set up your system to print an invoice on complete, or some insightfully-formatted summary on failure.</p>
-
-<h2>Displaying results from getResponse</h2>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-<span class='line-number'>37</span>
-<span class='line-number'>38</span>
-<span class='line-number'>39</span>
-<span class='line-number'>40</span>
-<span class='line-number'>41</span>
-<span class='line-number'>42</span>
-<span class='line-number'>43</span>
-<span class='line-number'>44</span>
-<span class='line-number'>45</span>
-<span class='line-number'>46</span>
-<span class='line-number'>47</span>
-<span class='line-number'>48</span>
-<span class='line-number'>49</span>
-<span class='line-number'>50</span>
-<span class='line-number'>51</span>
-<span class='line-number'>52</span>
-</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="n">echo</span> <span class="s">&#39;&lt;pre&gt;&#39;</span><span class="p">;</span>
-</span><span class='line'><span class="n">print_r</span><span class="p">(</span><span class="nv">$details</span><span class="p">);</span>
-</span><span class='line'><span class="n">echo</span> <span class="s">&#39;&lt;pre&gt;&#39;</span><span class="p">;</span>
-</span><span class='line'><span class="n">print_r</span><span class="p">(</span><span class="nv">$response</span><span class="p">);</span>
-</span><span class='line'>
-</span><span class='line'><span class="c1"># The above code should print out something similar to the following:</span>
-</span><span class='line'>
-</span><span class='line'><span class="n">Array</span>
-</span><span class='line'><span class="p">(</span>
-</span><span class='line'>    <span class="p">[</span><span class="n">TOKEN</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="n">EC</span><span class="nv">%2d8DS53628GJ4630109</span>
-</span><span class='line'>    <span class="p">[</span><span class="n">TIMESTAMP</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="mi">2010</span><span class="nv">%2d03%2d31T08%3a25%3a40Z</span>
-</span><span class='line'>    <span class="p">[</span><span class="n">CORRELATIONID</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="n">ce3e460d38d2f</span>
-</span><span class='line'>    <span class="p">[</span><span class="n">ACK</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="n">Success</span>
-</span><span class='line'>    <span class="p">[</span><span class="n">VERSION</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="mi">51</span><span class="nv">%2e0</span>
-</span><span class='line'>    <span class="p">[</span><span class="n">BUILD</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="mi">1247606</span>
-</span><span class='line'>    <span class="p">[</span><span class="n">EMAIL</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="n">test_acct_36654645742_per</span><span class="nv">%40domain%2ecom</span>
-</span><span class='line'>    <span class="p">[</span><span class="n">PAYERID</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="n">W96GXTA5P9BRN</span>
-</span><span class='line'>    <span class="p">[</span><span class="n">PAYERSTATUS</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="n">verified</span>
-</span><span class='line'>    <span class="p">[</span><span class="n">FIRSTNAME</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="n">Test</span>
-</span><span class='line'>    <span class="p">[</span><span class="n">LASTNAME</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="n">User</span>
-</span><span class='line'>    <span class="p">[</span><span class="n">COUNTRYCODE</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="n">US</span>
-</span><span class='line'>    <span class="p">[</span><span class="n">SHIPTONAME</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="n">Test</span><span class="nv">%20User</span>
-</span><span class='line'>    <span class="p">[</span><span class="n">SHIPTOSTREET</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="mi">1</span><span class="nv">%20Main%20St</span>
-</span><span class='line'>    <span class="p">[</span><span class="n">SHIPTOCITY</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="n">San</span><span class="nv">%20Jose</span>
-</span><span class='line'>    <span class="p">[</span><span class="n">SHIPTOSTATE</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="n">CA</span>
-</span><span class='line'>    <span class="p">[</span><span class="n">SHIPTOZIP</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="mi">95131</span>
-</span><span class='line'>    <span class="p">[</span><span class="n">SHIPTOCOUNTRYCODE</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="n">US</span>
-</span><span class='line'>    <span class="p">[</span><span class="n">SHIPTOCOUNTRYNAME</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="n">United</span><span class="nv">%20States</span>
-</span><span class='line'>    <span class="p">[</span><span class="n">ADDRESSSTATUS</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="n">Confirmed</span>
-</span><span class='line'>    <span class="p">[</span><span class="n">CUSTOM</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="n">Anything</span> <span class="n">you</span> <span class="n">want</span> <span class="n">to</span> <span class="n">put</span>
-</span><span class='line'>    <span class="p">[</span><span class="n">INVNUM</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="n">IYUUFEOAS0ME3MTI</span>
-</span><span class='line'><span class="p">)</span>
-</span><span class='line'><span class="n">Array</span>
-</span><span class='line'><span class="p">(</span>
-</span><span class='line'>    <span class="p">[</span><span class="n">TOKEN</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="n">EC</span><span class="nv">%2d8DS53628GJ4630109</span>
-</span><span class='line'>    <span class="p">[</span><span class="n">TIMESTAMP</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="mi">2010</span><span class="nv">%2d03%2d31T08%3a25%3a43Z</span>
-</span><span class='line'>    <span class="p">[</span><span class="n">CORRELATIONID</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="n">b1989df39a0ca</span>
-</span><span class='line'>    <span class="p">[</span><span class="n">ACK</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="n">Success</span>
-</span><span class='line'>    <span class="p">[</span><span class="n">VERSION</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="mi">51</span><span class="nv">%2e0</span>
-</span><span class='line'>    <span class="p">[</span><span class="n">BUILD</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="mi">1247606</span>
-</span><span class='line'>    <span class="p">[</span><span class="n">TRANSACTIONID</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="mi">1</span><span class="n">PR0061154034542X</span>
-</span><span class='line'>    <span class="p">[</span><span class="n">TRANSACTIONTYPE</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="n">expresscheckout</span>
-</span><span class='line'>    <span class="p">[</span><span class="n">PAYMENTTYPE</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="n">instant</span>
-</span><span class='line'>    <span class="p">[</span><span class="n">ORDERTIME</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="mi">2010</span><span class="nv">%2d03%2d31T08%3a25%3a42Z</span>
-</span><span class='line'>    <span class="p">[</span><span class="n">AMT</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="mi">152</span><span class="nv">%2e00</span>
-</span><span class='line'>    <span class="p">[</span><span class="n">FEEAMT</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="mi">4</span><span class="nv">%2e71</span>
-</span><span class='line'>    <span class="p">[</span><span class="n">TAXAMT</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="mi">0</span><span class="nv">%2e00</span>
-</span><span class='line'>    <span class="p">[</span><span class="n">CURRENCYCODE</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="n">USD</span>
-</span><span class='line'>    <span class="p">[</span><span class="n">PAYMENTSTATUS</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="n">Completed</span>
-</span><span class='line'>    <span class="p">[</span><span class="n">PENDINGREASON</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="n">None</span>
-</span><span class='line'>    <span class="p">[</span><span class="n">REASONCODE</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="n">None</span>
-</span><span class='line'><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>Testing</h2>
-
-<p>If you don’t have a <a href="https://developer.paypal.com/">Paypal developer account</a>, than you should certainly sign up for one to use Paypal’s Sandbox, which makes a mock version of Paypal available for testing. Comes complete with personal and business accounts, each with their own credentials, and unlimited funds.</p>
-
-<h2>Summary</h2>
-
-<p>Follow the preceding order and you could easily narrow this code down to a a single file, with enough if() constructs, or span it out to many.</p>
-
-<p>You might be left wondering why it seems less daunting than you have expected. That would be because you’re right. These few objects are all that’s needed to handle a shopping cart system on your website.</p>
-
-<p>Maybe Paypal will use this post to refer new users trying to understand how this system works. But I doubt it.</p>
-
-<h3>Note</h3>
-
-<p>Don&#8217;t forget to adjust your database schema for <em>address2</em> in <strong>$details</strong> when available.</p>
 ]]></content>
   </entry>
   

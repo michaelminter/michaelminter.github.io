@@ -5,7 +5,7 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Database Version Control with MySQL Utilities - Michael Minter</title>
+  <title>Git Push to Github and Heroku - Michael Minter</title>
   <meta name="author" content="Michael Minter">
   <link rel="author" href="humans.txt">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -13,7 +13,7 @@
   
     
   
-  <meta name="description" content="The following steps are meant to capture a snapshot of your development database structure and your staging/production database structure, compare &hellip;">
+  <meta name="description" content=" Group assign any git repository, on any git provider, and for as many repos as you wish. ">
   
   <!-- http://t.co/dKP3o1e -->
   <meta name="HandheldFriendly" content="True">
@@ -21,20 +21,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://moorberry.net/blog/database-version-control/">
+  <link rel="canonical" href="http://moorberry.net/blog/git-push-github-heroku/">
   <link href="/favicon.png" rel="icon">
   <link href='http://fonts.googleapis.com/css?family=Cantarell' rel='stylesheet' type='text/css'>
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="Michael Minter" type="application/atom+xml">
   <meta name="og:type" content="website" />
   <meta name="og:site_name" content="Michael Minter" />
-  <meta name="og:title" content="Database Version Control with MySQL Utilities" />
-  <meta name="og:description" content="The following steps are meant to capture a snapshot of your development database structure and your staging/production database structure, compare &hellip;" />
-  <meta name="og:url" content="http://moorberry.net/blog/database-version-control/"/>
-  <meta name="url" content="http://moorberry.net/blog/database-version-control/">
+  <meta name="og:title" content="Git Push to Github and Heroku" />
+  <meta name="og:description" content=" Group assign any git repository, on any git provider, and for as many repos as you wish. " />
+  <meta name="og:url" content="http://moorberry.net/blog/git-push-github-heroku/"/>
+  <meta name="url" content="http://moorberry.net/blog/git-push-github-heroku/">
   
-  <meta name="subject" content="MySQLSQL"/>
-  <meta name="category" content="MySQLSQL"/>
+  <meta name="subject" content="git"/>
+  <meta name="category" content="git"/>
   
   <meta name="distribution" content="global">
   <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
@@ -106,7 +106,7 @@
   
     <header>
       
-        <h1 class="entry-title">Database Version Control With MySQL Utilities</h1>
+        <h1 class="entry-title">Git Push to Github and Heroku</h1>
       
       
         <p class="meta">
@@ -131,13 +131,13 @@
   
 
 
-<time datetime="2014-04-13T23:30:00-05:00" pubdate data-updated="true">Apr 13<span>th</span>, 2014</time> - 
+<time datetime="2014-05-08T22:58:00-05:00" pubdate data-updated="true">May 8<span>th</span>, 2014</time> - 
           
 
 posted in
 <span class="categories">
   
-    <a class='category' href='/blog/categories/mysql/'>MySQL</a>, <a class='category' href='/blog/categories/sql/'>SQL</a>
+    <a class='category' href='/blog/categories/git/'>git</a>
   
 </span>
 
@@ -163,34 +163,50 @@ posted in
         </script>
         <script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script>
       </div>
-      <p>The following steps are meant to capture a snapshot of your development database structure and your staging/production database structure, compare the two, and provide SQL to consolidate the differences.</p>
+      <p>Group assign any git repository, on any git provider, and for as many repos as you wish.</p>
 
 <!-- more -->
 
 
-<p>This article relates to one of many methods for <strong>database version control</strong> in a singular or team-based environment.</p>
+<p><img src="/images/posts/remotes.jpg" alt="Remotes Funny" /></p>
 
-<h2>MySQL Workbench</h2>
+<p>From your terminal, <code>cd</code> into where your repository is located and run:</p>
 
-<p>Having <strong>MySQL Workbench</strong> is not mandatory for this process. But it&#8217;s a nice interface to consolidate the suite of tools that <strong>MySQL</strong> offers.</p>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$&gt; git remote -v</span></code></pre></td></tr></table></div></figure>
 
-<p>Download <a href="http://dev.mysql.com/downloads/tools/workbench/">http://dev.mysql.com/downloads/tools/workbench/</a></p>
 
-<h2>MySQL Utilities</h2>
+<p>Should look something like:</p>
 
-<p><strong>MySQL Utilities</strong> will install the required programs to finish the fowllowing steps.</p>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>heroku  git@heroku.com:activezoo.git (fetch)
+</span><span class='line'>heroku  git@heroku.com:activezoo.git (push)
+</span><span class='line'>openshift ssh://5340404b5973ca1ff800034d@ruby-activezoo.rhcloud.com/~/git/ruby.git (push)
+</span><span class='line'>openshift ssh://5340404b5973ca1ff800034d@ruby-activezoo.rhcloud.com/~/git/ruby.git (fetch)
+</span><span class='line'>origin  git@github.com:michaelminter/active_zoo.git (push)
+</span><span class='line'>origin  git@github.com:michaelminter/active_zoo.git (fetch)</span></code></pre></td></tr></table></div></figure>
 
-<p>Download <a href="http://dev.mysql.com/doc/workbench/en/mysql-utilities.html">http://dev.mysql.com/doc/workbench/en/mysql-utilities.html</a></p>
 
-<h2>Verify MySQL Utilities</h2>
+<p>Find the Github repo. Usually set up under the <strong>origin</strong> label.</p>
 
-<p>Open <strong>MySQL Workbench</strong>.</p>
+<p>To create the group remote, add the following command, with your Github repo address switched out with the one listed.</p>
 
-<p>Start <strong>MySQL Utilities</strong> from <strong>MySQL Workbench</strong>.</p>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$&gt; git remote add all git@github.com:michaelminter/test.git</span></code></pre></td></tr></table></div></figure>
 
-<p><img src="http://dev.mysql.com/doc/workbench/en/images/wb-mysql-utilities-open.png" width="100%" /></p>
 
-<p>The available <strong>MySQL Utilities</strong> programs can be seen in the console output below with the &#8220;help&#8221; command executed.</p>
+<p>Find the Heroku git repo address and switch it out with the repo in this command. Run the command.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$&gt; git remote set-url --add all git@heroku.com:test.git</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Keep executing the previous command, switching out the git address, to add more repos to the new &#8220;all&#8221; remote.</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -202,139 +218,22 @@ posted in
 <span class='line-number'>8</span>
 <span class='line-number'>9</span>
 <span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>~$ mysqluc -e "help utilities"
-</span><span class='line'>Launching console ...
-</span><span class='line'>
-</span><span class='line'>Utility           Description
-</span><span class='line'>----------------  ---------------------------------------------------------
-</span><span class='line'>mysqlauditadmin   audit log maintenance utility
-</span><span class='line'>mysqlauditgrep    audit log search utility
-</span><span class='line'>mysqldbcompare    compare databases for consistency
-</span><span class='line'>mysqldbcopy       copy databases from one server to another
-</span><span class='line'>mysqldbexport     export metadata and data from databases
-</span><span class='line'>mysqldbimport     import metadata and data from files
-</span><span class='line'>mysqldiff         compare object definitions among objects where the
-</span><span class='line'>                  difference is how db1.obj1 differs from db2.obj2
-</span><span class='line'>mysqldiskusage    show disk usage for databases
-</span><span class='line'>mysqlfailover     automatic replication health monitoring and failover
-</span><span class='line'>mysqlfrm          show CREATE TABLE from .frm files
-</span><span class='line'>mysqlindexcheck   check for duplicate or redundant indexes
-</span><span class='line'>mysqlmetagrep     search metadata
-</span><span class='line'>mysqlprocgrep     search process information
-</span><span class='line'>mysqlreplicate    establish replication with a master
-</span><span class='line'>mysqlrpladmin     administration utility for MySQL replication
-</span><span class='line'>mysqlrplcheck     check replication
-</span><span class='line'>mysqlrplshow      show slaves attached to a master
-</span><span class='line'>mysqlserverclone  start another instance of a running server
-</span><span class='line'>mysqlserverinfo   show server information
-</span><span class='line'>mysqluserclone    clone a MySQL user account to one or more new users</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$&gt; git remote -v
+</span><span class='line'>all git@github.com:michaelminter/active_zoo.git (fetch)
+</span><span class='line'>all git@heroku.com:activezoo.git (push)
+</span><span class='line'>all git@github.com:michaelminter/active_zoo.git (push)
+</span><span class='line'>heroku  git@heroku.com:activezoo.git (fetch)
+</span><span class='line'>heroku  git@heroku.com:activezoo.git (push)
+</span><span class='line'>openshift ssh://5340404b5973ca1ff800034d@ruby-activezoo.rhcloud.com/~/git/ruby.git (push)
+</span><span class='line'>openshift ssh://5340404b5973ca1ff800034d@ruby-activezoo.rhcloud.com/~/git/ruby.git (fetch)
+</span><span class='line'>origin  git@github.com:michaelminter/active_zoo.git (push)
+</span><span class='line'>origin  git@github.com:michaelminter/active_zoo.git (fetch)</span></code></pre></td></tr></table></div></figure>
 
 
-<p>The same can be done by entering <code>mysqluc -e "help utilities"</code> into your console.</p>
-
-<p>If you receive the following error.</p>
+<p>Now you can push the same code to multiple remotes with one command.</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>Traceback (most recent call last):
-</span><span class='line'>  File "/bin/mysqluc", line 23, in &lt;module&gt;
-</span><span class='line'>  from mysql.utilities.common.options import license_callback, UtilitiesParser
-</span><span class='line'>File "/Library/Python/2.7/site-packages/mysql/utilities/common/options.py", line 34, in     &lt;module&gt;
-</span><span class='line'>from mysql.connector.conversion import MySQLConverter
-</span><span class='line'>ImportError: No module named connector.conversion</span></code></pre></td></tr></table></div></figure>
-
-
-<blockquote><p><strong>ImportError: No module named connector.conversion</strong></p></blockquote>
-
-<p><strong>MySQL Utilities</strong> assumes that the <strong>MySQL Connector</strong> for <strong>Python</strong> has been installed.</p>
-
-<p>Download it here <a href="http://dev.mysql.com/downloads/connector/python/">http://dev.mysql.com/downloads/connector/python/</a></p>
-
-<h2>Compare Databases with mysqldbcompare</h2>
-
-<p>Run <strong>mysqldbcompare</strong>.</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>~$ mysqldbcompare --server1=&lt;user&gt;:&lt;password&gt;@&lt;host&gt; --server2=&lt;user&gt;:&lt;password&gt;@localhost dwh_production:dwh_development --run-all-tests --skip-data-check --difftype=sql
-</span><span class='line'># server1 on localhost: ... connected.
-</span><span class='line'># server2 on localhost: ... connected.
-</span><span class='line'># Checking databases dwh_production on server1 and dwh_development on server2
-</span><span class='line'>#</span></code></pre></td></tr></table></div></figure>
-
-
-<p>If you can&#8217;t connect to your database directly, but can <strong>SSH</strong> into the platform that the database server is located on, run:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>~$ ssh -f -N -L 3307:localhost:3306 &lt;user&gt;@&lt;server&gt;</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Run <strong>mysqldbcompare</strong>.</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>~$ mysqldbcompare --server1=&lt;user&gt;:&lt;password&gt;@localhost:3307 --server2=&lt;user&gt;:&lt;password&gt;@localhost dwh_production:dwh_development --run-all-tests --skip-data-check --difftype=sql
-</span><span class='line'># server1 on localhost: ... connected.
-</span><span class='line'># server2 on localhost: ... connected.
-</span><span class='line'># Checking databases dwh_production on server1 and dwh_development on server2
-</span><span class='line'>#</span></code></pre></td></tr></table></div></figure>
-
-
-<p><strong>TIP:</strong> Generate a file with the above output.</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>~$ mysqldbcompare --server1=&lt;database_user&gt;:&lt;database_password&gt;@localhost:3307 --server2=&lt;user&gt;:&lt;password&gt;@localhost dwh_production:dwh_development --run-all-tests --skip-data-check --difftype=sql &gt;&gt; mysqldbcompare.sql</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Now you have all the SQL to <strong>ALTER</strong> your production database structure so that it matches up with your development database structure.</p>
-
-<h2>Import</h2>
-
-<p>Import database <strong>ALTER</strong> statements.</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>~$ mysqlimport -u &lt;user&gt; -p&lt;password&gt; dwh_production mysqldbcompare.sql</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>Verify</h2>
-
-<p>Get a <strong>DIFF</strong> of the two databases.</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>~$ mysqldbcompare --server1=&lt;database_user&gt;:&lt;database_password&gt;@localhost:3307 --server2=&lt;user&gt;:&lt;password&gt;@localhost dwh_production:dwh_development --run-all-tests --skip-data-check</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>Resources</h2>
-
-<ul>
-<li><a href="http://dev.mysql.com/doc/mysql-utilities/1.3/en/mysqldbcompare.html">http://dev.mysql.com/doc/mysql-utilities/1.3/en/mysqldbcompare.html</a></li>
-</ul>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$&gt; git push all [branch]</span></code></pre></td></tr></table></div></figure>
 
 
     </div>
@@ -346,10 +245,8 @@ posted in
         <p>Let me know how you use it - <a href="#footer-widgets" alt="Contact Michael" title="Contact Michael">contact me here.</a></p>
       </div>
       
-        <a class="pull-left" href="/blog/multi-column-unique-indexes/" title="Previous Post: Multi Column Unique Indexes">&laquo; Multi Column Unique Indexes</a>
+        <a class="pull-left" href="/blog/database-version-control/" title="Previous Post: Database Version Control with MySQL Utilities">&laquo; Database Version Control with MySQL Utilities</a>
       
-      
-        <a class="pull-right" href="/blog/git-push-github-heroku/" title="Next Post: Git Push to Github and Heroku">Git Push to Github and Heroku &raquo;</a>
       
     </footer>
   
@@ -492,8 +389,8 @@ posted in
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://moorberry.net/blog/database-version-control/';
-        var disqus_url = 'http://moorberry.net/blog/database-version-control/';
+        var disqus_identifier = 'http://moorberry.net/blog/git-push-github-heroku/';
+        var disqus_url = 'http://moorberry.net/blog/git-push-github-heroku/';
         var disqus_script = 'embed.js';
       
     (function () {
