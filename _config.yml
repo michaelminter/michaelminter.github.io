@@ -3,11 +3,11 @@
 # ----------------------- #
 
 url: http://moorberry.net
-title: Michael Minter
+title: Moorberry
 subtitle: A blog for web engineers.
 author: Michael Minter
 simple_search: http://google.com/search
-description:
+description: Blog about Web application development and programming; and other tech.
 
 # Default date format is "ordinal" (resulting in "July 22nd 2007")
 # You can customize the format as defined in
