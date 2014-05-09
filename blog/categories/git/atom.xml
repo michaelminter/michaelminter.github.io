@@ -4,7 +4,7 @@
   <title><![CDATA[Category: git | Michael Minter]]></title>
   <link href="http://moorberry.net/blog/categories/git/atom.xml" rel="self"/>
   <link href="http://moorberry.net/"/>
-  <updated>2014-05-08T23:08:48-05:00</updated>
+  <updated>2014-05-08T23:10:50-05:00</updated>
   <id>http://moorberry.net/</id>
   <author>
     <name><![CDATA[Michael Minter]]></name>
@@ -18,7 +18,7 @@
     <link href="http://moorberry.net/blog/git-push-github-heroku/"/>
     <updated>2014-05-08T22:58:00-05:00</updated>
     <id>http://moorberry.net/blog/git-push-github-heroku</id>
-    <content type="html"><![CDATA[<p>Group assign any git repository, on any git provider, and for as many repos as you wish.</p>
+    <content type="html"><![CDATA[<p>Group assign any git repository, on any git provider, and for as many remotes as you wish.</p>
 
 <!-- more -->
 
