@@ -4,7 +4,7 @@
   <title><![CDATA[Moorberry]]></title>
   <link href="http://moorberry.net/atom.xml" rel="self"/>
   <link href="http://moorberry.net/"/>
-  <updated>2014-05-13T11:16:49-05:00</updated>
+  <updated>2014-05-13T11:19:04-05:00</updated>
   <id>http://moorberry.net/</id>
   <author>
     <name><![CDATA[Michael Minter]]></name>
@@ -14,7 +14,7 @@
 
   
   <entry>
-    <title type="html"><![CDATA[install_linux_from_usb]]></title>
+    <title type="html"><![CDATA[Install Linux from USB]]></title>
     <link href="http://moorberry.net/blog/install-linux-from-usb/"/>
     <updated>2014-05-13T11:14:00-05:00</updated>
     <id>http://moorberry.net/blog/install-linux-from-usb</id>

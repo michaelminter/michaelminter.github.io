@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: linux | Moorberry]]></title>
+  <link href="http://moorberry.net/blog/categories/linux/atom.xml" rel="self"/>
+  <link href="http://moorberry.net/"/>
+  <updated>2014-05-13T11:19:04-05:00</updated>
+  <id>http://moorberry.net/</id>
+  <author>
+    <name><![CDATA[Michael Minter]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Install Linux from USB]]></title>
+    <link href="http://moorberry.net/blog/install-linux-from-usb/"/>
+    <updated>2014-05-13T11:14:00-05:00</updated>
+    <id>http://moorberry.net/blog/install-linux-from-usb</id>
+    <content type="html"><![CDATA[<p>Create a bootable USB drive for installing Linux</p>
+
+<!-- more -->
+
+
+<p>Picking a Linux distro is like picking your favorite flavor of ice cream.</p>
+
+<p>Find an awesome Linux distribution here <a href="http://distrowatch.com">distrowatch.com</a></p>
+
+<h2>Prepare</h2>
+
+<p>Convert the .iso file to .img using the convert option of hdiutil</p>
+
+<p><code>
+hdiutil convert -format UDRW -o ~/path/to/target.img ~/path/to/ubuntu.iso
+</code></p>
+
+<p><strong>Note:</strong> OS X tends to put the .dmg ending on the output file automatically.</p>
+
+<p>Remove the USB drive from your machine if it's currently inserted.</p>
+
+<p>Run <code>diskutil list</code> to get the current list of devices.</p>
+
+<p><code>
+diskutil list
+</code></p>
+
+<p>Insert your flash drive.</p>
+
+<p>Run <code>diskutil list</code> again to determine the device node assigned to your flash media (e.g. /dev/disk1).</p>
+
+<p><code>
+diskutil list
+</code></p>
+
+<p><em>insert example output</em></p>
+
+<p><code>
+diskutil unmountDisk /dev/diskN
+</code></p>
+
+<p>Replace <em>N</em> with the disk number from the last command; in the previous example, <em>N</em> would be 1.</p>
+
+<p><code>
+sudo dd if=/path/to/downloaded.img of=/dev/rdiskN bs=1m
+</code></p>
+
+<p>Execute sudo dd if=/path/to/downloaded.img of=/dev/rdiskN bs=1m (replace /path/to/downloaded.img with the path where the image file is located; for example, ./ubuntu.imgor ./ubuntu.dmg).</p>
+
+<ul>
+<li>Using /dev/rdisk instead of /dev/disk may be faster</li>
+<li>If you see the error dd: Invalid number '1m', you are using GNU dd. Use the same command but replace bs=1m with bs=1M</li>
+<li>If you see the error dd: /dev/diskN: Resource busy, make sure the disk is not in use. Start the 'Disk Utility.app' and unmount (don't eject) the drive</li>
+</ul>
+
+
+<p><code>
+diskutil eject /dev/diskN
+</code></p>
+
+<p>and remove your flash media when the command completes.</p>
+
+<h2>Install</h2>
+
+<p>Restart your computer and press alt/option key while the Mac is restarting to choose the USB drive.</p>
+]]></content>
+  </entry>
+  
+</feed>
