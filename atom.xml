@@ -4,7 +4,7 @@
   <title><![CDATA[Moorberry]]></title>
   <link href="http://moorberry.net/atom.xml" rel="self"/>
   <link href="http://moorberry.net/"/>
-  <updated>2014-05-13T11:21:20-05:00</updated>
+  <updated>2014-05-13T11:29:35-05:00</updated>
   <id>http://moorberry.net/</id>
   <author>
     <name><![CDATA[Michael Minter]]></name>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Create Linux Install USB on Mac]]></title>
-    <link href="http://moorberry.net/blog/install-linux-from-usb/"/>
+    <link href="http://moorberry.net/blog/create-linux-install-usb/"/>
     <updated>2014-05-13T11:14:00-05:00</updated>
-    <id>http://moorberry.net/blog/install-linux-from-usb</id>
+    <id>http://moorberry.net/blog/create-linux-install-usb</id>
     <content type="html"><![CDATA[<p>Create a bootable USB drive, for installing Linux, on your Mac.</p>
 
 <!-- more -->
