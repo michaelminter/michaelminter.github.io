@@ -5,7 +5,7 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Git Push to Github and Heroku - Moorberry</title>
+  <title>install_linux_from_usb - Moorberry</title>
   <meta name="author" content="Michael Minter">
   <link rel="author" href="humans.txt">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -13,7 +13,7 @@
   
     
   
-  <meta name="description" content=" Group assign any git repository, on any git provider, and for as many remotes as you wish. ">
+  <meta name="description" content=" Create a bootable USB drive for installing Linux ">
   
   <!-- http://t.co/dKP3o1e -->
   <meta name="HandheldFriendly" content="True">
@@ -21,20 +21,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://moorberry.net/blog/git-push-github-heroku/">
+  <link rel="canonical" href="http://moorberry.net/blog/install-linux-from-usb/">
   <link href="/favicon.png" rel="icon">
   <link href='http://fonts.googleapis.com/css?family=Cantarell' rel='stylesheet' type='text/css'>
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="Moorberry" type="application/atom+xml">
   <meta name="og:type" content="website" />
   <meta name="og:site_name" content="Moorberry" />
-  <meta name="og:title" content="Git Push to Github and Heroku" />
-  <meta name="og:description" content=" Group assign any git repository, on any git provider, and for as many remotes as you wish. " />
-  <meta name="og:url" content="http://moorberry.net/blog/git-push-github-heroku/"/>
-  <meta name="url" content="http://moorberry.net/blog/git-push-github-heroku/">
+  <meta name="og:title" content="install_linux_from_usb" />
+  <meta name="og:description" content=" Create a bootable USB drive for installing Linux " />
+  <meta name="og:url" content="http://moorberry.net/blog/install-linux-from-usb/"/>
+  <meta name="url" content="http://moorberry.net/blog/install-linux-from-usb/">
   
-  <meta name="subject" content="git"/>
-  <meta name="category" content="git"/>
+  <meta name="subject" content=""/>
+  <meta name="category" content=""/>
   
   <meta name="distribution" content="global">
   <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
@@ -106,7 +106,7 @@
   
     <header>
       
-        <h1 class="entry-title">Git Push to Github and Heroku</h1>
+        <h1 class="entry-title">Install_linux_from_usb</h1>
       
       
         <p class="meta">
@@ -131,15 +131,8 @@
   
 
 
-<time datetime="2014-05-08T22:58:00-05:00" pubdate data-updated="true">May 8<span>th</span>, 2014</time> - 
+<time datetime="2014-05-13T11:14:00-05:00" pubdate data-updated="true">May 13<span>th</span>, 2014</time> - 
           
-
-posted in
-<span class="categories">
-  
-    <a class='category' href='/blog/categories/git/'>git</a>
-  
-</span>
 
 
           
@@ -163,78 +156,71 @@ posted in
         </script>
         <script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script>
       </div>
-      <p>Group assign any git repository, on any git provider, and for as many remotes as you wish.</p>
+      <p>Create a bootable USB drive for installing Linux</p>
 
 <!-- more -->
 
 
-<p><img src="/images/posts/remotes.jpg" alt="Remotes Funny" /></p>
+<p>Picking a Linux distro is like picking your favorite flavor of ice cream.</p>
 
-<p>From your terminal, <code>cd</code> into where your repository is located and run:</p>
+<p>Find an awesome Linux distribution here <a href="http://distrowatch.com">distrowatch.com</a></p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$&gt; git remote -v</span></code></pre></td></tr></table></div></figure>
+<h2>Prepare</h2>
 
-
-<p>Should look something like:</p>
+<p>Convert the .iso file to .img using the convert option of hdiutil</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>heroku  git@heroku.com:activezoo.git (fetch)
-</span><span class='line'>heroku  git@heroku.com:activezoo.git (push)
-</span><span class='line'>openshift ssh://5340404b5973ca1ff800034d@ruby-activezoo.rhcloud.com/~/git/ruby.git (push)
-</span><span class='line'>openshift ssh://5340404b5973ca1ff800034d@ruby-activezoo.rhcloud.com/~/git/ruby.git (fetch)
-</span><span class='line'>origin  git@github.com:michaelminter/active_zoo.git (push)
-</span><span class='line'>origin  git@github.com:michaelminter/active_zoo.git (fetch)</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class=''><span class='line'>hdiutil convert -format UDRW -o ~/path/to/target.img ~/path/to/ubuntu.iso</span></code></pre></td></tr></table></div></figure>
 
 
-<p>Find the Github repo. Usually set up under the <strong>origin</strong> label.</p>
+<p><strong>Note:</strong> OS X tends to put the .dmg ending on the output file automatically.</p>
 
-<p>To create the group remote, add the following command, with your Github repo address switched out with the one listed.</p>
+<p>Remove the USB drive from your machine if it&#8217;s currently inserted.</p>
+
+<p>Run <code>diskutil list</code> to get the current list of devices.</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$&gt; git remote add all git@github.com:michaelminter/test.git</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class=''><span class='line'>diskutil list</span></code></pre></td></tr></table></div></figure>
 
 
-<p>Find the Heroku git repo address and switch it out with the repo in this command. Run the command.</p>
+<p>Insert your flash drive.</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$&gt; git remote set-url --add all git@heroku.com:test.git</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Keep executing the previous command, switching out the git address, to add more repos to the new &#8220;all&#8221; remote.</p>
+<p>Run <code>diskutil list</code> again to determine the device node assigned to your flash media (e.g. /dev/disk1).</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$&gt; git remote -v
-</span><span class='line'>all git@github.com:michaelminter/active_zoo.git (fetch)
-</span><span class='line'>all git@heroku.com:activezoo.git (push)
-</span><span class='line'>all git@github.com:michaelminter/active_zoo.git (push)
-</span><span class='line'>heroku  git@heroku.com:activezoo.git (fetch)
-</span><span class='line'>heroku  git@heroku.com:activezoo.git (push)
-</span><span class='line'>openshift ssh://5340404b5973ca1ff800034d@ruby-activezoo.rhcloud.com/~/git/ruby.git (push)
-</span><span class='line'>openshift ssh://5340404b5973ca1ff800034d@ruby-activezoo.rhcloud.com/~/git/ruby.git (fetch)
-</span><span class='line'>origin  git@github.com:michaelminter/active_zoo.git (push)
-</span><span class='line'>origin  git@github.com:michaelminter/active_zoo.git (fetch)</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class=''><span class='line'>diskutil list</span></code></pre></td></tr></table></div></figure>
 
 
-<p>Now you can push the same code to multiple remotes with one command.</p>
+<p><em>insert example output</em></p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$&gt; git push all [branch]</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class=''><span class='line'>diskutil unmountDisk /dev/diskN</span></code></pre></td></tr></table></div></figure>
 
+
+<p>Replace <em>N</em> with the disk number from the last command; in the previous example, <em>N</em> would be 1.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo dd if=/path/to/downloaded.img of=/dev/rdiskN bs=1m</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Execute sudo dd if=/path/to/downloaded.img of=/dev/rdiskN bs=1m (replace /path/to/downloaded.img with the path where the image file is located; for example, ./ubuntu.imgor ./ubuntu.dmg).</p>
+
+<ul>
+<li>Using /dev/rdisk instead of /dev/disk may be faster</li>
+<li>If you see the error dd: Invalid number &#8216;1m&#8217;, you are using GNU dd. Use the same command but replace bs=1m with bs=1M</li>
+<li>If you see the error dd: /dev/diskN: Resource busy, make sure the disk is not in use. Start the &#8216;Disk Utility.app&#8217; and unmount (don&#8217;t eject) the drive</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>diskutil eject /dev/diskN</span></code></pre></td></tr></table></div></figure>
+
+
+<p>and remove your flash media when the command completes.</p>
+
+<h2>Install</h2>
+
+<p>Restart your computer and press alt/option key while the Mac is restarting to choose the USB drive.</p>
 
     </div>
   
@@ -245,10 +231,8 @@ posted in
         <p>Let me know how you use it - <a href="#footer-widgets" alt="Contact Michael" title="Contact Michael">contact me here.</a></p>
       </div>
       
-        <a class="pull-left" href="/blog/database-version-control/" title="Previous Post: Database Version Control with MySQL Utilities">&laquo; Database Version Control with MySQL Utilities</a>
+        <a class="pull-left" href="/blog/git-push-github-heroku/" title="Previous Post: Git Push to Github and Heroku">&laquo; Git Push to Github and Heroku</a>
       
-      
-        <a class="pull-right" href="/blog/install-linux-from-usb/" title="Next Post: install_linux_from_usb">install_linux_from_usb &raquo;</a>
       
     </footer>
   
@@ -391,8 +375,8 @@ posted in
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://moorberry.net/blog/git-push-github-heroku/';
-        var disqus_url = 'http://moorberry.net/blog/git-push-github-heroku/';
+        var disqus_identifier = 'http://moorberry.net/blog/install-linux-from-usb/';
+        var disqus_url = 'http://moorberry.net/blog/install-linux-from-usb/';
         var disqus_script = 'embed.js';
       
     (function () {
