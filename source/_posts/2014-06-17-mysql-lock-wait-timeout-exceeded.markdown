@@ -6,6 +6,12 @@ comments: true
 categories: [mysql]
 ---
 
+What to do when you encounter:
+
+> ActiveRecord::StatementInvalid: Mysql2::Error: Lock wait timeout exceeded; 
+
+<!-- more -->
+
 One solution I've used, if you have an uber query or series of queries, is to extend the wait timeout.
 
 If you can't currently restart the server or MySQL, enter the following in the MySQL terminal:
