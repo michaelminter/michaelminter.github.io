@@ -13,7 +13,7 @@
   
     
   
-  <meta name="description" content="One solution I&#8217;ve used, if you have an uber query or series of queries, is to extend the wait timeout. If you can&#8217;t currently restart &hellip;">
+  <meta name="description" content=" What to do when you encounter: ActiveRecord::StatementInvalid: Mysql2::Error: Lock wait timeout exceeded; ">
   
   <!-- http://t.co/dKP3o1e -->
   <meta name="HandheldFriendly" content="True">
@@ -29,7 +29,7 @@
   <meta name="og:type" content="website" />
   <meta name="og:site_name" content="Moorberry" />
   <meta name="og:title" content="MySQL Lock Wait Timeout Exceeded" />
-  <meta name="og:description" content="One solution I&#8217;ve used, if you have an uber query or series of queries, is to extend the wait timeout. If you can&#8217;t currently restart &hellip;" />
+  <meta name="og:description" content=" What to do when you encounter: ActiveRecord::StatementInvalid: Mysql2::Error: Lock wait timeout exceeded; " />
   <meta name="og:url" content="http://moorberry.net/blog/mysql-lock-wait-timeout-exceeded/"/>
   <meta name="url" content="http://moorberry.net/blog/mysql-lock-wait-timeout-exceeded/">
   
@@ -163,7 +163,14 @@ posted in
         </script>
         <script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script>
       </div>
-      <p>One solution I&#8217;ve used, if you have an uber query or series of queries, is to extend the wait timeout.</p>
+      <p>What to do when you encounter:</p>
+
+<blockquote><p>ActiveRecord::StatementInvalid: Mysql2::Error: Lock wait timeout exceeded;</p></blockquote>
+
+<!-- more -->
+
+
+<p>One solution I&#8217;ve used, if you have an uber query or series of queries, is to extend the wait timeout.</p>
 
 <p>If you can&#8217;t currently restart the server or MySQL, enter the following in the MySQL terminal:</p>
 

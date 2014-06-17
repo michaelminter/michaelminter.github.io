@@ -164,61 +164,16 @@ posted in
     <!--
     
     -->
-    <div class="entry-content"><p>One solution I&#8217;ve used, if you have an uber query or series of queries, is to extend the wait timeout.</p>
+    <div class="entry-content"><p>What to do when you encounter:</p>
 
-<p>If you can&#8217;t currently restart the server or MySQL, enter the following in the MySQL terminal:</p>
-
-<pre><code>mysql&gt; set GLOBAL wait_timeout=28800;
-</code></pre>
-
-<p>This setting will go away when the current MySQL instance is terminated.</p>
-
-<p>To set the wait_timeout parameter permanently, edit your MySQL configuration file:</p>
-
-<pre><code>~$ vim /etc/my.conf
-</code></pre>
-
-<p>Insert the following line:</p>
-
-<pre><code>wait_timeout = 28800
-</code></pre>
-
-<p>Now restart MySQL:</p>
-
-<pre><code>sudo /etc/init.d/mysql restart
-</code></pre>
-
-<p>Or on Redhat:</p>
-
-<pre><code>sudo service mysqld restart
-</code></pre>
-
-<p><strong>Notes</strong></p>
-
-<p><strong>wait_timeout</strong><br/>
-The number of seconds the server waits for activity on a noninteractive connection before closing it. This timeout applies only to TCP/IP and Unix socket file connections, not to connections made using named pipes, or shared memory.</p>
-
-<p><strong>interactive_timeout</strong><br/>
-The number of seconds the server waits for activity on an interactive connection before closing it. An interactive client is defined as a client that uses the CLIENT_INTERACTIVE option to mysql_real_connect().</p>
-
-<p>Can be set like:</p>
-
-<pre><code>interactive_timeout = 28800
-</code></pre>
-
-<p><strong>my.cnf</strong><br/>
-Possible locations of my.cnf:</p>
-
-<ul>
-<li>/etc/my.cnf</li>
-<li>/etc/mysql/my.cnf</li>
-<li>$MYSQL_HOME/my.cnf</li>
-<li>[datadir]/my.cnf</li>
-<li>~/.my.cnf</li>
-</ul>
+<blockquote><p>ActiveRecord::StatementInvalid: Mysql2::Error: Lock wait timeout exceeded;</p></blockquote>
 
 </div>
     
+    
+      <footer>
+        <a rel="full-article" href="/blog/mysql-lock-wait-timeout-exceeded/">Read on &rarr;</a>
+      </footer>
     
   
   

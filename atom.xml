@@ -4,7 +4,7 @@
   <title><![CDATA[Moorberry]]></title>
   <link href="http://moorberry.net/atom.xml" rel="self"/>
   <link href="http://moorberry.net/"/>
-  <updated>2014-06-17T17:05:31-05:00</updated>
+  <updated>2014-06-17T17:07:51-05:00</updated>
   <id>http://moorberry.net/</id>
   <author>
     <name><![CDATA[Michael Minter]]></name>
@@ -18,7 +18,14 @@
     <link href="http://moorberry.net/blog/mysql-lock-wait-timeout-exceeded/"/>
     <updated>2014-06-17T17:03:00-05:00</updated>
     <id>http://moorberry.net/blog/mysql-lock-wait-timeout-exceeded</id>
-    <content type="html"><![CDATA[<p>One solution I&#8217;ve used, if you have an uber query or series of queries, is to extend the wait timeout.</p>
+    <content type="html"><![CDATA[<p>What to do when you encounter:</p>
+
+<blockquote><p>ActiveRecord::StatementInvalid: Mysql2::Error: Lock wait timeout exceeded;</p></blockquote>
+
+<!-- more -->
+
+
+<p>One solution I&#8217;ve used, if you have an uber query or series of queries, is to extend the wait timeout.</p>
 
 <p>If you can&#8217;t currently restart the server or MySQL, enter the following in the MySQL terminal:</p>
 
