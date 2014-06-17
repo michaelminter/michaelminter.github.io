@@ -5,7 +5,7 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Create Linux Install USB on Mac - Moorberry</title>
+  <title>MySQL Lock Wait Timeout Exceeded - Moorberry</title>
   <meta name="author" content="Michael Minter">
   <link rel="author" href="humans.txt">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -13,7 +13,7 @@
   
     
   
-  <meta name="description" content=" Create a bootable USB drive, for installing Linux, on your Mac. ">
+  <meta name="description" content="One solution I&#8217;ve used, if you have an uber query or series of queries, is to extend the wait timeout. If you can&#8217;t currently restart &hellip;">
   
   <!-- http://t.co/dKP3o1e -->
   <meta name="HandheldFriendly" content="True">
@@ -21,20 +21,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://moorberry.net/blog/create-linux-install-usb/">
+  <link rel="canonical" href="http://moorberry.net/blog/mysql-lock-wait-timeout-exceeded/">
   <link href="/favicon.png" rel="icon">
   <link href='http://fonts.googleapis.com/css?family=Cantarell' rel='stylesheet' type='text/css'>
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="Moorberry" type="application/atom+xml">
   <meta name="og:type" content="website" />
   <meta name="og:site_name" content="Moorberry" />
-  <meta name="og:title" content="Create Linux Install USB on Mac" />
-  <meta name="og:description" content=" Create a bootable USB drive, for installing Linux, on your Mac. " />
-  <meta name="og:url" content="http://moorberry.net/blog/create-linux-install-usb/"/>
-  <meta name="url" content="http://moorberry.net/blog/create-linux-install-usb/">
+  <meta name="og:title" content="MySQL Lock Wait Timeout Exceeded" />
+  <meta name="og:description" content="One solution I&#8217;ve used, if you have an uber query or series of queries, is to extend the wait timeout. If you can&#8217;t currently restart &hellip;" />
+  <meta name="og:url" content="http://moorberry.net/blog/mysql-lock-wait-timeout-exceeded/"/>
+  <meta name="url" content="http://moorberry.net/blog/mysql-lock-wait-timeout-exceeded/">
   
-  <meta name="subject" content="linux"/>
-  <meta name="category" content="linux"/>
+  <meta name="subject" content="mysql"/>
+  <meta name="category" content="mysql"/>
   
   <meta name="distribution" content="global">
   <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
@@ -106,7 +106,7 @@
   
     <header>
       
-        <h1 class="entry-title">Create Linux Install USB on Mac</h1>
+        <h1 class="entry-title">MySQL Lock Wait Timeout Exceeded</h1>
       
       
         <p class="meta">
@@ -131,13 +131,13 @@
   
 
 
-<time datetime="2014-05-13T11:14:00-05:00" pubdate data-updated="true">May 13<span>th</span>, 2014</time> - 
+<time datetime="2014-06-17T17:03:00-05:00" pubdate data-updated="true">Jun 17<span>th</span>, 2014</time> - 
           
 
 posted in
 <span class="categories">
   
-    <a class='category' href='/blog/categories/linux/'>linux</a>
+    <a class='category' href='/blog/categories/mysql/'>mysql</a>
   
 </span>
 
@@ -163,71 +163,59 @@ posted in
         </script>
         <script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script>
       </div>
-      <p>Create a bootable USB drive, for installing Linux, on your Mac.</p>
+      <p>One solution I&#8217;ve used, if you have an uber query or series of queries, is to extend the wait timeout.</p>
 
-<!-- more -->
+<p>If you can&#8217;t currently restart the server or MySQL, enter the following in the MySQL terminal:</p>
 
+<pre><code>mysql&gt; set GLOBAL wait_timeout=28800;
+</code></pre>
 
-<p>Picking a Linux distro is like picking your favorite flavor of ice cream.</p>
+<p>This setting will go away when the current MySQL instance is terminated.</p>
 
-<p>Find an awesome Linux distribution here <a href="http://distrowatch.com">distrowatch.com</a></p>
+<p>To set the wait_timeout parameter permanently, edit your MySQL configuration file:</p>
 
-<h2>Prepare</h2>
+<pre><code>~$ vim /etc/my.conf
+</code></pre>
 
-<p>Convert the .iso file to .img using the convert option of hdiutil</p>
+<p>Insert the following line:</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>hdiutil convert -format UDRW -o ~/path/to/target.img ~/path/to/ubuntu.iso</span></code></pre></td></tr></table></div></figure>
+<pre><code>wait_timeout = 28800
+</code></pre>
 
+<p>Now restart MySQL:</p>
 
-<p><strong>Note:</strong> OS X tends to put the .dmg ending on the output file automatically.</p>
+<pre><code>sudo /etc/init.d/mysql restart
+</code></pre>
 
-<p>Remove the USB drive from your machine if it&#8217;s currently inserted.</p>
+<p>Or on Redhat:</p>
 
-<p>Run <code>diskutil list</code> to get the current list of devices.</p>
+<pre><code>sudo service mysqld restart
+</code></pre>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>diskutil list</span></code></pre></td></tr></table></div></figure>
+<p><strong>Notes</strong></p>
 
+<p><strong>wait_timeout</strong><br/>
+The number of seconds the server waits for activity on a noninteractive connection before closing it. This timeout applies only to TCP/IP and Unix socket file connections, not to connections made using named pipes, or shared memory.</p>
 
-<p>Insert your flash drive.</p>
+<p><strong>interactive_timeout</strong><br/>
+The number of seconds the server waits for activity on an interactive connection before closing it. An interactive client is defined as a client that uses the CLIENT_INTERACTIVE option to mysql_real_connect().</p>
 
-<p>Run <code>diskutil list</code> again to determine the device node assigned to your flash media (e.g. /dev/disk1).</p>
+<p>Can be set like:</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>diskutil list</span></code></pre></td></tr></table></div></figure>
+<pre><code>interactive_timeout = 28800
+</code></pre>
 
-
-<p><em>insert example output</em></p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>diskutil unmountDisk /dev/diskN</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Replace <em>N</em> with the disk number from the last command; in the previous example, <em>N</em> would be 1.</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>sudo dd if=/path/to/downloaded.img of=/dev/rdiskN bs=1m</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Execute sudo dd if=/path/to/downloaded.img of=/dev/rdiskN bs=1m (replace /path/to/downloaded.img with the path where the image file is located; for example, ./ubuntu.imgor ./ubuntu.dmg).</p>
+<p><strong>my.cnf</strong><br/>
+Possible locations of my.cnf:</p>
 
 <ul>
-<li>Using /dev/rdisk instead of /dev/disk may be faster</li>
-<li>If you see the error dd: Invalid number &#8216;1m&#8217;, you are using GNU dd. Use the same command but replace bs=1m with bs=1M</li>
-<li>If you see the error dd: /dev/diskN: Resource busy, make sure the disk is not in use. Start the &#8216;Disk Utility.app&#8217; and unmount (don&#8217;t eject) the drive</li>
+<li>/etc/my.cnf</li>
+<li>/etc/mysql/my.cnf</li>
+<li>$MYSQL_HOME/my.cnf</li>
+<li>[datadir]/my.cnf</li>
+<li>~/.my.cnf</li>
 </ul>
 
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>diskutil eject /dev/diskN</span></code></pre></td></tr></table></div></figure>
-
-
-<p>and remove your flash media when the command completes.</p>
-
-<h2>Install</h2>
-
-<p>Restart your computer and press alt/option key while the Mac is restarting to choose the USB drive.</p>
 
     </div>
   
@@ -238,10 +226,8 @@ posted in
         <p>Let me know how you use it - <a href="#footer-widgets" alt="Contact Michael" title="Contact Michael">contact me here.</a></p>
       </div>
       
-        <a class="pull-left" href="/blog/git-push-github-heroku/" title="Previous Post: Git Push to Github and Heroku">&laquo; Git Push to Github and Heroku</a>
+        <a class="pull-left" href="/blog/create-linux-install-usb/" title="Previous Post: Create Linux Install USB on Mac">&laquo; Create Linux Install USB on Mac</a>
       
-      
-        <a class="pull-right" href="/blog/mysql-lock-wait-timeout-exceeded/" title="Next Post: MySQL Lock Wait Timeout Exceeded">MySQL Lock Wait Timeout Exceeded &raquo;</a>
       
     </footer>
   
@@ -384,8 +370,8 @@ posted in
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://moorberry.net/blog/create-linux-install-usb/';
-        var disqus_url = 'http://moorberry.net/blog/create-linux-install-usb/';
+        var disqus_identifier = 'http://moorberry.net/blog/mysql-lock-wait-timeout-exceeded/';
+        var disqus_url = 'http://moorberry.net/blog/mysql-lock-wait-timeout-exceeded/';
         var disqus_script = 'embed.js';
       
     (function () {

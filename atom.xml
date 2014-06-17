@@ -4,7 +4,7 @@
   <title><![CDATA[Moorberry]]></title>
   <link href="http://moorberry.net/atom.xml" rel="self"/>
   <link href="http://moorberry.net/"/>
-  <updated>2014-05-13T11:29:35-05:00</updated>
+  <updated>2014-06-17T17:05:31-05:00</updated>
   <id>http://moorberry.net/</id>
   <author>
     <name><![CDATA[Michael Minter]]></name>
@@ -12,6 +12,67 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[MySQL Lock Wait Timeout Exceeded]]></title>
+    <link href="http://moorberry.net/blog/mysql-lock-wait-timeout-exceeded/"/>
+    <updated>2014-06-17T17:03:00-05:00</updated>
+    <id>http://moorberry.net/blog/mysql-lock-wait-timeout-exceeded</id>
+    <content type="html"><![CDATA[<p>One solution I&#8217;ve used, if you have an uber query or series of queries, is to extend the wait timeout.</p>
+
+<p>If you can&#8217;t currently restart the server or MySQL, enter the following in the MySQL terminal:</p>
+
+<pre><code>mysql&gt; set GLOBAL wait_timeout=28800;
+</code></pre>
+
+<p>This setting will go away when the current MySQL instance is terminated.</p>
+
+<p>To set the wait_timeout parameter permanently, edit your MySQL configuration file:</p>
+
+<pre><code>~$ vim /etc/my.conf
+</code></pre>
+
+<p>Insert the following line:</p>
+
+<pre><code>wait_timeout = 28800
+</code></pre>
+
+<p>Now restart MySQL:</p>
+
+<pre><code>sudo /etc/init.d/mysql restart
+</code></pre>
+
+<p>Or on Redhat:</p>
+
+<pre><code>sudo service mysqld restart
+</code></pre>
+
+<p><strong>Notes</strong></p>
+
+<p><strong>wait_timeout</strong><br/>
+The number of seconds the server waits for activity on a noninteractive connection before closing it. This timeout applies only to TCP/IP and Unix socket file connections, not to connections made using named pipes, or shared memory.</p>
+
+<p><strong>interactive_timeout</strong><br/>
+The number of seconds the server waits for activity on an interactive connection before closing it. An interactive client is defined as a client that uses the CLIENT_INTERACTIVE option to mysql_real_connect().</p>
+
+<p>Can be set like:</p>
+
+<pre><code>interactive_timeout = 28800
+</code></pre>
+
+<p><strong>my.cnf</strong><br/>
+Possible locations of my.cnf:</p>
+
+<ul>
+<li>/etc/my.cnf</li>
+<li>/etc/mysql/my.cnf</li>
+<li>$MYSQL_HOME/my.cnf</li>
+<li>[datadir]/my.cnf</li>
+<li>~/.my.cnf</li>
+</ul>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Create Linux Install USB on Mac]]></title>
@@ -1732,77 +1793,6 @@
 
 
 <p>Super “thanks” go out to the <a href="http://sendgrid.tellapal.com/a/clk/1zzx0" title="SendGrid">SendGrid</a> crew for their constantly superior customer service skills and for helping me out on my way to becoming an email marketing specialist.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Export Data as CSV]]></title>
-    <link href="http://moorberry.net/blog/export-csv/"/>
-    <updated>2011-11-14T15:15:00-06:00</updated>
-    <id>http://moorberry.net/blog/export-csv</id>
-    <content type="html"><![CDATA[<p>In my research I found a hundred and more different ways to manage the task of exporting data into a CSV file. Whenever I’m learning something new, on a new system or with a new language, I like to build the process myself from scratch. And being a minimalist programmer it just seems fitting. Enjoy</p>
-
-<!--more-->
-
-
-
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">def</span> <span class="nf">export_inverts</span>
-</span><span class='line'>  <span class="nb">require</span> <span class="s1">&#39;fastercsv&#39;</span>
-</span><span class='line'>  <span class="n">inverts</span>  <span class="o">=</span> <span class="no">Invert</span><span class="o">.</span><span class="n">all</span>
-</span><span class='line'>  <span class="n">filename</span> <span class="o">=</span> <span class="n">params</span><span class="o">[</span><span class="ss">:action</span><span class="o">]</span> <span class="o">+</span> <span class="s2">&quot;.csv&quot;</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="c1">#this is required if you want this to work with IE</span>
-</span><span class='line'>  <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">env</span><span class="o">[</span><span class="s1">&#39;HTTP_USER_AGENT&#39;</span><span class="o">]</span> <span class="o">=~</span> <span class="sr">/msie/i</span>
-</span><span class='line'>    <span class="n">headers</span><span class="o">[</span><span class="s1">&#39;Pragma&#39;</span><span class="o">]</span> <span class="o">=</span> <span class="s1">&#39;public&#39;</span>
-</span><span class='line'>    <span class="n">headers</span><span class="o">[</span><span class="s2">&quot;Content-type&quot;</span><span class="o">]</span> <span class="o">=</span> <span class="s2">&quot;text/plain&quot;</span>
-</span><span class='line'>    <span class="n">headers</span><span class="o">[</span><span class="s1">&#39;Cache-Control&#39;</span><span class="o">]</span> <span class="o">=</span> <span class="s1">&#39;no-cache, must-revalidate, post-check=0, pre-check=0&#39;</span>
-</span><span class='line'>    <span class="n">headers</span><span class="o">[</span><span class="s1">&#39;Content-Disposition&#39;</span><span class="o">]</span> <span class="o">=</span> <span class="s2">&quot;attachment; filename=</span><span class="se">\&quot;</span><span class="si">#{</span><span class="n">filename</span><span class="si">}</span><span class="se">\&quot;</span><span class="s2">&quot;</span>
-</span><span class='line'>    <span class="n">headers</span><span class="o">[</span><span class="s1">&#39;Expires&#39;</span><span class="o">]</span> <span class="o">=</span> <span class="s2">&quot;0&quot;</span>
-</span><span class='line'>  <span class="k">else</span>
-</span><span class='line'>    <span class="n">headers</span><span class="o">[</span><span class="s2">&quot;Content-Type&quot;</span><span class="o">]</span> <span class="o">||=</span> <span class="s1">&#39;text/csv&#39;</span>
-</span><span class='line'>    <span class="n">headers</span><span class="o">[</span><span class="s2">&quot;Content-Disposition&quot;</span><span class="o">]</span> <span class="o">=</span> <span class="s2">&quot;attachment; filename=</span><span class="se">\&quot;</span><span class="si">#{</span><span class="n">filename</span><span class="si">}</span><span class="se">\&quot;</span><span class="s2">&quot;</span>
-</span><span class='line'>    <span class="n">headers</span><span class="o">[</span><span class="s2">&quot;Content-Transfer-Encoding&quot;</span><span class="o">]</span> <span class="o">=</span> <span class="s2">&quot;binary&quot;</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="n">csv_string</span> <span class="o">=</span> <span class="no">FasterCSV</span><span class="o">.</span><span class="n">generate</span> <span class="k">do</span> <span class="o">|</span><span class="n">csv</span><span class="o">|</span>
-</span><span class='line'>    <span class="n">csv</span> <span class="o">&lt;&lt;</span> <span class="o">[</span><span class="s2">&quot;Genus&quot;</span><span class="p">,</span><span class="s2">&quot;Species&quot;</span><span class="p">,</span><span class="s2">&quot;Common Name&quot;</span><span class="p">,</span><span class="s2">&quot;Pet Name&quot;</span><span class="p">,</span><span class="s2">&quot;Gender&quot;</span><span class="o">]</span>
-</span><span class='line'>    <span class="n">inverts</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">i</span><span class="o">|</span>
-</span><span class='line'>      <span class="n">csv</span> <span class="o">&lt;&lt;</span> <span class="o">[</span><span class="n">i</span><span class="o">.</span><span class="n">scientific_name</span><span class="p">,</span><span class="n">i</span><span class="o">.</span><span class="n">scientific_name</span><span class="p">,</span><span class="n">i</span><span class="o">.</span><span class="n">common_name</span><span class="p">,</span><span class="n">i</span><span class="o">.</span><span class="n">pet_name</span><span class="p">,</span><span class="n">i</span><span class="o">.</span><span class="n">gender</span><span class="o">]</span>
-</span><span class='line'>    <span class="k">end</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'>  <span class="n">render</span> <span class="ss">:text</span> <span class="o">=&gt;</span> <span class="n">csv_string</span>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>NOTE: <em>Developers using Ruby 1.8 &lt;= must install gem:fastercsv</em></p>
 ]]></content>
   </entry>
   
