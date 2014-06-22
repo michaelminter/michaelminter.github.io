@@ -1,63 +1,15 @@
 ---
+layout: default
 single: true
 ---
-{% capture root_url %}{{ site.root | strip_slash }}{% endcapture %}
-{% include head.html %}
-<body {% if page.body_id %} id="{{ page.body_id }}" {% endif %} {% if page.sidebar == false %} class="no-sidebar" {% endif %} {% if page.sidebar == 'collapse' or site.sidebar == 'collapse' %} class="collapse-sidebar sidebar-footer" {% endif %}>
-  <nav role="navigation">{% include navigation.html %}</nav>
-  <div class="wrapper_single" style="padding:40px 0;">
 
-    <div style="clear:both;height:90px;margin:0 auto;padding:0 0 40px 60px;width:720px;">
-      <script type="text/javascript"><!--
-      google_ad_client = "ca-pub-7424434269432645";
-      /* moorberry.net (test) */
-      google_ad_slot = "9894759925";
-      google_ad_width = 728;
-      google_ad_height = 90;
-      //-->
-      </script>
-      <script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
-      </script>
-    </div>
-
-    <div class="container">
-      <article class="span8 offset2" role="article">
-        {% include article.html %}
-      </article>
-      
-      <div id="ad_container" style="clear:both;height:90px;margin:0 auto;padding:0 0 0 60px;width:720px;">
-        <script type="text/javascript"><!--
-        google_ad_client = "ca-pub-7424434269432645";
-        /* moorberry.net (octopress) */
-        google_ad_slot = "8992473921";
-        google_ad_width = 728;
-        google_ad_height = 90;
-        //-->
-        </script>
-        <script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script>
-      </div>
-    </div>
-  </div>
-  <div class="comments_wrapper"> 
-    {% if site.disqus_short_name and page.comments == true %}
-      <section>
-        <h1>Comments</h1>
-        <div id="disqus_thread" aria-live="polite">{% include post/disqus_thread.html %}</div>
-      </section>
-    {% endif %}
-  </div>
-
-  <!-- AddThis Button BEGIN -->
-  <div class="addthis_toolbox addthis_floating_style addthis_counter_style" style="padding-top:10px;right:0;top:212px;">
-    <a class="addthis_button_facebook_like" fb:like:layout="box_count"></a>
-    <a class="addthis_button_tweet" tw:count="vertical"></a>
-    <a class="addthis_button_google_plusone" g:plusone:size="tall"></a>
-    <a class="addthis_counter"></a>
-  </div>
-  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=xa-51685d3f427968b8"></script>
-  <!-- AddThis Button END -->
-
-  {% include footer.html %}
-  {% include after_footer.html %}
-</body>
-</html>
+<div>
+<article>
+	{% include article.html %}
+	{% if site.disqus_short_name and page.comments == true %}
+	  <section class="comments">
+	    <div id="disqus_thread" aria-live="polite">{% include post/disqus_thread.html %}</div>
+	  </section>
+	{% endif %}
+</article>
+</div>

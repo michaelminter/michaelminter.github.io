@@ -1,56 +1,20 @@
 ---
 layout: default
 ---
+{% assign index = true %}
+{% for post in paginator.posts %}
+{% assign content = post.content %}
+<article>
+	{% include article.html %}
+</article>
+{% endfor %}
+<div class="pagination">
+{% if paginator.next_page %}
+  <a class="prev" href="{{paginator.next_page}}">&larr; Older</a>
+{% endif %}
 
-<div id="front-wrapper">
-  <div id="hero">
-    <div id="hero-inner" class="container">
-      {% include custom/intro.html %}
-    </div>
-  </div>
-  <section id="sub-hero">
-    <div class="container">
-      {% include custom/widgets.html %}
-    </div>
-  </section>
-
-  <div style="height:90px;margin:0 auto;padding:10px 0 40px;width:728px;">
-    <script type="text/javascript"><!--
-      google_ad_client = "ca-pub-7424434269432645";
-      /* moorberry.net (test) */
-      google_ad_slot = "9894759925";
-      google_ad_width = 728;
-      google_ad_height = 90;
-      //-->
-    </script>
-    <script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
-    </script>
-  </div>
-
-  <div class="container">
-    <div class="row" id="post-container">
-    {% assign index = true %}
-    {% for post in paginator.posts %}
-    {% assign content = post.content %}
-      <article class="span4">
-        {% include article.html %}
-      </article>
-    {% endfor %}
-    </div>
-      <div class="row">
-        <ul class="pager">
-          {% if paginator.next_page %}
-            <li class="previous">
-              <a href="{{paginator.next_page}}">&larr; Older</a>
-            </li>
-          {% endif %}
-          {% if paginator.previous_page %}
-            <li class="next">
-              <a class="next" href="{{paginator.previous_page}}">Newer &rarr;</a>
-            </li>
-          {% endif %}
-        </ul>
-      </div>
-  </div>
+{% if paginator.previous_page %}
+<a class="next" href="{{paginator.previous_page}}">Newer &rarr;</a>
+{% endif %}
 </div>
 
