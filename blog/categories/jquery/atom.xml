@@ -4,7 +4,7 @@
   <title><![CDATA[Category: jQuery | Moorberry]]></title>
   <link href="http://moorberry.net/blog/categories/jquery/atom.xml" rel="self"/>
   <link href="http://moorberry.net/"/>
-  <updated>2014-06-17T17:07:51-05:00</updated>
+  <updated>2014-06-22T22:08:41-05:00</updated>
   <id>http://moorberry.net/</id>
   <author>
     <name><![CDATA[Michael Minter]]></name>
@@ -27,7 +27,7 @@
 
 <p>One <a href="http://datatables.net/plug-ins/pagination" target="_blank">plug-in</a> that I found will allow your browser to render the default pagination with tags that are designed to work with the popular responsive grid framework: <a href="http://twitter.github.com/bootstrap" target="_blank">Twitter Bootstrap</a>.</p>
 
-<p><img src="http://moorberry.net/images/posts/pagination.jpg" alt="DataTables Pagination with Twitter Bootstrap Design Inteegration" width="100%" /></p>
+<p><img src="http://moorberry.net/images/posts/pagination.png" alt="DataTables Pagination with Twitter Bootstrap Design Inteegration" width="100%" /></p>
 
 <p>``` javascript</p>
 

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: git | Moorberry]]></title>
   <link href="http://moorberry.net/blog/categories/git/atom.xml" rel="self"/>
   <link href="http://moorberry.net/"/>
-  <updated>2014-06-17T17:07:51-05:00</updated>
+  <updated>2014-06-22T22:08:41-05:00</updated>
   <id>http://moorberry.net/</id>
   <author>
     <name><![CDATA[Michael Minter]]></name>
@@ -23,7 +23,7 @@
 <!-- more -->
 
 
-<p><img src="http://moorberry.net/images/posts/remotes.jpg" alt="Remotes Funny" /></p>
+<p><img src="http://moorberry.net/images/posts/remotes.jpg" alt="Remotes Funny" style="width:100%;" /></p>
 
 <p>From your terminal, <code>cd</code> into where your repository is located and run:</p>
 

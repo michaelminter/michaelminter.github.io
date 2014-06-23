@@ -4,7 +4,7 @@
   <title><![CDATA[Category: API | Moorberry]]></title>
   <link href="http://moorberry.net/blog/categories/api/atom.xml" rel="self"/>
   <link href="http://moorberry.net/"/>
-  <updated>2014-06-17T17:07:51-05:00</updated>
+  <updated>2014-06-22T22:08:41-05:00</updated>
   <id>http://moorberry.net/</id>
   <author>
     <name><![CDATA[Michael Minter]]></name>
@@ -63,7 +63,7 @@
 
 <h2>Twilio</h2>
 
-<p><img src="http://moorberry.net/images/posts/twilio.jpg" alt="Twilio Logo" title="Twilio Logo" /></p>
+<p><img src="http://moorberry.net/images/posts/twilio.jpg" alt="Twilio Logo" title="Twilio Logo" style="width:100%;" /></p>
 
 <p>Try out <a href="http://twilio.com" target="_blank" alt="Twilio" title="Twilio" style="color:red;">Twilio</a>. They offer a <a href="http://twilio.com" target="_blank" alt="Twilio Free Plan" title="Twilio Free Plan" style="color:red;font-weight:bold;">free plan</a> that includes 200 messages to send each month and maintains a series of APIs that are <a href="http://www.twilio.com/blog/2012/02/adding-twilio-sms-messaging-to-your-rails-app.html" target="_blank" alt="Adding Twilio SMS Messaging to your Rails App" title="Adding Twilio SMS Messaging to your Rails App">easy to use</a> and <a href="https://github.com/twilio" target="_blank" alt="Twilio Github" title="Github Twilio">open source</a>.</p>
 ]]></content>
@@ -107,7 +107,7 @@
 
 <p><a href="http://pingdom.com" target="_blank" style="font-weight:bold;">Pingdom</a> is loaded with features; including availability to a public page to view when the last time your host was checked, alerts via email or SMS, and many other features.</p>
 
-<p><a href="http://pingdom.com" target="_blank"><img src="http://moorberry.net/images/posts/pingdom_public.png" style="border:none;" alt="Pingdom" style="width:100%;" /></a></p>
+<p><a href="http://pingdom.com" target="_blank"><img src="http://moorberry.net/images/posts/pingdom_public.png" style="border:none;width:100%;" alt="Pingdom" /></a></p>
 
 <p>I chose to sample <a href="http://pingdom.com" target="_blank" style="font-weight:bold;">Pingdom</a> because it affords the least amount of work in setting up at a free price. Please post any alternatives you can think of in the comments below.</p>
 ]]></content>
