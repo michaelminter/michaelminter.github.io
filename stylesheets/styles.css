@@ -4,3 +4,6 @@
 .header-container img{margin:80px auto;display:block}
 .header-container h1 {color:#b8d6e0;margin:120px auto;text-align:center;text-transform:uppercase;}
 .header-container h1 span {color:#374d61}
+
+.article-ad-header { margin:40px auto; }
+.article-ad-footer { margin:40px auto; }
