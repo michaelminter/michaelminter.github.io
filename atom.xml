@@ -4,7 +4,7 @@
   <title><![CDATA[Moorberry]]></title>
   <link href="http://moorberry.net/atom.xml" rel="self"/>
   <link href="http://moorberry.net/"/>
-  <updated>2014-07-30T13:25:13-05:00</updated>
+  <updated>2014-07-30T13:31:51-05:00</updated>
   <id>http://moorberry.net/</id>
   <author>
     <name><![CDATA[Michael Minter]]></name>
@@ -611,7 +611,7 @@ Possible locations of my.cnf:</p>
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Postgres: Search and Sort by Distance]]></title>
+    <title type="html"><![CDATA[Postgres: Search and Sort by Radial Distance]]></title>
     <link href="http://moorberry.net/blog/postgres-search-distance/"/>
     <updated>2013-12-11T13:01:00-06:00</updated>
     <id>http://moorberry.net/blog/postgres-search-distance</id>

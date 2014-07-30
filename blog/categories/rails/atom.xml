@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Rails | Moorberry]]></title>
   <link href="http://moorberry.net/blog/categories/rails/atom.xml" rel="self"/>
   <link href="http://moorberry.net/"/>
-  <updated>2014-07-30T13:25:13-05:00</updated>
+  <updated>2014-07-30T13:31:51-05:00</updated>
   <id>http://moorberry.net/</id>
   <author>
     <name><![CDATA[Michael Minter]]></name>
@@ -169,6 +169,87 @@ Widget.delete_all!</p>
 <h1>=> UPDATE widgets SET deleted_at = NULL WHERE id = 1</h1>
 
 <p>```</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Airbrake: Send Error Notices using Javascript]]></title>
+    <link href="http://moorberry.net/blog/airbrake-error-notice-javascript/"/>
+    <updated>2013-02-19T12:46:00-06:00</updated>
+    <id>http://moorberry.net/blog/airbrake-error-notice-javascript</id>
+    <content type="html"><![CDATA[<p>Right now you may be saying to yourself, "but why not just use an AJAX request inside of my Javascript application or use the Image().src hack..."</p>
+
+<!--more-->
+
+
+<p>Well they don't work across all medias.</p>
+
+<p>You cannot issue requests through the XMLHttpRequest to other domains or subdomains. If you are issuing the request from www.foo.com you also need to target the request at www.foo.com and make certain to remember the www.</p>
+
+<p>If you really need to hit another domain you can use <a href="http://en.wikipedia.org/wiki/JSONP" target="_blank">JsonP</a> where the browser utilizes the <code>&lt;script&gt;</code> tags ability to load scripts from a different domain. The loaded script then executes a callback function to give you the data. But for regular AJAX calls you cannot leave the source domain at all.</p>
+
+<p>See the Wiki article on <a href="http://en.wikipedia.org/wiki/Same_origin_policy" target="_blank">Same Origin Policy</a></p>
+
+<p>In your Rails/Sinatra application controller file:</p>
+
+<p>``` javascript
+notice = params[:notice]
+url    = URI.parse('http://api.airbrake.io/notifier_api/v2/notices')</p>
+
+<p>request              = Net::HTTP::Post.new(url.path)
+request.content_type = 'text/xml'
+request.body         = "&lt;?xml version=\"1.0\" encoding=\"UTF-8\"?></p>
+
+<pre><code>                  &lt;notice version=\"2.3\"&gt;
+                    &lt;api-key&gt;948fhc4h9f98f190a4d69fee945d8b133cc11&lt;/api-key&gt;
+                    &lt;notifier&gt;
+                      &lt;name&gt;Airbrake Notifier&lt;/name&gt;
+                      &lt;version&gt;3.1.6&lt;/version&gt;
+                      &lt;url&gt;http://api.airbrake.io&lt;/url&gt;
+                    &lt;/notifier&gt;
+                    &lt;error&gt;
+                      &lt;class&gt;RuntimeError&lt;/class&gt;
+                      &lt;message&gt;#{notice}&lt;/message&gt;
+                      &lt;backtrace&gt;
+                        &lt;line method=\"public\" file=\"/testapp/app/models/user.rb\" number=\"53\"/&gt;
+                        &lt;line method=\"index\" file=\"/testapp/app/controllers/users_controller.rb\" number=\"14\"/&gt;
+                      &lt;/backtrace&gt;
+                    &lt;/error&gt;
+                    &lt;request&gt;
+                      &lt;url&gt;#{request.url}&lt;/url&gt;
+                      &lt;component/&gt;
+                      &lt;action/&gt;
+                      &lt;cgi-data&gt;
+                        &lt;var key=\"SERVER_NAME\"&gt;example.org&lt;/var&gt;
+                        &lt;var key=\"HTTP_USER_AGENT\"&gt;Mozilla&lt;/var&gt;
+                      &lt;/cgi-data&gt;
+                    &lt;/request&gt;
+                    &lt;server-environment&gt;
+                      &lt;project-root&gt;/testapp&lt;/project-root&gt;
+                      &lt;environment-name&gt;production&lt;/environment-name&gt;
+                      &lt;app-version&gt;1.0.0&lt;/app-version&gt;
+                    &lt;/server-environment&gt;
+                  &lt;/notice&gt;"
+</code></pre>
+
+<p>response = Net::HTTP.start(url.host, url.port) {|http| http.request(request)}
+```</p>
+
+<p>In your javascript:</p>
+
+<p><code>javascript
+function airbrake(notice){
+  var airbrake = $.ajax({ url: '/api/v1/error', context: document.body, cache: false, type: 'POST', data: { notice: notice } });
+}
+</code></p>
+
+<p>To call this function, simply:</p>
+
+<p><code>javascript
+airbrake ("This goose won't cook.");
+</code></p>
+
+<p>Some alternative error/message handlers include: <a href="http://loggly.com" target="_blank">Loggly</a>, <a href="https://papertrailapp.com/" target="_blank">Papertrail</a>, <a href="https://logentries.com/" target="_blank">Log Entries</a>, or better yet create your own with <a href="https://github.com/flyingmachine/whoops" target="_blank">Whoops</a> which later I'd like to research and develop upon for my own error catching application.</p>
 ]]></content>
   </entry>
   

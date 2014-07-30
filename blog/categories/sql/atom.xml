@@ -4,7 +4,7 @@
   <title><![CDATA[Category: SQL | Moorberry]]></title>
   <link href="http://moorberry.net/blog/categories/sql/atom.xml" rel="self"/>
   <link href="http://moorberry.net/"/>
-  <updated>2014-07-30T13:25:13-05:00</updated>
+  <updated>2014-07-30T13:31:51-05:00</updated>
   <id>http://moorberry.net/</id>
   <author>
     <name><![CDATA[Michael Minter]]></name>
@@ -12,162 +12,6 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
-  
-  <entry>
-    <title type="html"><![CDATA[Database Version Control with MySQL Utilities]]></title>
-    <link href="http://moorberry.net/blog/database-version-control/"/>
-    <updated>2014-04-13T23:30:00-05:00</updated>
-    <id>http://moorberry.net/blog/database-version-control</id>
-    <content type="html"><![CDATA[<p>The following steps are meant to capture a snapshot of your development database structure and your staging/production database structure, compare the two, and provide SQL to consolidate the differences.</p>
-
-<!-- more -->
-
-
-<p>This article relates to one of many methods for <strong>database version control</strong> in a singular or team-based environment.</p>
-
-<h2>MySQL Workbench</h2>
-
-<p>Having <strong>MySQL Workbench</strong> is not mandatory for this process. But it's a nice interface to consolidate the suite of tools that <strong>MySQL</strong> offers.</p>
-
-<p>Download <a href="http://dev.mysql.com/downloads/tools/workbench/">http://dev.mysql.com/downloads/tools/workbench/</a></p>
-
-<h2>MySQL Utilities</h2>
-
-<p><strong>MySQL Utilities</strong> will install the required programs to finish the fowllowing steps.</p>
-
-<p>Download <a href="http://dev.mysql.com/doc/workbench/en/mysql-utilities.html">http://dev.mysql.com/doc/workbench/en/mysql-utilities.html</a></p>
-
-<h2>Verify MySQL Utilities</h2>
-
-<p>Open <strong>MySQL Workbench</strong>.</p>
-
-<p>Start <strong>MySQL Utilities</strong> from <strong>MySQL Workbench</strong>.</p>
-
-<p><img src="http://dev.mysql.com/doc/workbench/en/images/wb-mysql-utilities-open.png" width="100%" /></p>
-
-<p>The available <strong>MySQL Utilities</strong> programs can be seen in the console output below with the "help" command executed.</p>
-
-<p>```
-~$ mysqluc -e "help utilities"
-Launching console ...</p>
-
-<p>Utility           Description</p>
-
-<hr />
-
-<p>mysqlauditadmin   audit log maintenance utility
-mysqlauditgrep    audit log search utility
-mysqldbcompare    compare databases for consistency
-mysqldbcopy       copy databases from one server to another
-mysqldbexport     export metadata and data from databases
-mysqldbimport     import metadata and data from files
-mysqldiff         compare object definitions among objects where the</p>
-
-<pre><code>              difference is how db1.obj1 differs from db2.obj2
-</code></pre>
-
-<p>mysqldiskusage    show disk usage for databases
-mysqlfailover     automatic replication health monitoring and failover
-mysqlfrm          show CREATE TABLE from .frm files
-mysqlindexcheck   check for duplicate or redundant indexes
-mysqlmetagrep     search metadata
-mysqlprocgrep     search process information
-mysqlreplicate    establish replication with a master
-mysqlrpladmin     administration utility for MySQL replication
-mysqlrplcheck     check replication
-mysqlrplshow      show slaves attached to a master
-mysqlserverclone  start another instance of a running server
-mysqlserverinfo   show server information
-mysqluserclone    clone a MySQL user account to one or more new users
-```</p>
-
-<p>The same can be done by entering <code>mysqluc -e "help utilities"</code> into your console.</p>
-
-<p>If you receive the following error.</p>
-
-<p><code>
-Traceback (most recent call last):
-  File "/bin/mysqluc", line 23, in &lt;module&gt;
-  from mysql.utilities.common.options import license_callback, UtilitiesParser
-File "/Library/Python/2.7/site-packages/mysql/utilities/common/options.py", line 34, in     &lt;module&gt;
-from mysql.connector.conversion import MySQLConverter
-ImportError: No module named connector.conversion
-</code></p>
-
-<blockquote><p><strong>ImportError: No module named connector.conversion</strong></p></blockquote>
-
-<p><strong>MySQL Utilities</strong> assumes that the <strong>MySQL Connector</strong> for <strong>Python</strong> has been installed.</p>
-
-<p>Download it here <a href="http://dev.mysql.com/downloads/connector/python/">http://dev.mysql.com/downloads/connector/python/</a></p>
-
-<h2>Compare Databases with mysqldbcompare</h2>
-
-<p>Run <strong>mysqldbcompare</strong>.</p>
-
-<p>```
-~$ mysqldbcompare --server1=<user>:<password>@<host> --server2=<user>:<password>@localhost dwh_production:dwh_development --run-all-tests --skip-data-check --difftype=sql</p>
-
-<h1>server1 on localhost: ... connected.</h1>
-
-<h1>server2 on localhost: ... connected.</h1>
-
-<h1>Checking databases dwh_production on server1 and dwh_development on server2</h1>
-
-<p>#
-```</p>
-
-<p>If you can't connect to your database directly, but can <strong>SSH</strong> into the platform that the database server is located on, run:</p>
-
-<p><code>
-~$ ssh -f -N -L 3307:localhost:3306 &lt;user&gt;@&lt;server&gt;
-</code></p>
-
-<p>Run <strong>mysqldbcompare</strong>.</p>
-
-<p>```
-~$ mysqldbcompare --server1=<user>:<password>@localhost:3307 --server2=<user>:<password>@localhost dwh_production:dwh_development --run-all-tests --skip-data-check --difftype=sql</p>
-
-<h1>server1 on localhost: ... connected.</h1>
-
-<h1>server2 on localhost: ... connected.</h1>
-
-<h1>Checking databases dwh_production on server1 and dwh_development on server2</h1>
-
-<p>#
-```</p>
-
-<p><strong>TIP:</strong> Generate a file with the above output.</p>
-
-<p><code>
-~$ mysqldbcompare --server1=&lt;database_user&gt;:&lt;database_password&gt;@localhost:3307 --server2=&lt;user&gt;:&lt;password&gt;@localhost dwh_production:dwh_development --run-all-tests --skip-data-check --difftype=sql &gt;&gt; mysqldbcompare.sql
-</code></p>
-
-<p>Now you have all the SQL to <strong>ALTER</strong> your production database structure so that it matches up with your development database structure.</p>
-
-<h2>Import</h2>
-
-<p>Import database <strong>ALTER</strong> statements.</p>
-
-<p><code>
-~$ mysqlimport -u &lt;user&gt; -p&lt;password&gt; dwh_production mysqldbcompare.sql
-</code></p>
-
-<h2>Verify</h2>
-
-<p>Get a <strong>DIFF</strong> of the two databases.</p>
-
-<p><code>
-~$ mysqldbcompare --server1=&lt;database_user&gt;:&lt;database_password&gt;@localhost:3307 --server2=&lt;user&gt;:&lt;password&gt;@localhost dwh_production:dwh_development --run-all-tests --skip-data-check
-</code></p>
-
-<h2>Resources</h2>
-
-<ul>
-<li><a href="http://dev.mysql.com/doc/mysql-utilities/1.3/en/mysqldbcompare.html">http://dev.mysql.com/doc/mysql-utilities/1.3/en/mysqldbcompare.html</a></li>
-</ul>
-
-]]></content>
-  </entry>
   
   <entry>
     <title type="html"><![CDATA[Multi Column Unique Indexes]]></title>
@@ -258,7 +102,7 @@ ALTER TABLE src_dfp ADD UNIQUE index composite_dfp (date, ad_unit_id_1, ad_unit_
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Postgres: Search and Sort by Distance]]></title>
+    <title type="html"><![CDATA[Postgres: Search and Sort by Radial Distance]]></title>
     <link href="http://moorberry.net/blog/postgres-search-distance/"/>
     <updated>2013-12-11T13:01:00-06:00</updated>
     <id>http://moorberry.net/blog/postgres-search-distance</id>
