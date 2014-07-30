@@ -12,6 +12,7 @@
     </h1>
   {% endif %}
 </header>
+
 {% if index %}
   <section>{{ content | excerpt }}</section>
   {% capture excerpted %}{{ content | has_excerpt }}{% endcapture %}
@@ -22,6 +23,27 @@
   </footer>
   {% endif %}
 {% else %}
+  <div class="article-ad-container">
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <!-- moorberry_article_header_300x250 -->
+    <ins class="adsbygoogle"
+         style="display:inline-block;width:300px;height:250px"
+         data-ad-client="ca-pub-7424434269432645"
+         data-ad-slot="3616337128"></ins>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+  </div>
   <section>{{ content }}</section>
+  <div class="article-ad-container">
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <!-- moorberry-article-footer-300x250 -->
+    <ins class="adsbygoogle"
+         style="display:inline-block;width:300px;height:250px"
+         data-ad-client="ca-pub-7424434269432645"
+         data-ad-slot="5093070328"></ins>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+  </div>
 {% endif %}
-

@@ -8,7 +8,7 @@ layout: default
 	{% include article.html %}
 </article>
 {% endfor %}
-<div class="pagination">
+<div class="pagination" style="display:none;">
 {% if paginator.next_page %}
   <a class="prev" href="{{paginator.next_page}}">&larr; Older</a>
 {% endif %}

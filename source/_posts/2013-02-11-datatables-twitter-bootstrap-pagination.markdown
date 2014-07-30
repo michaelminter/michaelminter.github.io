@@ -13,7 +13,7 @@ As a developer who likes to spend more time with beautiful object-oriented code 
 
 One <a href="http://datatables.net/plug-ins/pagination" target="_blank">plug-in</a> that I found will allow your browser to render the default pagination with tags that are designed to work with the popular responsive grid framework: <a href="http://twitter.github.com/bootstrap" target="_blank">Twitter Bootstrap</a>.
 
-<img src="/images/posts/pagination.jpg" alt="DataTables Pagination with Twitter Bootstrap Design Inteegration" width="100%" />
+<img src="/images/posts/pagination.png" alt="DataTables Pagination with Twitter Bootstrap Design Inteegration" width="100%" />
 
 ``` javascript
 <!-- more information at: http://www.datatables.net/download/ -->

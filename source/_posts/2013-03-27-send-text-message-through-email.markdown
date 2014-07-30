@@ -47,6 +47,6 @@ Some caveats to this transaction method:
 
 ## Twilio
 
-<img src="/images/posts/twilio.jpg" alt="Twilio Logo" title="Twilio Logo" />
+<img src="/images/posts/twilio.jpg" alt="Twilio Logo" title="Twilio Logo" style="width:100%;" />
 
 Try out <a href="http://twilio.com" target="_blank" alt="Twilio" title="Twilio" style="color:red;">Twilio</a>. They offer a <a href="http://twilio.com" target="_blank" alt="Twilio Free Plan" title="Twilio Free Plan" style="color:red;font-weight:bold;">free plan</a> that includes 200 messages to send each month and maintains a series of APIs that are <a href="http://www.twilio.com/blog/2012/02/adding-twilio-sms-messaging-to-your-rails-app.html" target="_blank" alt="Adding Twilio SMS Messaging to your Rails App" title="Adding Twilio SMS Messaging to your Rails App">easy to use</a> and <a href="https://github.com/twilio" target="_blank" alt="Twilio Github" title="Github Twilio">open source</a>.

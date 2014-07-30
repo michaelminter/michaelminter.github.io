@@ -36,6 +36,6 @@ You can sign up for a service provider, **free** at <a href="http://pingdom.com"
 
 <a href="http://pingdom.com" target="_blank" style="font-weight:bold;">Pingdom</a> is loaded with features; including availability to a public page to view when the last time your host was checked, alerts via email or SMS, and many other features.
 
-<a href="http://pingdom.com" target="_blank"><img src="/images/posts/pingdom_public.png" style="border:none;" alt="Pingdom" style="width:100%;" /></a>
+<a href="http://pingdom.com" target="_blank"><img src="/images/posts/pingdom_public.png" style="border:none;width:100%;" alt="Pingdom" /></a>
 
 I chose to sample <a href="http://pingdom.com" target="_blank" style="font-weight:bold;">Pingdom</a> because it affords the least amount of work in setting up at a free price. Please post any alternatives you can think of in the comments below.

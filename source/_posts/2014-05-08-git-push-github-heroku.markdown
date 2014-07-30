@@ -10,7 +10,7 @@ Group assign any git repository, on any git provider, and for as many remotes as
 
 <!-- more -->
 
-<img src="/images/posts/remotes.jpg" alt="Remotes Funny" />
+<img src="/images/posts/remotes.jpg" alt="Remotes Funny" style="width:100%;" />
 
 From your terminal, `cd` into where your repository is located and run:
 
