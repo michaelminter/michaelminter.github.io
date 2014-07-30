@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Server vs Client - Moorberry</title>
+  <title>Scan Multiple Directories with cd - Moorberry</title>
   <meta name="author" content="Michael Minter">
 
   
-  <meta name="description" content="Javascript, PHP, Ruby Server vs Client <ins class="adsbygoogle" style="display:inline-block;width:300px;height:250px" data-ad-client="ca-pub- &hellip;">
+  <meta name="description" content="Bash Scan Multiple Directories With Cd <ins class="adsbygoogle" style="display:inline-block;width:300px;height:250px" data-ad-client="ca-pub- &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://moorberry.net/blog/server-vs-client">
+  <link rel="canonical" href="http://moorberry.net/blog/scan-multiple-directories-with-cd">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/styles.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="Moorberry" type="application/atom+xml">
@@ -210,7 +210,7 @@
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/javascript/'>Javascript</a>, <a class='category' href='/blog/categories/php/'>PHP</a>, <a class='category' href='/blog/categories/ruby/'>Ruby</a>
+    <a class='category' href='/blog/categories/bash/'>Bash</a>
   
 </span>
 
@@ -218,7 +218,7 @@
   </div>
   
     <h1>
-      Server vs Client
+      Scan Multiple Directories With Cd
     </h1>
   
 </header>
@@ -235,93 +235,56 @@
       (adsbygoogle = window.adsbygoogle || []).push({});
     </script>
   </div>
-  <section><p>My presumption is that it’s because of the passionate advent of JQuery, that there has been an increasing rise of using Javascript, in precedence of a server side language like PHP or Ruby. This circumstance is arguably the sole cause to how and why, <em>mostly designers</em>, are simply not learning a better way. I’m here to enlighten you.</p>
+  <section><p>If you use the command line and frequent a particular directory you can modify Bash to lookup multiple directories using the standard <strong>cd</strong> command.</p>
 
-<!--more-->
+<!-- more -->
 
 
-<p><a href="/images/posts/versus.jpg"><img src="/images/posts/versus.jpg" alt="Versus" width="100%" /></a></p>
+<p>Modify <strong>~/.bash_profile</strong> by appending directories to the <strong>CDPATH</strong> environment variable.</p>
 
-<p>In opening, I’d like to express, that I hold no animosity for Javascript. Actually I quite often fancy a touch of its elegant lure and almost regularly indulge my viewers with its properties to control aesthetics at a dynamic fashion. But it has its place. If PHP can serve the same purpose, than its obvious strengths, should not be taken for granted.</p>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># define base directory for cd command
+</span><span class='line'>export CDPATH=$CDPATH:$HOME/Repos</span></code></pre></td></tr></table></div></figure>
 
-<p>One prominent example of this that I seem to notice more often in use than others, is the  application of color alternating rows with HTML tables, or also favorably known as the “zebra” effect. Which I’ll be using for my reference material.</p>
 
-<h2>PHP</h2>
+<p>Restart your terminal session and now you can <code>cd projectDir</code>. <strong>cd</strong> will reference your current directory and <strong>$HOME/Repos</strong>.</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<h2>Autotabbing Custom Base Directories</h2>
+
+<p>You can install an additonal library; <strong>bash-completion</strong> to use the <strong>[tab]</strong> key to autocomplete from the <strong>cd</strong> command.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>brew install bash-completion</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Add the following to <strong>~/.bash_profile</strong>.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="k">for</span> <span class="p">(</span><span class="nv">$i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="nv">$i</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">;</span><span class="nv">$i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>    <span class="k">if</span> <span class="p">((</span><span class="nv">$i</span> <span class="nv">%</span> <span class="nv">2</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>        <span class="n">echo</span> <span class="s">&#39;&lt;tr class=&quot;zebra&quot;&gt;&#39;</span><span class="p">;</span>
-</span><span class='line'>    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-</span><span class='line'>        <span class="n">echo</span> <span class="s">&#39;&lt;tr&gt;&#39;</span><span class="p">;</span>
-</span><span class='line'>    <span class="p">}</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class=''><span class='line'># add bash-completion
+</span><span class='line'>if [ -f `brew --prefix`/etc/bash_completion ]; then
+</span><span class='line'>  . `brew --prefix`/etc/bash_completion
+</span><span class='line'>fi</span></code></pre></td></tr></table></div></figure>
 
 
-<p>The for() loop, does the accumulating work. It exponentially raises the default value ($i) by one, each iteration, so that the modulus operator (%) can equate the remainder of $i divided by two. So every instance of an even number represented by $i would evaluate to zero.</p>
+<p>To install <strong>bash-completion</strong> on other systems and more resources: <a href="https://github.com/bobthecow/git-flow-completion/wiki/Install-Bash-git-completion">https://github.com/bobthecow/git-flow-completion/wiki/Install-Bash-git-completion</a></p>
 
-<h2>Ruby on Rails</h2>
+<h2>Case Insensitive Completion</h2>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="o">&lt;</span><span class="sx">% @items.each </span><span class="k">do</span> <span class="o">|</span><span class="n">item</span><span class="o">|</span> <span class="sx">%&gt;</span>
-</span><span class='line'><span class="sx">  &lt;tr class=&quot;&lt;%= cycle(&quot;even&quot;, &quot;odd&quot;) %&gt;</span><span class="s2">&quot;&gt;</span>
-</span><span class='line'><span class="s2">    &lt;!-- use item --&gt;</span>
-</span><span class='line'><span class="s2">  &lt;/tr&gt;</span>
-</span><span class='line'><span class="s2">&lt;% end %&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
+<p>Update <strong>~/.inputrc</strong> file to include the following line:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>set completion-ignore-case on</span></code></pre></td></tr></table></div></figure>
 
 
-<h2>JQuery</h2>
+<p>For hyphens and underscores as well:</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='perl'><span class='line'><span class="nv">$</span><span class="err">(</span><span class="nv">document</span><span class="p">)</span><span class="o">.</span><span class="n">ready</span><span class="p">(</span><span class="n">function</span><span class="p">(){</span>
-</span><span class='line'>    <span class="vg">$(</span><span class="s">&quot;tr:even&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">css</span><span class="p">(</span><span class="s">&quot;background-color&quot;</span><span class="p">,</span> <span class="s">&quot;#EFEFEF&quot;</span><span class="p">);</span>
-</span><span class='line'>    <span class="vg">$(</span><span class="s">&quot;tr:odd&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">css</span><span class="p">(</span><span class="s">&quot;background-color&quot;</span><span class="p">,</span> <span class="s">&quot;#FFFFFF&quot;</span><span class="p">);</span>
-</span><span class='line'><span class="p">});</span>
-</span></code></pre></td></tr></table></div></figure>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>set completion-map-case on</span></code></pre></td></tr></table></div></figure>
 
-
-<p>The JQuery even and odd filters are used as index selectors. This method can be used on any page element with just a little bit of reverse engineering.</p>
-
-<h2>Discovering the Front-End</h2>
-
-<p>If you were to analyze the speed of using only Javascript, you would find that it is 16% slower, compared to PHP [1]. Though that number might seem relatively low in scale, because it is, consider all of the other factors when developing for the web.</p>
-
-<p>80% of the average user’s response time is spent on the front-end [2]. This time, is composed of downloading all of the elements necessary to make up the page (Images, libraries, scripts, stylesheets and more). Reducing the number of elements, in turn, reduces the number of HTTP requests required to render the page.</p>
-
-<p>With PHP everything is rendered before any HTTP requests are sent by the server.</p>
-
-<p><img src="https://chart.googleapis.com/chart?cht=bvs&chs=714x100&chd=t:13,20|87,80&chco=4d89f9,c6d9fd&chbh=20&chds=0,160" style="float:left;" /></p>
-
-<br style="clear:both;" />
-
-
-<p>Graphically interpreted above are the details associated with load times. This analysis completes the HTTP request cycle from initialization. The darker portion, of each representation, shows the percentage of work involved by the server. As consistency shows, a lot of web design and development, relies mostly on what’s being delivered to the browser.</p>
-
-<p><em>in order of appearance: Google, PHP Rockstar</em></p>
-
-<h2>Summary</h2>
-
-<p>It’s certain that a professional web server is going to best the average home network set-up, in performance, any day. It’s your responsibility to take advantage of that, by running some server-side code, to save your guests the frustration of dealing with an idle load time.</p>
-
-<h2>References</h2>
-
-<p>[1] http://www.timestretch.com/FractalBenchmark.html<br/>
-[2] http://developer.yahoo.net/blog/archives/2007/03/high_performanc.html</p>
 </section>
   <div class="article-ad-container">
     <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
@@ -362,8 +325,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://moorberry.net/blog/server-vs-client/';
-        var disqus_url = 'http://moorberry.net/blog/server-vs-client/';
+        var disqus_identifier = 'http://moorberry.net/blog/scan-multiple-directories-with-cd/';
+        var disqus_url = 'http://moorberry.net/blog/scan-multiple-directories-with-cd/';
         var disqus_script = 'embed.js';
       
     (function () {

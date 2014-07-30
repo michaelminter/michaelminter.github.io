@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Bash | Moorberry]]></title>
+  <link href="http://moorberry.net/blog/categories/bash/atom.xml" rel="self"/>
+  <link href="http://moorberry.net/"/>
+  <updated>2014-07-30T10:33:56-05:00</updated>
+  <id>http://moorberry.net/</id>
+  <author>
+    <name><![CDATA[Michael Minter]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Scan Multiple Directories with cd]]></title>
+    <link href="http://moorberry.net/blog/scan-multiple-directories-with-cd/"/>
+    <updated>2014-07-30T10:32:00-05:00</updated>
+    <id>http://moorberry.net/blog/scan-multiple-directories-with-cd</id>
+    <content type="html"><![CDATA[<p>If you use the command line and frequent a particular directory you can modify Bash to lookup multiple directories using the standard <strong>cd</strong> command.</p>
+
+<!-- more -->
+
+
+<p>Modify <strong>~/.bash_profile</strong> by appending directories to the <strong>CDPATH</strong> environment variable.</p>
+
+<p>```</p>
+
+<h1>define base directory for cd command</h1>
+
+<p>export CDPATH=$CDPATH:$HOME/Repos
+```</p>
+
+<p>Restart your terminal session and now you can <code>cd projectDir</code>. <strong>cd</strong> will reference your current directory and <strong>$HOME/Repos</strong>.</p>
+
+<h2>Autotabbing Custom Base Directories</h2>
+
+<p>You can install an additonal library; <strong>bash-completion</strong> to use the <strong>[tab]</strong> key to autocomplete from the <strong>cd</strong> command.</p>
+
+<p><code>
+brew install bash-completion
+</code></p>
+
+<p>Add the following to <strong>~/.bash_profile</strong>.</p>
+
+<p>```</p>
+
+<h1>add bash-completion</h1>
+
+<p>if [ -f <code>brew --prefix</code>/etc/bash_completion ]; then
+  . <code>brew --prefix</code>/etc/bash_completion
+fi
+```</p>
+
+<p>To install <strong>bash-completion</strong> on other systems and more resources: <a href="https://github.com/bobthecow/git-flow-completion/wiki/Install-Bash-git-completion">https://github.com/bobthecow/git-flow-completion/wiki/Install-Bash-git-completion</a></p>
+
+<h2>Case Insensitive Completion</h2>
+
+<p>Update <strong>~/.inputrc</strong> file to include the following line:</p>
+
+<p><code>
+set completion-ignore-case on
+</code></p>
+
+<p>For hyphens and underscores as well:</p>
+
+<p><code>
+set completion-map-case on
+</code></p>
+]]></content>
+  </entry>
+  
+</feed>
