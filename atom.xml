@@ -4,7 +4,7 @@
   <title><![CDATA[Moorberry]]></title>
   <link href="http://moorberry.net/atom.xml" rel="self"/>
   <link href="http://moorberry.net/"/>
-  <updated>2014-07-30T10:38:10-05:00</updated>
+  <updated>2014-07-30T13:23:45-05:00</updated>
   <id>http://moorberry.net/</id>
   <author>
     <name><![CDATA[Michael Minter]]></name>
@@ -14,11 +14,11 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Scan Multiple Directories with cd]]></title>
-    <link href="http://moorberry.net/blog/scan-multiple-directories-with-cd/"/>
+    <title type="html"><![CDATA[Search Multiple Directories with cd]]></title>
+    <link href="http://moorberry.net/blog/search-multiple-directories-with-cd/"/>
     <updated>2014-07-30T10:32:00-05:00</updated>
-    <id>http://moorberry.net/blog/scan-multiple-directories-with-cd</id>
-    <content type="html"><![CDATA[<p>If you use the command line and frequent a particular directory you can modify Bash to lookup multiple directories using the standard <strong>cd</strong> command.</p>
+    <id>http://moorberry.net/blog/search-multiple-directories-with-cd</id>
+    <content type="html"><![CDATA[<p>If you use the command line and frequent a particular directory you can set <strong>cd</strong> to scan, not just current, but other directories as well.</p>
 
 <!-- more -->
 
@@ -32,7 +32,7 @@
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>Restart your terminal session and now you can <code>cd projectDir</code>. <strong>cd</strong> will reference your current directory and <strong>$HOME/Repos</strong>.</p>
+<p>Restart your terminal session and now you can <code>cd projectDir</code>. <strong>cd</strong> will reference any subdirectories in the current directory&mdash;as well as <strong>$HOME/Repos</strong>.</p>
 
 <h2>Autotabbing Custom Base Directories</h2>
 
