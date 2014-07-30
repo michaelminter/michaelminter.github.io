@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: Linux | Moorberry]]></title>
+  <title><![CDATA[Category: linux | Moorberry]]></title>
   <link href="http://moorberry.net/blog/categories/linux/atom.xml" rel="self"/>
   <link href="http://moorberry.net/"/>
-  <updated>2014-07-30T13:23:45-05:00</updated>
+  <updated>2014-07-30T13:25:13-05:00</updated>
   <id>http://moorberry.net/</id>
   <author>
     <name><![CDATA[Michael Minter]]></name>
@@ -14,60 +14,75 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Search Multiple Directories with cd]]></title>
-    <link href="http://moorberry.net/blog/search-multiple-directories-with-cd/"/>
-    <updated>2014-07-30T10:32:00-05:00</updated>
-    <id>http://moorberry.net/blog/search-multiple-directories-with-cd</id>
-    <content type="html"><![CDATA[<p>If you use the command line and frequent a particular directory you can set <strong>cd</strong> to scan, not just current, but other directories as well.</p>
+    <title type="html"><![CDATA[Create Linux Install USB on Mac]]></title>
+    <link href="http://moorberry.net/blog/create-linux-install-usb/"/>
+    <updated>2014-05-13T11:14:00-05:00</updated>
+    <id>http://moorberry.net/blog/create-linux-install-usb</id>
+    <content type="html"><![CDATA[<p>Create a bootable USB drive, for installing Linux, on your Mac.</p>
 
 <!-- more -->
 
 
-<p>Modify <strong>~/.bash_profile</strong> by appending directories to the <strong>CDPATH</strong> environment variable.</p>
+<p>Picking a Linux distro is like picking your favorite flavor of ice cream.</p>
 
-<p>```bash</p>
+<p>Find an awesome Linux distribution here <a href="http://distrowatch.com">distrowatch.com</a></p>
 
-<h1>define base directory for cd command</h1>
+<h2>Prepare</h2>
 
-<p>export CDPATH=$CDPATH:$HOME/Repos
-```</p>
+<p>Convert the .iso file to .img using the convert option of hdiutil</p>
 
-<p>Restart your terminal session and now you can <code>cd projectDir</code>. <strong>cd</strong> will reference any subdirectories in the current directory&mdash;as well as <strong>$HOME/Repos</strong>.</p>
-
-<h2>Autotabbing Custom Base Directories</h2>
-
-<p>You can install an additonal library; <strong>bash-completion</strong> to use the <strong>[tab]</strong> key to autocomplete from the <strong>cd</strong> command.</p>
-
-<p><code>bash
-brew install bash-completion
+<p><code>
+hdiutil convert -format UDRW -o ~/path/to/target.img ~/path/to/ubuntu.iso
 </code></p>
 
-<p>Add the following to <strong>~/.bash_profile</strong>.</p>
+<p><strong>Note:</strong> OS X tends to put the .dmg ending on the output file automatically.</p>
 
-<p>```bash</p>
+<p>Remove the USB drive from your machine if it's currently inserted.</p>
 
-<h1>add bash-completion</h1>
+<p>Run <code>diskutil list</code> to get the current list of devices.</p>
 
-<p>if [ -f <code>brew --prefix</code>/etc/bash_completion ]; then
-  . <code>brew --prefix</code>/etc/bash_completion
-fi
-```</p>
-
-<p>To install <strong>bash-completion</strong> on other systems and more resources: <a href="https://github.com/bobthecow/git-flow-completion/wiki/Install-Bash-git-completion">https://github.com/bobthecow/git-flow-completion/wiki/Install-Bash-git-completion</a></p>
-
-<h2>Case Insensitive Completion</h2>
-
-<p>Update <strong>~/.inputrc</strong> file to include the following line:</p>
-
-<p><code>bash
-set completion-ignore-case on
+<p><code>
+diskutil list
 </code></p>
 
-<p>For hyphens and underscores as well:</p>
+<p>Insert your flash drive.</p>
 
-<p><code>bash
-set completion-map-case on
+<p>Run <code>diskutil list</code> again to determine the device node assigned to your flash media (e.g. /dev/disk1).</p>
+
+<p><code>
+diskutil list
 </code></p>
+
+<p><em>insert example output</em></p>
+
+<p><code>
+diskutil unmountDisk /dev/diskN
+</code></p>
+
+<p>Replace <em>N</em> with the disk number from the last command; in the previous example, <em>N</em> would be 1.</p>
+
+<p><code>
+sudo dd if=/path/to/downloaded.img of=/dev/rdiskN bs=1m
+</code></p>
+
+<p>Execute sudo dd if=/path/to/downloaded.img of=/dev/rdiskN bs=1m (replace /path/to/downloaded.img with the path where the image file is located; for example, ./ubuntu.imgor ./ubuntu.dmg).</p>
+
+<ul>
+<li>Using /dev/rdisk instead of /dev/disk may be faster</li>
+<li>If you see the error dd: Invalid number '1m', you are using GNU dd. Use the same command but replace bs=1m with bs=1M</li>
+<li>If you see the error dd: /dev/diskN: Resource busy, make sure the disk is not in use. Start the 'Disk Utility.app' and unmount (don't eject) the drive</li>
+</ul>
+
+
+<p><code>
+diskutil eject /dev/diskN
+</code></p>
+
+<p>and remove your flash media when the command completes.</p>
+
+<h2>Install</h2>
+
+<p>Restart your computer and press alt/option key while the Mac is restarting to choose the USB drive.</p>
 ]]></content>
   </entry>
   
