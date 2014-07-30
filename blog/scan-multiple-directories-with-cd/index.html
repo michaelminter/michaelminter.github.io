@@ -242,10 +242,11 @@
 
 <p>Modify <strong>~/.bash_profile</strong> by appending directories to the <strong>CDPATH</strong> environment variable.</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'># define base directory for cd command
-</span><span class='line'>export CDPATH=$CDPATH:$HOME/Repos</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># define base directory for cd command</span>
+</span><span class='line'><span class="nb">export </span><span class="nv">CDPATH</span><span class="o">=</span><span class="nv">$CDPATH</span>:<span class="nv">$HOME</span>/Repos
+</span></code></pre></td></tr></table></div></figure>
 
 
 <p>Restart your terminal session and now you can <code>cd projectDir</code>. <strong>cd</strong> will reference your current directory and <strong>$HOME/Repos</strong>.</p>
@@ -254,20 +255,22 @@
 
 <p>You can install an additonal library; <strong>bash-completion</strong> to use the <strong>[tab]</strong> key to autocomplete from the <strong>cd</strong> command.</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>brew install bash-completion</span></code></pre></td></tr></table></div></figure>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>brew install bash-completion
+</span></code></pre></td></tr></table></div></figure>
 
 
 <p>Add the following to <strong>~/.bash_profile</strong>.</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'># add bash-completion
-</span><span class='line'>if [ -f `brew --prefix`/etc/bash_completion ]; then
-</span><span class='line'>  . `brew --prefix`/etc/bash_completion
-</span><span class='line'>fi</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># add bash-completion</span>
+</span><span class='line'><span class="k">if</span> <span class="o">[</span> -f <span class="sb">`</span>brew --prefix<span class="sb">`</span>/etc/bash_completion <span class="o">]</span>; <span class="k">then</span>
+</span><span class='line'>  . <span class="sb">`</span>brew --prefix<span class="sb">`</span>/etc/bash_completion
+</span><span class='line'><span class="k">fi</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
 <p>To install <strong>bash-completion</strong> on other systems and more resources: <a href="https://github.com/bobthecow/git-flow-completion/wiki/Install-Bash-git-completion">https://github.com/bobthecow/git-flow-completion/wiki/Install-Bash-git-completion</a></p>
@@ -276,14 +279,16 @@
 
 <p>Update <strong>~/.inputrc</strong> file to include the following line:</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>set completion-ignore-case on</span></code></pre></td></tr></table></div></figure>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nb">set </span>completion-ignore-case on
+</span></code></pre></td></tr></table></div></figure>
 
 
 <p>For hyphens and underscores as well:</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>set completion-map-case on</span></code></pre></td></tr></table></div></figure>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nb">set </span>completion-map-case on
+</span></code></pre></td></tr></table></div></figure>
 
 </section>
   <div class="article-ad-container">

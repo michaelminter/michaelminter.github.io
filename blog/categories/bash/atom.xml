@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Bash | Moorberry]]></title>
   <link href="http://moorberry.net/blog/categories/bash/atom.xml" rel="self"/>
   <link href="http://moorberry.net/"/>
-  <updated>2014-07-30T10:33:56-05:00</updated>
+  <updated>2014-07-30T10:38:10-05:00</updated>
   <id>http://moorberry.net/</id>
   <author>
     <name><![CDATA[Michael Minter]]></name>
@@ -25,7 +25,7 @@
 
 <p>Modify <strong>~/.bash_profile</strong> by appending directories to the <strong>CDPATH</strong> environment variable.</p>
 
-<p>```</p>
+<p>```bash</p>
 
 <h1>define base directory for cd command</h1>
 
@@ -38,13 +38,13 @@
 
 <p>You can install an additonal library; <strong>bash-completion</strong> to use the <strong>[tab]</strong> key to autocomplete from the <strong>cd</strong> command.</p>
 
-<p><code>
+<p><code>bash
 brew install bash-completion
 </code></p>
 
 <p>Add the following to <strong>~/.bash_profile</strong>.</p>
 
-<p>```</p>
+<p>```bash</p>
 
 <h1>add bash-completion</h1>
 
@@ -59,13 +59,13 @@ fi
 
 <p>Update <strong>~/.inputrc</strong> file to include the following line:</p>
 
-<p><code>
+<p><code>bash
 set completion-ignore-case on
 </code></p>
 
 <p>For hyphens and underscores as well:</p>
 
-<p><code>
+<p><code>bash
 set completion-map-case on
 </code></p>
 ]]></content>
