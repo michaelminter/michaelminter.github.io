@@ -3,7 +3,7 @@ layout: post
 title: "Send Text Message Through Email"
 date: 2013-03-27 17:20
 comments: true
-categories: [Text Messaging, Email, API]
+categories: [SMS, Email, API]
 ---
 
 If you'd like to send a TXT message through email rather than use a SaaS application, such as <a href="http://twilio.com" target="_blank" alt="Twilio" title="Twilio">Twilio</a>, you can send SMS messages through SMTP.

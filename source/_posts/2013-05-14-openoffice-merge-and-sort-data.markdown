@@ -3,7 +3,7 @@ layout: post
 title: "OpenOffice: Merge and Sort Data"
 date: 2013-05-14 22:55
 comments: true
-categories: [data]
+categories: [Data]
 ---
 
 You need to __construct an array using a list of pre-existing values__ but firstly have to __sort the order__ of that list.

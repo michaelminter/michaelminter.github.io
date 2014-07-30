@@ -3,7 +3,7 @@ layout: post
 title: "Airbrake: Send Error Notices using Javascript"
 date: 2013-02-19 12:46
 comments: true
-categories: ['Javascript','Airbrake','Ruby on Rails','Sinatra']
+categories: ['Javascript','Airbrake','Ruby','Rails','Sinatra']
 ---
 Right now you may be saying to yourself, "but why not just use an AJAX request inside of my Javascript application or use the Image().src hack..."
 

@@ -3,7 +3,7 @@ layout: post
 title: "Git Push to Github and Heroku"
 date: 2014-05-08 22:58
 comments: true
-categories: [git]
+categories: [Git]
 ---
 
 Group assign any git repository, on any git provider, and for as many remotes as you wish.

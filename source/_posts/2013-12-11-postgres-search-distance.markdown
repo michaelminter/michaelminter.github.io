@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Postgres: Search and Sort by Distance"
+title: "Postgres: Search and Sort by Radial Distance"
 date: 2013-12-11 13:01
 comments: true
 categories: [Postgres, SQL, Data]

@@ -3,7 +3,7 @@ layout: post
 title: "localStorage: Object Relational Mapping"
 date: 2013-02-23 16:31
 comments: true
-categories: ['Javascript','localStorage']
+categories: ['Javascript','LocalStorage']
 ---
 
 An Active Record -like localStorage Object-Relational Mapping library.

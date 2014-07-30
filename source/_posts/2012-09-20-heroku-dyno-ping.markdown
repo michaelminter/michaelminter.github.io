@@ -4,7 +4,7 @@ title: "Keeping Your Heroku Dyno Awake"
 author: '<a href="/" target="_blank" alt="Homepage" title="Michael Minter">Michael Minter</a>'
 date: 2012-09-20 16:23
 comments: true
-categories: [Shell, API]
+categories: [API]
 ---
 
 Apps that have scaled the number of web dynos (dynos running the web process type) so that only a single web dyno is running, will have that web dyno idled out after one hour of inactivity. When this happens, you’ll see the following in your logs:

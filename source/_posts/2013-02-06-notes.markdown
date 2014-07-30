@@ -3,7 +3,7 @@ layout: post
 title: "Special Notes Lookup in Rails"
 date: 2012-11-06 17:52
 comments: true
-categories: [Ruby, Rails, rake]
+categories: [Ruby, Rails, Rake]
 ---
 
 Add special notes to your source code comments in Rails to later remind you of tasks you need to complete:

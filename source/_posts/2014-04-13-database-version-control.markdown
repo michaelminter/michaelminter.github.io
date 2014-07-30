@@ -3,7 +3,7 @@ layout: post
 title: "Database Version Control with MySQL Utilities"
 date: 2014-04-13 23:30
 comments: true
-categories: [SQL, MySQL]
+categories: [MySQL]
 ---
 
 The following steps are meant to capture a snapshot of your development database structure and your staging/production database structure, compare the two, and provide SQL to consolidate the differences.
